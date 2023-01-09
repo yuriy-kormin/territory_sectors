@@ -9,8 +9,13 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
+import os
 from pathlib import Path
+from dotenv import load_dotenv
+import dj_database_url
+
+# dotenv_path = os.path.join(os.path.dirname(__file__), '.env_example')
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,10 +25,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-neoi&wit0j*!ph#xy)3#6jbn$v8u4ick20zne^-mjn4hu#(4%)'
+SECRET_KEY = os.getenv('DJANGO_SECRET')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG_ENV = os.getenv('DEBUG')
+DEBUG = DEBUG_ENV if DEBUG_ENV else True
 
 ALLOWED_HOSTS = []
 
@@ -37,6 +43,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
+    'bootstrap4',
+    'territory_sectors',
+    'territory_sectors.flat',
+    'territory_sectors.house',
+    'territory_sectors.sector',
 ]
 
 MIDDLEWARE = [
@@ -74,11 +86,12 @@ WSGI_APPLICATION = 'territory_sectors.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default='sqlite:///db.sqlite3',
+        # conn_max_age=600,
+    )
 }
 
 
