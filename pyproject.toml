@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "service-sector"
+version = "0.1.0"
+description = ""
+authors = ["Yuriy Kormin <yuriy.kormin@gmail.com>"]
+readme = "README.md"
+packages = [{include = "territory_sectors"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+python-dotenv = "^0.21.0"
+dj-database-url = "^1.2.0"
+django-extensions = "^3.2.1"
+django-bootstrap4 = "^22.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
