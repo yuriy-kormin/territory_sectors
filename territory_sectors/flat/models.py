@@ -1,5 +1,4 @@
 from django.db import models
-
 from territory_sectors.house.models import House
 
 
