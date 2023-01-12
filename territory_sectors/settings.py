@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'territory_sectors.flat',
     'territory_sectors.house',
     'territory_sectors.sector',
+    'territory_sectors.language',
 ]
 
 MIDDLEWARE = [
