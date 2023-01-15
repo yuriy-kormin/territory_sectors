@@ -1,0 +1,21 @@
+{% load i18n %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand mr-auto mr-lg-3 h2 text-primary" href="{% url "root" %}">{% translate "Territory" %}</a>
+    <button class="navbar-toggler p-0 border-0" type="button" data-toggle="collapse"  data-target="#navbarToggleExternalContent">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarToggleExternalContent">
+    <ul class="navbar-nav">
+            {% if request.user.is_authenticated %}
+                <li class = "nav-item "><p class="nav-link active">{{ request.user.username }}</p></li>
+                <li class = "nav-item"><a class="nav-link active" href="{% url "user_logout" %}">{% translate "Logout" %}</a></li>
+            {% else %}
+                <li class = "nav-item active"><a class="nav-link active" href="{% url "flat_list" %}">{% translate "Flats" %}</a></li>
+
+            {% endif %}
+    </ul>
+    </div>
+</nav>
+
+{#{% endblock %}#}

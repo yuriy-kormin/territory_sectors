@@ -50,8 +50,10 @@ INSTALLED_APPS = [
     'territory_sectors',
     'territory_sectors.flat',
     'territory_sectors.house',
+    'django.contrib.gis',
     'territory_sectors.sector',
     'territory_sectors.language',
+    'territory_sectors.uuid_qr',
 ]
 
 MIDDLEWARE = [
@@ -91,7 +93,7 @@ WSGI_APPLICATION = 'territory_sectors.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='sqlite:///db.sqlite3',
+        default='spatialite:///db.sqlite3',
         # conn_max_age=600,
     )
 }
@@ -137,3 +139,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+GEOS_LIBRARY_PATH = os.getenv('GEOS_LIBRARY_PATH')
+GDAL_LIBRARY_PATH = os.getenv('GDAL_LIBRARY_PATH')

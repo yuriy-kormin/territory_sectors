@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load bootstrap4 %}
+{% block page_content %}
+    <form method="post" action=".">
+    {% csrf_token %}
+        <h1 class="my-4"> {{ header }}</h1>
+        <div class = "card">
+            <div class="card-header">
+                <h2>{% translate "flat" %} #{{ flat.id }}</h2>
+            </div>
+        <div class="container">
+            <div class="row p-2">
+                <div class="col">{% translate "date joined" %}</div>
+                <div class="col">{{ flat.date_joined }}</div>
+              </div>
+            <div class="row p-2">
+                <div class="col">{% translate "House" %}</div>
+                <div class="col">{{ flat.house }}</div>
+              </div>
+            <div class="row p-2">
+                <div class="col">{% translate "entrance" %}</div>
+                <div class="col">{{ flat.entrance }}</div>
+              </div>
+            <div class="row p-2">
+                <div class="col">{% translate "floor" %}</div>
+                <div class="col">{{ flat.floor }}</div>
+            </div>
+            <div class="row p-2">
+                <div class="col">{% translate "number" %}</div>
+                <div class="col">{{ flat.number }}</div>
+            </div>
+            <div class="row p-2">
+                <div class="col">{% translate "language" %}</div>
+                <div class="col">{{ flat.language }}</div>
+            </div>
+            <div class="row p-2">
+                <div class="col">{% translate "way description" %}</div>
+                <div class="col">{{ flat.way_desc }}</div>
+            </div>
+      </div>
+{% endblock %}
+{% block markers %}
+<script>
+    const marker1 = new mapboxgl.Marker()
+        .setLngLat([{{ flat.house.gps_point.x }}, {{ flat.house.gps_point.y }}])
+        .addTo(map);
+</script>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block page_content %}
+   <h1 class="my-4"> {{ marks }}</h1>
+    <a class="nav-link" href="{% url "flat_add" %}">{% translate "Create flat" %}</a>
+    <table class = "table table-striped">
+        <tr>
+            <th>{% translate "address" %}</th>
+            <th>{% translate "number" %}</th>
+            <th>{% translate "floor" %}</th>
+            <th>{% translate "language" %}</th>
+            <th>{% translate "way_description" %}</th>
+            <th>{% translate "gps_x" %}</th>
+            <th>{% translate "gps_y" %}</th>
+        </tr>
+        {% for flat in object_list %}
+            <tr>
+                <td> {{flat.house.address}}</td>
+                <td> <a href = "{% url "flat_view" flat.id %}">{{flat.number}}</a></td>
+                <td> {{flat.floor}}</td>
+                <td> {{flat.language}}</td>
+                <td> {{flat.way_desc}}</td>
+                <td> {{flat.house.gps_point.x}}</td>
+                <td> {{flat.house.gps_point.y}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
