@@ -1,0 +1,2 @@
+def MakeResult(request):
+    pass

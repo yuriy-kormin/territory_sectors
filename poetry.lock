@@ -119,6 +119,20 @@ pycodestyle = ">=2.10.0,<2.11.0"
 pyflakes = ">=3.0.0,<3.1.0"
 
 [[package]]
+name = "gdal"
+version = "3.6.2"
+description = "GDAL: Geospatial Data Abstraction Library"
+category = "main"
+optional = false
+python-versions = ">=3.6.0"
+files = [
+    {file = "GDAL-3.6.2.tar.gz", hash = "sha256:a167cde1813707d91a938dad1a22f280f5ad28c45980d42e948fb8c59f890f5a"},
+]
+
+[package.extras]
+numpy = ["numpy (>1.0.0)"]
+
+[[package]]
 name = "mccabe"
 version = "0.7.0"
 description = "McCabe checker, plugin for flake8"
@@ -129,6 +143,22 @@ files = [
     {file = "mccabe-0.7.0-py2.py3-none-any.whl", hash = "sha256:6c2d30ab6be0e4a46919781807b4f0d834ebdd6c6e3dca0bda5a15f863427b6e"},
     {file = "mccabe-0.7.0.tar.gz", hash = "sha256:348e0240c33b60bbdf4e523192ef919f28cb2c3d7d5c7794f74009290f236325"},
 ]
+
+[[package]]
+name = "postgis"
+version = "1.0.4"
+description = "Pyscopg and asyncpg helpers to work with PostGIS."
+category = "main"
+optional = false
+python-versions = "*"
+files = [
+    {file = "postgis-1.0.4-py3-none-any.whl", hash = "sha256:1dfa62d33c585d68a54bdd47c21bdcb9302f9cbb0ef5aec360e64d2c3e0e1a93"},
+    {file = "postgis-1.0.4.tar.gz", hash = "sha256:3d41f087e249a2a8b6720931e6f8f22b7747801f250265a8b8ac5f9d48221e63"},
+]
+
+[package.extras]
+docs = ["mkdocs"]
+test = ["pytest"]
 
 [[package]]
 name = "pycodestyle"
@@ -182,6 +212,18 @@ files = [
 ]
 
 [[package]]
+name = "spatialite"
+version = "0.0.3"
+description = "Wrapper of sqlite3 module which adds SpatiaLite support."
+category = "dev"
+optional = false
+python-versions = "*"
+files = [
+    {file = "spatialite-0.0.3-py3-none-any.whl", hash = "sha256:3124f643688c8ba4e2ff200ef401cf7b57caa44db666cb78519784f98f662982"},
+    {file = "spatialite-0.0.3.tar.gz", hash = "sha256:a0761f239a52f326b14ce41ba61b6614dfcc808b978a0bec4a37c1de9ad9071e"},
+]
+
+[[package]]
 name = "sqlparse"
 version = "0.4.3"
 description = "A non-validating SQL parser."
@@ -208,4 +250,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "06f651259cb9a9d1ce967ece4d32cf178ac536dbe58e31377fcc1bc04e9402c3"
+content-hash = "a93035b7f92a801109159c7e4226e2fc3f63da20fc3a785432107e89d10dc84a"

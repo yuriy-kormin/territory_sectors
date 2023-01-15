@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js"></script>
+
+    <meta charset="UTF-8">
+    {% load i18n %}
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery=True %}
+    {% bootstrap_jquery %}
+        {% block head %}
+        {% endblock %}
+{#    #map { position: absolute; top: 0; bottom: 0; width: 100%; }#}
+    <title>{% translate "Territory" %}</title>
+</head>
+<body class="bg-light d-flex flex-column min-vh-100">
+{% include "nav.html" %}
+<main role="main" class="container">
+    <div class="my-3 mt-5 p-5 bg-white rounded shadow-sm overflow-auto">
+        {% bootstrap_messages %}
+        {% block page_content %}
+        {% endblock %}
+    </div>
+    <div id="map" style="height:40vh"></div>
+    {% include "map.html" %}
+        {% block markers %}
+        {% endblock %}
+    {#    style="height: 30%, width:100%" ></div>#}
+{#        <script>#}
+{#            mapboxgl.accessToken = 'pk.eyJ1IjoieXVyaXlrb3JtaW4iLCJhIjoiY2xjdTZjMm1jMHJwZTNvbXg1cm1xMGh5ciJ9.uHPoJEdjly2KUEmc8YEOkw';#}
+{##}
+{#            const map = new mapboxgl.Map({#}
+{#            container: 'map', // container ID#}
+{#            style: 'mapbox://styles/mapbox/streets-v12', // style URL#}
+{#            center: [41.612803, 41.632153], // starting position [lng, lat]#}
+{#            zoom: 16, // starting zoom#}
+{#            });#}
+{#            map.addControl(new mapboxgl.NavigationControl());#}
+{#        </script>#}
+
+</main>
+</body>
+</html>
+
