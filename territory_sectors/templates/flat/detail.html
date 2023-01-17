@@ -43,7 +43,7 @@
 {% block markers %}
 <script>
     const marker1 = new mapboxgl.Marker()
-        .setLngLat([{{ flat.house.gps_point.x }}, {{ flat.house.gps_point.y }}])
+        .setLngLat([{{ flat.house.gps_pos }}])
         .addTo(map);
 </script>
 {% endblock %}

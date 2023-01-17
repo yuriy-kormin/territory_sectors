@@ -3,9 +3,10 @@ from django.contrib import admin
 # # Register your models here.
 #
 # admin.site.register(House)
-from django.contrib.gis.admin import OSMGeoAdmin
+from django.contrib.gis.admin import GISModelAdmin
 from .models import House
 
+
 @admin.register(House)
-class HouseAdmin(OSMGeoAdmin):
+class HouseAdmin(GISModelAdmin):
     list_display = ('address', 'gps_point')

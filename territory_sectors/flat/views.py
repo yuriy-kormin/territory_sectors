@@ -4,7 +4,7 @@ from django.views.generic.edit import CreateView
 from .models import Flat
 from territory_sectors.house.models import House
 from django.utils.translation import gettext_lazy as _
-
+from territory_sectors.mixins import HousesAddMixin
 
 class FlatCreateView(CreateView):
     model = Flat
@@ -17,15 +17,11 @@ class FlatCreateView(CreateView):
     }
 
 
-class FlatListView(ListView):
+class FlatListView(ListView, HousesAddMixin):
     model = Flat
     template_name = "flat/list.html"
-    extra_context = {
-        'marks': _('Flats'),
-        'ID': _('ID'),
-        'name': _('Name'),
-        'created_at': _('Created at'),
-    }
+    houses = Flat.objects.all()
+
 
 class FlatDetailView(DetailView):
     model = Flat

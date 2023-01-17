@@ -11,8 +11,7 @@
             <th>{% translate "floor" %}</th>
             <th>{% translate "language" %}</th>
             <th>{% translate "way_description" %}</th>
-            <th>{% translate "gps_x" %}</th>
-            <th>{% translate "gps_y" %}</th>
+            <th>{% translate "gps(x,y)" %}</th>
         </tr>
         {% for flat in object_list %}
             <tr>
@@ -21,9 +20,17 @@
                 <td> {{flat.floor}}</td>
                 <td> {{flat.language}}</td>
                 <td> {{flat.way_desc}}</td>
-                <td> {{flat.house.gps_point.x}}</td>
-                <td> {{flat.house.gps_point.y}}</td>
+                <td> {{flat.house.gps_pos}}</td>
             </tr>
         {% endfor %}
     </table>
+{% endblock %}
+{% block markers %}
+<script>
+    {% for id,obj in houses.items %}
+    const marker{{ id }} = new mapboxgl.Marker()
+        .setLngLat([{{ obj.gps_pos}}])
+        .addTo(map);
+    {% endfor %}
+</script>
 {% endblock %}

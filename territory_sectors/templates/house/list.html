@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block page_content %}
+   <h1 class="my-4"> {{ marks }}</h1>
+    <a class="nav-link" href="{% url "house_add" %}">{% translate "Create house" %}</a>
+    <table class = "table table-striped">
+        <tr>
+            <th>{% translate "address" %}</th>
+            <th>{% translate "entrances" %}</th>
+            <th>{% translate "floors" %}</th>
+            <th>{% translate "sector" %}</th>
+            <th>{% translate "gps" %}</th>
+        </tr>
+        {% for house in object_list %}
+            <tr>
+                <td> <a href = {% url "house_view" house.id %}>{{house.address}}</a></td>
+                <td> {{house.entrances}}</td>
+                <td> {{house.floors}}</td>
+                <td> {{house.sector}}</td>
+                <td> {{house.gps_pos}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
+{% block markers %}
+<script>
+    {% for id,obj in houses.items %}
+    const marker{{ id }} = new mapboxgl.Marker()
+        .setLngLat([{{ obj.gps_pos}}])
+        .addTo(map);
+    {% endfor %}
+</script>
+{% endblock %}
