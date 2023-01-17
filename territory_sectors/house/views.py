@@ -20,7 +20,7 @@ class HouseCreateView(CreateView):
     extra_context = {
         'header': _('Create house'),
         'button_title': _('Create'),
-        'markers': {0: Point(41.6115, 41.632645)}
+        # 'markers': {0: Point(41.6115, 41.632645)}
     }
 
 class HouseListView(ListView):

@@ -24,4 +24,4 @@ function add_marker (event) {
   marker1.setLngLat(coordinates).addTo(map);
 }
 
-map.on('click', add_marker);
+// map.on('click', add_marker);
