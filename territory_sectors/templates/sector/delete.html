@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load bootstrap4 %}
+{% block page_content %}
+    <h1 class="my-4"> {{ header }}</h1>
+    <form method="post" action=".">
+    {% csrf_token %}
+        <p>{{ message }} "{{ object.address }}"  ?</p>
+{% bootstrap_button button_title button_type="submit" button_class="btn btn-danger" %}    </form>
+{% endblock %}
+{% block markers %}
+        set_popup({{ house.id }}, "{{ house.address }}")
+        set_marker({{ house.id }}, {{ house.gps_pos }});
+{% endblock %}
+

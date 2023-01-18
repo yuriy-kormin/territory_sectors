@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load bootstrap4 %}
+{% block page_content %}
+   <h1 class="my-4"> {{ marks }}</h1>
+{#    <a class="nav-link" href="{% url "sector_add" %}">{% translate "Create sector" %}</a>#}
+    <table class = "table table-striped">
+        <tr>
+            <th>{% translate "name" %}</th>
+            <th>{% translate "uuid" %}</th>
+            <th></th>
+
+        </tr>
+        {% for sector in object_list %}
+            <tr>
+{#                <td> <a href = {% url "sector_update" sector.id %}>{{sector.name}}</a></td>#}
+                <td> {{ sector.name }}</td>
+                <td> {{sector.uuid}}</td>
+                <td>
+{#                    <form method="get" action="{% url "sector_delete" sector.id %}">#}
+                        {% bootstrap_button remove_title button_type="submit" button_class="btn btn-danger" %}
+{#                    </form>#}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{#    <input type = "hidden", id = "sectors_data", value ='{{ sectors_data }}'>#}
+{{ sectors_data|json_script:"sectors_data" }}
+{% endblock %}
+{#{% block js_variables %}#}
+{#    defer#}
+{#    data-sectors = "{% autoescape off %}{{ sectors_data }}{% endautoescape %}"#}
+{#{% endblock %}#}
+{% block markers %}
+    map.on('styledata', () => {
+        add_sectors();
+    })
+{#    map.on(#}
+{#    add_sector()#}
+
+{#    {% for sector in object_list %}#}
+{#        {{ sector|json_script:'sectors_data' }}#}
+        {#        set_popup({{ sector.id }},"{{ sector.address }}({{ sector.flat__count }})")#}
+{#        set_marker({{ sector.id }},{{ sector.gps_pos }})#}
+{##}
+{#        map.on('load', () => {#}
+{#            map.addSource(#}
+{#                'sector_{{ sector.id }}', {#}
+{#                    'type': 'geojson',#}
+{#                    'data':{#}
+{#                        'type': 'Feature',#}
+{#                        'geometry': {% autoescape off %}{{ sector.contour.geojson }}{% endautoescape %}#}
+{#                    }#}
+{#                }#}
+{#            )#}
+{#        })#}
+{#        map.on('styledata', function() {#}
+{#                map.addLayer({#}
+{#                    'id': 'sector_{{ sector.id }}',#}
+{#                    'type': 'fill',#}
+{#                    'source': 'sector_{{ sector.id }}', // reference the data source#}
+{#                    'layout': {},#}
+{#                    'paint': {#}
+{#                        'fill-color': '#0080ff', // blue color fill#}
+{#                        'fill-opacity': 0.5#}
+{#                    }#}
+{#                });#}
+{#        });#}
+{##}
+{#    {% endfor %}#}
+{% endblock %}

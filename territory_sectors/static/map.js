@@ -18,6 +18,7 @@ map.addControl(new mapboxgl.GeolocateControl({
 map.addControl(new mapboxgl.NavigationControl());
 var markers = {};
 var popups = {};
+// var sector_sources = {};
 
 
 function set_popup (id, text) {
@@ -54,4 +55,31 @@ function move_marker (event) {
 function flat_change_house(e) {
     // d = document.getElementById("id_house").value;
     alert(e.target.value);
+}
+
+function add_sectors() {
+    const sectors_data = JSON.parse(document.getElementById('sectors_data').textContent)
+    for (let i in sectors_data){
+        map.addSource(
+            'source'+i.toString(),{
+                'type': 'geojson',
+                'data':{
+                    'type': 'Feature',
+                    'geometry': JSON.parse(sectors_data[i]),
+                }
+            }
+        );
+        map.addLayer({
+                    'id': i,
+                    'type': 'fill',
+                    'source': 'source'+i.toString(), // reference the data source
+                    'layout': {},
+                    'paint': {
+                        'fill-color': '#0080ff', // blue color fill
+                        'fill-opacity': 0.5
+                    }
+                });
+    }
+
+
 }
