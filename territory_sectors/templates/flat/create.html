@@ -17,3 +17,9 @@
         </div>
     </form>
 {% endblock %}
+{% block markers %}
+    {% if object %}
+        set_popup({{ object.house.id }}, "{{ object.house.address }}-{{ object.number }}")
+        set_marker({{ object.house.id }}, {{ object.house.gps_pos }});
+    {% endif %}
+{% endblock %}

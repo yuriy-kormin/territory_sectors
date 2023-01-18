@@ -50,3 +50,8 @@ function move_marker (event) {
     }
     document.getElementById("gps_point").setAttribute('value',"SRID=4326;POINT("+coordinates.lng.toString() +" " +coordinates.lat.toString()+')')
 }
+
+function flat_change_house(e) {
+    // d = document.getElementById("id_house").value;
+    alert(e.target.value);
+}

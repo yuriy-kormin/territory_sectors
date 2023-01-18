@@ -6,7 +6,7 @@ from .models import House
 from django.utils.translation import gettext_lazy as _
 
 
-class HouseCreateView( SuccessMessageMixin, CreateView):
+class HouseCreateView(SuccessMessageMixin, CreateView):
     form_class = HouseForm
     template_name = "house/create.html"
     success_url = reverse_lazy('house_list')

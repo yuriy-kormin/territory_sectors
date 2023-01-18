@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
-
+{% load bootstrap4 %}
 {% block page_content %}
    <h1 class="my-4"> {{ marks }}</h1>
     <a class="nav-link" href="{% url "flat_add" %}">{% translate "Create flat" %}</a>
@@ -10,26 +10,28 @@
             <th>{% translate "number" %}</th>
             <th>{% translate "floor" %}</th>
             <th>{% translate "language" %}</th>
-            <th>{% translate "way_description" %}</th>
             <th>{% translate "gps(x,y)" %}</th>
+            <th></th>
         </tr>
         {% for flat in object_list %}
             <tr>
                 <td> {{flat.house.address}}</td>
-                <td> <a href = "{% url "flat_view" flat.id %}">{{flat.number}}</a></td>
+                <td> <a href = "{% url "flat_update" flat.id %}">{{flat.number}}</a></td>
                 <td> {{flat.floor}}</td>
                 <td> {{flat.language}}</td>
-                <td> {{flat.way_desc}}</td>
                 <td> {{flat.house.gps_pos}}</td>
+                <td>
+                    <form method="get" action="{% url "flat_delete" flat.id %}">
+                        {% bootstrap_button remove_title button_type="submit" button_class="btn btn-danger" %}
+                    </form>
+                </td>
             </tr>
         {% endfor %}
     </table>
 {% endblock %}
 {% block markers %}
-
-    {% for id,obj in houses.items %}
-    const marker{{ id }} = new mapboxgl.Marker()
-        .setLngLat([{{ obj.gps_pos}}])
-        .addTo(map);
+    {% for house in houses %}
+        set_popup({{ house.id }},"{{ house }}({{ house.flat__count }})")
+        set_marker({{ house.id }}, {{ house.gps_pos }})
     {% endfor %}
 {% endblock %}
