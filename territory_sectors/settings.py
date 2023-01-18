@@ -54,7 +54,9 @@ INSTALLED_APPS = [
     'territory_sectors.sector',
     'territory_sectors.language',
     'territory_sectors.uuid_qr',
+    "debug_toolbar",
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -64,6 +66,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = 'territory_sectors.urls'
@@ -145,3 +148,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 GEOS_LIBRARY_PATH = os.getenv('GEOS_LIBRARY_PATH')
 GDAL_LIBRARY_PATH = os.getenv('GDAL_LIBRARY_PATH')
+
+INTERNAL_IPS = ('127.0.0.1',)
