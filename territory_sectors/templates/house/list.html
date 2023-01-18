@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
-
+{% load bootstrap4 %}
 {% block page_content %}
    <h1 class="my-4"> {{ marks }}</h1>
     <a class="nav-link" href="{% url "house_add" %}">{% translate "Create house" %}</a>
@@ -11,24 +11,28 @@
             <th>{% translate "floors" %}</th>
             <th>{% translate "sector" %}</th>
             <th>{% translate "gps" %}</th>
+            <th></th>
+
         </tr>
         {% for house in object_list %}
             <tr>
-                <td> <a href = {% url "house_view" house.id %}>{{house.address}}</a></td>
+                <td> <a href = {% url "house_update" house.id %}>{{house.address}}</a></td>
                 <td> {{house.entrances}}</td>
                 <td> {{house.floors}}</td>
                 <td> {{house.sector}}</td>
                 <td> {{house.gps_pos}}</td>
+                <td>
+                    <form method="get" action="{% url "house_delete" house.id %}">
+                        {% bootstrap_button remove_title button_type="submit" button_class="btn btn-danger" %}
+                    </form>
+                </td>
             </tr>
         {% endfor %}
     </table>
 {% endblock %}
 {% block markers %}
-<script>
-    {% for id,obj in houses.items %}
-    const marker{{ id }} = new mapboxgl.Marker()
-        .setLngLat([{{ obj.gps_pos}}])
-        .addTo(map);
+    {% for house in object_list %}
+        set_popup({{ house.id }},"{{ house.address }}")
+        set_marker({{ house.id }},{{ house.gps_pos }})
     {% endfor %}
-</script>
 {% endblock %}

@@ -15,5 +15,15 @@
                      {% bootstrap_button button_title button_type="submit" button_class="mt-3 btn btn-primary" %}
                 </div>
         </div>
+        <input type="hidden" id="id" value="{{ house.id|default:'0' }}">
     </form>
+{#    {% debug %}#}
+{% endblock %}
+
+{% block markers %}
+    {% if object %}
+        set_popup({{ house.id }}, "{{ house.address }}")
+        set_marker({{ house.id }}, {{ house.gps_pos }});
+    {% endif %}
+    map.on('click', move_marker);
 {% endblock %}

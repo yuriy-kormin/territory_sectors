@@ -4,7 +4,6 @@
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
     <meta charset="UTF-8">
     {% load static %}
-
     {% load i18n %}
     {% load bootstrap4 %}
     {% bootstrap_css %}
@@ -14,22 +13,22 @@
         {% endblock %}
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js"></script>
-{#    <script src="{% static 'map.js' %}"></script>#}
     <title>{% translate "Territory" %}</title>
 </head>
 <body class="bg-light d-flex flex-column min-vh-100">
 {% include "nav.html" %}
 <main role="main" class="container">
-    <div class="my-3 mt-5 p-5 bg-white rounded shadow-sm overflow-auto">
+    <div class="my-3 mt-3 p-3 bg-white rounded shadow-sm overflow-auto">
         {% bootstrap_messages %}
         {% block page_content %}
         {% endblock %}
     </div>
     <div id="map" style="height:40vh"></div>
-    <script src="{% static "map.js" %}">
+    <script src="{% static "map.js" %}"></script>
+    <script>
+        {% block markers %}
+        {% endblock %}
     </script>
-    {% block markers %}
-    {% endblock %}
 </main>
 </body>
 </html>

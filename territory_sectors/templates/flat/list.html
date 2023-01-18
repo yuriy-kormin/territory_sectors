@@ -26,11 +26,10 @@
     </table>
 {% endblock %}
 {% block markers %}
-<script>
+
     {% for id,obj in houses.items %}
     const marker{{ id }} = new mapboxgl.Marker()
         .setLngLat([{{ obj.gps_pos}}])
         .addTo(map);
     {% endfor %}
-</script>
 {% endblock %}

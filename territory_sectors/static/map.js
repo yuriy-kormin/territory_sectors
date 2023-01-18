@@ -16,12 +16,37 @@ map.addControl(new mapboxgl.GeolocateControl({
     showUserHeading: true
 }));
 map.addControl(new mapboxgl.NavigationControl());
+var markers = {};
+var popups = {};
 
 
-function add_marker (event) {
-  var coordinates = event.lngLat;
-  console.log('Lng:', coordinates.lng, 'Lat:', coordinates.lat);
-  marker1.setLngLat(coordinates).addTo(map);
+function set_popup (id, text) {
+    popups[id] = new mapboxgl.Popup(
+        {
+            offset: 25,
+            closeButton: false,
+            closeOnClick: true,
+        },
+    ).setText(text)
 }
+function set_marker (id, lng, lat) {
+    markers[id] = new mapboxgl.Marker()
+        .setPopup(popups[id])
+        .setLngLat([lng, lat])
+        .addTo(map);
 
-// map.on('click', add_marker);
+    // if (id == 11){
+    //     // markers[id].icon({'marker-color': 'red'})
+    //     alert(markers[id].properties)
+    // }
+}
+function move_marker (event) {
+    var coordinates = event.lngLat;
+    var id = document.getElementById("id").value
+    if (id in markers ){
+        markers[id].setLngLat(coordinates).addTo(map);
+    } else {
+        set_marker(id, coordinates.lng, coordinates.lat);
+    }
+    document.getElementById("gps_point").setAttribute('value',"SRID=4326;POINT("+coordinates.lng.toString() +" " +coordinates.lat.toString()+')')
+}
