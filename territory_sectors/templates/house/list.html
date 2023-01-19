@@ -10,6 +10,7 @@
             <th>{% translate "entrances" %}</th>
             <th>{% translate "floors" %}</th>
             <th>{% translate "sector" %}</th>
+            <th>{% translate "Founded addresses" %}</th>
             <th>{% translate "gps" %}</th>
             <th></th>
 
@@ -20,6 +21,7 @@
                 <td> {{house.entrances}}</td>
                 <td> {{house.floors}}</td>
                 <td> {{house.sector}}</td>
+                <td> {{house.flat__count}}</td>
                 <td> {{house.gps_pos}}</td>
                 <td>
                     <form method="get" action="{% url "house_delete" house.id %}">
@@ -31,8 +33,9 @@
     </table>
 {% endblock %}
 {% block markers %}
-    {% for house in object_list %}
+    {% for house in houses %}
         set_popup({{ house.id }},"{{ house.address }}({{ house.flat__count }})")
         set_marker({{ house.id }},{{ house.gps_pos }})
     {% endfor %}
+
 {% endblock %}

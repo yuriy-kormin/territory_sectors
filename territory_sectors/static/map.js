@@ -69,7 +69,7 @@ function add_sectors() {
                 }
             }
         );
-        map.addLayer({
+        layer_data = {
                     'id': i,
                     'type': 'fill',
                     'source': 'source'+i.toString(), // reference the data source
@@ -78,7 +78,9 @@ function add_sectors() {
                         'fill-color': '#0080ff', // blue color fill
                         'fill-opacity': 0.5
                     }
-                });
+                }
+        console.log(layer_data)
+        // map.addLayer(layer_data);
     }
 
 

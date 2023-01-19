@@ -2,6 +2,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .forms import HouseForm
+from .mixins import CountFlatsMixin
 from .models import House
 from django.utils.translation import gettext_lazy as _
 
@@ -38,12 +39,11 @@ class HouseUpdateView(SuccessMessageMixin, UpdateView):
     #     return context
     #
 
-class HouseListView(ListView):
+class ListView(CountFlatsMixin, ListView):
     model = House
     template_name = "house/list.html"
     extra_context = {
         'remove_title': _('remove'),
-        # 'houses': House.objects.all().in_bulk()
     }
 
 class HouseDeleteView(SuccessMessageMixin,DeleteView):
