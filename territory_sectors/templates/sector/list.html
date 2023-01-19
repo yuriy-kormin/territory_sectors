@@ -27,45 +27,9 @@
 {#    <input type = "hidden", id = "sectors_data", value ='{{ sectors_data }}'>#}
 {{ sectors_data|json_script:"sectors_data" }}
 {% endblock %}
-{#{% block js_variables %}#}
-{#    defer#}
-{#    data-sectors = "{% autoescape off %}{{ sectors_data }}{% endautoescape %}"#}
-{#{% endblock %}#}
 {% block markers %}
-    map.on('styledata', () => {
+    map.once('styledata', () => {
+        add_source();
         add_sectors();
     })
-{#    map.on(#}
-{#    add_sector()#}
-
-{#    {% for sector in object_list %}#}
-{#        {{ sector|json_script:'sectors_data' }}#}
-        {#        set_popup({{ sector.id }},"{{ sector.address }}({{ sector.flat__count }})")#}
-{#        set_marker({{ sector.id }},{{ sector.gps_pos }})#}
-{##}
-{#        map.on('load', () => {#}
-{#            map.addSource(#}
-{#                'sector_{{ sector.id }}', {#}
-{#                    'type': 'geojson',#}
-{#                    'data':{#}
-{#                        'type': 'Feature',#}
-{#                        'geometry': {% autoescape off %}{{ sector.contour.geojson }}{% endautoescape %}#}
-{#                    }#}
-{#                }#}
-{#            )#}
-{#        })#}
-{#        map.on('styledata', function() {#}
-{#                map.addLayer({#}
-{#                    'id': 'sector_{{ sector.id }}',#}
-{#                    'type': 'fill',#}
-{#                    'source': 'sector_{{ sector.id }}', // reference the data source#}
-{#                    'layout': {},#}
-{#                    'paint': {#}
-{#                        'fill-color': '#0080ff', // blue color fill#}
-{#                        'fill-opacity': 0.5#}
-{#                    }#}
-{#                });#}
-{#        });#}
-{##}
-{#    {% endfor %}#}
 {% endblock %}

@@ -57,31 +57,38 @@ function flat_change_house(e) {
     alert(e.target.value);
 }
 
-function add_sectors() {
+function add_source() {
     const sectors_data = JSON.parse(document.getElementById('sectors_data').textContent)
-    for (let i in sectors_data){
-        map.addSource(
-            'source'+i.toString(),{
-                'type': 'geojson',
-                'data':{
-                    'type': 'Feature',
-                    'geometry': JSON.parse(sectors_data[i]),
-                }
+    features = []
+    for (let i in sectors_data) {
+        features.push(
+            {
+                "type": "Feature",
+                "geometry": JSON.parse(sectors_data[i])
             }
-        );
-        layer_data = {
-                    'id': i,
-                    'type': 'fill',
-                    'source': 'source'+i.toString(), // reference the data source
-                    'layout': {},
-                    'paint': {
-                        'fill-color': '#0080ff', // blue color fill
-                        'fill-opacity': 0.5
-                    }
-                }
-        console.log(layer_data)
-        // map.addLayer(layer_data);
+        )
+
     }
 
-
+    map.addSource(
+            'layers', {
+                'type': 'geojson',
+                'data': {
+                    'type': 'FeatureCollection',
+                    'features': features,
+                },
+            },
+        )
+}
+function add_sectors(){
+    map. addLayer({
+        'id': 'sectors',
+        'type':'fill',
+        'source': 'layers',
+        'layout': {},
+        'paint':{
+            'fill-color': '#0080ff', // blue color fill
+            'fill-opacity': 0.5
+        }
+    })
 }
