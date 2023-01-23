@@ -18,7 +18,6 @@ class HouseCreateView(SuccessMessageMixin, CreateView):
     success_message = _('House created successfully')
 
 
-
 class HouseUpdateView(SuccessMessageMixin, UpdateView):
     model = House
     form_class = HouseForm
@@ -39,6 +38,7 @@ class HouseUpdateView(SuccessMessageMixin, UpdateView):
     #     return context
     #
 
+
 class ListView(CountFlatsMixin, ListView):
     model = House
     template_name = "house/list.html"
@@ -46,7 +46,8 @@ class ListView(CountFlatsMixin, ListView):
         'remove_title': _('remove'),
     }
 
-class HouseDeleteView(SuccessMessageMixin,DeleteView):
+
+class HouseDeleteView(SuccessMessageMixin, DeleteView):
     model = House
     template_name = "house/delete.html"
     success_url = reverse_lazy('house_list')

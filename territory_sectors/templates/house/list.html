@@ -33,7 +33,7 @@
     </table>
 {% endblock %}
 {% block markers %}
-    {% for house in houses %}
+    {% for house in object_list %}
         set_popup({{ house.id }},"{{ house.address }}({{ house.flat__count }})")
         set_marker({{ house.id }},{{ house.gps_pos }})
     {% endfor %}
