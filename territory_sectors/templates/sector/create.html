@@ -19,10 +19,18 @@
     </form>
 {#    {% debug %}#}
 {% endblock %}
-
+{% block head %}
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.2.2/mapbox-gl-draw.js"></script>
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.2.2/mapbox-gl-draw.css" type="text/css">
+{% endblock %}
 {% block markers %}
-    {% if object %}
-        set_popup({{ house.id }}, "{{ house.address }}")
-        set_marker({{ house.id }}, {{ house.gps_pos }});
-    {% endif %}
+    add_draw_control()
+    map.on('draw.update', update_sector);
+    map.on('draw.create', update_sector);
+{#    {% if object %}#}
+
+
+{#        set_popup({{ house.id }}, "{{ house.address }}")#}
+{#        set_marker({{ house.id }}, {{ house.gps_pos }});#}
+{#    {% endif %}#}
 {% endblock %}

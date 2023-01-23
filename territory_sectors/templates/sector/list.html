@@ -3,7 +3,7 @@
 {% load bootstrap4 %}
 {% block page_content %}
    <h1 class="my-4"> {{ marks }}</h1>
-{#    <a class="nav-link" href="{% url "sector_add" %}">{% translate "Create sector" %}</a>#}
+    <a class="nav-link" href="{% url "sector_add" %}">{% translate "Create sector" %}</a>
     <table class = "table table-striped">
         <tr>
             <th>{% translate "name" %}</th>
@@ -24,12 +24,15 @@
             </tr>
         {% endfor %}
     </table>
-{#    <input type = "hidden", id = "sectors_data", value ='{{ sectors_data }}'>#}
+{% autoescape off %}
 {{ sectors_data|json_script:"sectors_data" }}
+{%  endautoescape %}
 {% endblock %}
 {% block markers %}
     map.once('styledata', () => {
         add_source();
         add_sectors();
     })
+    map.on('click','sectors', sector_popup)
+
 {% endblock %}

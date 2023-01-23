@@ -1,12 +1,19 @@
+import json
+
 from django.db import models
 from territory_sectors.uuid_qr.models import Uuid
 from django.contrib.gis.db import models as gis_models
 
+
 class SectorManager(models.Manager):
     def json_polygons(self):
-        return {
-            sector.id: sector.contour.geojson for sector in super().get_queryset()
-        }
+        result = {}
+        for sector in super().get_queryset():
+            result[sector.id] ={
+                'name': sector.name,
+                'geojson': sector.contour.geojson,
+            }
+        return result
 
 
 class Sector(models.Model):
@@ -17,7 +24,7 @@ class Sector(models.Model):
     contour = gis_models.PolygonField(null=False, blank=False, srid=4326)
     objects = models.Manager()
     js = SectorManager()
+
     # var polygon = {{obj.geom.transform(4326).geojson}};
     def __str__(self):
         return self.name
-

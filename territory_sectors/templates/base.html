@@ -9,10 +9,11 @@
     {% bootstrap_css %}
     {% bootstrap_javascript jquery=True %}
     {% bootstrap_jquery %}
-        {% block head %}
-        {% endblock %}
+
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js"></script>
+        {% block head %}
+        {% endblock %}
     <title>{% translate "Territory" %}</title>
 </head>
 <body class="bg-light d-flex flex-column min-vh-100">

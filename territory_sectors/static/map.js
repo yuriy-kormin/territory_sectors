@@ -36,10 +36,6 @@ function set_marker (id, lng, lat) {
         .setLngLat([lng, lat])
         .addTo(map);
 
-    // if (id == 11){
-    //     // markers[id].icon({'marker-color': 'red'})
-    //     alert(markers[id].properties)
-    // }
 }
 function move_marker (event) {
     var coordinates = event.lngLat;
@@ -53,23 +49,31 @@ function move_marker (event) {
 }
 
 function flat_change_house(e) {
-    // d = document.getElementById("id_house").value;
     alert(e.target.value);
 }
 
 function add_source() {
-    const sectors_data = JSON.parse(document.getElementById('sectors_data').textContent)
+    const sectors= JSON.parse(document.getElementById('sectors_data').textContent)
     features = []
-    for (let i in sectors_data) {
-        features.push(
-            {
+    for (let id in sectors) {
+        features.push({
                 "type": "Feature",
-                "geometry": JSON.parse(sectors_data[i])
-            }
+                "properties":{
+                    'id': id,
+                    'name':sectors[id]['name']
+                },
+                "geometry": JSON.parse(sectors[id]['geojson'])
+            });
+        popups[id] = new mapboxgl.Popup(
+            {
+                offset: 25,
+                closeButton: false,
+                closeOnClick: true,
+            },
+        ).setHTML(
+            sectors[id]['name']
         )
-
     }
-
     map.addSource(
             'layers', {
                 'type': 'geojson',
@@ -91,4 +95,46 @@ function add_sectors(){
             'fill-opacity': 0.5
         }
     })
+}
+
+function sector_popup(e) {
+    id = e.features[0].properties.id
+    popups[id].setLngLat(e.lngLat).addTo(map);
+    console.log(id);
+        // .setHTML(e.features.properties.id)
+// .addTo(map);
+}
+
+function add_draw_control() {
+    draw = new MapboxDraw({
+        displayControlsDefault: false,
+        // Select which mapbox-gl-draw control buttons to add to the map.
+        controls: {
+        polygon: true,
+        trash: true
+        },
+        // Set mapbox-gl-draw to draw by default.
+        // The user does not have to click the polygon control button first.
+        defaultMode: 'draw_polygon'
+        });
+
+        map.addControl(draw);
+
+}
+
+function list2string(l){
+    var result = []
+    for (i in l){
+        result.push(l[i].join(' '))
+    }
+
+    return '(('+result.join(',')+'))'
+}
+
+function update_sector(event) {
+    const data = draw.getAll();
+    var coordinates = draw.getAll()['features'][0]['geometry']['coordinates'][0]
+    document.getElementById("contour").setAttribute(
+        'value',"SRID=4326;POLYGON"+list2string(coordinates))
+    console.log(document.getElementById('contour').value)
 }

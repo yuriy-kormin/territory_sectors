@@ -7,9 +7,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarToggleExternalContent">
     <ul class="navbar-nav">
+        <li class = "nav-item active"><a class="nav-link active" href="{% url "sector_list" %}">{% translate "Sectors" %}</a></li>
         <li class = "nav-item active"><a class="nav-link active" href="{% url "house_list" %}">{% translate "Houses" %}</a></li>
         <li class = "nav-item active"><a class="nav-link active" href="{% url "flat_list" %}">{% translate "Flats" %}</a></li>
-        <li class = "nav-item active"><a class="nav-link active" href="{% url "sector_list" %}">{% translate "Sectors" %}</a></li>
     </ul>
     <ul class="navbar-nav">
             {% if request.user.is_authenticated %}
