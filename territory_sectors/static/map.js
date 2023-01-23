@@ -55,9 +55,9 @@ function flat_change_house(e) {
 
 function add_sector_source(id, json, popup_data){
     sectors.push({
+                'id': id,
                 "type": "Feature",
                 "properties":{
-                    'id': id,
                     'name':popup_data,
                 },
                 "geometry": json,
@@ -143,7 +143,7 @@ function map_add_layer(){
 // }
 
 function sector_popup(e) {
-    id = e.features[0].properties.id
+    id = e.features[0].id
     popups[id].setLngLat(e.lngLat).addTo(map);
         // .setHTML(e.features.properties.id)
 // .addTo(map);

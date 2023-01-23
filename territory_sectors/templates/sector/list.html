@@ -13,9 +13,7 @@
         </tr>
         {% for sector in object_list %}
             <tr>
-{#                <td> <a href = {% url "sector_update" sector.id %}>{{sector.name}}</a></td>#}
-{#                <td> {{ sector.name }}</td>#}
-                <td>{{ sector.name }}</td>
+                <td> <a href = {% url "sector_update" sector.id %}>{{sector.name}}</a></td>
                 <td> {{sector.uuid}}</td>
                 <td>
                     <form method="get" action="{% url "sector_delete" sector.id %}">
@@ -31,8 +29,7 @@
     add_sector_source(
         {{ sector.id }},
         {{ sector.geojson | safe }},
-        "{{ sector.name }}"
-        )
+        "<b> {{ sector.name }}</b> <br>Flats - {{ sector.flat_count }}")
     {% endfor %}
     map.on('load', map_add_layer)
     map.on('click','sectors', sector_popup)

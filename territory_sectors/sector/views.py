@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from .forms import SectorForm
 from .models import Sector
 from django.utils.translation import gettext_lazy as _
-from .mixins import GeoJSONAnnotateMixin
+from .mixins import GeoJSONAnnotateMixin, AnnotateHouseFlatsCountsMixin
 
 
 class SectorCreateView(SuccessMessageMixin, CreateView):
@@ -18,20 +18,17 @@ class SectorCreateView(SuccessMessageMixin, CreateView):
     success_message = _('Sector created successfully')
 
 
-class SectorUpdateView(SuccessMessageMixin, UpdateView):
-    pass
+class SectorUpdateView(GeoJSONAnnotateMixin, AnnotateHouseFlatsCountsMixin, SuccessMessageMixin, UpdateView):
+    model = Sector
+    form_class = SectorForm
+    template_name = "sector/create.html"
+    success_url = reverse_lazy('sector_list')
+    extra_context = {
+        'header': _('Update Sector'),
+        'button_title': _('Update'),
+    }
+    success_message = _('Sector updated successfully')
 
-
-#     model = House
-#     form_class = HouseForm
-#     template_name = "house/create.html"
-#     success_url = reverse_lazy('house_list')
-#     extra_context = {
-#         'header': _('Update house'),
-#         'button_title': _('Update'),
-#     }
-#     success_message = _('House updated successfully')
-#
 #     #
 #     # def get_context_data(self, **kwargs):
 #     #     context = super().get_context_data(**kwargs)
@@ -41,7 +38,7 @@ class SectorUpdateView(SuccessMessageMixin, UpdateView):
 #     #     return context
 #     #
 
-class SectorListView(GeoJSONAnnotateMixin, ListView):
+class SectorListView(GeoJSONAnnotateMixin, AnnotateHouseFlatsCountsMixin, ListView):
     model = Sector
     template_name = "sector/list.html"
     extra_context = {
@@ -49,7 +46,7 @@ class SectorListView(GeoJSONAnnotateMixin, ListView):
     }
 
 
-class SectorDeleteView(GeoJSONAnnotateMixin,SuccessMessageMixin, DeleteView):
+class SectorDeleteView(GeoJSONAnnotateMixin,AnnotateHouseFlatsCountsMixin, SuccessMessageMixin, DeleteView):
     model = Sector
     template_name = "sector/delete.html"
     success_url = reverse_lazy('sector_list')

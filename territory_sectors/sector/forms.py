@@ -25,7 +25,7 @@ class SectorForm(forms.ModelForm):
                     'choices': Uuid,
                 }
             ),
-            'contour': forms.HiddenInput(
+            'contour': forms.TextInput(
                 attrs={
                     'id': 'contour',
                 },

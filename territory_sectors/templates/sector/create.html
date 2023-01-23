@@ -17,7 +17,6 @@
         </div>
         <input type="hidden" id="id" value="{{ house.id|default:'0' }}">
     </form>
-{#    {% debug %}#}
 {% endblock %}
 {% block head %}
 <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.2.2/mapbox-gl-draw.js"></script>
@@ -25,11 +24,21 @@
 {% endblock %}
 {% block markers %}
     add_draw_control()
-    {% if object %}
+
+{#    {% if object %}#}
         map.on('draw.update', update_sector);
-    {% else %}
-        map.on('draw.create', update_sector);
+        add_sector_source(
+        {{ object.id }},
+        {{ object.geojson | safe }},
+        "{{ object.name }}"
+        )
+    map.on('load', map_add_layer)
+        draw.add(sectors)
+{#    map.on('click','sectors', sector_popup)#}
+
+{#    {% else %}#}
+{#        map.on('draw.create', update_sector);#}
 {#        set_popup({{ house.id }}, "{{ house.address }}")#}
 {#        set_marker({{ house.id }}, {{ house.gps_pos }});#}
-    {% endif %}
+{#    {% endif %}#}
 {% endblock %}
