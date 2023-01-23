@@ -1,7 +1,7 @@
-from django.db.models import Count
+from django.contrib.gis.db.models.functions import AsGeoJSON
 
 
-class CountHousesFlatsMixin:
+class GeoJSONAnnotateMixin:
     def get_queryset(self):
-        qs = super(CountHousesFlatsMixin, self).get_queryset()
-        return qs.annotate(Count('house'), Count('house__flat'))
+        qs = super(GeoJSONAnnotateMixin, self).get_queryset()
+        return qs.annotate(geojson=AsGeoJSON('contour'))

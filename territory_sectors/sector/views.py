@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from .forms import SectorForm
 from .models import Sector
 from django.utils.translation import gettext_lazy as _
-from .mixins import CountHousesFlatsMixin
+from .mixins import GeoJSONAnnotateMixin
 
 
 class SectorCreateView(SuccessMessageMixin, CreateView):
@@ -18,8 +18,10 @@ class SectorCreateView(SuccessMessageMixin, CreateView):
     success_message = _('Sector created successfully')
 
 
+class SectorUpdateView(SuccessMessageMixin, UpdateView):
+    pass
 
-# class HouseUpdateView(SuccessMessageMixin, UpdateView):
+
 #     model = House
 #     form_class = HouseForm
 #     template_name = "house/create.html"
@@ -39,21 +41,21 @@ class SectorCreateView(SuccessMessageMixin, CreateView):
 #     #     return context
 #     #
 
-class SectorListView(CountHousesFlatsMixin, ListView):
+class SectorListView(GeoJSONAnnotateMixin, ListView):
     model = Sector
     template_name = "sector/list.html"
     extra_context = {
         'remove_title': _('remove'),
-        'sectors_data': Sector.js.json_polygons(),
     }
 
-# class HouseDeleteView(SuccessMessageMixin,DeleteView):
-#     model = House
-#     template_name = "house/delete.html"
-#     success_url = reverse_lazy('house_list')
-#     extra_context = {
-#         'header': _('Remove house'),
-#         'button_title': _('Remove '),
-#         'message': _('Are you sure delete house '),
-#     }
-#     success_message = _('House deleted successfully')
+
+class SectorDeleteView(GeoJSONAnnotateMixin,SuccessMessageMixin, DeleteView):
+    model = Sector
+    template_name = "sector/delete.html"
+    success_url = reverse_lazy('sector_list')
+    extra_context = {
+        'header': _('Remove sector'),
+        'button_title': _('Remove '),
+        'message': _('Are you sure delete sector '),
+    }
+    success_message = _('Sector deleted successfully')

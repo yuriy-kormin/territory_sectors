@@ -8,7 +8,7 @@ from django.contrib.gis.db import models as gis_models
 class SectorManager(models.Manager):
     def json_polygons(self):
         result = {}
-        for sector in super().get_queryset():
+        for sector in super(SectorManager,self).get_queryset():
             result[sector.id] ={
                 'name': sector.name,
                 'geojson': sector.contour.geojson,

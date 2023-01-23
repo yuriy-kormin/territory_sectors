@@ -18,6 +18,7 @@ map.addControl(new mapboxgl.GeolocateControl({
 map.addControl(new mapboxgl.NavigationControl());
 var markers = {};
 var popups = {};
+var sectors = []
 // var sector_sources = {};
 
 
@@ -49,42 +50,41 @@ function move_marker (event) {
 }
 
 function flat_change_house(e) {
-    alert(e.target.value);
+    // alert(e.target.value);
 }
 
-function add_source() {
-    const sectors= JSON.parse(document.getElementById('sectors_data').textContent)
-    features = []
-    for (let id in sectors) {
-        features.push({
+function add_sector_source(id, json, popup_data){
+    sectors.push({
                 "type": "Feature",
                 "properties":{
                     'id': id,
-                    'name':sectors[id]['name']
+                    'name':popup_data,
                 },
-                "geometry": JSON.parse(sectors[id]['geojson'])
+                "geometry": json,
             });
-        popups[id] = new mapboxgl.Popup(
+    popups[id] = new mapboxgl.Popup(
             {
                 offset: 25,
                 closeButton: false,
                 closeOnClick: true,
             },
         ).setHTML(
-            sectors[id]['name']
-        )
-    }
+            popup_data
+    )
+}
+
+function map_add_layer(){
+    // sources = {
     map.addSource(
             'layers', {
                 'type': 'geojson',
                 'data': {
                     'type': 'FeatureCollection',
-                    'features': features,
+                    'features': sectors,
                 },
-            },
-        )
-}
-function add_sectors(){
+    })
+
+        // )
     map. addLayer({
         'id': 'sectors',
         'type':'fill',
@@ -97,10 +97,54 @@ function add_sectors(){
     })
 }
 
+// function add_source() {
+//     const sectors= JSON.parse(document.getElementById('sectors_data').textContent)
+//     features = []
+//     for (let id in sectors) {
+//         features.push({
+//                 "type": "Feature",
+//                 "properties":{
+//                     'id': id,
+//                     'name':sectors[id]['name']
+//                 },
+//                 "geometry": JSON.parse(sectors[id]['geojson'])
+//             });
+//         popups[id] = new mapboxgl.Popup(
+//             {
+//                 offset: 25,
+//                 closeButton: false,
+//                 closeOnClick: true,
+//             },
+//         ).setHTML(
+//             sectors[id]['name']
+//         )
+//     }
+//     map.addSource(
+//             'layers', {
+//                 'type': 'geojson',
+//                 'data': {
+//                     'type': 'FeatureCollection',
+//                     'features': features,
+//                 },
+//             },
+//         )
+// }
+// function add_sectors(){
+//     map. addLayer({
+//         'id': 'sectors',
+//         'type':'fill',
+//         'source': 'layers',
+//         'layout': {},
+//         'paint':{
+//             'fill-color': '#0080ff', // blue color fill
+//             'fill-opacity': 0.5
+//         }
+//     })
+// }
+
 function sector_popup(e) {
     id = e.features[0].properties.id
     popups[id].setLngLat(e.lngLat).addTo(map);
-    console.log(id);
         // .setHTML(e.features.properties.id)
 // .addTo(map);
 }

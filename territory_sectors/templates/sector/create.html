@@ -25,12 +25,11 @@
 {% endblock %}
 {% block markers %}
     add_draw_control()
-    map.on('draw.update', update_sector);
-    map.on('draw.create', update_sector);
-{#    {% if object %}#}
-
-
+    {% if object %}
+        map.on('draw.update', update_sector);
+    {% else %}
+        map.on('draw.create', update_sector);
 {#        set_popup({{ house.id }}, "{{ house.address }}")#}
 {#        set_marker({{ house.id }}, {{ house.gps_pos }});#}
-{#    {% endif %}#}
+    {% endif %}
 {% endblock %}

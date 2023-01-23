@@ -5,11 +5,17 @@
     <h1 class="my-4"> {{ header }}</h1>
     <form method="post" action=".">
     {% csrf_token %}
-        <p>{{ message }} "{{ object.address }}"  ?</p>
+        <p>{{ message }} "{{ object.name }}"  ?</p>
 {% bootstrap_button button_title button_type="submit" button_class="btn btn-danger" %}    </form>
 {% endblock %}
 {% block markers %}
-        set_popup({{ house.id }}, "{{ house.address }}")
-        set_marker({{ house.id }}, {{ house.gps_pos }});
+    add_sector_source(
+        {{ object.id }},
+        {{ object.geojson | safe }},
+        "{{ object.name }}"
+        )
+    map.on('load', map_add_layer)
+    map.on('click','sectors', sector_popup)
+
 {% endblock %}
 

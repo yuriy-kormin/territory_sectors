@@ -14,25 +14,27 @@
         {% for sector in object_list %}
             <tr>
 {#                <td> <a href = {% url "sector_update" sector.id %}>{{sector.name}}</a></td>#}
-                <td> {{ sector.name }}</td>
+{#                <td> {{ sector.name }}</td>#}
+                <td>{{ sector.name }}</td>
                 <td> {{sector.uuid}}</td>
                 <td>
-{#                    <form method="get" action="{% url "sector_delete" sector.id %}">#}
+                    <form method="get" action="{% url "sector_delete" sector.id %}">
                         {% bootstrap_button remove_title button_type="submit" button_class="btn btn-danger" %}
-{#                    </form>#}
+                    </form>
                 </td>
             </tr>
         {% endfor %}
     </table>
-{% autoescape off %}
-{{ sectors_data|json_script:"sectors_data" }}
-{%  endautoescape %}
 {% endblock %}
 {% block markers %}
-    map.once('styledata', () => {
-        add_source();
-        add_sectors();
-    })
+    {% for sector in object_list %}
+    add_sector_source(
+        {{ sector.id }},
+        {{ sector.geojson | safe }},
+        "{{ sector.name }}"
+        )
+    {% endfor %}
+    map.on('load', map_add_layer)
     map.on('click','sectors', sector_popup)
 
 {% endblock %}
