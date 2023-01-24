@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+    pgdatabase:
+        image: postgres:latest
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+            - POSTGRES_DB=postgres
+        expose:
+            - 5432
+        restart: always
+        volumes:
+            - pgdata:/var/lib/postgresql/data/:rw
+    sectors:
+        build: .
+        environment:
+        - DATABASE_URL=postgresql://postgres:postgres@pgdatabase:5432/postgres
+        - DJANGO_SECRET = '%ygz@y(^ma*_h_rp92r#srrir+zpiau2i$#740ju$)yyr-dz_n'
+        expose:
+        - 8000
+        depends_on:
+        - pgdatabase
+    nginx:
+        image: tork83/task-nginx:latest
+        ports:
+            - 8000:80
+        depends_on:
+            - sectors
+volumes:
+    pgdata:

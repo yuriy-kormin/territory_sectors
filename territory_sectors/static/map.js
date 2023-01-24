@@ -75,6 +75,7 @@ function add_sector_source(id, json, popup_data){
 
 function map_add_layer(){
     // sources = {
+    console.log(sectors)
     map.addSource(
             'layers', {
                 'type': 'geojson',

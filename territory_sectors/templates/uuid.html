@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+{% load i18n %}
+{% block page_content %}
+{#    <h2>Log In</h2>#}
+{#<form method="post">#}
+{#  {% csrf_token %}#}
+{#    {% bootstrap_form form %}#}
+{#  {{ form.as_div }}#}
+{#  <button type="submit">Log In</button>#}
+{#{% bootstrap_button "Login" button_type="submit" button_class="mt-3 btn btn-primary" %}#}
+{#{{ uuid }}#}
+    <table class = "table table-striped">
+        <tr>
+            <th>{% translate "house" %}</th>
+            <th>{% translate "flats" %}</th>
+{#            <th></th>#}
+
+        </tr>
+    {% for house in object.sector.house_set.all %}
+        <tr>
+            <td>{{ house.address }}</td>
+            <td><table class = "table table-striped">
+                {% for flat in house.flat_set.all %}
+                    <tr>
+                        <td>{{ flat.entrance }} подъезд</td>
+                        <td>{{ flat.floor }} этаж </td>
+                        <td>{{ flat.number }} квартира</td>
+
+                    </tr>
+                {% endfor %}
+                </table>
+            </td>
+
+
+        </tr>
+    {% endfor %}
+    </table>
+{#    </form>#}
+{% endblock %}
+{% block markers %}
+{#        add_sector_source(#}
+{#        {{ object.sector.id }},#}
+{#        {{ object.sector.contour.geojson | safe }},#}
+{#        "{{ object.sector.name }}"#}
+{#        )#}
+{#    map.on('load', map_add_layer)#}
+{#        draw.add(sectors)#}
+    {% for house in object.sector.house_set.all %}
+        set_popup({{ house.id }},"{{ house }}({{ house.flat__count }})")
+        set_marker({{ house.id }}, {{ house.gps_pos }})
+    {% endfor %}
+{% endblock %}
