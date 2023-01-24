@@ -1,5 +1,3 @@
-import json
-
 from django.db import models
 from territory_sectors.uuid_qr.models import Uuid
 from django.contrib.gis.db import models as gis_models

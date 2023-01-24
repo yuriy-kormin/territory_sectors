@@ -11,6 +11,22 @@ COPY docker-entrypoint.sh /app
 
 WORKDIR /app
 RUN apt-get update
+RUN echo deb http://deb.debian.org/debian testing main contrib non-free >> /etc/apt/sources.list && \
+    apt-get update && \
+    apt-get remove -y binutils && \
+    apt-get autoremove -y
+
+# Install GDAL dependencies
+RUN apt-get install -y libgdal-dev g++ --no-install-recommends && \
+    pip install pipenv && \
+    pip install whitenoise && \
+    pip install gunicorn && \
+    apt-get clean -y
+
+# Update C env vars so compiler can find gdal
+ENV CPLUS_INCLUDE_PATH=/usr/include/gdal
+ENV C_INCLUDE_PATH=/usr/include/gdal
+
 RUN pip3 install poetry
 RUN poetry config virtualenvs.create false
 RUN poetry install
