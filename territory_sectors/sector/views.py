@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from django.urls import reverse_lazy
@@ -7,7 +8,7 @@ from django.utils.translation import gettext_lazy as _
 from .mixins import GeoJSONAnnotateMixin, AnnotateHouseFlatsCountsMixin
 
 
-class SectorCreateView(SuccessMessageMixin, CreateView):
+class SectorCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     form_class = SectorForm
     template_name = "sector/create.html"
     success_url = reverse_lazy('sector_list')
@@ -18,7 +19,7 @@ class SectorCreateView(SuccessMessageMixin, CreateView):
     success_message = _('Sector created successfully')
 
 
-class SectorUpdateView(GeoJSONAnnotateMixin, AnnotateHouseFlatsCountsMixin, SuccessMessageMixin, UpdateView):
+class SectorUpdateView(LoginRequiredMixin, GeoJSONAnnotateMixin, AnnotateHouseFlatsCountsMixin, SuccessMessageMixin, UpdateView):
     model = Sector
     form_class = SectorForm
     template_name = "sector/create.html"
@@ -38,7 +39,7 @@ class SectorUpdateView(GeoJSONAnnotateMixin, AnnotateHouseFlatsCountsMixin, Succ
 #     #     return context
 #     #
 
-class SectorListView(GeoJSONAnnotateMixin, AnnotateHouseFlatsCountsMixin, ListView):
+class SectorListView(LoginRequiredMixin, GeoJSONAnnotateMixin, AnnotateHouseFlatsCountsMixin, ListView):
     model = Sector
     template_name = "sector/list.html"
     extra_context = {
@@ -46,7 +47,7 @@ class SectorListView(GeoJSONAnnotateMixin, AnnotateHouseFlatsCountsMixin, ListVi
     }
 
 
-class SectorDeleteView(GeoJSONAnnotateMixin,AnnotateHouseFlatsCountsMixin, SuccessMessageMixin, DeleteView):
+class SectorDeleteView(LoginRequiredMixin, GeoJSONAnnotateMixin,AnnotateHouseFlatsCountsMixin, SuccessMessageMixin, DeleteView):
     model = Sector
     template_name = "sector/delete.html"
     success_url = reverse_lazy('sector_list')

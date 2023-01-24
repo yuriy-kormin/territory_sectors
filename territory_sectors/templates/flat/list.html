@@ -10,7 +10,7 @@
             <th>{% translate "number" %}</th>
             <th>{% translate "floor" %}</th>
             <th>{% translate "language" %}</th>
-            <th>{% translate "gps(x,y)" %}</th>
+            <th>{% translate "sector_name" %}</th>
             <th></th>
         </tr>
         {% for flat in object_list %}
@@ -19,7 +19,7 @@
                 <td> <a href = "{% url "flat_update" flat.id %}">{{flat.number}}</a></td>
                 <td> {{flat.floor}}</td>
                 <td> {{flat.language}}</td>
-                <td> {{flat.house.gps_pos}}</td>
+                <td> {{flat.house.sector}}</td>
                 <td>
                     <form method="get" action="{% url "flat_delete" flat.id %}">
                         {% bootstrap_button remove_title button_type="submit" button_class="btn btn-danger" %}

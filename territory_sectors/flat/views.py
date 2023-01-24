@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView
@@ -9,7 +10,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 
-class FlatCreateView(SuccessMessageMixin,CreateView):
+class FlatCreateView(LoginRequiredMixin, SuccessMessageMixin,CreateView):
     form_class = FlatForm
     template_name = "flat/create.html"
     success_url = reverse_lazy('flat_list')
@@ -20,7 +21,7 @@ class FlatCreateView(SuccessMessageMixin,CreateView):
     success_message = _('Flat created successfully')
 
 
-class FlatListView(HousesAddMixin, ListView):
+class FlatListView(LoginRequiredMixin, HousesAddMixin, ListView):
     model = Flat
     template_name = "flat/list.html"
     extra_context = {
@@ -28,7 +29,8 @@ class FlatListView(HousesAddMixin, ListView):
     }
 
 
-class FlatUpdateView(SuccessMessageMixin, UpdateView):
+
+class FlatUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Flat
     form_class = FlatForm
     template_name = "flat/create.html"
@@ -40,7 +42,7 @@ class FlatUpdateView(SuccessMessageMixin, UpdateView):
     success_message = _('Flat updated successfully')
 
 
-class FlatDeleteView(SuccessMessageMixin, DeleteView):
+class FlatDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Flat
     template_name = "flat/delete.html"
     success_url = reverse_lazy('flat_list')
