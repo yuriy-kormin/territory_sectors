@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'territory_sectors.language',
     'territory_sectors.uuid_qr',
     "debug_toolbar",
+    "qr_code",
 ]
 
 

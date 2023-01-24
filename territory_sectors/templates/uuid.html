@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load bootstrap4 %}
 {% load i18n %}
+{% load qr_code %}
 {% block page_content %}
 {#    <h2>Log In</h2>#}
 {#<form method="post">#}
@@ -10,6 +11,11 @@
 {#  <button type="submit">Log In</button>#}
 {#{% bootstrap_button "Login" button_type="submit" button_class="mt-3 btn btn-primary" %}#}
 {#{{ uuid }}#}
+    {% if request.user.is_authenticated %}
+{#        <img src="{% qr_url_from_data "Hello World!" size=8 version=10 image_format='png' %}" alt="Hello World!">#}
+{#        {{ requ }}#}
+        {% qr_from_text request.build_absolute_uri size="t" image_format="png" error_correction="L" %}
+    {% endif %}
     <table class = "table table-striped">
         <tr>
             <th>{% translate "house" %}</th>
