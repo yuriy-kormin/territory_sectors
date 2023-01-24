@@ -25,7 +25,7 @@ services:
             - pgdata:/var/lib/postgresql/data/:rw
     nginx:
         build:
-            context: .
+            context: ./Docker/nginx/
             dockerfile: ./Docker/nginx/Dockerfile
         ports:
             - 80:80
