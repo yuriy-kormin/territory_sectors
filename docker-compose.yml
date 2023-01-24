@@ -13,7 +13,9 @@ services:
             - pgdatabase
 
     pgdatabase:
-        image: postgis/postgis:latest
+        build:
+            context: .
+            dockerfile: ./Docker/postgis/Dockerfile
         environment:
             - POSTGRES_USER=postgres
             - POSTGRES_PASSWORD=postgres
