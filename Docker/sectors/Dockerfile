@@ -8,7 +8,7 @@ COPY territory_sectors/ /app/territory_sectors
 RUN mkdir /app/static/
 COPY pyproject.toml /app
 COPY README.md manage.py .env /app/
-COPY docker-entrypoint.sh /app/
+COPY Docker/sectors/docker-entrypoint.sh /app/
 
 WORKDIR /app
 RUN apt-get update
