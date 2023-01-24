@@ -2,7 +2,8 @@ version: "3.9"
 
 services:
     sectors:
-        build: ./Docker/sectors
+        build:
+            - dockerfile: ./Docker/sectors
         env_file:
             - .env
         expose:
@@ -22,7 +23,8 @@ services:
         volumes:
             - pgdata:/var/lib/postgresql/data/:rw
     nginx:
-        build: ./Docker/nginx
+        build:
+            - dockerfile: ./Docker/nginx
         ports:
             - 80:80
         depends_on:
