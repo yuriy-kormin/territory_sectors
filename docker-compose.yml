@@ -2,13 +2,14 @@ version: "3.9"
 
 services:
     sectors:
-        build: .
+        build: ./Docker/sectors
         env_file:
             - .env
         expose:
             - 8000
         depends_on:
             - pgdatabase
+
     pgdatabase:
         image: postgis/postgis:latest
         environment:
@@ -21,7 +22,7 @@ services:
         volumes:
             - pgdata:/var/lib/postgresql/data/:rw
     nginx:
-        image: tork83/task-nginx:latest
+        build: ./Docker/nginx
         ports:
             - 80:80
         depends_on:
