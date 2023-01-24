@@ -97,7 +97,7 @@ WSGI_APPLICATION = 'territory_sectors.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='spatialite:///db.sqlite3',
+        # default='spatialite:///db.sqlite3',
         # conn_max_age=600,
     )
 }

@@ -23,7 +23,7 @@ services:
     nginx:
         image: tork83/task-nginx:latest
         ports:
-            - 8000:80
+            - 80:80
         depends_on:
             - sectors
 volumes:

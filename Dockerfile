@@ -5,6 +5,7 @@ ENV PYTHONDONTWRITEBYTECODE 1
 
 RUN mkdir /app
 COPY territory_sectors/ /app/territory_sectors
+RUN mkdir /app/static/
 COPY pyproject.toml /app
 COPY README.md manage.py /app/
 COPY docker-entrypoint.sh /app
