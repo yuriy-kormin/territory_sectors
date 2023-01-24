@@ -1,5 +1,11 @@
 #!/bin/bash
 
+#python manage.py initadmin
+######################################
+#### planning to write initadmin  ####
+######################################
+
+
 # Apply database migrations
 echo "Apply database migrations"
 python manage.py migrate --noinput
