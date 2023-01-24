@@ -11,10 +11,6 @@ COPY docker-entrypoint.sh /app
 
 WORKDIR /app
 RUN apt-get update
-RUN echo deb http://deb.debian.org/debian testing main contrib non-free >> /etc/apt/sources.list && \
-    apt-get update && \
-    apt-get remove -y binutils && \
-    apt-get autoremove -y
 
 # Install GDAL dependencies
 RUN apt-get install -y libgdal-dev g++ --no-install-recommends && \
