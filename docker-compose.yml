@@ -3,10 +3,8 @@ version: "3.9"
 services:
     sectors:
         build: .
-        environment:
-            - DATABASE_URL=postgresql://postgres:postgres@pgdatabase:5432/postgres
-            - DJANGO_SECRET=%ygz@y(^ma*_h_rp92r#srrir+zpiau2i$#740ju$)yyr-dz)n
-            - DEBUG=False
+        env_file:
+            - .env
         expose:
             - 8000
         depends_on:
