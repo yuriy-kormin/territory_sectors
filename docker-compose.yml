@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
     pgdatabase:
-        image: postgres:latest
+        image: postgis/postgis:latest
         environment:
             - POSTGRES_USER=postgres
             - POSTGRES_PASSWORD=postgres
