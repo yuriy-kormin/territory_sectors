@@ -18,8 +18,8 @@ services:
             - POSTGRES_USER=postgres
             - POSTGRES_PASSWORD=postgres
             - POSTGRES_DB=postgres
-        expose:
-            - 5432
+        ports:
+            - 5432:5432
         restart: always
         volumes:
             - pgdata:/var/lib/postgresql/data/:rw
