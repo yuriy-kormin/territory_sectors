@@ -32,7 +32,7 @@ class FlatForm(forms.ModelForm):
             'number': forms.TextInput(
                 attrs={
                     'class': 'form-control',
-                    'placeholder': _('Please add flat number if possible')
+                    'placeholder': _('If possible - set number. (use , as separator for multiply)')
                 }
             ),
             'entrance': forms.TextInput(
