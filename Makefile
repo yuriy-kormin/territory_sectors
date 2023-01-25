@@ -7,6 +7,8 @@ shell:
 migrate:
 	${MANAGE} makemigrations
 	${MANAGE} migrate
+collectstatic:
+	poetry run python manage.py collectstatic --no-input --clear
 test:
 	${MANAGE} test
 install:
