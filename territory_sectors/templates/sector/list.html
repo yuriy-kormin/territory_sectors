@@ -33,5 +33,8 @@
     {% endfor %}
     map.on('load', map_add_layer)
     map.on('click','sectors', sector_popup)
-
+    {% for house in houses %}
+{#        set_popup({{ house.id }},"{{ house.address }}({{ house.flat__count }})")#}
+        set_marker({{ house.id }},{{ house.gps_pos }})
+    {% endfor %}
 {% endblock %}

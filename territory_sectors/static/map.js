@@ -32,8 +32,11 @@ function set_popup (id, text) {
     ).setText(text)
 }
 function set_marker (id, lng, lat) {
-    markers[id] = new mapboxgl.Marker()
-        .setPopup(popups[id])
+    markers[id] = new mapboxgl.Marker({
+        color: "#B917FC",
+        scale:0.5,
+        // sy
+    }).setPopup(popups[id])
         .setLngLat([lng, lat])
         .addTo(map);
 
