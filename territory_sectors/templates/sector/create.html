@@ -1,9 +1,15 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load qr_code %}
 {% load bootstrap4 %}
 {% block page_content %}
     <form method="post" action=".">
     {% csrf_token %}
+    {% if object.uuid_id %}
+        {% with request.scheme|add:"://"|add:request.get_host|add:'/'|add:object.uuid_id as url_string %}
+            {% qr_from_text url_string size="t" image_format="png" error_correction="L" %}
+        {% endwith %}
+    {% endif %}
         <h1 class="my-4"> {{ header }}</h1>
         <div class = "form">
             {%  for field in form %}
@@ -24,21 +30,15 @@
 {% endblock %}
 {% block markers %}
     add_draw_control()
-
-{#    {% if object %}#}
-        map.on('draw.update', update_sector);
+    map.on('draw.update', update_sector);
+    map.on('draw.create', update_sector);
+    {% if object %}
         add_sector_source(
-        {{ object.id }},
-        {{ object.geojson | safe }},
-        "{{ object.name }}"
+            {{ object.id }},
+            {{ object.geojson | safe }},
+            "{{ object.name }}"
         )
-    map.on('load', map_add_layer)
+        map.on('load', map_add_layer)
         draw.add(sectors)
-{#    map.on('click','sectors', sector_popup)#}
-
-{#    {% else %}#}
-{#        map.on('draw.create', update_sector);#}
-{#        set_popup({{ house.id }}, "{{ house.address }}")#}
-{#        set_marker({{ house.id }}, {{ house.gps_pos }});#}
-{#    {% endif %}#}
+    {% endif %}
 {% endblock %}

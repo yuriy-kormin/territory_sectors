@@ -163,7 +163,7 @@ function add_draw_control() {
         defaultMode: 'draw_polygon'
         });
 
-        map.addControl(draw);
+    map.addControl(draw);
 
 }
 
