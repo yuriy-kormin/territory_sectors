@@ -1,5 +1,6 @@
+from django.contrib import messages
 from django.db.models import Count
-from django.shortcuts import redirect
+from django.http import HttpResponseRedirect
 from .models import Flat
 from territory_sectors.house.models import House
 from django.views.generic.list import MultipleObjectMixin
@@ -19,7 +20,7 @@ class HousesAddMixin(MultipleObjectMixin):
 class SeveralInstanceCreateMixin:
     def form_valid(self, form):
         def separate(string):
-            if ',' in string:
+            if string and ',' in string:
                 return [i for i in string.split(',') if len(i)]
 
         if numbers := separate(form.instance.number):
@@ -36,7 +37,10 @@ class SeveralInstanceCreateMixin:
                     )
                 )
             Flat.objects.bulk_create(instances)
-            return redirect(self.get_success_url())
+            success_message = self.get_success_message(form.cleaned_data)
+            if success_message:
+                messages.success(self.request, success_message)
+            return HttpResponseRedirect(self.success_url)
         return super().form_valid(form)
 
 #

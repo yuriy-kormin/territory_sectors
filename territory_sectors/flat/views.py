@@ -21,6 +21,7 @@ class FlatCreateView(LoginRequiredMixin,SeveralInstanceCreateMixin, SuccessMessa
     success_message = _('Flat created successfully')
 
 
+
 class FlatListView(LoginRequiredMixin, HousesAddMixin, ListView):
     model = Flat
     template_name = "flat/list.html"
