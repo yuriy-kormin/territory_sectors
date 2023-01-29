@@ -16,6 +16,8 @@ map.addControl(new mapboxgl.GeolocateControl({
     showUserHeading: true
 }));
 map.addControl(new mapboxgl.NavigationControl());
+// mapboxgl.setRTLTextPlugin('https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js');
+// map.addControl(new MapboxLanguage({defaultLanguage: 'ru'}));
 var markers = {};
 var popups = {};
 var sectors = []

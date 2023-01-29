@@ -16,32 +16,60 @@
 {#        {{ requ }}#}
         {% qr_from_text request.build_absolute_uri size="t" image_format="png" error_correction="L" %}
     {% endif %}
-    <table class = "table table-striped">
-        <tr>
-            <th>{% translate "house" %}</th>
-            <th>{% translate "flats" %}</th>
+{#    <table class = "table table-striped">#}
+{#        <tr>#}
+{#            <th>{% translate "house" %}</th>#}
+{#            <th>{% translate "flats" %}</th>#}
 {#            <th></th>#}
+{##}
+{#        </tr>#}
+{#    </table>#}
+        <div id="accordion">
+            {% for house in object.sector.house_set.all %}
+              <div class="card">
+                <div class="card-header" id="headingOne">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{ house.id }}" aria-expanded="true" aria-controls="collapse{{ house.id }}">
+                        {{house.address}}
+                    </button>
+                  </h5>
+                </div>
 
-        </tr>
-    {% for house in object.sector.house_set.all %}
-        <tr>
-            <td>{{ house.address }}</td>
-            <td><table class = "table table-striped">
-                {% for flat in house.flat_set.all %}
-                    <tr>
-                        <td>{{ flat.entrance }} подъезд</td>
-                        <td>{{ flat.floor }} этаж </td>
-                        <td>{{ flat.number }} квартира</td>
-
-                    </tr>
-                {% endfor %}
-                </table>
-            </td>
-
-
-        </tr>
-    {% endfor %}
-    </table>
+                <div id="collapse{{ house.id }}" class="collapse" aria-labelledby="heading{{ house.id }}" data-parent="#accordion">
+                  <div class="card-body">
+                      <table class = "table table-striped">
+                        {% for flat in house.flat_set.all %}
+                            <tr>
+                                <td>{{ flat.number }} квартира</td>
+                                <td>{{ flat.entrance }} подъезд</td>
+                                <td>{{ flat.floor }} этаж </td>
+                                <td>{{ flat.way_desc }}</td>
+                            </tr>
+                        {% endfor %}
+                      </table>
+                  </div>
+                </div>
+              </div>
+        {% endfor %}
+        </div>
+{#        <tr>#}
+{#            <td>{{ house.address }}</td>#}
+{#            <td><table class = "table table-striped">#}
+{#                {% for flat in house.flat_set.all %}#}
+{#                    <tr>#}
+{#                        <td>{{ flat.entrance }} подъезд</td>#}
+{#                        <td>{{ flat.floor }} этаж </td>#}
+{#                        <td>{{ flat.number }} квартира</td>#}
+{##}
+{#                    </tr>#}
+{#                {% endfor %}#}
+{#                </table>#}
+{#            </td>#}
+{##}
+{##}
+{#        </tr>#}
+{#    {% endfor %}#}
+{#    </table>#}
 {#    </form>#}
 {% endblock %}
 {% block markers %}

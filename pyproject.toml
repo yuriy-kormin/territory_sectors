@@ -10,7 +10,6 @@ packages = [{include = "territory_sectors"}]
 python = "^3.10"
 python-dotenv = "^0.21.0"
 dj-database-url = "^1.2.0"
-django-extensions = "^3.2.1"
 django-bootstrap4 = "^22.3"
 postgis = "^1.0.4"
 shortuuid = "^1.0.11"
@@ -24,6 +23,7 @@ pillow = "^9.4.0"
 qrcode = "^7.3.1"
 
 [tool.poetry.group.dev.dependencies]
+django-extensions = "^3.2.1"
 flake8 = "^6.0.0"
 
 [build-system]

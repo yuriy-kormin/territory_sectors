@@ -1,6 +1,5 @@
 from django.db.models import Count
 from django.shortcuts import redirect
-
 from .models import Flat
 from territory_sectors.house.models import House
 from django.views.generic.list import MultipleObjectMixin
