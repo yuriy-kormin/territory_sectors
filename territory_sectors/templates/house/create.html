@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load bootstrap4 %}
 {% block page_content %}
-    <form method="post" action=".">
+    <input method="post" action=".">
     {% csrf_token %}
         <h1 class="my-4"> {{ header }}</h1>
         <div class = "form">
@@ -16,6 +16,7 @@
                 </div>
         </div>
         <input type="hidden" id="id" value="{{ house.id|default:'0' }}">
+        <input type="text" id="mapboxaddress"></input>
     </form>
 {#    {% debug %}#}
 {% endblock %}

@@ -1,6 +1,7 @@
 from django.db import models
 from territory_sectors.uuid_qr.models import Uuid
 from django.contrib.gis.db import models as gis_models
+from simple_history.models import HistoricalRecords
 
 
 class SectorManager(models.Manager):
@@ -22,6 +23,7 @@ class Sector(models.Model):
     contour = gis_models.PolygonField(null=False, blank=False, srid=4326)
     objects = models.Manager()
     js = SectorManager()
+    history = HistoricalRecords()
 
     # var polygon = {{obj.geom.transform(4326).geojson}};
     def __str__(self):

@@ -148,6 +148,18 @@ pytz = "*"
 segno = ">=1.5"
 
 [[package]]
+name = "django-simple-history"
+version = "3.2.0"
+description = "Store model history and view/revert changes from admin site."
+category = "main"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "django-simple-history-3.2.0.tar.gz", hash = "sha256:bff0a756238b2fa048ea3ffe8224b4edd421559123ff9ce5c27682c37c6a7702"},
+    {file = "django_simple_history-3.2.0-py3-none-any.whl", hash = "sha256:516e1872c2028c31f77208f542967e81bd3bf75623e69fe7008d5d3d15e33534"},
+]
+
+[[package]]
 name = "flake8"
 version = "6.0.0"
 description = "the modular source code checker: pep8 pyflakes and co"
@@ -655,4 +667,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "1e22250387d501ea31cd367f94c4fcf9f6c7a1990ebc9901309e1002714d6e28"
+content-hash = "bf3555b49ddd74096bf9dd26626dbf7205c80f326083a1cdb5edf71d432bd1df"
