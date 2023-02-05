@@ -3,15 +3,18 @@ from shortuuid.django_fields import ShortUUIDField
 # from territory_sectors.sector.models import Sector
 # from territory_sectors.house.models import House
 # from territory_sectors.flat.models import Flat
-import qrcode
-from io import BytesIO
-from django.core.files import File
-from PIL import Image, ImageDraw
+# import qrcode
+# from io import BytesIO
+# from django.core.files import File
+# from PIL import Image, ImageDraw
+
+
 class Uuid(models.Model):
     id = ShortUUIDField(primary_key=True,
                         length=10,
                         max_length=10,
-                        auto_created=True,)
+                        auto_created=True, )
+
     # qr_image = models.ImageField(blank=True, null=True, upload_to='QRCode')
 
     # created_at = models.DateTimeField(auto_now_add=True)

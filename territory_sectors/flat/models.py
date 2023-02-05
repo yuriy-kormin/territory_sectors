@@ -14,9 +14,12 @@ class Flat(models.Model):
     entrance = models.IntegerField(null=True, blank=True)
     floor = models.IntegerField(null=True, blank=True)
     way_desc = models.CharField(max_length=500)
-    language = models.ForeignKey(to=Language, on_delete=models.SET_DEFAULT, default=1)
-    uuid = models.OneToOneField(to=Uuid, null=True, blank=True, on_delete=models.SET_NULL)
+    language = models.ForeignKey(to=Language, on_delete=models.SET_DEFAULT,
+                                 default=1)
+    uuid = models.OneToOneField(to=Uuid, null=True, blank=True,
+                                on_delete=models.SET_NULL)
     history = HistoricalRecords()
 
     def __str__(self):
-        return f'{self.house.address} - {self.entrance} - {self.floor} {self.number}'
+        return f'{self.house.address} - ' \
+               f'{self.entrance} - {self.floor} {self.number}'

@@ -5,7 +5,6 @@ from territory_sectors.uuid_qr.models import Uuid
 from simple_history.models import HistoricalRecords
 
 
-
 # Create your models here.
 class House(models.Model):
     address = models.CharField(max_length=300)
@@ -18,7 +17,8 @@ class House(models.Model):
                                null=True, blank=True)
 
     gps_point = gis_models.PointField(null=False, blank=False, srid=4326)
-    uuid = models.OneToOneField(to=Uuid, null=True, blank=True, on_delete=models.SET_NULL)
+    uuid = models.OneToOneField(to=Uuid, null=True, blank=True,
+                                on_delete=models.SET_NULL)
     history = HistoricalRecords()
 
     def __str__(self):

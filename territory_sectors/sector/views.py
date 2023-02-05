@@ -5,8 +5,10 @@ from django.urls import reverse_lazy
 from .forms import SectorForm
 from .models import Sector
 from django.utils.translation import gettext_lazy as _
-from .mixins import GeoJSONAnnotateMixin, AnnotateHouseFlatsCountsMixin,ContextAddHousesMixin
-from territory_sectors.house.models import House
+from .mixins import GeoJSONAnnotateMixin, AnnotateHouseFlatsCountsMixin, \
+    ContextAddHousesMixin
+# from territory_sectors.house.models import House
+
 
 class SectorCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     form_class = SectorForm
@@ -19,7 +21,9 @@ class SectorCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     success_message = _('Sector created successfully')
 
 
-class SectorUpdateView(LoginRequiredMixin, GeoJSONAnnotateMixin, AnnotateHouseFlatsCountsMixin, SuccessMessageMixin, UpdateView):
+class SectorUpdateView(LoginRequiredMixin, GeoJSONAnnotateMixin,
+                       AnnotateHouseFlatsCountsMixin, SuccessMessageMixin,
+                       UpdateView):
     model = Sector
     form_class = SectorForm
     template_name = "sector/create.html"
@@ -30,6 +34,7 @@ class SectorUpdateView(LoginRequiredMixin, GeoJSONAnnotateMixin, AnnotateHouseFl
     }
     success_message = _('Sector updated successfully')
 
+
 #     #
 #     # def get_context_data(self, **kwargs):
 #     #     context = super().get_context_data(**kwargs)
@@ -39,7 +44,9 @@ class SectorUpdateView(LoginRequiredMixin, GeoJSONAnnotateMixin, AnnotateHouseFl
 #     #     return context
 #     #
 
-class SectorListView(LoginRequiredMixin, GeoJSONAnnotateMixin, AnnotateHouseFlatsCountsMixin, ListView,ContextAddHousesMixin):
+class SectorListView(LoginRequiredMixin, GeoJSONAnnotateMixin,
+                     AnnotateHouseFlatsCountsMixin, ListView,
+                     ContextAddHousesMixin):
     model = Sector
     template_name = "sector/list.html"
     extra_context = {
@@ -47,7 +54,9 @@ class SectorListView(LoginRequiredMixin, GeoJSONAnnotateMixin, AnnotateHouseFlat
     }
 
 
-class SectorDeleteView(LoginRequiredMixin, GeoJSONAnnotateMixin,AnnotateHouseFlatsCountsMixin, SuccessMessageMixin, DeleteView):
+class SectorDeleteView(LoginRequiredMixin, GeoJSONAnnotateMixin,
+                       AnnotateHouseFlatsCountsMixin, SuccessMessageMixin,
+                       DeleteView):
     model = Sector
     template_name = "sector/delete.html"
     success_url = reverse_lazy('sector_list')

@@ -7,8 +7,8 @@ from simple_history.models import HistoricalRecords
 class SectorManager(models.Manager):
     def json_polygons(self):
         result = {}
-        for sector in super(SectorManager,self).get_queryset():
-            result[sector.id] ={
+        for sector in super(SectorManager, self).get_queryset():
+            result[sector.id] = {
                 'name': sector.name,
                 'geojson': sector.contour.geojson,
             }
@@ -19,7 +19,8 @@ class Sector(models.Model):
     date_joined = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
     name = models.CharField(max_length=300, null=True)
-    uuid = models.OneToOneField(to=Uuid, null=True, blank=True, on_delete=models.SET_NULL)
+    uuid = models.OneToOneField(to=Uuid, null=True, blank=True,
+                                on_delete=models.SET_NULL)
     contour = gis_models.PolygonField(null=False, blank=False, srid=4326)
     objects = models.Manager()
     js = SectorManager()
