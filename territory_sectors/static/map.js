@@ -1,5 +1,12 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoieXVyaXlrb3JtaW4iLCJhIjoiY2xjdTZjMm1jMHJwZTNvbXg1cm1xMGh5ciJ9.uHPoJEdjly2KUEmc8YEOkw';
 
+//
+// geocoder = new MapboxGeocoder({
+//     accessToken:mapboxgl.accessToken,
+//     mapboxgl:mapboxgl,
+//     reverseGeocode:true,
+// })
+
 const map = new mapboxgl.Map({
 container: 'map', // container ID
 style: 'mapbox://styles/mapbox/streets-v12', // style URL
@@ -43,6 +50,16 @@ function set_marker (id, lng, lat) {
         .addTo(map);
 
 }
+const reverseGeocoding = function (longitude,latitude) {
+    var url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/'
+            + longitude + ', ' + latitude
+            + '.json&access_token=' + mapboxgl.accessToken;
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", url, false ); // false for synchronous request
+    xmlHttp.send( null );
+
+   return xmlHttp.responseText;
+}
 function move_marker (event) {
     var coordinates = event.lngLat;
     var id = document.getElementById("id").value
@@ -52,6 +69,10 @@ function move_marker (event) {
         set_marker(id, coordinates.lng, coordinates.lat);
     }
     document.getElementById("gps_point").setAttribute('value',"SRID=4326;POINT("+coordinates.lng.toString() +" " +coordinates.lat.toString()+')')
+    var xy = '"'+coordinates.lng.toString()+','+coordinates.lat.toString()+'"'
+    console.log(reverseGeocoding(coordinates.lng.toString(),coordinates.lat.toString()))
+    // document.getElementById("mapboxaddress").setAttribute('value',ee)
+
 }
 
 function flat_change_house(e) {
@@ -177,7 +198,6 @@ function list2string(l){
     for (i in l){
         result.push(l[i].join(' '))
     }
-
     return '(('+result.join(',')+'))'
 }
 
@@ -186,5 +206,5 @@ function update_sector(event) {
     var coordinates = draw.getAll()['features'][0]['geometry']['coordinates'][0]
     document.getElementById("contour").setAttribute(
         'value',"SRID=4326;POLYGON"+list2string(coordinates))
-    console.log(document.getElementById('contour').value)
+    // console.log(document.getElementById('contour').value)
 }
