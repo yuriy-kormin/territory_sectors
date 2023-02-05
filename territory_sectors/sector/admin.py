@@ -4,4 +4,4 @@ from simple_history.admin import SimpleHistoryAdmin
 # Register your models here.
 
 
-admin.site.register(Sector,SimpleHistoryAdmin)
+admin.site.register(Sector, SimpleHistoryAdmin)

@@ -3,4 +3,4 @@ from .models import Flat
 from simple_history.admin import SimpleHistoryAdmin
 
 
-admin.site.register(Flat,SimpleHistoryAdmin)
+admin.site.register(Flat, SimpleHistoryAdmin)

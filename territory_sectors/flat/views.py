@@ -4,13 +4,13 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .forms import FlatForm
-from .mixins import HousesAddMixin,SeveralInstanceCreateMixin
+from .mixins import HousesAddMixin, SeveralInstanceCreateMixin
 from .models import Flat
 from django.utils.translation import gettext_lazy as _
 
 
-
-class FlatCreateView(LoginRequiredMixin,SeveralInstanceCreateMixin, SuccessMessageMixin,CreateView):
+class FlatCreateView(LoginRequiredMixin, SeveralInstanceCreateMixin,
+                     SuccessMessageMixin, CreateView):
     form_class = FlatForm
     template_name = "flat/create.html"
     success_url = reverse_lazy('flat_list')
@@ -21,14 +21,12 @@ class FlatCreateView(LoginRequiredMixin,SeveralInstanceCreateMixin, SuccessMessa
     success_message = _('Flat created successfully')
 
 
-
 class FlatListView(LoginRequiredMixin, HousesAddMixin, ListView):
     model = Flat
     template_name = "flat/list.html"
     extra_context = {
         "remove_title": _("remove")
     }
-
 
 
 class FlatUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
