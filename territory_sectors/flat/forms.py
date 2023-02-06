@@ -1,4 +1,5 @@
 from django import forms
+from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 from .models import Flat
 # from territory_sectors.sector.models import Sector
@@ -10,7 +11,6 @@ from ..language.models import Language
 class FlatForm(forms.ModelForm):
     class Meta:
         model = Flat
-        # readonly_fields = ['gps_point', ]
         fields = [
             'house',
             'number',
@@ -67,6 +67,12 @@ class FlatForm(forms.ModelForm):
                 },
             ),
         }
-        # labels = {
-        #     'name': _('Name'),
-        # }
+
+    def clean_number(self):
+        number = self.cleaned_data.get('number', None)
+        house = self.cleaned_data.get('house', None)
+        same_object = Flat.objects.filter(house=house, number=number)
+        if same_object:
+            raise ValidationError(
+                'Database contains this flat number. Please set another')
+        return number

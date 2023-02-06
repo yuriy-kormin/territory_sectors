@@ -13,7 +13,8 @@ class Uuid(models.Model):
     id = ShortUUIDField(primary_key=True,
                         length=10,
                         max_length=10,
-                        auto_created=True, )
+                        auto_created=True,
+                        )
 
     # qr_image = models.ImageField(blank=True, null=True, upload_to='QRCode')
 

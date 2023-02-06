@@ -7,7 +7,7 @@ from simple_history.models import HistoricalRecords
 
 # Create your models here.
 class House(models.Model):
-    address = models.CharField(max_length=300)
+    address = models.CharField(max_length=300, unique=True)
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
     floor_amount = models.IntegerField(null=True)
