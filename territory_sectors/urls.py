@@ -28,6 +28,7 @@ urlpatterns = [
     path('flat/', include('territory_sectors.flat.urls')),
     path('house/', include('territory_sectors.house.urls')),
     path('sector/', include('territory_sectors.sector.urls')),
+    path('uuid/', include('territory_sectors.uuid_qr.urls')),
     path('__debug__/', include('debug_toolbar.urls')),
 
 ]
