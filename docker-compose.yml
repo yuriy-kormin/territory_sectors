@@ -17,9 +17,12 @@ services:
             context: .
             dockerfile: ./Docker/postgis/Dockerfile
         environment:
-            - POSTGRES_USER=postgres
-            - POSTGRES_PASSWORD=postgres
-            - POSTGRES_DB=postgres
+            - POSTGRES_USER=sectors
+            - POSTGRES_PASSWORD=sectors
+            - POSTGRES_DB=sectors
+            - DJANGO_SUPERUSER_PASSWORD = sectors
+            - DJANGO_SUPERUSER_EMAIL = sectors@secorssec
+            - DJANGO_SUPERUSER_USERNAME = sectors
         expose:
             - 5432
         restart: always
