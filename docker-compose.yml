@@ -16,13 +16,8 @@ services:
         build:
             context: .
             dockerfile: ./Docker/postgis/Dockerfile
-        environment:
-            - POSTGRES_USER=sectors
-            - POSTGRES_PASSWORD=sectors
-            - POSTGRES_DB=sectors
-            - DJANGO_SUPERUSER_PASSWORD = sectors
-            - DJANGO_SUPERUSER_EMAIL = sectors@secorssec
-            - DJANGO_SUPERUSER_USERNAME = sectors
+        env_file:
+            -   ./Docker/postgis/env
         expose:
             - 5432
         restart: always
