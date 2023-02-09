@@ -20,9 +20,9 @@
                     <div class="card-body">
                       <table class = "table table-striped">
                         <tr>
-                            <th>{% translate "address" %}</th>
-                            <th>{% translate "number" %}</th>
+                            <th>{% translate "entrance" %}</th>
                             <th>{% translate "floor" %}</th>
+                            <th>{% translate "number" %}</th>
                             <th>{% translate "language" %}</th>
                             <th>{% translate "way desc" %}</th>
                             <th>{% translate "sector_name" %}</th>
@@ -30,9 +30,9 @@
                         </tr>
                         {% for flat in flats %}
                             <tr>
-                                <td> {{flat.house.address}}</td>
-                                <td> <a href = "{% url "flat_update" flat.id %}">{{flat.number}}</a></td>
+                                <td> {{flat.entrance}}</td>
                                 <td> {{flat.floor}}</td>
+                                <td> <a href = "{% url "flat_update" flat.id %}">{{flat.number}}</a></td>
                                 <td> {{flat.language}}</td>
                                 <td> {{ flat.way_desc }}</td>
                                 <td> {{flat.house.sector}}</td>
