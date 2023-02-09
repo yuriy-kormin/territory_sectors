@@ -40,9 +40,10 @@ class HouseUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     #
 
 
-class ListView(LoginRequiredMixin, CountFlatsMixin, ListView):
+class HouseListView(LoginRequiredMixin, CountFlatsMixin, ListView):
     model = House
     template_name = "house/list.html"
+    queryset = House.objects.order_by('address')
     extra_context = {
         'remove_title': _('remove'),
     }

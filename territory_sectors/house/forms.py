@@ -14,8 +14,9 @@ class HouseForm(forms.ModelForm):
             'floor_amount',
             'entrances',
             # 'sector',
-            'uuid',
+            # 'uuid',
             'gps_point',
+            'desc',
             'id',
         ]
         widgets = {
@@ -43,10 +44,10 @@ class HouseForm(forms.ModelForm):
             #         'choices': Sector,
             #     }
             # ),
-            'uuid': forms.Select(
+            'desc': forms.Textarea(
                 attrs={
                     'class': 'form-control',
-                    'choices': Uuid,
+                    'placeholder': _('Some description about house')
                 }
             ),
             'gps_point': forms.HiddenInput(

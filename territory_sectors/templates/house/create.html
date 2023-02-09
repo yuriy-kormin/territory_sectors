@@ -6,7 +6,7 @@
     {% csrf_token %}
         <h1 class="my-4"> {{ header }}</h1>
         <div class = "form">
-            {%  for field in form %}
+            {% for field in form %}
                 <div class = "form-group">
                     {% bootstrap_field field %}
                 </div>

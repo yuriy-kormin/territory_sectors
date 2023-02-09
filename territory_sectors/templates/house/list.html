@@ -4,21 +4,23 @@
 {% block page_content %}
    <h1 class="my-4"> {{ marks }}</h1>
     <a class="nav-link" href="{% url "house_add" %}">{% translate "Create house" %}</a>
-    <table class = "table table-striped">
-        <tr>
-            <th>{% translate "address" %}</th>
-            <th>{% translate "entrances" %}</th>
-            <th>{% translate "floors" %}</th>
-            <th>{% translate "sector" %}</th>
-            <th>{% translate "Founded addresses" %}</th>
-            <th></th>
-
-        </tr>
-        {% for house in object_list %}
+    <table class = "table table-striped table-sm">
+        <thead class="thead-dark">
             <tr>
-                <td> <a href = {% url "house_update" house.id %}>{{house.address}}</a></td>
+                <th scope="col">{% translate "address" %}</th>
+                <th scope="col">{% translate "entrances" %}</th>
+                <th scope="col">{% translate "floors" %}</th>
+                <th scope="col">{% translate "sector" %}</th>
+                <th scope="col">{% translate "Founded addresses" %}</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for house in house_list %}
+            <tr id = "house{{ house.id }}">>
+                <th scope="row"> <a href = {% url "house_update" house.id %}>{{house.address}}</a></td>
                 <td> {{house.entrances}}</td>
-                <td> {{house.floors}}</td>
+                <td> {{house.floor_amount}}</td>
                 <td> {{house.sector}}</td>
                 <td> {{house.flat__count}}</td>
                 <td>
@@ -28,6 +30,7 @@
                 </td>
             </tr>
         {% endfor %}
+        </tbody>
     </table>
 {% endblock %}
 {% block markers %}

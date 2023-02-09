@@ -15,7 +15,7 @@ class House(models.Model):
     # lift = ???
     # sector = models.ForeignKey(to=Sector, on_delete=models.SET_NULL,
     #                            null=True, blank=True)
-
+    desc = models.CharField(max_length=1500, default='', null=True)
     gps_point = gis_models.PointField(null=False, blank=False, srid=4326)
     uuid = models.OneToOneField(to=Uuid, null=True, blank=True,
                                 on_delete=models.SET_NULL)
@@ -35,4 +35,3 @@ class House(models.Model):
 
     def gps_pos(self):
         return f'{self.gps_point.x}, {self.gps_point.y}'
-
