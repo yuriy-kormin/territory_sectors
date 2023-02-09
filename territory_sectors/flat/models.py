@@ -13,7 +13,7 @@ class Flat(models.Model):
     number = models.CharField(max_length=300, null=True, blank=True)
     entrance = models.IntegerField(null=True, blank=True)
     floor = models.IntegerField(null=True, blank=True)
-    way_desc = models.CharField(max_length=500)
+    way_desc = models.CharField(max_length=1500)
     language = models.ForeignKey(to=Language, on_delete=models.SET_DEFAULT,
                                  default=1)
     uuid = models.OneToOneField(to=Uuid, null=True, blank=True,
