@@ -32,7 +32,7 @@ class FlatForm(forms.ModelForm):
             'number': forms.TextInput(
                 attrs={
                     'class': 'form-control',
-                    'placeholder': _('If possible - set number. \
+                    'placeholder': _('Please set number, if possible. Elsewhere - stay it empty. \
                     (use , as separator for multiply)')
                 }
             ),
@@ -70,9 +70,11 @@ class FlatForm(forms.ModelForm):
 
     def clean_number(self):
         number = self.cleaned_data.get('number', None)
+        if number is None:
+            return number
         house = self.cleaned_data.get('house', None)
         same_object = Flat.objects.filter(house=house, number=number)
-        if same_object:
+        if same_object :
             raise ValidationError(
                 'Database contains this flat number. Please set another')
         return number
