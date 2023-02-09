@@ -13,7 +13,7 @@ class HouseForm(forms.ModelForm):
             'address',
             'floor_amount',
             'entrances',
-            'sector',
+            # 'sector',
             'uuid',
             'gps_point',
             'id',
@@ -37,12 +37,12 @@ class HouseForm(forms.ModelForm):
                     'placeholder': _('How much entrances in building')
                 }
             ),
-            'sector': forms.Select(
-                attrs={
-                    'class': 'form-control',
-                    'choices': Sector,
-                }
-            ),
+            # 'sector': forms.Select(
+            #     attrs={
+            #         'class': 'form-control',
+            #         'choices': Sector,
+            #     }
+            # ),
             'uuid': forms.Select(
                 attrs={
                     'class': 'form-control',

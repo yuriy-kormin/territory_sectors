@@ -23,6 +23,7 @@
             </tr>
         {% endfor %}
     </table>
+    {% for house in houses %} {{ house.flat_count }}{% endfor %}
 {% endblock %}
 {% block markers %}
     {% for sector in object_list %}
@@ -34,7 +35,8 @@
     map.on('load', map_add_layer)
     map.on('click','sectors', sector_popup)
     {% for house in houses %}
-{#        set_popup({{ house.id }},"{{ house.address }}({{ house.flat__count }})")#}
+{#        set_popup({{ house.id }},"{{ house.address }}({{ house.flat_count }})")#}
         set_marker({{ house.id }},{{ house.gps_pos }})
     {% endfor %}
+    circle_text()
 {% endblock %}

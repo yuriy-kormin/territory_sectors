@@ -5,8 +5,10 @@ from django.urls import reverse_lazy
 from .forms import SectorForm
 from .models import Sector
 from django.utils.translation import gettext_lazy as _
-from .mixins import GeoJSONAnnotateMixin, AnnotateHouseFlatsCountsMixin, \
-    ContextAddHousesMixin
+from .mixins import GeoJSONAnnotateMixin, ContextAddHousesMixin
+from ..house.models import House
+
+
 # from territory_sectors.house.models import House
 
 
@@ -22,8 +24,7 @@ class SectorCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 
 
 class SectorUpdateView(LoginRequiredMixin, GeoJSONAnnotateMixin,
-                       AnnotateHouseFlatsCountsMixin, SuccessMessageMixin,
-                       UpdateView):
+                       SuccessMessageMixin, UpdateView):
     model = Sector
     form_class = SectorForm
     template_name = "sector/create.html"
@@ -45,8 +46,7 @@ class SectorUpdateView(LoginRequiredMixin, GeoJSONAnnotateMixin,
 #     #
 
 class SectorListView(LoginRequiredMixin, GeoJSONAnnotateMixin,
-                     AnnotateHouseFlatsCountsMixin, ListView,
-                     ContextAddHousesMixin):
+                     ListView, ContextAddHousesMixin):
     model = Sector
     template_name = "sector/list.html"
     extra_context = {
@@ -55,8 +55,7 @@ class SectorListView(LoginRequiredMixin, GeoJSONAnnotateMixin,
 
 
 class SectorDeleteView(LoginRequiredMixin, GeoJSONAnnotateMixin,
-                       AnnotateHouseFlatsCountsMixin, SuccessMessageMixin,
-                       DeleteView):
+                       SuccessMessageMixin, DeleteView):
     model = Sector
     template_name = "sector/delete.html"
     success_url = reverse_lazy('sector_list')

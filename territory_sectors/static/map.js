@@ -27,7 +27,8 @@ map.addControl(new mapboxgl.NavigationControl());
 // map.addControl(new MapboxLanguage({defaultLanguage: 'ru'}));
 var markers = {};
 var popups = {};
-var sectors = []
+var sectors = [];
+
 // var sector_sources = {};
 
 
@@ -40,23 +41,52 @@ function set_popup (id, text) {
         },
     ).setText(text)
 }
+
+function circle_text() {
+    // const el = document.createElement('div');
+    // el.style.width = `30px`;
+    // el.style.height = `30px`;
+    // // el.className = 'marker';
+    // el.innerText= txt
+    console.log(markers)
+
+    map.addLayer({
+                'id': 'poi-labels',
+                'type': 'symbol',
+                'source': 'markers',
+                'layout': {
+                    'text-field': ['get', 'description'],
+                    'text-variable-anchor': ['top', 'bottom', 'left', 'right'],
+                    'text-radial-offset': 0.5,
+                    'text-justify': 'auto',
+                    'icon-image': ['concat', ['get', 'icon'], '-15']
+                }
+            });
+
+
+
+}
 function set_marker (id, lng, lat) {
-    markers[id] = new mapboxgl.Marker({
+
+    markers[id] = new mapboxgl.Marker(
+        {
         color: "#B917FC",
         scale:0.5,
         // sy
-    }).setPopup(popups[id])
+    }
+    ).setPopup(popups[id])
         .setLngLat([lng, lat])
         .addTo(map);
 
 }
 const reverseGeocoding = function (longitude,latitude) {
     var url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/'
-            + longitude + ', ' + latitude
+            + longitude + ',' + latitude
             + '.json&access_token=' + mapboxgl.accessToken;
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "GET", url, false ); // false for synchronous request
-    xmlHttp.send( null );
+    console.log(url)
+    // var xmlHttp = new XMLHttpRequest();
+    // xmlHttp.open( "GET", url, false ); // false for synchronous request
+    // xmlHttp.send( null );
 
    return xmlHttp.responseText;
 }

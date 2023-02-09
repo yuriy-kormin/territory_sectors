@@ -1,4 +1,6 @@
 from django.db import models
+
+from territory_sectors.house.models import House
 from territory_sectors.uuid_qr.models import Uuid
 from django.contrib.gis.db import models as gis_models
 from simple_history.models import HistoricalRecords
@@ -29,3 +31,10 @@ class Sector(models.Model):
     # var polygon = {{obj.geom.transform(4326).geojson}};
     def __str__(self):
         return self.name
+
+    def get_houses_into(self):
+        return House.objects.filter(gps_point__intersects=self.contour)
+
+    @classmethod
+    def get_all_houses(self):
+        return House.objects.all()

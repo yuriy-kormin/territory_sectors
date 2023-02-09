@@ -11,7 +11,6 @@
             <th>{% translate "floors" %}</th>
             <th>{% translate "sector" %}</th>
             <th>{% translate "Founded addresses" %}</th>
-            <th>{% translate "gps" %}</th>
             <th></th>
 
         </tr>
@@ -22,7 +21,6 @@
                 <td> {{house.floors}}</td>
                 <td> {{house.sector}}</td>
                 <td> {{house.flat__count}}</td>
-                <td> {{house.gps_pos}}</td>
                 <td>
                     <form method="get" action="{% url "house_delete" house.id %}">
                         {% bootstrap_button remove_title button_type="submit" button_class="btn btn-danger" %}
