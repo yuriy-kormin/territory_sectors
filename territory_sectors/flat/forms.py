@@ -74,7 +74,9 @@ class FlatForm(forms.ModelForm):
             return number
         house = self.cleaned_data.get('house', None)
         same_object = Flat.objects.filter(house=house, number=number)
-        if same_object :
+        if self.instance:
+            same_object = same_object.exclude(id=self.instance.id)
+        if same_object.exists():
             raise ValidationError(
                 'Database contains this flat number. Please set another')
         return number
