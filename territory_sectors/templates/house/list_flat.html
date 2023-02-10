@@ -1,0 +1,30 @@
+{% load i18n %}
+{% load bootstrap4 %}
+{% if house.flat_set.all %}
+    <div class="card-body">
+      <table class = "table table-striped">
+        <tr>
+            <th>{% translate "entrance" %}</th>
+            <th>{% translate "floor" %}</th>
+            <th>{% translate "number" %}</th>
+            <th>{% translate "language" %}</th>
+            <th>{% translate "way desc" %}</th>
+            <th></th>
+        </tr>
+        {% for flat in house.flat_set.all %}
+            <tr>
+                <td> {{flat.entrance}}</td>
+                <td> {{flat.floor}}</td>
+                <td> <a href = "{% url "flat_update" flat.id %}">{{flat.number}}</a></td>
+                <td> {{flat.language}}</td>
+                <td> {{ flat.way_desc }}</td>
+                <td>
+                    <form method="get" action="{% url "flat_delete" flat.id %}">
+                        {% bootstrap_button remove_title button_type="submit" button_class="btn btn-danger" %}
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+      </table>
+    </div>
+{% endif %}
