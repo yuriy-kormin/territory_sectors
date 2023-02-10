@@ -20,6 +20,9 @@ class Flat(models.Model):
                                 on_delete=models.SET_NULL)
     history = HistoricalRecords()
 
+    class Meta:
+        ordering = ['house', 'entrance', 'floor', 'number']
+
     def __str__(self):
-        return f'{self.house.address} - ' \
-               f'{self.entrance} - {self.floor} {self.number}'
+        return f'{self.house.address}(' \
+               f'{self.entrance}-{self.floor}-{self.number})'
