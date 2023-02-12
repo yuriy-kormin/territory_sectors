@@ -1,11 +1,16 @@
+import json
+
 from django import forms
+# from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
 from .models import House
-from territory_sectors.sector.models import Sector
-from territory_sectors.uuid_qr.models import Uuid
+from territory_sectors.flat.models import Flat
 
 
 class HouseForm(forms.ModelForm):
+    flats_data = forms.CharField()
+
+    #
     class Meta:
         model = House
         # readonly_fields = ['gps_point', ]
@@ -18,6 +23,7 @@ class HouseForm(forms.ModelForm):
             'gps_point',
             'desc',
             'id',
+            'flats_data',
         ]
         widgets = {
             'address': forms.TextInput(
@@ -38,12 +44,6 @@ class HouseForm(forms.ModelForm):
                     'placeholder': _('How much entrances in building')
                 }
             ),
-            # 'sector': forms.Select(
-            #     attrs={
-            #         'class': 'form-control',
-            #         'choices': Sector,
-            #     }
-            # ),
             'desc': forms.Textarea(
                 attrs={
                     'class': 'form-control',
@@ -51,11 +51,54 @@ class HouseForm(forms.ModelForm):
                 }
             ),
             'gps_point': forms.HiddenInput(
+                # error_messages={
+                #     'required': "Please Enter gps"},
                 attrs={
                     'id': 'gps_point',
                 },
             ),
+            'flats_data': forms.HiddenInput(
+                attrs={
+                    'class': 'form-control',
+                    'id': 'flats_data',
+                }
+            )
         }
-        # labels = {
-        #     'name': _('Name'),
-        # }
+
+    def __init__(self, *args, **kwargs):
+        self.is_create = kwargs.get('instance') is None
+        super().__init__(*args, **kwargs)
+        # instance = self.instance
+        if not self.is_create:
+            self.fields['flats_data'].initial = self.instance.flats_json()
+
+    def clean_flats_data(self):
+        flats_data = self.cleaned_data.get('flats_data')
+        # try:
+        #     hidden_field = json.loads(hidden_field)
+        # except json.JSONDecodeError:
+        #     raise forms.ValidationError("Invalid JSON data.")
+        return flats_data
+
+    def save(self):
+        obj = super().save()
+        flats_data = json.loads(self.cleaned_data.get('flats_data'))
+        instances = []
+        fields = []
+        for flat in flats_data:
+            if 'id' not in flat.keys():
+                instance = Flat.objects.create(house=obj)
+            else:
+                instance = Flat.objects.get(id=flat['id'])
+            instance.entrance = flat['entrance']
+            instance.floor = flat['floor']
+            instance.number = flat['number']
+            instance.way_desc = flat['way_desc']
+            instance.save()
+            #     instance.key = flat[key]
+            instances.append(instance)
+        #     # fields.append(key)
+        # raise IOError(instances)
+        # Flat.objects.abulk_update(instances,
+        #                           ['entrance', 'floor', 'number', 'way_desc'])
+        return obj

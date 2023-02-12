@@ -31,11 +31,11 @@ class UUIDView(DetailView):
     template_name = "uuid.html"
     slug_field = 'id'
 
-    def get_queryset(self):
-        qs = super().get_queryset()
-        return qs.annotate(
-            flat_count=Count('sector__house__flat')
-        )
+    # def get_queryset(self):
+    #     qs = super().get_queryset()
+    #     return qs.annotate(
+    #         flat_count=Count('sector__house__flat')
+    #     )
     #
     # def get_object(self, queryset=None):
     #     uuid = self.kwargs.get('uuid')

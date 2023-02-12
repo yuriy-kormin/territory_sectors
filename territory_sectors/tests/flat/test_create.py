@@ -15,9 +15,8 @@ class CreateFlat(TestCase):
         self.user_obj = User.objects.get_or_create(username='testuser')
 
     def test_create_open_without_login(self):
-        response = self.client.get(reverse('flat_list'))
-        self.assertEqual(response.status_code, 302)
-
+        response = self.client.get(reverse_lazy('flat_add'))
+        self.assertRedirects(response, f'{reverse_lazy("user_login")}?next={reverse_lazy("flat_add")}')
     def test_login_create(self):
         pass
 
@@ -25,6 +24,6 @@ class CreateFlat(TestCase):
         # self.assertEqual(User.objects.get(username = 'testuser'), self.user_obj)
         self.client.force_login(self.user_obj[0])
         f = Flat.objects.first()
-        self.client.post(path=reverse_lazy('flat_add'),
-                         data=f,
-                         )
+        response = self.client.post(path=reverse_lazy('flat_add'),
+                         data=f)
+        self.assertRedirects

@@ -11,6 +11,9 @@
                     {% bootstrap_field field %}
                 </div>
             {% endfor %}
+                <div>
+                    {% include "house/bulk_flat_create_update.html" %}
+                </div>
             <div class = "form-group">
                      {% bootstrap_button button_title button_type="submit" button_class="mt-3 btn btn-primary" %}
                 </div>

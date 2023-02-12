@@ -56,6 +56,8 @@ INSTALLED_APPS = [
     'territory_sectors.uuid_qr',
     "debug_toolbar",
     "qr_code",
+    # 'territory_sectors.sector.models.Sector',
+    # 'territory_sectors.house.models.House',
 ]
 
 

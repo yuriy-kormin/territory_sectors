@@ -5,9 +5,17 @@ from territory_sectors.uuid_qr.models import Uuid
 
 
 class SectorForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(SectorForm, self).__init__(*args, **kwargs)
+        # if self.is_bound: - этот метод определяет, это update или create
+        # self.fields['uuid']
+        self.fields['uuid'].queryset = Uuid.objects.filter(
+            sector__isnull=True,
+            house__isnull=True,
+            flat__isnull=True,
+        )
 
     class Meta:
-
         model = Sector
         fields = [
             'name',
@@ -38,17 +46,3 @@ class SectorForm(forms.ModelForm):
                 },
             ),
         }
-
-    def __init__(self, *args, **kwargs):
-        super(SectorForm, self).__init__(*args, **kwargs)
-        # self.fields['uuid'].queryset =
-        self.fields['uuid'] = forms.ModelChoiceField(
-            queryset=Uuid.objects.filter(
-                    sector__isnull=True,
-                    house__isnull=True,
-                    flat__isnull=True,
-                ),
-            widget=forms.Select(
-                attrs={'class': 'form-control'}
-            )
-        )

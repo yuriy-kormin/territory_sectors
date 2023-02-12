@@ -36,15 +36,6 @@ class SectorUpdateView(LoginRequiredMixin, GeoJSONAnnotateMixin,
     success_message = _('Sector updated successfully')
 
 
-#     #
-#     # def get_context_data(self, **kwargs):
-#     #     context = super().get_context_data(**kwargs)
-#     #     context['houses'] = {
-#     #         self.object.id: House.objects.get(id=self.object.id)
-#     #     }
-#     #     return context
-#     #
-
 class SectorListView(LoginRequiredMixin, GeoJSONAnnotateMixin,
                      ListView, ContextAddHousesMixin):
     model = Sector

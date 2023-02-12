@@ -1,0 +1,36 @@
+{% load i18n %}
+{% load bootstrap4 %}
+{% load static %}
+<script src = "{% static "house.js" %}"></script>
+
+<div class="form-row" ><h2> Flats</h2></div>
+<div id="flat_table" class="form-row" style="visibility: hidden">
+    <div class="form-row" id="flat_template" style="visibility: hidden">
+        <div class="col" id="entrance_">
+            <input type="text" placeholder="entrance" class="form-control">
+        </div>
+        <div class="col" id="floor_">
+            <input type="text"  placeholder="floor" class="form-control">
+        </div>
+        <div class="col" id="number_">
+            <input type="text" placeholder="number" class="form-control">
+        </div>
+        <div class="col-auto" id="way_desc_">
+            <textarea cols="30" rows="1" class="form-control" placeholder="way_desc"></textarea>
+        </div>
+        <div class="col" id="language_">
+            <select class ="form-control">
+                {% for lang in langs %}
+                    <option value="{{ lang.id }}">{{ lang.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+</div>
+
+<script src = {% static "house.js" %}></script>
+<script>
+    fillFlats()
+</script>
+<a href="#" title="Click to do something" onclick="addRow();return false;">Add flat</a>
+<a href="#" title="Click to do something" onclick="update_flats_data();return false;">update_data</a>

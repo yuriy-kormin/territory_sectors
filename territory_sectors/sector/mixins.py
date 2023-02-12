@@ -1,7 +1,6 @@
 from django.contrib.gis.db.models.functions import AsGeoJSON
 from django.db.models import Count
 from django.views.generic.list import MultipleObjectMixin
-
 from territory_sectors.sector.models import Sector
 
 

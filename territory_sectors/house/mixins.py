@@ -5,6 +5,8 @@ class CountFlatsMixin:
     def get_queryset(self):
         qs = super(CountFlatsMixin, self).get_queryset()
         return qs.annotate(Count('flat'))
+
+
     # def get_context_data(self, **kwargs):
     #     query = self.get_queryset()
     #     context = super().get_context_data(**kwargs)
@@ -14,3 +16,7 @@ class CountFlatsMixin:
     #     ).distinct().annotate(Count('flat'))
     #
     #     return context
+# class LanguagesListMixin:
+#     def get_con(self):
+#         qs = super(CountFlatsMixin, self).get_queryset()
+#         return qs.annotate(Count('flat'))

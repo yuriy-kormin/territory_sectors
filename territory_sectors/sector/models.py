@@ -1,5 +1,4 @@
 from django.db import models
-
 from territory_sectors.house.models import House
 from territory_sectors.uuid_qr.models import Uuid
 from django.contrib.gis.db import models as gis_models
@@ -25,8 +24,11 @@ class Sector(models.Model):
                                 on_delete=models.SET_NULL)
     contour = gis_models.PolygonField(null=False, blank=False, srid=4326)
     objects = models.Manager()
-    js = SectorManager()
+    js = SectorManager.json_polygons
     history = HistoricalRecords()
+    # houses = models.ManyToManyField('House', through='Intersection',
+    #                                 related_name='sectors_of_houses')
+    # # houses = models.ManyToManyField('House', through='Intersection')
 
     # var polygon = {{obj.geom.transform(4326).geojson}};
     def __str__(self):
@@ -36,5 +38,10 @@ class Sector(models.Model):
         return House.objects.filter(gps_point__intersects=self.contour)
 
     @classmethod
-    def get_all_houses(self):
+    def get_all_houses(cls):
         return House.objects.all()
+
+
+# class Intersection(models.Model):
+#     house = models.ForeignKey('House', on_delete=models.CASCADE)
+#     sector = models.ForeignKey('Sector', on_delete=models.CASCADE)
