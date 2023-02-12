@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load bootstrap4 %}
 {% block page_content %}
-    <form method="post" action=".">
+    <form method="post" action="." id="houseform">
     {% csrf_token %}
         <h1 class="my-4"> {{ header }}</h1>
         <div class = "form">

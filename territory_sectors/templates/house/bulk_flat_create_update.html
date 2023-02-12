@@ -31,6 +31,9 @@
 <script src = {% static "house.js" %}></script>
 <script>
     fillFlats()
+
+    const form = document.querySelector("#houseform");
+    form.addEventListener("submit", function (){update_flats_data()});
 </script>
 <a href="#" title="Click to do something" onclick="addRow();return false;">Add flat</a>
-<a href="#" title="Click to do something" onclick="update_flats_data();return false;">update_data</a>
+{#<a href="#" title="Click to do something" onclick="update_flats_data();return false;">update_data</a>#}

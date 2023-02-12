@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.gis.db import models as gis_models
-# from territory_sectors.sector.models import Sector
 from territory_sectors.uuid_qr.models import Uuid
 from simple_history.models import HistoricalRecords
 from territory_sectors.language.models import Language
@@ -39,7 +38,7 @@ class House(models.Model):
                                 on_delete=models.SET_NULL)
     history = HistoricalRecords()
     flats_json = HouseManager.flats_json
-    flats_ids = HouseManager
+    # flats_ids = HouseManager
     # Shop.objects.annotate(
     #     contained_points=
     #     Location.objects.values('area').filter(

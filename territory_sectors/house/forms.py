@@ -8,7 +8,7 @@ from territory_sectors.flat.models import Flat
 
 
 class HouseForm(forms.ModelForm):
-    flats_data = forms.CharField()
+hide flats json data    flats_data = forms.CharField(widget=forms.HiddenInput)
 
     #
     class Meta:
@@ -23,7 +23,7 @@ class HouseForm(forms.ModelForm):
             'gps_point',
             'desc',
             'id',
-            'flats_data',
+            # 'flats_data',
         ]
         widgets = {
             'address': forms.TextInput(
@@ -57,12 +57,12 @@ class HouseForm(forms.ModelForm):
                     'id': 'gps_point',
                 },
             ),
-            'flats_data': forms.HiddenInput(
-                attrs={
-                    'class': 'form-control',
-                    'id': 'flats_data',
-                }
-            )
+            # 'flats_data': forms.HiddenInput(
+            #     attrs={
+            #         # 'class': 'form-control',
+            #         'id': 'flats_data',
+            #     }
+            # )
         }
 
     def __init__(self, *args, **kwargs):
