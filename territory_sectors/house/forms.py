@@ -10,7 +10,6 @@ from territory_sectors.flat.models import Flat
 class HouseForm(forms.ModelForm):
     flats_data = forms.CharField(widget=forms.HiddenInput)
 
-    #
     class Meta:
         model = House
         # readonly_fields = ['gps_point', ]
@@ -18,8 +17,6 @@ class HouseForm(forms.ModelForm):
             'address',
             'floor_amount',
             'entrances',
-            # 'sector',
-            # 'uuid',
             'gps_point',
             'desc',
             'id',
@@ -47,7 +44,8 @@ class HouseForm(forms.ModelForm):
             'desc': forms.Textarea(
                 attrs={
                     'class': 'form-control',
-                    'placeholder': _('Some description about house')
+                    'placeholder': _('Some description about house'),
+                    'rows':2,
                 }
             ),
             'gps_point': forms.HiddenInput(
@@ -71,6 +69,8 @@ class HouseForm(forms.ModelForm):
         # instance = self.instance
         if not self.is_create:
             self.fields['flats_data'].initial = self.instance.flats_json()
+        else:
+            self.fields['flats_data'].initial = '[]'
 
     def clean_flats_data(self):
         flats_data = self.cleaned_data.get('flats_data')
@@ -82,23 +82,25 @@ class HouseForm(forms.ModelForm):
 
     def save(self):
         obj = super().save()
-        flats_data = json.loads(self.cleaned_data.get('flats_data'))
-        instances = []
-        for flat in flats_data:
-            if 'id' not in flat.keys():
-                instance = Flat.objects.create(house=obj)
-            else:
-                instance = Flat.objects.get(id=flat['id'])
-            instance.entrance = flat['entrance']
-            instance.floor = flat['floor']
-            instance.number = flat['number']
-            instance.way_desc = flat['way_desc']
-            instance.save()
-            #     instance.key = flat[key]
-            instances.append(instance)
-        #     # fields.append(key)
-        # raise IOError(instances)
-        # Flat.objects.abulk_update(instances,
-        #                           ['entrance', 'floor',
-        #                           'number', 'way_desc'])
+        flats = self.cleaned_data.get('flats_data')
+        if flats:
+            flats_data = json.loads(flats)
+            instances = []
+            for flat in flats_data:
+                if 'id' not in flat.keys():
+                    instance = Flat.objects.create(house=obj)
+                else:
+                    instance = Flat.objects.get(id=flat['id'])
+                instance.entrance = flat['entrance']
+                instance.floor = flat['floor']
+                instance.number = flat['number']
+                instance.way_desc = flat['way_desc']
+                instance.save()
+                #     instance.key = flat[key]
+                instances.append(instance)
+            #     # fields.append(key)
+            # raise IOError(instances)
+            # Flat.objects.abulk_update(instances,
+            #                           ['entrance', 'floor',
+            #                           'number', 'way_desc'])
         return obj
