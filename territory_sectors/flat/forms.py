@@ -2,9 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 from .models import Flat
-# from territory_sectors.sector.models import Sector
 from territory_sectors.house.models import House
-# from territory_sectors.uuid_qr.models import Uuid
 from ..language.models import Language
 
 
