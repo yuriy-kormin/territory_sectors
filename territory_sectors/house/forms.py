@@ -8,7 +8,7 @@ from territory_sectors.flat.models import Flat
 
 
 class HouseForm(forms.ModelForm):
-hide flats json data    flats_data = forms.CharField(widget=forms.HiddenInput)
+    flats_data = forms.CharField(widget=forms.HiddenInput)
 
     #
     class Meta:
