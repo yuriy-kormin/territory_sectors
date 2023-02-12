@@ -6,7 +6,6 @@ class CountFlatsMixin:
         qs = super(CountFlatsMixin, self).get_queryset()
         return qs.annotate(Count('flat'))
 
-
     # def get_context_data(self, **kwargs):
     #     query = self.get_queryset()
     #     context = super().get_context_data(**kwargs)

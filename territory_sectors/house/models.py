@@ -46,7 +46,8 @@ class House(models.Model):
     #         area__intersects=OuterRef('location')
     #     )[:1],
     # ).values()
-    # House.objects.annotate(contain_sec = Sector.objects.values('contour').filter(contour__intersects=OuterRef('gps_point'))[:1]).values('contain_sec')
+    # House.objects.annotate(contain_sec = Sector.objects.values('contour')
+    # .filter(contour__intersects=OuterRef('gps_point'))[:1]).values('contain_sec')
     # - работает - но только в сторону annotate with sector instance
 
     # class Meta:

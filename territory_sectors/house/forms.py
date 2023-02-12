@@ -84,7 +84,6 @@ class HouseForm(forms.ModelForm):
         obj = super().save()
         flats_data = json.loads(self.cleaned_data.get('flats_data'))
         instances = []
-        fields = []
         for flat in flats_data:
             if 'id' not in flat.keys():
                 instance = Flat.objects.create(house=obj)
@@ -100,5 +99,6 @@ class HouseForm(forms.ModelForm):
         #     # fields.append(key)
         # raise IOError(instances)
         # Flat.objects.abulk_update(instances,
-        #                           ['entrance', 'floor', 'number', 'way_desc'])
+        #                           ['entrance', 'floor',
+        #                           'number', 'way_desc'])
         return obj

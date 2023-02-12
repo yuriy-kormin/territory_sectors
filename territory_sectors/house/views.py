@@ -7,8 +7,6 @@ from .mixins import CountFlatsMixin
 from .models import House
 from django.utils.translation import gettext_lazy as _
 
-from ..flat.models import Flat
-
 
 class HouseCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     form_class = HouseForm
@@ -20,45 +18,6 @@ class HouseCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         'langs': House.get_lang_list_qs(),
     }
     success_message = _('House created successfully')
-
-    # def form_valid(self, form):
-    #     super().form_valid(form)
-    #     flat_count = int(self.request.POST.get('flat_count'))
-    #     #
-    #     house = House.objects.get(
-    #         address=self.request.POST.get('address')
-        # )
-        #
-        # # if response:
-        # #     return
-        # # house = super(HouseForm, self).save(commit=False)
-        # # flat_count = int(self.cleaned_data.get('flat_count'))
-        # # house.save()
-        # #
-        # # raise IOError(self.POST)
-        # if flat_count:
-        #     flats = []
-        #     for i in range(1, flat_count + 1):
-        #         flats.append(
-        #             Flat(
-        #                 house=house,
-        #                 number=self.request.POST.get(f'number_{i}'),
-        #                 entrance=self.request.POST.get(f'entrance_{i}'),
-        #                 floor=self.request.POST.get(f'floor_{i}'),
-        #                 way_desc=self.request.POST.get(f'desc_{i}'),
-        #             )
-        #         )
-        #     Flat.objects.bulk_create(flats)
-        # #     # pass
-        # # return self.instance
-    #
-    #  ATTENTION    !!!! NEED TO MAKE!!!!
-    #
-    # def clean_gps_point(self):
-    #     if not self.cleaned_data.get('gps_point', None):
-    #         messages.error(self.request, "Please set point on map below")
-    #     return self.clean_gps_point()
-    # def
 
 
 class HouseUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):

@@ -32,8 +32,10 @@ class FlatForm(forms.ModelForm):
             'number': forms.TextInput(
                 attrs={
                     'class': 'form-control',
-                    'placeholder': _('Please set number, if possible. Elsewhere - stay it empty. \
-                    (use , as separator for multiply)')
+                    'placeholder': _('Please set number, if possible.'
+                                     ' Elsewhere - stay it empty.'
+                                     'use , as separator for multiply)'
+                                     )
                 }
             ),
             'entrance': forms.TextInput(

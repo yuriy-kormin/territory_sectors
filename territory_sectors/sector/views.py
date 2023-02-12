@@ -6,10 +6,6 @@ from .forms import SectorForm
 from .models import Sector
 from django.utils.translation import gettext_lazy as _
 from .mixins import GeoJSONAnnotateMixin, ContextAddHousesMixin
-from ..house.models import House
-
-
-# from territory_sectors.house.models import House
 
 
 class SectorCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):

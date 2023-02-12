@@ -8,4 +8,3 @@ from .models import Uuid
 def gen_qr(request):
     Uuid.objects.create()
     return redirect(reverse_lazy('root'))
-
