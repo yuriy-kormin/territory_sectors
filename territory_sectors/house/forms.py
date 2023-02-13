@@ -84,6 +84,8 @@ class HouseForm(forms.ModelForm):
     def save(self):
         def instance_set_data(instance, data):
             for key in data:
+                if key == 'id':
+                    continue
                 key_name = key+'_id' if key == 'language' else key
                 setattr(instance, key_name, data[key])
         obj = super().save()
@@ -93,11 +95,26 @@ class HouseForm(forms.ModelForm):
             instances = []
             for flat in flats_data:
                 if 'id' not in flat.keys():
-                    instance = Flat.objects.create(house=obj)
+                    for flat_number in flat['number'].split(','):
+                        flat_set = flat.copy()
+                        flat_set['number'] = flat_number
+                        instance = Flat.objects.create(house=obj)
+                        instance_set_data(instance, flat_set)
+                        instance.save()
                 else:
                     instance = Flat.objects.get(id=flat['id'])
-                instance_set_data(instance, flat)
-                instance.save()
+                    for i, flat_number in enumerate(flat['number'].split(',')):
+                        if i == 0:
+                            flat_set = flat.copy()
+                            flat_set['number'] = flat_number
+                            instance_set_data(instance, flat_set)
+                            instance.save()
+                        else:
+                            flat_set = flat.copy()
+                            flat_set['number'] = flat_number
+                            instance = Flat.objects.create(house=obj)
+                            instance_set_data(instance, flat_set)
+                            instance.save()
                 instances.append(instance)
             #     # fields.append(key)
             # raise IOError(instances)
