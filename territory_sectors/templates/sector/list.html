@@ -23,20 +23,16 @@
             </tr>
         {% endfor %}
     </table>
-    {% for house in houses %} {{ house.flat_count }}{% endfor %}
+{#    {% for house in houses %} {{ house.flat_count }}{% endfor %}#}
 {% endblock %}
 {% block markers %}
     {% for sector in object_list %}
-    add_sector_source(
+        add_sector_source(
         {{ sector.id }},
         {{ sector.geojson | safe }},
         "<b> {{ sector.name }}</b> <br>Flats - {{ sector.flat_count }}")
     {% endfor %}
     map.on('load', map_add_layer)
     map.on('click','sectors', sector_popup)
-    {% for house in houses %}
-{#        set_popup({{ house.id }},"{{ house.address }}({{ house.flat_count }})")#}
-        set_marker({{ house.id }},{{ house.gps_pos }})
-    {% endfor %}
-    circle_text()
+{% include "sector/houses_circles.html" %}
 {% endblock %}

@@ -71,7 +71,7 @@ function set_marker (id, lng, lat) {
     markers[id] = new mapboxgl.Marker(
         {
         color: "#B917FC",
-        scale:0.5,
+        scale:1.5,
         // sy
     }
     ).setPopup(popups[id])
@@ -100,10 +100,11 @@ function move_marker (event) {
     }
     document.getElementById("gps_point").setAttribute('value',"SRID=4326;POINT("+coordinates.lng.toString() +" " +coordinates.lat.toString()+')')
     var xy = '"'+coordinates.lng.toString()+','+coordinates.lat.toString()+'"'
-    console.log(reverseGeocoding(coordinates.lng.toString(),coordinates.lat.toString()))
+    // console.log(reverseGeocoding(coordinates.lng.toString(),coordinates.lat.toString()))
     // document.getElementById("mapboxaddress").setAttribute('value',ee)
 
 }
+
 
 function flat_change_house(e) {
     // alert(e.target.value);
@@ -131,7 +132,6 @@ function add_sector_source(id, json, popup_data){
 
 function map_add_layer(){
     // sources = {
-    console.log(sectors)
     map.addSource(
             'layers', {
                 'type': 'geojson',

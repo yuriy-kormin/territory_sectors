@@ -8,7 +8,8 @@ from django.utils.translation import gettext_lazy as _
 from .mixins import GeoJSONAnnotateMixin, ContextAddHousesMixin
 
 
-class SectorCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+class SectorCreateView(LoginRequiredMixin, ContextAddHousesMixin,
+                       SuccessMessageMixin, CreateView):
     form_class = SectorForm
     template_name = "sector/create.html"
     success_url = reverse_lazy('sector_list')
@@ -19,8 +20,8 @@ class SectorCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     success_message = _('Sector created successfully')
 
 
-class SectorUpdateView(LoginRequiredMixin, GeoJSONAnnotateMixin,
-                       SuccessMessageMixin, UpdateView):
+class SectorUpdateView(LoginRequiredMixin, ContextAddHousesMixin,
+                       GeoJSONAnnotateMixin, SuccessMessageMixin, UpdateView):
     model = Sector
     form_class = SectorForm
     template_name = "sector/create.html"
@@ -32,8 +33,8 @@ class SectorUpdateView(LoginRequiredMixin, GeoJSONAnnotateMixin,
     success_message = _('Sector updated successfully')
 
 
-class SectorListView(LoginRequiredMixin, GeoJSONAnnotateMixin,
-                     ListView, ContextAddHousesMixin):
+class SectorListView(LoginRequiredMixin, ContextAddHousesMixin, GeoJSONAnnotateMixin,
+                     ListView):
     model = Sector
     template_name = "sector/list.html"
     extra_context = {

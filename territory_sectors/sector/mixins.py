@@ -10,7 +10,7 @@ class GeoJSONAnnotateMixin:
         return qs.annotate(geojson=AsGeoJSON('contour'))
 
 
-class ContextAddHousesMixin(MultipleObjectMixin):
+class ContextAddHousesMixin(object):
     def get_context_data(self, **kwargs):
         """Add context."""
         context = super().get_context_data(**kwargs)

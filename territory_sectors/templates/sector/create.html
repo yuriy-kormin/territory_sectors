@@ -30,7 +30,7 @@
             {% endfor %}
                 {% if object %}
                     {% for house in object.get_houses_into %}
-                        {{ house.address }}
+                        {{ house.address.as_div }}
                     {% endfor %}
                 {% endif %}
                 <div class = "form-group">
@@ -49,11 +49,12 @@
     add_draw_control()
     map.on('draw.update', update_sector);
     map.on('draw.create', update_sector);
+{% include "sector/houses_circles.html" %}
     {% if object %}
         add_sector_source(
-            {{ object.id }},
-            {{ object.geojson | safe }},
-            "{{ object.name }}"
+        {{ object.id }},
+        {{ object.geojson | safe }},
+        "{{ object.name }}"
         )
         map.on('load', map_add_layer)
         draw.add(sectors)
