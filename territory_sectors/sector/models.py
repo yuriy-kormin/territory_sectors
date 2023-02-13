@@ -1,4 +1,6 @@
 from django.db import models
+from django.urls import reverse
+
 from territory_sectors.house.models import House
 from territory_sectors.uuid_qr.models import Uuid
 from django.contrib.gis.db import models as gis_models
@@ -36,6 +38,9 @@ class Sector(models.Model):
 
     def get_houses_into(self):
         return House.objects.filter(gps_point__intersects=self.contour)
+
+    # def get_absolute_url(self):
+        # return reverse('sector_update', args=[str(self.id)])
 
     @classmethod
     def get_all_houses(cls):

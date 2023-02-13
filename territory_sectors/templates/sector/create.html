@@ -10,6 +10,7 @@
         {% with request.scheme|add:"://"|add:request.get_host|add:'/'|add:object.uuid_id as url_string %}
             {% qr_from_text url_string size="t" image_format="png" error_correction="L" %}
         {% endwith %}
+{#        <img src="data:image/png;base64,{{ qr_img_data }}">#}
     <a href="{% url "uuid" object.uuid_id %}">link</a>
     {% endif %}
         <h1 class="my-4"> {{ header }}</h1>
