@@ -22,17 +22,13 @@ function parseChild(child_id,divs){
   }
   divs.forEach(function(div){
     var item = div.children[0]
-    // placeholder
-    // if (item.nodeName === 'SELECT'){
     let key_name = div.id.split('_')[0]
-    // value
     if (["entrance",'floor','language'].includes(key_name)){
       result[key_name] = parseInt(item.value||0)
     }else{
       if (key_name==='way'){key_name="way_desc"}
       result[key_name] = item.value||""
     }
-    // }
   })
   return result
 }

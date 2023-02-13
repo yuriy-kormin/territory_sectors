@@ -5,6 +5,7 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 from .models import House
 from territory_sectors.flat.models import Flat
+from territory_sectors.language.models import Language
 
 
 class HouseForm(forms.ModelForm):
@@ -45,7 +46,7 @@ class HouseForm(forms.ModelForm):
                 attrs={
                     'class': 'form-control',
                     'placeholder': _('Some description about house'),
-                    'rows':2,
+                    'rows': 2,
                 }
             ),
             'gps_point': forms.HiddenInput(
@@ -81,6 +82,10 @@ class HouseForm(forms.ModelForm):
         return flats_data
 
     def save(self):
+        def instance_set_data(instance, data):
+            for key in data:
+                key_name = key+'_id' if key == 'language' else key
+                setattr(instance, key_name, data[key])
         obj = super().save()
         flats = self.cleaned_data.get('flats_data')
         if flats:
@@ -91,12 +96,8 @@ class HouseForm(forms.ModelForm):
                     instance = Flat.objects.create(house=obj)
                 else:
                     instance = Flat.objects.get(id=flat['id'])
-                instance.entrance = flat['entrance']
-                instance.floor = flat['floor']
-                instance.number = flat['number']
-                instance.way_desc = flat['way_desc']
+                instance_set_data(instance, flat)
                 instance.save()
-                #     instance.key = flat[key]
                 instances.append(instance)
             #     # fields.append(key)
             # raise IOError(instances)

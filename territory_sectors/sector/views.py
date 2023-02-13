@@ -73,6 +73,7 @@ class SectorListView(LoginRequiredMixin, ContextAddHousesMixin,
                      GeoJSONAnnotateMixin,
                      ListView):
     model = Sector
+    # paginate_by = model
     template_name = "sector/list.html"
     extra_context = {
         'remove_title': _('remove'),
