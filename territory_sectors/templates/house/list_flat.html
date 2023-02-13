@@ -5,8 +5,8 @@
       <table class = "table table-striped">
         <tr>
             <th>{% translate "entrance" %}</th>
-            <th>{% translate "floor" %}</th>
             <th>{% translate "number" %}</th>
+            <th>{% translate "floor" %}</th>
             <th>{% translate "language" %}</th>
             <th>{% translate "way desc" %}</th>
             <th></th>
@@ -14,8 +14,8 @@
         {% for flat in house.flat_set.all %}
             <tr>
                 <td> {{flat.entrance}}</td>
-                <td> {{flat.floor}}</td>
                 <td> <a href = "{% url "flat_update" flat.id %}">{{flat.number}}</a></td>
+                <td> {{flat.floor}}</td>
                 <td> {{flat.language}}</td>
                 <td> {{ flat.way_desc }}</td>
                 <td>

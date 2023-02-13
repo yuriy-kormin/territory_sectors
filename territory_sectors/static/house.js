@@ -75,8 +75,8 @@ function addFlatRow(flat_dict){
   clone.style.visibility= 'visible';
   children = clone.children
     set_field_value(children[0],flat_dict['entrance']||"")
-    set_field_value(children[1],flat_dict['floor']||"")
-    set_field_value(children[2],flat_dict['number']||"")
+    set_field_value(children[1],flat_dict['number']||"")
+    set_field_value(children[2],flat_dict['floor']||"")
     set_field_value(children[3],flat_dict['way_desc']||"")
     set_field_value(children[4],flat_dict['language']||1)
   return clone
