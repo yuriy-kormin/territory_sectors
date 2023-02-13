@@ -70,7 +70,10 @@ class House(models.Model):
     #         'language__id', 'language__name'
     #     )
     #     return json.dumps(list(flats), cls=DjangoJSONEncoder)
+    def flat_count(self):
+        return self.flat_set.count()
 
     @classmethod
     def get_lang_list_qs(cls):
         return Language.objects.all()
+

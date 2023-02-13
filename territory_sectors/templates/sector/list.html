@@ -21,6 +21,13 @@
                     </form>
                 </td>
             </tr>
+             <tr>
+                 <td colspan="3">
+                     {% for house in sector.get_houses_into %}
+                         {{ house.address }}({{ house.flat_count }}),
+                     {% endfor %}
+                 </td>
+             </tr>
         {% endfor %}
     </table>
 {#    {% for house in houses %} {{ house.flat_count }}{% endfor %}#}

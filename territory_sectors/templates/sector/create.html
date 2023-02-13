@@ -29,9 +29,9 @@
                 </div>
             {% endfor %}
                 {% if object %}
-                    {% for house in object.get_houses_into %}
-                        {{ house.address.as_div }}
-                    {% endfor %}
+{#                    {% for house in object.get_houses_into %}#}
+{#                        {{ house.address.as_div }}#}
+{#                    {% endfor %}#}
                 {% endif %}
                 <div class = "form-group">
                      {% bootstrap_button button_title button_type="submit" button_class="mt-3 btn btn-primary" %}
