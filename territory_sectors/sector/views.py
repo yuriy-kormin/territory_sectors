@@ -5,7 +5,10 @@ from django.urls import reverse_lazy
 from .forms import SectorForm
 from .models import Sector
 from django.utils.translation import gettext_lazy as _
-from .mixins import GeoJSONAnnotateMixin, ContextAddHousesMixin
+from .mixins import GeoJSONAnnotateMixin, ContextAddHousesMixin, \
+    CentoidAnnotateMixin
+
+
 # from territory_sectors.uuid_qr.mixins import ContextAddQrImgData
 # import base64
 # from io import BytesIO
@@ -30,7 +33,7 @@ class SectorCreateView(LoginRequiredMixin,
 
 
 
-class SectorUpdateView(LoginRequiredMixin,
+class SectorUpdateView(LoginRequiredMixin,CentoidAnnotateMixin,
                        ContextAddHousesMixin, GeoJSONAnnotateMixin,
                        SuccessMessageMixin, UpdateView):
     model = Sector
@@ -70,7 +73,7 @@ class SectorUpdateView(LoginRequiredMixin,
     #     return context
 
 class SectorListView(LoginRequiredMixin, ContextAddHousesMixin,
-                     GeoJSONAnnotateMixin,
+                     GeoJSONAnnotateMixin,CentoidAnnotateMixin,
                      ListView):
     model = Sector
     # paginate_by = model

@@ -31,7 +31,12 @@ var sectors = [];
 
 // var sector_sources = {};
 
-
+function map_fly(point_x,point_y){
+    // console.log(point_x,point_y)
+    map.flyTo({
+        center: [point_x,point_y]
+    })
+}
 function set_popup (id, text) {
     popups[id] = new mapboxgl.Popup(
         {

@@ -39,6 +39,7 @@
         {{ sector.geojson | safe }},
         "<b> {{ sector.name }}</b> <br>Flats - {{ sector.flat_count }}")
     {% endfor %}
+    map.setZoom(14)
     map.on('load', map_add_layer)
     map.on('click','sectors', sector_popup)
 {% include "sector/houses_circles.html" %}
