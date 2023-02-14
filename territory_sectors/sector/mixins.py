@@ -1,4 +1,4 @@
-from django.contrib.gis.db.models.functions import AsGeoJSON
+from django.contrib.gis.db.models.functions import AsGeoJSON, Centroid
 from django.db.models import Count
 from django.views.generic.list import MultipleObjectMixin
 from territory_sectors.sector.models import Sector
@@ -8,6 +8,12 @@ class GeoJSONAnnotateMixin:
     def get_queryset(self):
         qs = super(GeoJSONAnnotateMixin, self).get_queryset()
         return qs.annotate(geojson=AsGeoJSON('contour'))
+
+
+class CentoidAnnotateMixin:
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.annotate(centroid=Centroid('contour'))
 
 
 class ContextAddHousesMixin(object):
