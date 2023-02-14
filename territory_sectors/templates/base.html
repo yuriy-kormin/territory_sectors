@@ -12,6 +12,7 @@
 
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js"></script>
+    <script src="{% static "map.js" %}"></script>
     <script src ="{% static "sector.js" %}"></script>
 {#    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>#}
 {#    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" type="text/css">#}
@@ -27,11 +28,17 @@
         {% block page_content %}
         {% endblock %}
     </div>
-    <div id="map" style="height:40vh"></div>
-    <script src="{% static "map.js" %}"></script>
+    <div id="map" style="height:60vh"></div>
     <script>
-        {% block markers %}
-        {% endblock %}
+        let show_map = true;
+        let center_point = [41.612803, 41.632153];
+        let map_zoom = 16;
+            {% block map_init %}
+            {% endblock %}
+        map_init (show_map,center_point, map_zoom).then(function() {
+            {% block markers %}
+            {% endblock %}
+        });
     </script>
 </main>
 </body>

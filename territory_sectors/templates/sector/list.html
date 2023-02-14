@@ -9,7 +9,6 @@
             <th>{% translate "name" %}</th>
             <th>{% translate "uuid" %}</th>
             <th></th>
-
         </tr>
         {% for sector in object_list %}
             <tr>
@@ -30,7 +29,6 @@
              </tr>
         {% endfor %}
     </table>
-{#    {% for house in houses %} {{ house.flat_count }}{% endfor %}#}
 {% endblock %}
 {% block markers %}
     {% for sector in object_list %}
@@ -39,7 +37,7 @@
         {{ sector.geojson | safe }},
         "<b> {{ sector.name }}</b> <br>Flats - {{ sector.flat_count }}")
     {% endfor %}
-    map.on('load', map_add_layer)
+{#    map.on('load', map_add_layer)#}
     map.on('click','sectors', sector_popup)
 {% include "sector/houses_circles.html" %}
 {% endblock %}

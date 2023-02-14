@@ -1,5 +1,4 @@
-mapboxgl.accessToken = 'pk.eyJ1IjoieXVyaXlrb3JtaW4iLCJhIjoiY2xjdTZjMm1jMHJwZTNvbXg1cm1xMGh5ciJ9.uHPoJEdjly2KUEmc8YEOkw';
-
+const mapbox_token = 'pk.eyJ1IjoieXVyaXlrb3JtaW4iLCJhIjoiY2xjdTZjMm1jMHJwZTNvbXg1cm1xMGh5ciJ9.uHPoJEdjly2KUEmc8YEOkw'
 //
 // geocoder = new MapboxGeocoder({
 //     accessToken:mapboxgl.accessToken,
@@ -7,29 +6,39 @@ mapboxgl.accessToken = 'pk.eyJ1IjoieXVyaXlrb3JtaW4iLCJhIjoiY2xjdTZjMm1jMHJwZTNvb
 //     reverseGeocode:true,
 // })
 
-const map = new mapboxgl.Map({
-container: 'map', // container ID
-style: 'mapbox://styles/mapbox/streets-v12', // style URL
-center: [41.612803, 41.632153], // starting position [lng, lat]
-zoom: 16, // starting zoom
-language: 'ru-RU'
-});
-map.addControl(new mapboxgl.FullscreenControl());
-map.addControl(new mapboxgl.GeolocateControl({
-    positionOptions: {
-    enableHighAccuracy: true
-    },
-    trackUserLocation: true,
-    showUserHeading: true
-}));
-map.addControl(new mapboxgl.NavigationControl());
-// mapboxgl.setRTLTextPlugin('https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js');
-// map.addControl(new MapboxLanguage({defaultLanguage: 'ru'}));
+function map_init(show_map = true, center_point, map_zoom){
+    return new Promise(function(resolve, reject) {
+    if (show_map) {
+        // var map_div = document.createElement("div");
+        // map_div.id = 'map';
+        // map_div.style = ("height:60vh");
+        // document.body.appendChild(map_div);
+        mapboxgl.accessToken = mapbox_token;
+        const map = new mapboxgl.Map({
+            container: 'map', // container ID
+            style: 'mapbox://styles/mapbox/streets-v12', // style URL
+            center: center_point, // starting position [lng, lat]
+            zoom: map_zoom, // starting zoom
+            language: 'ru-RU'
+        });
+        map.addControl(new mapboxgl.FullscreenControl());
+        map.addControl(new mapboxgl.GeolocateControl({
+            positionOptions: {
+                enableHighAccuracy: true
+            },
+            trackUserLocation: true,
+            showUserHeading: true
+        }));
+        map.addControl(new mapboxgl.NavigationControl());
+        // mapboxgl.setRTLTextPlugin('https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js');
+        // map.addControl(new MapboxLanguage({defaultLanguage: 'ru'}));
+    }
+        resolve();
+    });
+}
 var markers = {};
 var popups = {};
 var sectors = [];
-
-// var sector_sources = {};
 
 
 function set_popup (id, text) {
@@ -105,10 +114,6 @@ function move_marker (event) {
 
 }
 
-
-function flat_change_house(e) {
-    // alert(e.target.value);
-}
 
 function add_sector_source(id, json, popup_data){
     sectors.push({
