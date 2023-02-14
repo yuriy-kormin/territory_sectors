@@ -37,7 +37,7 @@
             </tr>
         </thead>
         <tbody>
-        {% for house in house_list %}
+        {% for house in page_obj %}
             <tr id = "house{{ house.id }}" data-toggle="collapse" data-target="#house_{{ house.id }}" class="clickable"  style = " transition: 0.4s;">
                 <th scope="row"> <a href = {% url "house_update" house.id %}>{{house.address}}</a></td>
                 <td> {{house.entrances}}</td>
@@ -59,6 +59,7 @@
         {% endfor %}
         </tbody>
     </table>
+    {% include "house/pagination.html" %}
 {% endblock %}
 {% block markers %}
     {% for house in object_list %}
