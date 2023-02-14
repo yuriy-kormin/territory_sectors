@@ -6,7 +6,7 @@ from .forms import SectorForm
 from .models import Sector
 from django.utils.translation import gettext_lazy as _
 from .mixins import GeoJSONAnnotateMixin, ContextAddHousesMixin, \
-    CentoidAnnotateMixin
+    CentroidAnnotateMixin
 
 
 # from territory_sectors.uuid_qr.mixins import ContextAddQrImgData
@@ -31,9 +31,7 @@ class SectorCreateView(LoginRequiredMixin,
     success_message = _('Sector created successfully')
 
 
-
-
-class SectorUpdateView(LoginRequiredMixin,CentoidAnnotateMixin,
+class SectorUpdateView(LoginRequiredMixin, CentroidAnnotateMixin,
                        ContextAddHousesMixin, GeoJSONAnnotateMixin,
                        SuccessMessageMixin, UpdateView):
     model = Sector
@@ -72,8 +70,9 @@ class SectorUpdateView(LoginRequiredMixin,CentoidAnnotateMixin,
     #     context['qr_img_data'] = img_data
     #     return context
 
+
 class SectorListView(LoginRequiredMixin, ContextAddHousesMixin,
-                     GeoJSONAnnotateMixin,CentoidAnnotateMixin,
+                     GeoJSONAnnotateMixin, CentroidAnnotateMixin,
                      ListView):
     model = Sector
     # paginate_by = model

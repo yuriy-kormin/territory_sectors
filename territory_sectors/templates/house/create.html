@@ -27,6 +27,7 @@
     {% if object %}
         set_popup({{ house.id }}, "{{ house.address }}")
         set_marker({{ house.id }}, {{ house.gps_pos }});
+        map_fly({{ house.gps_pos }});
     {% endif %}
     map.on('click', move_marker);
 {% endblock %}
