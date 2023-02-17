@@ -1,6 +1,6 @@
 from django.contrib.gis.db.models.functions import AsGeoJSON, Centroid
-from django.db.models import Count, Avg
-from django.views.generic.list import MultipleObjectMixin
+from django.db.models import Count
+# from django.views.generic.list import MultipleObjectMixin
 from territory_sectors.sector.models import Sector
 
 

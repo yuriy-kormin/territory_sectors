@@ -5,7 +5,7 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 from .models import House
 from territory_sectors.flat.models import Flat
-from territory_sectors.language.models import Language
+# from territory_sectors.language.models import Language
 
 
 class HouseForm(forms.ModelForm):

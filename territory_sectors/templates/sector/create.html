@@ -48,11 +48,11 @@
 {% endblock %}
 {% block markers %}
     add_draw_control()
-    map_fly({{ object.centroid.coords.0 }},{{ object.centroid.coords.1 }})
     map.on('draw.update', update_sector);
     map.on('draw.create', update_sector);
-{% include "sector/houses_circles.html" %}
+    {% include "sector/houses_circles.html" %}
     {% if object %}
+        map_fly({{ object.centroid.coords.0 }},{{ object.centroid.coords.1 }})
         add_sector_source(
         {{ object.id }},
         {{ object.geojson | safe }},

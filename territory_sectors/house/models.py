@@ -76,4 +76,3 @@ class House(models.Model):
     @classmethod
     def get_lang_list_qs(cls):
         return Language.objects.all()
-

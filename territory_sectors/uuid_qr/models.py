@@ -1,4 +1,4 @@
-import base64
+# import base64
 
 from django.db import models
 from shortuuid.django_fields import ShortUUIDField
@@ -6,12 +6,12 @@ from shortuuid.django_fields import ShortUUIDField
 # from territory_sectors.house.models import House
 # from territory_sectors.flat.models import Flat
 # import qrcode
-from io import BytesIO
-from qrcode import make
-from django.core.files import File
-from django.core.files.base import ContentFile
-from django.core.files.uploadedfile import InMemoryUploadedFile
-from django.urls import reverse
+# from io import BytesIO
+# from qrcode import make
+# from django.core.files import File
+# from django.core.files.base import ContentFile
+# from django.core.files.uploadedfile import InMemoryUploadedFile
+# from django.urls import reverse
 # from django.core.files import File
 # from PIL import Image, ImageDraw
 

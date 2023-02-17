@@ -1,5 +1,5 @@
 from django.db import models
-from django.urls import reverse
+# from django.urls import reverse
 
 from territory_sectors.house.models import House
 from territory_sectors.uuid_qr.models import Uuid
