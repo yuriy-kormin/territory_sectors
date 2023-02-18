@@ -11,21 +11,19 @@ COPY README.md manage.py .env /app/
 COPY Docker/sectors/docker-entrypoint.sh /app/
 
 WORKDIR /app
-RUN apt-get update
 
 # Install GDAL dependencies
-RUN apt-get install -y libgdal-dev g++ --no-install-recommends && \
+RUN apt update && apt install -y libgdal-dev g++ --no-install-recommends && \
     pip install pipenv && \
     pip install whitenoise && \
     pip install gunicorn && \
+    pip3 install poetry && \
+    poetry config virtualenvs.create false && \
+    poetry poetry install && \
     apt-get clean -y
 
 # Update C env vars so compiler can find gdal
 ENV CPLUS_INCLUDE_PATH=/usr/include/gdal
 ENV C_INCLUDE_PATH=/usr/include/gdal
-
-RUN pip3 install poetry
-RUN poetry config virtualenvs.create false
-RUN poetry install
 
 CMD ["./docker-entrypoint.sh"]
