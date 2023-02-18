@@ -12,12 +12,13 @@ WORKDIR /app
 
 # Install GDAL dependencies
 RUN apt update && apt install -y libgdal-dev g++ --no-install-recommends && \
-    pip install pipenv && \
-    pip install whitenoise && \
-    pip install gunicorn && \
+    python3 -m pip install --upgrade pip &&\
+    pip3 install pipenv && \
+    pip3 install whitenoise && \
+    pip3 install gunicorn && \
     pip3 install poetry && \
     poetry config virtualenvs.create false && \
-    poetry poetry install && \
+    poetry install && \
     apt-get clean -y
 
 # Update C env vars so compiler can find gdal
