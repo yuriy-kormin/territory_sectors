@@ -3,12 +3,10 @@ FROM python:3.11
 ENV PYTHONUNBUFFERED 1
 ENV PYTHONDONTWRITEBYTECODE 1
 
-RUN mkdir /app
+RUN mkdir -p /app/static/
 COPY territory_sectors/ /app/territory_sectors
-RUN mkdir /app/static/
-COPY pyproject.toml /app
-COPY README.md manage.py .env /app/
-COPY Docker/sectors/docker-entrypoint.sh /app/
+COPY ["pyproject.toml","README.md","manage.py","Docker/sectors/docker-entrypoint.sh","/app/"]
+COPY .env-compose /app/.env
 
 WORKDIR /app
 
