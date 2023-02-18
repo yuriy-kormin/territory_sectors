@@ -53,11 +53,10 @@
     {% include "sector/houses_circles.html" %}
     {% if object %}
         map_fly({{ object.centroid.coords.0 }},{{ object.centroid.coords.1 }})
-        add_sector_source(
-        {{ object.id }},
-        {{ object.geojson | safe }},
-        "{{ object.name }}"
-        )
+{#        add_sector_source({{ object.id }},{{ object.geojson | safe }},"{{ object.name }}")#}
+        {% for sector in sectors %}
+            add_sector_source({{ sector.id }}, {{ object.geojson | safe }}, "{{ sector.name }}")
+        {% endfor %}
         map.on('load', map_add_layer)
         draw.add(sectors)
     {% endif %}

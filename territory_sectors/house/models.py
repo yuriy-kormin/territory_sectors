@@ -18,8 +18,10 @@ class HouseManager(models.Manager):
 
 # Create your models here.
 class House(models.Model):
-    class Meta:
-        ordering = ['address']
+    # class Meta:
+    #     ordering = ['address']
+    # class Meta:
+    #     ordering = ('id',)
 
     address = models.CharField(max_length=300, unique=True)
     date_created = models.DateTimeField(auto_now_add=True)

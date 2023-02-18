@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.gis.db.models.functions import AsGeoJSON
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from django.urls import reverse_lazy
@@ -41,6 +42,9 @@ class SectorUpdateView(LoginRequiredMixin, CentroidAnnotateMixin,
     extra_context = {
         'header': _('Update Sector'),
         'button_title': _('Update'),
+        'sectors': model.objects.all().annotate(
+            geojson=AsGeoJSON('contour')
+        )
     }
     success_message = _('Sector updated successfully')
 

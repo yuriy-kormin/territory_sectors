@@ -1,10 +1,9 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
-from django.core.paginator import Paginator
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .forms import HouseForm
-from .mixins import CountFlatsMixin
+from .mixins import CountFlatsMixin, PaginateMixin
 from .models import House
 from django.utils.translation import gettext_lazy as _
 
@@ -70,22 +69,16 @@ class HouseUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     #
 
 
-class HouseListView(LoginRequiredMixin, CountFlatsMixin, ListView):
+class HouseListView(LoginRequiredMixin, CountFlatsMixin,
+                    PaginateMixin, ListView):
     model = House
     template_name = "house/list.html"
-    # queryset = House.objects.order_by('address')
+    # queryset = House.objects.order_by('-id')
     extra_context = {
         'remove_title': _('remove'),
     }
     paginate_by = 15
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        paginator = Paginator(self.object_list, self.paginate_by)
-        page = self.request.GET.get('page')
-        page_obj = paginator.get_page(page)
-        context['page_obj'] = page_obj
-        return context
+    ordering = 'address'
 
 
 class HouseDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):

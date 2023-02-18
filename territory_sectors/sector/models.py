@@ -1,4 +1,6 @@
 from django.db import models
+# from django.db.models import Sum
+
 # from django.urls import reverse
 
 from territory_sectors.house.models import House
@@ -17,6 +19,9 @@ class SectorManager(models.Manager):
             }
         return result
 
+    def get_houses_into(self):
+        return House.objects.filter(gps_point__intersects=self.contour)
+
 
 class Sector(models.Model):
     date_joined = models.DateTimeField(auto_now_add=True)
@@ -26,8 +31,12 @@ class Sector(models.Model):
                                 on_delete=models.SET_NULL)
     contour = gis_models.PolygonField(null=False, blank=False, srid=4326)
     objects = models.Manager()
+    sm = SectorManager
     js = SectorManager.json_polygons
     history = HistoricalRecords()
+    houses = SectorManager.get_houses_into
+
+    # flat_count = SectorManager.get_houses_into().aggregate(Sum('flat'))
     # houses = models.ManyToManyField('House', through='Intersection',
     #                                 related_name='sectors_of_houses')
     # # houses = models.ManyToManyField('House', through='Intersection')
@@ -36,16 +45,12 @@ class Sector(models.Model):
     def __str__(self):
         return self.name
 
-    def get_houses_into(self):
-        return House.objects.filter(gps_point__intersects=self.contour)
-
     # def get_absolute_url(self):
-        # return reverse('sector_update', args=[str(self.id)])
+    # return reverse('sector_update', args=[str(self.id)])
 
     @classmethod
     def get_all_houses(cls):
         return House.objects.all()
-
 
 # class Intersection(models.Model):
 #     house = models.ForeignKey('House', on_delete=models.CASCADE)

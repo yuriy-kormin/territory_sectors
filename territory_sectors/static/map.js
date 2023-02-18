@@ -111,9 +111,6 @@ function move_marker (event) {
 }
 
 
-function flat_change_house(e) {
-    // alert(e.target.value);
-}
 
 function add_sector_source(id, json, popup_data){
     sectors.push({
