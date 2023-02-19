@@ -27,24 +27,29 @@ services:
         build:
             context: .
             dockerfile: ./Docker/nginx/Dockerfile
+        env_file:
+            - .env-compose
         volumes:
             - letsencrypt:/etc/letsencrypt/:ro
-            - ./letsencrypt/www:/var/www/letsencrypt:ro
+            - acme:/var/www/letsencrypt:ro
         ports:
             - 80:80
         depends_on:
             - sectors
-            - certbot
     certbot:
         build:
             context: .
-            dockerfile: ./Docker/nginx/Dockerfile
+            dockerfile: ./Docker/certbot/Dockerfile
+        env_file:
+            - .env-compose
         volumes:
             - letsencrypt:/etc/letsencrypt
-            - ./letsencrypt/www:/var/www/letsencrypt
-        command: certonly --webroot --agree-tos --non-interactive --email you@example.com --webroot-path /var/www/letsencrypt
+            - acme:/var/www/letsencrypt
+        depends_on:
+            - nginx
 
 volumes:
     pgdata:
     letsencrypt:
+    acme:
 
