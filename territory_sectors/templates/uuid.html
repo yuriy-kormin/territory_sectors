@@ -25,9 +25,9 @@
                       <table class = "table table-striped">
                         {% for flat in house.flat_set.all %}
                             <tr>
-                                <td>{{ flat.entrance }} подъезд</td>
-                                <td>{{ flat.floor }} этаж </td>
-                                <td>{{ flat.number }} квартира</td>
+                                <td>{{ flat.entrance }} {% translate "entrance" %}</td>
+                                <td>{{ flat.floor }} {% translate "floor" %} </td>
+                                <td>{{ flat.number }} {% translate "number" %}</td>
                                 <td>{{ flat.way_desc }}</td>
                             </tr>
                         {% endfor %}
@@ -39,6 +39,7 @@
         </div>
 {% endblock %}
 {% block markers %}
+    map_fly({{ object.centroid.coords.0 }},{{ object.centroid.coords.1 }})
     {% for house in object.sector.get_houses_into %}
         set_popup({{ house.id }},"{{ house }}({{ house.flat_count }})")
         set_marker({{ house.id }}, {{ house.gps_pos }})

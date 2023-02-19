@@ -1,3 +1,4 @@
+from django.contrib.gis.db.models.functions import Centroid
 from django.views.generic import TemplateView, DetailView
 from django.contrib.auth import logout
 from django.contrib.auth.views import LoginView, LogoutView
@@ -28,8 +29,9 @@ class UUIDView(DetailView):
     template_name = "uuid.html"
     slug_field = 'id'
 
-    # def get_queryset(self):
-    #     qs = super().get_queryset()
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.annotate(centroid=Centroid('sector__contour'))
     #     return qs.annotate(
     #         flat_count=Count('sector__house__flat')
     #     )
