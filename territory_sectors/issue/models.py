@@ -20,17 +20,3 @@ class Comment(models.Model):
     issue = models.ForeignKey(to=Issue, on_delete=models.CASCADE)
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-
-    # def form_valid(self, form):
-    #     form.instance.issue_id = self.kwargs['pk']
-    #     form.instance.author_id = self.request.user.id
-    #     return super().form_valid(form)
-
-    # def form_valid(self, commit=True, **kwargs):
-    #     comment = super().save(commit=False)
-    #     raise ValueError('qq')
-    #     comment.issue_id = kwargs['issue_id']
-    #     comment.author_id = self.request.user.id
-    #     if commit:
-    #         comment.save()
-    #     return comment

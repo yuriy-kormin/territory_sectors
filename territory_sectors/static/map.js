@@ -134,6 +134,7 @@ function add_sector_source(id, json, popup_data){
 
 function map_add_layer(){
     // sources = {
+    console.log(sectors)
     map.addSource(
             'layers', {
                 'type': 'geojson',
@@ -150,7 +151,7 @@ function map_add_layer(){
         'source': 'layers',
         'layout': {},
         'paint':{
-            'fill-color': 'rgba(0,178,255,0.63)', // blue color fill
+            'fill-color': 'rgba(117,148,185,0.37)', // blue color fill
             'fill-opacity': 0.5
         }
     })

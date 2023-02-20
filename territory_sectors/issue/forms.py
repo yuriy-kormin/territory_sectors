@@ -1,5 +1,4 @@
 from django import forms
-from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 from .models import Issue, Comment
 
@@ -26,6 +25,7 @@ class IssueForm(forms.ModelForm):
                 },
             ),
         }
+
 
 class CommentForm(forms.ModelForm):
     class Meta:
