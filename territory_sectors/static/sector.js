@@ -47,7 +47,7 @@ function add_circles_layer(){
     'paint':{
         'circle-radius': 16,
         'circle-stroke-width': 2,
-        'circle-color': 'red',
+        'circle-color': 'rgba(246,89,113,0.6)',
         'circle-stroke-color': 'white'
     }
 });

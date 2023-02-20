@@ -150,7 +150,7 @@ function map_add_layer(){
         'source': 'layers',
         'layout': {},
         'paint':{
-            'fill-color': '#0080ff', // blue color fill
+            'fill-color': 'rgba(0,178,255,0.63)', // blue color fill
             'fill-opacity': 0.5
         }
     })
