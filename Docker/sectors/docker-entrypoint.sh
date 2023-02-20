@@ -8,10 +8,10 @@
 
 # Apply database migrations
 echo "Apply database migrations"
-python manage.py migrate --noinput
-python manage.py createsuperuser --noinput
+poetry run python manage.py migrate --noinput
+poetry run python manage.py createsuperuser --noinput
 #collect static
-python manage.py collectstatic --noinput
+poetry run python manage.py collectstatic --noinput
 
 # Start server
 echo "Starting jango app"
