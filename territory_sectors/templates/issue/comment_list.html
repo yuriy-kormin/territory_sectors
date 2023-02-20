@@ -1,0 +1,25 @@
+{% load i18n %}
+<div class = "card mt-3">
+    <div class="card-header">
+        <h3>{% translate "Comments" %}</h3>
+    </div>
+    <div class="card-body">
+      {% for comment in comments %}
+        <div class = "card-body">
+          <div class="row">
+                {% if comment.text %}
+                    {{ comment.text }}
+                {% else %}
+                    null
+                {% endif %}
+          </div>
+            <div class="row small align-self-end float-right">
+                    {{ comment.date|date:"d M Y" }}  {{ comment.author }}
+            </div>
+        </div>
+      {% empty %}
+          <p>No comments yet.</p>
+      {% endfor %}
+
+    </div>
+</div>

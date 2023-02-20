@@ -29,6 +29,7 @@ urlpatterns = [
     path('house/', include('territory_sectors.house.urls')),
     path('sector/', include('territory_sectors.sector.urls')),
     path('uuid/', include('territory_sectors.uuid_qr.urls')),
+    path('issue/', include('territory_sectors.issue.urls')),
     path('__debug__/', include('debug_toolbar.urls')),
 
 ]

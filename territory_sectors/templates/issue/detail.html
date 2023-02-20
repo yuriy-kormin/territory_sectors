@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load bootstrap4 %}
+{% csrf_token %}
+{% block page_content %}
+    <div>
+        <h1 class="my-4"> {{ header }}</h1>
+        <div class = "card">
+            <div class="card-header">
+                <h2>{{ issue.title }}</h2>
+            </div>
+          <div class="card-body">
+            <div class="container">
+{#                <div class="row p-2">#}
+{#                    <div class="col">{% translate "Title" %}</div>#}
+{#                    <div class="col">{{ issue.title }}</div>#}
+{#                </div>#}
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col">{{ issue.text }}</div>
+                </div>
+                <div class="row align-self-end float-right">
+                    <div class="col small">{{ issue.date|date:"d M Y" }}  {{ issue.author }}</div>
+                </div>
+            </div>
+          </div>
+        </div>
+        {% include "issue/comment_list.html" %}
+        {% include "issue/comment_form.html" %}
+{% endblock %}
+{% block markers %}
+{% include "issue/map_hide.html" %}
+{% endblock %}
