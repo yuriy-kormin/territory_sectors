@@ -1,8 +1,3 @@
 {% for house in houses %}
         add_circle_source({{ house.id }},{{ house.flat_count }},{{ house.gps_pos }})
 {% endfor %}
-map.on('load', function(){
-    add_map_circles_source();
-    add_circles_layer();
-    add_symbols_layer();
-})
