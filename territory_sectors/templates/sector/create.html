@@ -18,11 +18,6 @@
             {%  for field in form %}
                 <div class = "form-group">
                     {% bootstrap_field field %}
-                    {% if field.name == 'uuid' %}
-                        <div class = "form">
-                            <a href="{% url "uuid_gen" %}" target="_blank" rel="noopener">create uuid</a>
-                        </div>
-                    {% endif %}
                 </div>
             {% endfor %}
                 <div class = "form-group">

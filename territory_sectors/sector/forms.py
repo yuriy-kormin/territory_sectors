@@ -59,3 +59,11 @@ class SectorForm(forms.ModelForm):
                 },
             ),
         }
+
+    def clean_uuid(self):
+        uuid_value = self.cleaned_data.get('uuid')
+        if not uuid_value:
+            uuid = Uuid.objects.create()
+            uuid.save()
+            return uuid.id
+        return uuid_value
