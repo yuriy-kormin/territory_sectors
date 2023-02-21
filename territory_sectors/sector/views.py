@@ -22,12 +22,16 @@ from .mixins import GeoJSONAnnotateMixin, ContextAddHousesMixin, \
 
 class SectorCreateView(LoginRequiredMixin,
                        ContextAddHousesMixin, SuccessMessageMixin, CreateView):
+    model = Sector
     form_class = SectorForm
     template_name = "sector/create.html"
     success_url = reverse_lazy('sector_list')
     extra_context = {
         'header': _('Create sector'),
         'button_title': _('Create'),
+        'sectors': model.objects.all().annotate(
+            geojson=AsGeoJSON('contour'),
+        )
     }
     success_message = _('Sector created successfully')
 
