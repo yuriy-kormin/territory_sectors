@@ -3,7 +3,6 @@
 {% load bootstrap4 %}
 {% block page_content %}
    <h1 class="my-4"> {{ marks }}</h1>
-    <a class="nav-link" href="{% url "sector_add" %}">{% translate "Create sector" %}</a>
     <table class = "table table-striped">
         <tr>
             <th>{% translate "name" %}</th>
@@ -29,6 +28,7 @@
              </tr>
         {% endfor %}
     </table>
+    <a class="nav-link" href="{% url "sector_add" %}">{% translate "Create sector" %}</a>
 {% endblock %}
 {% block markers %}
     {% for sector in object_list %}
