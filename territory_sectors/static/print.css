@@ -1,0 +1,36 @@
+@media print {
+  /* hide elements that shouldn't be printed */
+  header, nav, .no-print button{
+    display: none;
+  }
+  /* set table styles */
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  th {
+    background-color: #f2f2f2;
+  }
+  /* set font size and margins */
+  body {
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+  }
+  /* add page breaks before each table */
+  table {
+    page-break-inside: avoid;
+  }
+  tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+  /*div {*/
+  /*  cla*/
+  /*}*/
+}
