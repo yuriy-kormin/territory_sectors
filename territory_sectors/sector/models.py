@@ -1,4 +1,7 @@
+from django.contrib.auth.models import User
 from django.db import models
+# from django.db.models.signals import post_migrate
+# from django.dispatch import receiver
 
 from territory_sectors.house.models import House
 from territory_sectors.uuid_qr.models import Uuid
@@ -17,10 +20,24 @@ class SectorManager(models.Manager):
         return result
 
 
+class Status(models.Model):
+    name = models.CharField(max_length=300, null=False, unique=True)
+    #
+    # def ready(self):
+    #     @receiver(post_migrate)
+    #     def create_initial_data(sender, **kwargs):
+    #         StatusSector.objects.create(name='open')
+
+    def __str__(self):
+        return self.name
+
+
 class Sector(models.Model):
     date_joined = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
     name = models.CharField(max_length=300, null=True, unique=True)
+    # status = models.Many(StatusSector, null=True, blank=True,
+    #                            on_delete=models.SET_NULL,through=)
     uuid = models.OneToOneField(to=Uuid, null=True, blank=True,
                                 on_delete=models.SET_NULL)
     contour = gis_models.PolygonField(null=False, blank=False, srid=4326)
@@ -42,3 +59,12 @@ class Sector(models.Model):
 # class Intersection(models.Model):
 #     house = models.ForeignKey('House', on_delete=models.CASCADE)
 #     sector = models.ForeignKey('Sector', on_delete=models.CASCADE)
+
+
+class SectorStatus(models.Model):
+    sector = models.ForeignKey(to=Sector, on_delete=models.CASCADE)
+    status = models.ForeignKey(to=Status, null=True, on_delete=models.SET_NULL)
+    date = models.DateTimeField(auto_now=True)
+    set_by_user = models.ForeignKey(to=User, null=True,
+                                    on_delete=models.SET_NULL)
+    assign_to = models.CharField(max_length=300, null=True)

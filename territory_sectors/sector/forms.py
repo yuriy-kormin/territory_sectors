@@ -1,7 +1,7 @@
 from django import forms
 from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
-from .models import Sector
+from .models import Sector, Status
 from territory_sectors.uuid_qr.models import Uuid
 
 
@@ -33,7 +33,8 @@ class SectorForm(forms.ModelForm):
         fields = [
             'name',
             'uuid',
-            'contour'
+            'contour',
+            # 'status_set',
         ]
         widgets = {
             'name': forms.TextInput(
@@ -67,3 +68,9 @@ class SectorForm(forms.ModelForm):
             uuid.save()
             return uuid.id
         return uuid_value
+
+    # def clean_status(self):
+    #     status_value = self.cleaned_data.get('status')
+    #     if not status_value:
+    #         return StatusSector.objects.first()
+    #     return status_value

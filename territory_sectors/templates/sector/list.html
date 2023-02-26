@@ -7,12 +7,14 @@
         <tr>
             <th>{% translate "name" %}</th>
             <th>{% translate "uuid" %}</th>
+            <th>{% translate "status" %}</th>
             <th></th>
         </tr>
         {% for sector in object_list %}
             <tr>
                 <td> <a href = {% url "sector_update" sector.id %}>{{sector.name}}</a></td>
                 <td> {{sector.uuid}}</td>
+                <td> {{sector.status}}</td>
                 <td>
                     <form method="get" action="{% url "sector_delete" sector.id %}">
                         {% bootstrap_button remove_title button_type="submit" button_class="btn btn-danger" %}
@@ -20,7 +22,7 @@
                 </td>
             </tr>
              <tr>
-                 <td colspan="3">
+                 <td colspan="4">
                      {% for house in sector.get_houses_into %}
                          {{ house.address }}({{ house.flat_count }}),
                      {% endfor %}
