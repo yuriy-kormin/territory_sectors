@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import SectorListView, SectorCreateView,\
-    SectorDeleteView, SectorUpdateView
+    SectorDeleteView, SectorUpdateView, SectorStatusHistory
 
 urlpatterns = [
     path('', SectorListView.as_view(), name='sector_list'),
@@ -8,4 +8,6 @@ urlpatterns = [
     path('<int:pk>/', SectorUpdateView.as_view(), name='sector_update'),
     path('<int:pk>/delete/', SectorDeleteView.as_view(),
          name='sector_delete'),
+    path('<int:pk>/history/', SectorStatusHistory.as_view(),
+         name="sector_history")
 ]

@@ -28,18 +28,26 @@ class SectorForm(forms.ModelForm):
                 )
             )
 
+    # status = forms.ModelChoiceField(queryset=Status.objects.all())
     class Meta:
         model = Sector
         fields = [
             'name',
             'uuid',
-            'contour'
+            'contour',
+            'status',
+            'assigned_to',
         ]
         widgets = {
             'name': forms.TextInput(
                 attrs={
                     'class': 'form-control',
                     'placeholder': _('Please enter sector name')
+                }
+            ),
+            'status': forms.Select(
+                attrs={
+                    'class': 'form-control',
                 }
             ),
             # 'uuid': forms.Select(
@@ -59,3 +67,11 @@ class SectorForm(forms.ModelForm):
                 },
             ),
         }
+
+    # def clean_status(self):
+    #     status_data = self.cleaned_data.get('status')
+    #     return [status_data,]
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)

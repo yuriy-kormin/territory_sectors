@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load bootstrap4 %}
+{% block page_content %}
+   <h1 class="my-4"> {{ header }}</h1>
+    <a class="nav-link" href="{% url "status_add" %}">{% translate "Create status" %}</a>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">{% translate "name" %}</th>
+            </tr>
+    </thead>
+    <tbody>
+    {% for status in status_list %}
+            <tr>
+                <td scope="row"><a href="{% url "status_update" status.id %}">{{status.name}}</a></td>
+            </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+{% block markers %}
+{% include "issue/map_hide.html" %}
+{% endblock %}

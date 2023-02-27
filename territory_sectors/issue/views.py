@@ -5,7 +5,7 @@ from django.views.generic import CreateView, ListView, DetailView
 from django.utils.translation import gettext_lazy as _
 
 from .forms import IssueForm, CommentForm
-from .mixins import SetAuthorMixin
+from ..mixins import SetAuthorMixin
 from .models import Issue, Comment
 
 

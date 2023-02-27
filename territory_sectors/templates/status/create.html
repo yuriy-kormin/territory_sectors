@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load bootstrap4 %}
+{% block page_content %}
+    <form method="post" action=".">
+    {% csrf_token %}
+        <h1 class="my-4"> {{ header }}</h1>
+        <div class = "form">
+            {% if object %}
+                <div class = "form-group">
+                    <label for="id_sector">Sector</label>
+                    <output id="id_sector" class="form-control">{{object.house.sector.name}}</output>
+                </div>
+            {% endif %}
+            {%  for field in form %}
+{#                <div class = "form-group">#}
+                    {% bootstrap_field field %}
+{#                </div>#}
+            {% endfor %}
+                <div class = "form-group">
+                     {% bootstrap_button button_title button_type="submit" button_class="mt-3 btn btn-primary" %}
+                </div>
+        </div>
+    </form>
+{% endblock %}
+{% block markers %}
+    {% include "issue/map_hide.html" %}
+{% endblock %}

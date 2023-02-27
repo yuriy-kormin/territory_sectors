@@ -86,6 +86,21 @@ class SectorListView(LoginRequiredMixin, ContextAddHousesMixin,
     }
 
 
+class SectorStatusHistory(LoginRequiredMixin, ListView):
+    model = Sector
+    template_name = 'sector/history_status.html'
+    extra_context = {
+        'header': _('History statuses of '),
+    }
+
+    def get_queryset(self):
+        sector_id = self.kwargs['pk']
+        sector = Sector.objects.get(id=sector_id)
+        history = sector.history.filter(history_type='~').order_by(
+            '-history_date')
+        return history
+
+
 class SectorDeleteView(LoginRequiredMixin, GeoJSONAnnotateMixin,
                        SuccessMessageMixin, DeleteView):
     model = Sector
