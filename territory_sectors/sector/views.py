@@ -1,6 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.gis.db.models.functions import AsGeoJSON
 from django.contrib.messages.views import SuccessMessageMixin
+from django.db.models import Q
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .forms import SectorForm
@@ -103,6 +104,12 @@ class SectorStatusHistory(LoginRequiredMixin, ListView):
         history = sector.history.filter(history_type='~').order_by(
             '-history_date')
         return history
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        pk = self.kwargs['pk']
+        context['sector_name'] = self.model.objects.get(pk=pk).name
+        return context
 
 
 class SectorDeleteView(LoginRequiredMixin, GeoJSONAnnotateMixin,
