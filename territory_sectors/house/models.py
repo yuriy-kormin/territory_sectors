@@ -16,7 +16,6 @@ class HouseManager(models.Manager):
         return json.dumps(list(flats), cls=DjangoJSONEncoder)
 
 
-# Create your models here.
 class House(models.Model):
     # class Meta:
     #     ordering = ['address']

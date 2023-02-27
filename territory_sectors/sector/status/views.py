@@ -3,11 +3,8 @@ from django.contrib.gis.db.models.functions import AsGeoJSON
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from .forms import SectorForm
-from .models import Sector
-from django.utils.translation import gettext_lazy as _
-from .mixins import GeoJSONAnnotateMixin, ContextAddHousesMixin, \
-    CentroidAnnotateMixin
+
+from ..models import StatusSector
 
 
 # from territory_sectors.uuid_qr.mixins import ContextAddQrImgData
@@ -20,9 +17,9 @@ from .mixins import GeoJSONAnnotateMixin, ContextAddHousesMixin, \
 # from django.urls import reverse
 
 
-class SectorCreateView(LoginRequiredMixin,
-                       ContextAddHousesMixin, SuccessMessageMixin, CreateView):
-    model = Sector
+class StatusSectorCreateView(LoginRequiredMixin,
+                      SuccessMessageMixin, CreateView):
+    model = StatusSector
     form_class = SectorForm
     template_name = "sector/create.html"
     success_url = reverse_lazy('sector_list')
@@ -88,21 +85,6 @@ class SectorListView(LoginRequiredMixin, ContextAddHousesMixin,
     extra_context = {
         'remove_title': _('remove'),
     }
-
-
-class SectorStatusHistory(LoginRequiredMixin, ListView):
-    model = Sector
-    template_name = 'sector/history_status.html'
-    extra_context = {
-        'header': _('History statuses of '),
-    }
-
-    def get_queryset(self):
-        sector_id = self.kwargs['pk']
-        sector = Sector.objects.get(id=sector_id)
-        history = sector.history.filter(history_type='~').order_by(
-            '-history_date')
-        return history
 
 
 class SectorDeleteView(LoginRequiredMixin, GeoJSONAnnotateMixin,

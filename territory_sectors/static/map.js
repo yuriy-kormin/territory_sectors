@@ -88,7 +88,7 @@ const reverseGeocoding = function (longitude,latitude) {
     var url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/'
             + longitude + ',' + latitude
             + '.json&access_token=' + mapboxgl.accessToken;
-    console.log(url)
+    // console.log(url)
     // var xmlHttp = new XMLHttpRequest();
     // xmlHttp.open( "GET", url, false ); // false for synchronous request
     // xmlHttp.send( null );
@@ -109,9 +109,6 @@ function move_marker (event) {
     // document.getElementById("mapboxaddress").setAttribute('value',ee)
 
 }
-
-
-
 function add_sector_source(id, json, popup_data){
     sectors.push({
                 'id': id,
@@ -131,10 +128,9 @@ function add_sector_source(id, json, popup_data){
             popup_data
     )
 }
-
-function map_add_layer(){
-    // sources = {
+function map_add_layer(mark_id = false){
     console.log(sectors)
+    // sources = {
     map.addSource(
             'layers', {
                 'type': 'geojson',
@@ -151,7 +147,7 @@ function map_add_layer(){
         'source': 'layers',
         'layout': {},
         'paint':{
-            'fill-color': 'rgba(117,148,185,0.37)', // blue color fill
+            'fill-color': 'rgba(44,108,183,0.67)', // blue color fill
             'fill-opacity': 0.5
         }
     })
