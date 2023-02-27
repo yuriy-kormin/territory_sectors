@@ -57,8 +57,7 @@ INSTALLED_APPS = [
     "debug_toolbar",
     "qr_code",
     "territory_sectors.issue",
-    # 'territory_sectors.sector.models.Sector',
-    # 'territory_sectors.house.models.House',
+    "territory_sectors.status",
 ]
 
 
