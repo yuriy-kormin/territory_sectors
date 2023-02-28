@@ -1,36 +1,18 @@
+/* Hide the print time and page address */
+@page {
+  size: auto;
+  margin: 0mm;
+}
 @media print {
-  /* hide elements that shouldn't be printed */
-  header, nav, .no-print button{
-    display: none;
-  }
-  /* set table styles */
-  table {
-    border-collapse: collapse;
-    width: 100%;
-  }
-  th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-  }
-  th {
-    background-color: #f2f2f2;
-  }
-  /* set font size and margins */
-  body {
-    font-size: 12px;
+  /* Hide the print time and page address */
+  @page {
     margin: 0;
-    padding: 0;
   }
-  /* add page breaks before each table */
-  table {
-    page-break-inside: avoid;
+  #map {
+    display: block;
   }
-  tr {
-    page-break-inside: avoid;
-    page-break-after: auto;
+  .no-print,
+  .no-print * {
+    display: none !important;
   }
-  /*div {*/
-  /*  cla*/
-  /*}*/
 }

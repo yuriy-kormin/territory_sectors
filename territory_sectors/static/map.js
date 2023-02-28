@@ -243,3 +243,9 @@ function update_sector(event) {
         'value',"SRID=4326;POLYGON"+list2string(coordinates))
     // console.log(document.getElementById('contour').value)
 }
+
+function show_all_popups(){
+    for (var key in markers ) {
+        markers[key].getPopup().addTo(map);
+    }
+}

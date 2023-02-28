@@ -3,11 +3,9 @@
 {% load i18n %}
 {% load qr_code %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/print.css' %}">
 {% block page_content %}
     {% if request.user.is_authenticated %}
         {% qr_from_text request.build_absolute_uri size="t" image_format="png" error_correction="L" %}
-        <button onclick="window.print()">Print</button>
         {#        <img src="{% qr_url_from_data "Hello World!" size=8 version=10 image_format='png' %}" alt="Hello World!">#}
 {#        {{ requ }}#}
 {#    <img src="data:image/png;base64,{{ qr_img_data }}">#}
