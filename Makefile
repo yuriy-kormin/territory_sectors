@@ -15,3 +15,6 @@ install:
 	poetry install
 lint:
 	poetry run flake8 territory_sectors --exclude migrations
+translate:
+	${MANAGE} makemessages --locale ru
+	${MANAGE} compilemessages --locale ru

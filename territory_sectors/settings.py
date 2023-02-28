@@ -129,7 +129,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+# LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
@@ -156,3 +156,7 @@ GEOS_LIBRARY_PATH = os.getenv('GEOS_LIBRARY_PATH')
 GDAL_LIBRARY_PATH = os.getenv('GDAL_LIBRARY_PATH')
 
 INTERNAL_IPS = ('127.0.0.1',)
+LANGUAGE_CODE = 'ru-ru'
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, "territory_sectors", "locale"),
+)

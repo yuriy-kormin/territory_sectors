@@ -15,7 +15,7 @@
                 <div class="card-header" id="headingOne">
                   <h5 class="mb-0">
                     <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{ house.id }}" aria-expanded="true" aria-controls="collapse{{ house.id }}">
-                        {{house.address}}({{ house.flat_count }} addresses)
+                        {{house.address}}({{ house.flat_count }} {% translate "addresses" %})
                     </button>
                   </h5>
                 </div>
@@ -25,10 +25,10 @@
                       <table class = "table table-striped">
                         {% for flat in house.flat_set.all %}
                             <tr>
-                                <td>{{ flat.entrance }} {% translate "entrance" %}</td>
-                                <td>{{ flat.floor }} {% translate "floor" %} </td>
-                                <td>{{ flat.number }} {% translate "number" %}</td>
-                                <td>{{ flat.way_desc }}</td>
+                                <td>{% if flat.entrance %} {{ flat.entrance}} {% translate "entrance" %}{% endif %}</td>
+                                <td>{% if flat.floor %}{{ flat.floor }} {% translate "floor" %}{% endif %}</td>
+                                <td>{% if flat.number %}{{ flat.number }} {% translate "number" %}{% endif %}</td>
+                                <td>{{ flat.way_desc|default_if_none:"" }}</td>
                             </tr>
                         {% endfor %}
                       </table>
