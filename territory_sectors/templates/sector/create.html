@@ -10,14 +10,25 @@
         {% with request.scheme|add:"://"|add:request.get_host|add:'/'|add:object.uuid_id as url_string %}
             {% qr_from_text url_string size="t" image_format="png" error_correction="L" %}
         {% endwith %}
-{#        <img src="data:image/png;base64,{{ qr_img_data }}">#}
-    <a href="{% url "uuid" object.uuid_id %}">link</a>
+{#        <button class="btn btn-info" onclick="openWindow()">{% translate "Print" %}</button>#}
+{#<script>#}
+{#function openWindow() {#}
+{#  window.open("{% url "sector_print" object.id %}", "_blank");#}
+{#}#}
+{#</script>#}
+    <a href="{% url "uuid" object.uuid_id %}" target="_blank">link</a>
+    <a href="{% url "sector_print" object.id %}" target="_blank">{% translate "Print" %}</a>
     {% endif %}
         <h1 class="my-4"> {{ header }}</h1>
         <div class = "form">
             {%  for field in form %}
                 <div class = "form-group">
                     {% bootstrap_field field %}
+                    {% if field.name == 'uuid' %}
+                        <div class = "form">
+                            <a href="{% url "uuid_gen" %}" target="_blank" rel="noopener">create uuid</a>
+                        </div>
+                    {% endif %}
                 </div>
             {% endfor %}
                 <div class = "form-group">
@@ -26,34 +37,24 @@
         </div>
         <input type="hidden" id="id" value="{{ house.id|default:'0' }}">
     </form>
-{#    <button type="button" title="qq" id="myBtn" onclick="create_uuid()">#}
 {% endblock %}
 {% block head %}
 <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.2.2/mapbox-gl-draw.js"></script>
 <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.2.2/mapbox-gl-draw.css" type="text/css">
 {% endblock %}
-
 {% block markers %}
-add_draw_control()
-map.on('draw.update', update_sector);
-map.on('draw.create', update_sector);
-    {% for sector in sectors %}
+    add_draw_control()
+    map.on('draw.update', update_sector);
+    map.on('draw.create', update_sector);
+    {% include "sector/houses_circles.html" %}
+    {% if object %}
+        map_fly({{ object.centroid.coords.0 }},{{ object.centroid.coords.1 }})
         add_sector_source(
-        {{ sector.id }},
-        {{ sector.geojson | safe }},
-        "<b> {{ sector.name }}</b> <br>Flats - {{ sector.flat_count }}")
-    {% endfor %}
-    map.on('load', function(){
-        add_map_circles_source();
-        add_circles_layer();
-        add_symbols_layer();
-        map_add_layer();
-    })
-    map.on('click','sectors', sector_popup)
-{% include "sector/houses_circles.html" %}
-
-{% if object %}
-    map_fly({{ object.centroid.coords.0 }},{{ object.centroid.coords.1 }})
-{% endif %}
-
+        {{ object.id }},
+        {{ object.geojson | safe }},
+        "{{ object.name }}"
+        )
+        map.on('load', map_add_layer)
+        draw.add(sectors)
+    {% endif %}
 {% endblock %}

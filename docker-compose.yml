@@ -6,7 +6,7 @@ services:
             context: .
             dockerfile: ./Docker/sectors/Dockerfile
         env_file:
-            - .env
+            - .env-compose
         expose:
             - 8000
         depends_on:
@@ -27,9 +27,32 @@ services:
         build:
             context: .
             dockerfile: ./Docker/nginx/Dockerfile
+        env_file:
+            - .env-compose
+        volumes:
+            - letsencrypt:/etc/letsencrypt/:ro
+            - acme:/var/www/letsencrypt:ro
+            - nginx-conf:/etc/nginx/conf.d
         ports:
             - 80:80
         depends_on:
             - sectors
+    certbot:
+        build:
+            context: .
+            dockerfile: ./Docker/certbot/Dockerfile
+        env_file:
+            - .env-compose
+        volumes:
+            - letsencrypt:/etc/letsencrypt/
+            - acme:/var/www/letsencrypt/
+            - nginx-conf:/nginx/
+        depends_on:
+            - nginx
+
 volumes:
     pgdata:
+    letsencrypt:
+    acme:
+    nginx-conf:
+

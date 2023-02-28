@@ -79,6 +79,26 @@ class SectorUpdateView(LoginRequiredMixin, CentroidAnnotateMixin,
     #     return context
 
 
+class SectorPrintView(LoginRequiredMixin, CentroidAnnotateMixin, UpdateView):
+    model = Sector
+    fields = ['name', 'uuid']
+    template_name = "sector/print_sector.html"
+    success_url = reverse_lazy('sector_list')
+    extra_context = {
+        'print_header': _('Sector '),
+        'additional_rows': "*"*4,
+    }
+
+    def get_context_data(self, **kwargs):
+        """Add context."""
+        context = super().get_context_data(**kwargs)
+        context['url'] = self.request.build_absolute_uri(
+                    reverse_lazy(
+                        "uuid", kwargs={'pk': self.object.uuid_id})
+        )
+        return context
+
+
 class SectorListView(LoginRequiredMixin, ContextAddHousesMixin,
                      GeoJSONAnnotateMixin, CentroidAnnotateMixin,
                      ListView):
