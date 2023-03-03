@@ -54,11 +54,12 @@ INSTALLED_APPS = [
     'territory_sectors.sector',
     'territory_sectors.language',
     'territory_sectors.uuid_qr',
-    "debug_toolbar",
     "qr_code",
     "territory_sectors.issue",
     "territory_sectors.status",
 ]
+if DEBUG:
+    INSTALLED_APPS.append("debug_toolbar")
 
 
 MIDDLEWARE = [
