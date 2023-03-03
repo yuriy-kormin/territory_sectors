@@ -76,13 +76,13 @@
   <div class="row" id="map" style="height:40vh; page-break-inside: avoid;"></div>
   <script src="{% static "map.js" %}"></script>
 <script>
-
+console.log((11.49).toLocaleString("ru", {style: "currency", currency: "USD"}))
 map.on('load', function() {
     {% for house in object.get_houses_into %}
         set_popup({{ house.id }}, "{{ house.address }}")
         set_marker({{ house.id }}, {{ house.gps_pos }});
     {% endfor %}
-    map_fly({{ object.centroid.coords.0 }},{{ object.centroid.coords.1 }});
+    map_fly({{ object.centroid.coords.0 }}, {{ object.centroid.coords.1 }});
     show_all_popups();
     {#window.print();#}
 })
