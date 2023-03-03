@@ -13,7 +13,7 @@ ROTATE_COUNT=30
 DATABASE_CONTAINER_NAME="pgdatabase"
 
 # Parse database connection settings from DATABASE_URL
-export $(python3 -c "import dj_database_url; print('\n'.join(f'DB_{k.upper()}=\"{v}\"' for k, v in dj_database_url.parse('$DATABASE_URL').items()))")
+export $(python3 -c "import dj_database_url; print('\n'.join(f'DB_{k.upper()}={v}' for k, v in dj_database_url.parse('$DATABASE_URL').items()))")
 
 # Create backup directory if it doesn't exist
 mkdir -p $BACKUP_DIR
