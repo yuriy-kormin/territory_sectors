@@ -32,7 +32,6 @@ var sectors = [];
 // var sector_sources = {};
 
 function map_fly(point_x,point_y){
-    // console.log(point_x,point_y)
     map.flyTo({
         center: [point_x,point_y]
     })
@@ -48,12 +47,6 @@ function set_popup (id, text) {
 }
 
 function circle_text() {
-    // const el = document.createElement('div');
-    // el.style.width = `30px`;
-    // el.style.height = `30px`;
-    // // el.className = 'marker';
-    // el.innerText= txt
-    console.log(markers)
 
     map.addLayer({
                 'id': 'poi-labels',
@@ -71,11 +64,14 @@ function circle_text() {
 
 
 }
-function set_marker (id, lng, lat) {
-
+function set_marker (id, lng, lat, color = 'default') {
+    let color_val = "#B917FC";
+    if (color !== 'default'){
+        color_val = "#e8b72c"
+    }
     markers[id] = new mapboxgl.Marker(
         {
-        color: "#B917FC",
+        color: color_val,
         scale:1.5,
         // sy
     }
@@ -88,11 +84,6 @@ const reverseGeocoding = function (longitude,latitude) {
     var url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/'
             + longitude + ',' + latitude
             + '.json&access_token=' + mapboxgl.accessToken;
-    // console.log(url)
-    // var xmlHttp = new XMLHttpRequest();
-    // xmlHttp.open( "GET", url, false ); // false for synchronous request
-    // xmlHttp.send( null );
-
    return xmlHttp.responseText;
 }
 function move_marker (event) {
@@ -105,8 +96,6 @@ function move_marker (event) {
     }
     document.getElementById("gps_point").setAttribute('value',"SRID=4326;POINT("+coordinates.lng.toString() +" " +coordinates.lat.toString()+')')
     var xy = '"'+coordinates.lng.toString()+','+coordinates.lat.toString()+'"'
-    // console.log(reverseGeocoding(coordinates.lng.toString(),coordinates.lat.toString()))
-    // document.getElementById("mapboxaddress").setAttribute('value',ee)
 
 }
 function add_sector_source(id, json, popup_data){
@@ -129,8 +118,6 @@ function add_sector_source(id, json, popup_data){
     )
 }
 function map_add_layer(mark_id = false){
-    console.log(sectors)
-    // sources = {
     map.addSource(
             'layers', {
                 'type': 'geojson',

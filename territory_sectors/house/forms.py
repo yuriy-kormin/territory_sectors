@@ -5,12 +5,14 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 from .models import House
 from territory_sectors.flat.models import Flat
+
+
 # from territory_sectors.language.models import Language
 
 
 class HouseForm(forms.ModelForm):
-    flats_data = forms.CharField(widget=forms.HiddenInput)
-
+    flats_data = forms.CharField(widget=forms.HiddenInput
+    )
     class Meta:
         model = House
         # readonly_fields = ['gps_point', ]
@@ -18,6 +20,7 @@ class HouseForm(forms.ModelForm):
             'address',
             'floor_amount',
             'entrances',
+            'for_search',
             'gps_point',
             'desc',
             'id',
@@ -42,6 +45,11 @@ class HouseForm(forms.ModelForm):
                     'placeholder': _('How much entrances in building')
                 }
             ),
+            'for_search': forms.CheckboxInput(
+                attrs={
+                    'class': 'form-check-input',
+                }
+            ),
             'desc': forms.Textarea(
                 attrs={
                     'class': 'form-control',
@@ -56,12 +64,6 @@ class HouseForm(forms.ModelForm):
                     'id': 'gps_point',
                 },
             ),
-            # 'flats_data': forms.HiddenInput(
-            #     attrs={
-            #         # 'class': 'form-control',
-            #         'id': 'flats_data',
-            #     }
-            # )
         }
 
     def __init__(self, *args, **kwargs):
@@ -86,8 +88,9 @@ class HouseForm(forms.ModelForm):
             for key in data:
                 if key == 'id':
                     continue
-                key_name = key+'_id' if key == 'language' else key
+                key_name = key + '_id' if key == 'language' else key
                 setattr(instance, key_name, data[key])
+
         obj = super().save()
         flats = self.cleaned_data.get('flats_data')
         if flats:

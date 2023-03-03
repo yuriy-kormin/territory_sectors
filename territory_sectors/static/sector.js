@@ -2,16 +2,18 @@ function create_uuid(){
     fetch('/uuid/gen')
 }
 let circles = []
-function add_circle_source(id, msg, lng, lat){
+function add_circle_source(id, msg, mark ="default",lng, lat){
     circles.push({
         "type": "Feature",
         "geometry": {
             "type": "Point",
-            "coordinates": [lng, lat]
+            "coordinates": [lng, lat],
+
         },
         "properties": {
             "title": msg,
-        }
+            "mark":mark,
+        },
     })
 
 //     circles[id] = new mapboxgl.so(
@@ -40,6 +42,7 @@ function add_map_circles_source(){
 
 
 function add_circles_layer(){
+    console.log(circles)
     map.addLayer({
     'id': 'houses-layer',
     'type': 'circle',
@@ -47,9 +50,23 @@ function add_circles_layer(){
     'paint':{
         'circle-radius': 16,
         'circle-stroke-width': 2,
-        'circle-color': 'rgba(246,89,113,0.6)',
+        'circle-color': "#B917FC",
         'circle-stroke-color': 'white'
-    }
+    },
+    'filter': ['==', 'mark', 'default']
+});
+
+    map.addLayer({
+    'id': 'houses-search-layer',
+    'type': 'circle',
+    'source': 'circles',
+    'paint':{
+        'circle-radius': 16,
+        'circle-stroke-width': 2,
+        'circle-color': "#e8b72c",
+        'circle-stroke-color': 'white'
+    },
+    'filter': ['!=', 'mark', 'default']
 });
 }
 function add_symbols_layer(){
@@ -63,7 +80,7 @@ function add_symbols_layer(){
         'text-size': 20
     },
     paint: {
-            'text-color': '#4FA627',
+            'text-color': '#34621f',
         }
 });
 }
