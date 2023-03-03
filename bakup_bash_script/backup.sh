@@ -10,7 +10,7 @@ set +o allexport
 DATABASE_URL="$DATABASE_URL"
 BACKUP_DIR="backups"
 ROTATE_COUNT=30
-DATABASE_CONTAINER_NAME="pgdatabase"
+DATABASE_CONTAINER_NAME="terrytory_sectors_pgdatabase"
 
 # Parse database connection settings from DATABASE_URL
 export $(python3 -c "import dj_database_url; print('\n'.join(f'DB_{k.upper()}=\"{v}\"' for k, v in dj_database_url.parse('$DATABASE_URL').items()))")
