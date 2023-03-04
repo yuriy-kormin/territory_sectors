@@ -28,7 +28,7 @@ class House(models.Model):
     date_modified = models.DateTimeField(auto_now=True)
     floor_amount = models.IntegerField(null=True)
     entrances = models.IntegerField(null=True)
-    image = models.ImageField(upload_to='media/', null=True, blank=True)
+    image = models.ImageField(upload_to='house/', null=True, blank=True)
     # sector = models.ForeignKey('Sector', on_delete=models.CASCADE,
     #                            related_name='sectors')
 
