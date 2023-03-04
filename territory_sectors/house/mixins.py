@@ -53,7 +53,7 @@ class ImageResizeBeforeMixin:
             img.save(buffer, format='JPEG', quality=90)
 
             image_data = buffer.getvalue()
-            # fix here: pass image.name as the first argument instead of 'image'
-            form.instance.image.save(image.name, content=ContentFile(image_data), save=False)
+            form.instance.image.save(
+                image.name, content=ContentFile(image_data), save=False)
 
         return super().form_valid(form)

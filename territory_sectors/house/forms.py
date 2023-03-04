@@ -6,10 +6,6 @@ from .models import House
 from territory_sectors.flat.models import Flat
 
 
-
-# from territory_sectors.language.models import Language
-
-
 class HouseForm(forms.ModelForm):
     flats_data = forms.CharField(widget=forms.HiddenInput)
 
@@ -126,4 +122,3 @@ class HouseForm(forms.ModelForm):
             #                           ['entrance', 'floor',
             #                           'number', 'way_desc'])
         return obj
-
