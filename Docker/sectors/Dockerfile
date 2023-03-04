@@ -3,7 +3,7 @@ FROM python:3.11
 ENV PYTHONUNBUFFERED 1
 ENV PYTHONDONTWRITEBYTECODE 1
 
-RUN mkdir -p /app/static/
+RUN mkdir -p /app/static/ /app/media/
 COPY territory_sectors/ /app/territory_sectors
 COPY ["pyproject.toml","README.md","manage.py","Docker/sectors/docker-entrypoint.sh","/app/"]
 COPY .env-compose /app/.env
