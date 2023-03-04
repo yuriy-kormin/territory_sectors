@@ -161,6 +161,12 @@ INTERNAL_IPS = ('127.0.0.1',)
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+# Set the maximum file upload size to 20 megabytes
+FILE_UPLOAD_MAX_MEMORY_SIZE = 20971520
+
+# Set the maximum request body size to 20 megabytes
+DATA_UPLOAD_MAX_MEMORY_SIZE = 20971520
+
 LANGUAGE_CODE = 'ru-ru'
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, "territory_sectors", "locale"),
