@@ -157,6 +157,10 @@ GEOS_LIBRARY_PATH = os.getenv('GEOS_LIBRARY_PATH')
 GDAL_LIBRARY_PATH = os.getenv('GDAL_LIBRARY_PATH')
 
 INTERNAL_IPS = ('127.0.0.1',)
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
 LANGUAGE_CODE = 'ru-ru'
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, "territory_sectors", "locale"),

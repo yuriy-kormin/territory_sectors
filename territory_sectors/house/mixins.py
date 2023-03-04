@@ -1,5 +1,8 @@
+from django.core.files.base import ContentFile
 from django.core.paginator import Paginator
 from django.db.models import Count
+from PIL import Image
+from io import BytesIO
 
 
 class CountFlatsMixin:
@@ -30,3 +33,27 @@ class PaginateMixin:
         page_obj = paginator.get_page(page)
         context['page_obj'] = page_obj
         return context
+
+
+class ImageResizeBeforeMixin:
+    def form_valid(self, form):
+        image = form.cleaned_data.get('image')
+        if image:
+            img = Image.open(image)
+            width, height = img.size
+            if width > height:
+                new_width = self.model.MAX_IMAGE_RESOLUTION
+                new_height = int(height * (new_width / width))
+            else:
+                new_height = self.model.MAX_IMAGE_RESOLUTION
+                new_width = int(width * (new_height / height))
+            img = img.resize((new_width, new_height), Image.ANTIALIAS)
+            img = img.convert('RGB')
+            buffer = BytesIO()
+            img.save(buffer, format='JPEG', quality=90)
+
+            image_data = buffer.getvalue()
+            # fix here: pass image.name as the first argument instead of 'image'
+            form.instance.image.save(image.name, content=ContentFile(image_data), save=False)
+
+        return super().form_valid(form)

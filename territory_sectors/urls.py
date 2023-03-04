@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from .views import IndexView, UserLoginView, UserLogoutView, UUIDView
+from django.conf import settings
+from django.conf.urls.static import static
 
 # import shortuuid
 
@@ -32,5 +34,7 @@ urlpatterns = [
     path('issue/', include('territory_sectors.issue.urls')),
     path('status/', include('territory_sectors.status.urls')),
     path('__debug__/', include('debug_toolbar.urls')),
-
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)

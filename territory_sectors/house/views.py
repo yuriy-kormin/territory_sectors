@@ -3,12 +3,13 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .forms import HouseForm
-from .mixins import CountFlatsMixin, PaginateMixin
+from .mixins import CountFlatsMixin, PaginateMixin, ImageResizeBeforeMixin
 from .models import House
 from django.utils.translation import gettext_lazy as _
 
 
-class HouseCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+class HouseCreateView(LoginRequiredMixin, ImageResizeBeforeMixin,
+                      SuccessMessageMixin, CreateView):
     form_class = HouseForm
     template_name = "house/create.html"
     success_url = reverse_lazy('house_list')
@@ -20,7 +21,8 @@ class HouseCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     success_message = _('House created successfully')
 
 
-class HouseUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class HouseUpdateView(LoginRequiredMixin, ImageResizeBeforeMixin,
+                      SuccessMessageMixin, UpdateView):
     model = House
     form_class = HouseForm
     template_name = "house/create.html"

@@ -21,12 +21,14 @@ class House(models.Model):
     #     ordering = ['address']
     # class Meta:
     #     ordering = ('id',)
+    MAX_IMAGE_RESOLUTION = 1024
 
     address = models.CharField(max_length=300, unique=True)
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
     floor_amount = models.IntegerField(null=True)
     entrances = models.IntegerField(null=True)
+    image = models.ImageField(upload_to='media/', null=True, blank=True)
     # sector = models.ForeignKey('Sector', on_delete=models.CASCADE,
     #                            related_name='sectors')
 

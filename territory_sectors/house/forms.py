@@ -1,10 +1,10 @@
 import json
 
 from django import forms
-# from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
 from .models import House
 from territory_sectors.flat.models import Flat
+
 
 
 # from territory_sectors.language.models import Language
@@ -17,6 +17,7 @@ class HouseForm(forms.ModelForm):
         model = House
         # readonly_fields = ['gps_point', ]
         fields = [
+            'image',
             'address',
             'floor_amount',
             'entrances',
@@ -125,3 +126,4 @@ class HouseForm(forms.ModelForm):
             #                           ['entrance', 'floor',
             #                           'number', 'way_desc'])
         return obj
+

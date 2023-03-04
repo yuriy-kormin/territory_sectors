@@ -2,22 +2,45 @@
 {% load i18n %}
 {% load bootstrap4 %}
 {% block page_content %}
-    <form method="post" action="." id="houseform">
+    <form method="post" action="." id="houseform" enctype="multipart/form-data">
     {% csrf_token %}
-        <h1 class="my-4"> {{ header }}</h1>
         <div class = "form">
+
+{##}
+{#            {% if field.name == 'image' %}#}
+{#                <div class="form-group">#}
+{#                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>#}
+{#                    {% if form.instance.pk %}#}
+{#                        <img src="{{ field.value.url }}" alt="Current image">#}
+{#                    {% endif %}#}
+{#                    <input type="file" name="{{ field.name }}" id="{{ field.id_for_label }}">#}
+{#                </div>#}
+{#            {% else %}#}
+{#                <div class="form-group">#}
+{#                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>#}
+{#                    {{ field }}#}
+{#                </div>#}
+{#            {% endif %}#}
+{#            {% endfor %}#}
+
             {% for field in form %}
                 <div class = "form-group">
+
+                {% if field.name == 'image' and field.value.url %}
+                        <img src="{{ field.value.url }}" alt="Current image">
+                {% endif %}
                     {% bootstrap_field field %}
                 </div>
+
             {% endfor %}
-                <div>
-                    {% include "house/bulk_flat_create_update.html" %}
-                </div>
+            <div>
+                {% include "house/bulk_flat_create_update.html" %}
+            </div>
             <div class = "form-group">
-                     {% bootstrap_button button_title button_type="submit" button_class="mt-3 btn btn-primary" %}
-                </div>
+                {% bootstrap_button button_title button_type="submit" button_class="mt-3 btn btn-primary" %}
+            </div>
         </div>
+        <h1 class="my-4"> {{ header }}</h1>
     <input type="hidden" id="id" value="{{ house.id|default:'0' }}">
     </form>
 {#    {% debug %}#}
