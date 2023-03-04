@@ -23,6 +23,17 @@ map.addControl(new mapboxgl.GeolocateControl({
     showUserHeading: true
 }));
 map.addControl(new mapboxgl.NavigationControl());
+map.addControl(
+new mapboxgl.GeolocateControl({
+positionOptions: {
+enableHighAccuracy: true
+},
+// When active the map will receive updates to the device's location as it changes.
+trackUserLocation: true,
+// Draw an arrow next to the location dot to indicate which direction the device is heading.
+showUserHeading: true
+})
+);
 // mapboxgl.setRTLTextPlugin('https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js');
 // map.addControl(new MapboxLanguage({defaultLanguage: 'ru'}));
 var markers = {};
