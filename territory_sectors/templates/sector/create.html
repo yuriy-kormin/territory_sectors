@@ -48,7 +48,7 @@
     map.on('draw.create', update_sector);
     {% include "sector/houses_circles.html" %}
     {% if object %}
-        map_fly({{ object.centroid.coords.0 }},{{ object.centroid.coords.1 }})
+        map_fly({{ object.centroid.coords.0|floatformat:"." }},{{ object.centroid.coords.1|floatformat:"." }})
         add_sector_source(
         {{ object.id }},
         {{ object.geojson | safe }},
