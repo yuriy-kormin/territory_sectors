@@ -5,4 +5,4 @@ RUN mkdir -p /nginx/
 COPY  ["/Docker/certbot/docker-entrypoint.sh","/Docker/certbot/nginx.conf","/"]
 
 
-#ENTRYPOINT [ "sh", "-c", "/bin/bash" ]
+#ENTRYPOINT [ "sh", "-c", " /bin/bash" ]
