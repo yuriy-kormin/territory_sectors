@@ -27,6 +27,8 @@ services:
         build:
             context: .
             dockerfile: ./Docker/nginx/Dockerfile
+            args:
+                CERTBOT_DOMAINS: ${CERTBOT_DOMAINS}
         env_file:
             - .env-compose
         volumes:
