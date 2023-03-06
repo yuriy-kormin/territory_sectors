@@ -34,10 +34,6 @@ function add_map_circles_source(){
              "features": circles
          }
      })
-
-
-    // console.log("its a circles", circles)
-
 }
 
 
