@@ -21,6 +21,12 @@
                 <div id="collapse{{ house.id }}" class="collapse" aria-labelledby="heading{{ house.id }}" data-parent="#accordion">
                   <div class="card-body">
                       <table class = "table table-striped">
+                        <tr>
+                            <th>{% translate "entrance" %}</th>
+                            <th>{% translate "floor" %}</th>
+                            <th>{% translate "number" %}</th>
+                            <th>{% translate "desc" %}</th>
+                        </tr>
                         {% for flat in house.flat_set.all %}
                             <tr>
                                 <td>{% if flat.entrance %} {{ flat.entrance}} {% translate "entrance" %}{% endif %}</td>
