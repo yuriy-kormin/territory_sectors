@@ -1,7 +1,9 @@
 #!/bin/bash
 set -e
 
-rm /etc/nginx/conf.d/default.conf
+if [ -f /etc/nginx/conf.d/default.conf ]; then
+    rm /etc/nginx/conf.d/default.conf
+fi
 cp /app/nginx.conf /etc/nginx/conf.d/nginx.conf
 
 #envsubstr </app/nginx-ssl.tmp >/etc/nginx/conf.d/nginx-ssl.tmp
