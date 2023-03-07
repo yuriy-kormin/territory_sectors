@@ -7,12 +7,37 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js"></script>
-    <link rel="stylesheet" href = "{% static "print.css" %}">
+{#    <link rel="stylesheet" href = "{% static "print.css" %}">#}
     <style>
     #page {
          width: 95%;
          height: 95%;
         margin: 1cm auto;
+    }
+    .table td, .table th {
+      padding: 0.3rem; /* adjust as necessary */
+      padding-top: 0;
+      padding-bottom: 0;
+      font-size: 14px; /* adjust as necessary */
+    }
+     #map {
+        display: block;
+    }
+    {# @media print {#}
+    {#    .print-time {#}
+    {#        display: none;#}
+    {#    }#}
+    {#}#}
+    {# @page { size: auto;  margin: 0mm; }#}
+    @media print {
+      /* hide print time and date in header */
+      @page {
+        size: auto;
+        margin-top: 0;
+        margin-bottom: 0;
+        padding-left: 20mm;
+        padding-right: 20mm;
+      }
     }
     </style>
 {% load i18n %}

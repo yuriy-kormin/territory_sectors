@@ -140,50 +140,6 @@ function map_add_layer(mark_id = false){
     })
 }
 
-// function add_source() {
-//     const sectors= JSON.parse(document.getElementById('sectors_data').textContent)
-//     features = []
-//     for (let id in sectors) {
-//         features.push({
-//                 "type": "Feature",
-//                 "properties":{
-//                     'id': id,
-//                     'name':sectors[id]['name']
-//                 },
-//                 "geometry": JSON.parse(sectors[id]['geojson'])
-//             });
-//         popups[id] = new mapboxgl.Popup(
-//             {
-//                 offset: 25,
-//                 closeButton: false,
-//                 closeOnClick: true,
-//             },
-//         ).setHTML(
-//             sectors[id]['name']
-//         )
-//     }
-//     map.addSource(
-//             'layers', {
-//                 'type': 'geojson',
-//                 'data': {
-//                     'type': 'FeatureCollection',
-//                     'features': features,
-//                 },
-//             },
-//         )
-// }
-// function add_sectors(){
-//     map. addLayer({
-//         'id': 'sectors',
-//         'type':'fill',
-//         'source': 'layers',
-//         'layout': {},
-//         'paint':{
-//             'fill-color': '#0080ff', // blue color fill
-//             'fill-opacity': 0.5
-//         }
-//     })
-// }
 
 function sector_popup(e) {
     id = e.features[0].id
