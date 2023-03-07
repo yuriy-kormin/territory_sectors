@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-06 07:10+0000\n"
+"POT-Creation-Date: 2023-03-07 13:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -247,7 +247,7 @@ msgstr ""
 
 #: territory_sectors/templates/flat/list.html:23
 #: territory_sectors/templates/house/list_flat.html:7
-#: territory_sectors/templates/sector/print_sector.html:49
+#: territory_sectors/templates/sector/print_sector.html:82
 #: territory_sectors/templates/uuid.html:25
 #: territory_sectors/templates/uuid.html:32
 msgid "entrance"
@@ -255,7 +255,7 @@ msgstr "Подъезд"
 
 #: territory_sectors/templates/flat/list.html:24
 #: territory_sectors/templates/house/list_flat.html:9
-#: territory_sectors/templates/sector/print_sector.html:50
+#: territory_sectors/templates/sector/print_sector.html:83
 #: territory_sectors/templates/uuid.html:26
 #: territory_sectors/templates/uuid.html:33
 msgid "floor"
@@ -263,7 +263,7 @@ msgstr "Этаж"
 
 #: territory_sectors/templates/flat/list.html:25
 #: territory_sectors/templates/house/list_flat.html:8
-#: territory_sectors/templates/sector/print_sector.html:51
+#: territory_sectors/templates/sector/print_sector.html:84
 #: territory_sectors/templates/uuid.html:27
 #: territory_sectors/templates/uuid.html:34
 msgid "number"
@@ -382,7 +382,7 @@ msgstr ""
 msgid "uuid"
 msgstr ""
 
-#: territory_sectors/templates/sector/print_sector.html:52
+#: territory_sectors/templates/sector/print_sector.html:85
 #: territory_sectors/templates/uuid.html:28
 msgid "desc"
 msgstr "Как найти"
