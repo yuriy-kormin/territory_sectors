@@ -1,12 +1,51 @@
+upstream hello_django {
+    server sectors:8000;
+}
+
 server {
-        listen       443 ssl http2;
-        server_name  $CERTBOT_DOMAINS
+    listen 80;
+    client_max_body_size 20m;
+    return 301 https://$host$request_uri;
+    location / {
+        proxy_pass http://hello_django;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $host;
+        proxy_redirect off;
+    }
 
-        ssl_certificate /etc/letsencrypt/live/$CERTBOT_DOMAINS/fullchain.pem;
-        ssl_certificate_key /etc/letsencrypt/live/$CERTBOT_DOMAINS/privkey.pem;
+    location ^~ /.well-known/acme-challenge/ {
+        default_type "text/plain";
+        root /var/www/letsencrypt;
+    }
 
-        # SSL configuration
-        ssl_protocols TLSv1.2 TLSv1.3;
-        ssl_ciphers ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384;
-        ssl_prefer_server_ciphers on;
-        }
+    location /media/ {
+        alias /app/media/;
+        expires 1h;
+    }
+}
+
+server {
+    listen 443 ssl;
+    client_max_body_size 20m;
+    server_name  $CERTBOT_DOMAINS
+    ssl_certificate /etc/letsencrypt/live/$CERTBOT_DOMAINS/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/$CERTBOT_DOMAINS/privkey.pem;
+
+
+    location / {
+        proxy_pass http://hello_django;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $host;
+        proxy_redirect off;
+    }
+
+    location ^~ /.well-known/acme-challenge/ {
+        default_type "text/plain";
+        root /var/www/letsencrypt;
+    }
+
+    location /media/ {
+        alias /app/media/;
+        expires 1h;
+    }
+}

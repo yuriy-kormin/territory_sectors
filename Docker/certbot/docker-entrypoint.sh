@@ -2,4 +2,5 @@ certbot certonly --agree-tos --keep-until-expiring --webroot -w /var/www/letsenc
 #envsubstr </nginx.conf >/nginx/nginx-ssl.conf
 if [ -f /nginx/nginx-ssl.tmp ]; then
   mv /nginx/nginx-ssl.tmp /nginx/nginx-ssl.conf
+  rm /nginx/nginx.conf
 fi

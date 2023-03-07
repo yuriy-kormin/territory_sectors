@@ -18,11 +18,8 @@ function run_command {
 }
 
 # Use inotifywait to monitor the directory for changes
-inotifywait -m /etc/nginx/conf.d/ -e modify |
-  while read path action file; do
-    if [[ "$file" == *.conf ]]; then
-      run_command
-    fi
+inotifywait -m /etc/nginx/conf.d/ -e move |
+    run_command
   done &
 
 #CMD ["sh", "-c", "while inotifywait -e modify,create,delete /etc/nginx/conf.d/; do nginx -s reload; done & nginx -g \"daemon off;\""]
