@@ -197,7 +197,7 @@ msgstr ""
 
 #: territory_sectors/sector/views.py:88
 msgid "Sector "
-msgstr ""
+msgstr "Участок "
 
 #: territory_sectors/sector/views.py:117
 msgid "History statuses of "

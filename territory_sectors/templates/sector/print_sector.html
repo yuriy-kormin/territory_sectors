@@ -8,39 +8,47 @@
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js"></script>
 {#    <link rel="stylesheet" href = "{% static "print.css" %}">#}
-    <style>
-    #page {
-         width: 95%;
-         height: 95%;
-        margin: 1cm auto;
+<style>
+  #page {
+    width: 95%;
+    height: 95%;
+    margin: 1cm auto;
+  }
+
+  .table td,
+  .table th {
+    padding: 0.3rem; /* adjust as necessary */
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: 14px; /* adjust as necessary */
+  }
+
+  #map {
+    display: block;
+  }
+
+  @page {
+    size: auto;
+    margin-top: 5mm;
+    margin-bottom: 5mm;
+    padding: 15mm;
+  }
+
+  @media print {
+    .print-time,
+    .page-count {
+      display: none;
     }
-    .table td, .table th {
-      padding: 0.3rem; /* adjust as necessary */
-      padding-top: 0;
-      padding-bottom: 0;
-      font-size: 14px; /* adjust as necessary */
+
+    @page :blank {
+      margin-top: 0;
+      content: none;
     }
-     #map {
-        display: block;
-    }
-    {# @media print {#}
-    {#    .print-time {#}
-    {#        display: none;#}
-    {#    }#}
-    {#}#}
-    {# @page { size: auto;  margin: 0mm; }#}
-    @media print {
-      /* hide print time and date in header */
-      @page {
-        size: auto;
-        margin-top: 0;
-        margin-bottom: 0;
-        padding-left: 20mm;
-        padding-right: 20mm;
-      }
-    }
-    </style>
-{% load i18n %}
+  }
+</style>
+
+
+    {% load i18n %}
 {% load qr_code %}
 {% load bootstrap4 %}
 </head>
@@ -106,7 +114,7 @@
 
           </div>
       </div>
-      <div class="row" id="map" style="height:60vh; page-break-inside: avoid;"></div>
+      <div class="row" id="map" style="text-align: center; width:95%; height:60vh; page-break-inside: avoid;"></div>
   </div>
   <script src="{% static "map.js" %}"></script>
 <script>
