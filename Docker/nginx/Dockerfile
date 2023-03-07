@@ -10,4 +10,5 @@ FROM nginx:latest
 
 RUN mkdir -p /app/
 COPY ["/Docker/nginx/nginx.conf","/Docker/nginx/nginx-ssl.tmp", "/app/"]
+RUN apt-get update && apt-get install -y inotify-tools
 COPY /Docker/nginx/docker-entrypoint.sh /
