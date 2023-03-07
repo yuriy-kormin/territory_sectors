@@ -23,7 +23,7 @@ inotifywait -m /etc/nginx/conf.d/ -e modify |
     if [[ "$file" == *.conf ]]; then
       run_command
     fi
-  done
+  done &
 
 #CMD ["sh", "-c", "while inotifywait -e modify,create,delete /etc/nginx/conf.d/; do nginx -s reload; done & nginx -g \"daemon off;\""]
 nginx -g "daemon off;"
