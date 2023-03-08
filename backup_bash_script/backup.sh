@@ -1,8 +1,9 @@
 #!/bin/bash
-
+# Get the absolute path of the directory that contains the script
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # Load environment variables from .env file
 set -o allexport
-source ../.env
+source "${SCRIPT_DIR}/../.env-compose"
 set +o allexport
 
 
