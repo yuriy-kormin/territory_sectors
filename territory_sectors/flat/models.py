@@ -1,5 +1,4 @@
 from django.db import models
-from django.db.models import Count
 
 from territory_sectors.house.models import House
 from territory_sectors.language.models import Language
@@ -28,4 +27,3 @@ class Flat(models.Model):
     def __str__(self):
         return f'{self.house.address}(' \
                f'{self.entrance}-{self.floor}-{self.number})'
-

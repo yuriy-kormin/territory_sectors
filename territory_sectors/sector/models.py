@@ -1,5 +1,4 @@
 from django.db import models
-from django.db.models import Count
 
 from territory_sectors.house.models import House
 from territory_sectors.status.models import Status
