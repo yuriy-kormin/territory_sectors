@@ -86,7 +86,7 @@
                          </tr>
                          </thead>
                          <tbody>
-                         {% for flat in house.flat_set.all %}
+                         {% for flat in house.get_ru_flats %}
                             <tr>
                                 <td class="text-center">{{ flat.entrance|default_if_none:""}}</td>
                                 <td class="text-center">{{ flat.floor|default_if_none:"" }}</td>

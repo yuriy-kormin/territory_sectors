@@ -62,6 +62,9 @@ class House(models.Model):
     def gps_pos(self):
         return f'{self.gps_point.x}, {self.gps_point.y}'
 
+    def get_ru_flats(self):
+        return self.flat_set.filter(language_id=1)
+
     # def get_sectors(self):
     #     return Sector.objects.filter(contour__intersects=self.gps_point)
     # def flats_join_ids(self):
