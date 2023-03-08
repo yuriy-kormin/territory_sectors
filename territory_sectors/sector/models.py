@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models import Count
+
 from territory_sectors.house.models import House
 from territory_sectors.status.models import Status
 from territory_sectors.uuid_qr.models import Uuid
@@ -43,6 +45,7 @@ class Sector(models.Model):
     @classmethod
     def get_all_houses(cls):
         return House.objects.all()
+
 
 # class Intersection(models.Model):
 #     house = models.ForeignKey('House', on_delete=models.CASCADE)

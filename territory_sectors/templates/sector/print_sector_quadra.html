@@ -7,83 +7,125 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js"></script>
-{#    <link rel="stylesheet" href = "{% static "print.css" %}">#}
-<style type="text/css">
-  @page:first {
-      size: A4 landscape;
-      margin: 1cm;
-      border: 1cm solid black;
-    }
-  @page {
-    size: A4 portrait;
-    margin: 1cm;
-    border: 1cm solid black;
-  }
-  .quadrant {
-    width: 50%;
-    height: 50%;
-    border: 1px dotted #696868;
-  }
-  .quadrant.top-left {
-    top: 0;
-    left: 0;
-  }
-  .quadrant.top-right {
-    top: 0;
-    right: 0;
-  }
-  .quadrant.bottom-left {
-    bottom: 0;
-    left: 0;
-  }
-  .quadrant.bottom-right {
-    bottom: 0;
-    right: 0;
-  }
-  @page {
-    size: A4 landscape;
-    margin-top: 5mm;
-    margin-bottom: 5mm;
-    padding: 10mm;
-  }
-
-  @media print {
-    .print-time,
-    .page-count {
-      display: none;
-    }
-
-    @page :blank {
-      size: A4 landscape;
-      margin-top: 0;
-      content: none;
-    }
-
-  }
-</style>
     {% load i18n %}
 {% load qr_code %}
 {% load bootstrap4 %}
+
+    <style>
+@page:first {
+size: A4 landscape;
+margin: 1cm;
+border: 1cm solid black;
+    padding: 0;
+}
+@page {
+    size: A4 portrait;
+    margin: 1cm;
+    padding: 0;
+    border: 1cm solid black;
+    page-break-inside: avoid;
+}
+
+.page {
+box-sizing: border-box;
+width: 100vw;
+height: 100vh;
+position: relative;
+page-break-inside: avoid;
+}
+.col-md-6 {
+border: 1px dotted #484343;
+height: 100%;
+}
+
+.table td,
+.table th {
+line-height: 1.1;
+padding: 0;
+font-size: 13px;
+padding-right: 5px;
+padding-left: 5px;
+}
+
+#map {
+width: 99%;
+height: 99%;
+visibility: visible;
+}
+
+</style>
 </head>
 <body>
-  <div class="page">
-    <div class="quadrant top-left">
-      <div class="col">
-        <h1 class="my-4 justify-content-center align-self-end">{{ print_header }}{{ object.name }}</h1>
-      </div>
-      <div id="qr-code" class="col-auto">
-        {% qr_from_text url size="t" image_format="png" error_correction="L" %}
-      </div>
-    </div>
-    <div class="quadrant top-right">&nbsp;</div>
-    <div class="quadrant bottom-left">&nbsp;</div>
-    <div class="quadrant bottom-right">&nbsp;</div>
-      <div id="header" class="container">
+<div class="page">
+  <div class="container-fluid h-100">
+    <div class="row h-50">
+        <div class="col-md-6 ">
+          <div class="container-fluid">
+            <div class="row justify-content-left" >
+                <div class="col-md-12">
+                    <h1 class="my-4 ">{{ print_header }}{{ object.name }}</h1>
+                </div>
+            </div>
+            <div class="row flex-grow-1 d-print-block" >
+                <div class="col-md-12">
+                    {% for house in sector.get_houses_into %}
+                        <div class="row"><p class="h5">{{ house.address }} ({{ house.flat_count }} адресов )</p></div>
+                    {% endfor %}
+                </div>
+                <div id="qrcode" class="col-md-12 d-flex justify-content-end align-items-end">
+                    {% qr_from_text url size=2 image_format="png" error_correction="L" %}
+                </div>
+                 <div class="col-md-12">
+                     <p class="text-left"> Список адресов внутри</p>
+                 </div>
+             </div>
 
-      </div>
+          </div>
+        </div>
+        <div class="col-md-6 "></div>
+    </div>
+    <div class="row h-50">
+        <div class="col-md-6 ">
+            <div class="row" id="map" style="visibility: visible;"></div>
+        </div>
+        <div class="col-md-6 quadrant bottom-right"></div>
+    </div>
   </div>
-  <div class="page">
-      second page
+</div>
+  <div class="page" >
+    {% for house in sector.get_houses_into %}
+      <div class="row">
+        <div class="col-md-12">
+            <h5>{{ house.address }}</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+             <table class="table table-sm table-bordered d-print-table">
+                 <thead>
+                 <tr>
+                     <th>{% translate "entrance" %}</th>
+                     <th>{% translate "floor" %}</th>
+                     <th>{% translate "number" %}</th>
+                     <th>{% translate "desc" %}</th>
+                 </tr>
+                 </thead>
+                 <tbody>
+                 {% for flat in house.get_ru_flats %}
+                    <tr>
+                        <td class="text-center">{{ flat.entrance|default_if_none:""}}</td>
+                        <td class="text-center">{{ flat.floor|default_if_none:"" }}</td>
+                        <td class="text-center">{{ flat.number|default_if_none:"" }}</td>
+                        <td class="w-100">{{ flat.way_desc|default_if_none:"" }}</td>
+                    </tr>
+                 {% endfor %}
+                 </tbody>
+             </table>
+        </div>
+      </div>
+    {% empty %}
+        <h3>house list is empty</h3>
+    {% endfor %}
   </div>
 <script src="{% static "map.js" %}"></script>
 <script>

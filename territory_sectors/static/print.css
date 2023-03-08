@@ -1,0 +1,71 @@
+@page:first {
+size: A4 landscape;
+margin: 1cm;
+border: 1cm solid black;
+}
+@page {
+size: A4 portrait;
+margin: 1cm;
+border: 1cm solid black;
+    display: block;
+}
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: stretch;
+    align-items: stretch;
+}
+
+.page {
+box-sizing: border-box;
+width: 100vw;
+height: 100vh;
+position: relative;
+}
+
+#qrcode .content{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+
+.quadrant {
+  border: 1px dotted black;
+  box-sizing: border-box;
+  width: 50%;
+  height: 50%;
+  float: left;
+  position: relative;
+}
+
+.top-left {
+padding: 10px;
+}
+.top-right {
+padding: 10px;
+}
+.bottom-left {
+padding: 10px;
+}
+.bottom-right {
+padding: 10px;
+bottom: 0;
+right: 0;
+}
+.table td,
+.table th {
+padding: 0.3rem;
+padding-top: 0;
+padding-bottom: 0;
+font-size: 14px;
+}
+#map {
+width: 100%;
+height: 100%;
+visibility: visible;
+}

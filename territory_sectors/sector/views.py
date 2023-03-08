@@ -82,11 +82,11 @@ class SectorUpdateView(LoginRequiredMixin, CentroidAnnotateMixin,
 class SectorPrintView(LoginRequiredMixin, CentroidAnnotateMixin, UpdateView):
     model = Sector
     fields = ['name', 'uuid']
-    template_name = "sector/print_sector.html"
+    template_name = "sector/print_sector_quadra.html"
     success_url = reverse_lazy('sector_list')
     extra_context = {
         'print_header': _('Sector '),
-        'additional_rows': "*"*4,
+        'additional_rows': "*"*2,
     }
 
     def get_context_data(self, **kwargs):

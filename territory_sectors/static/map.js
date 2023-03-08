@@ -1,12 +1,5 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoieXVyaXlrb3JtaW4iLCJhIjoiY2xjdTZjMm1jMHJwZTNvbXg1cm1xMGh5ciJ9.uHPoJEdjly2KUEmc8YEOkw';
 
-//
-// geocoder = new MapboxGeocoder({
-//     accessToken:mapboxgl.accessToken,
-//     mapboxgl:mapboxgl,
-//     reverseGeocode:true,
-// })
-
 const map = new mapboxgl.Map({
 container: 'map', // container ID
 style: 'mapbox://styles/mapbox/streets-v12', // style URL
