@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+{% load static %}
+<head>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js"></script>
+{#    <link rel="stylesheet" href = "{% static "print.css" %}">#}
+<style type="text/css">
+  @page:first {
+      size: A4 landscape;
+      margin: 1cm;
+      border: 1cm solid black;
+    }
+  @page {
+    size: A4 portrait;
+    margin: 1cm;
+    border: 1cm solid black;
+  }
+  .quadrant {
+    width: 50%;
+    height: 50%;
+    border: 1px dotted #696868;
+  }
+  .quadrant.top-left {
+    top: 0;
+    left: 0;
+  }
+  .quadrant.top-right {
+    top: 0;
+    right: 0;
+  }
+  .quadrant.bottom-left {
+    bottom: 0;
+    left: 0;
+  }
+  .quadrant.bottom-right {
+    bottom: 0;
+    right: 0;
+  }
+  @page {
+    size: A4 landscape;
+    margin-top: 5mm;
+    margin-bottom: 5mm;
+    padding: 10mm;
+  }
+
+  @media print {
+    .print-time,
+    .page-count {
+      display: none;
+    }
+
+    @page :blank {
+      size: A4 landscape;
+      margin-top: 0;
+      content: none;
+    }
+
+  }
+</style>
+    {% load i18n %}
+{% load qr_code %}
+{% load bootstrap4 %}
+</head>
+<body>
+  <div class="page">
+    <div class="quadrant top-left">
+      <div class="col">
+        <h1 class="my-4 justify-content-center align-self-end">{{ print_header }}{{ object.name }}</h1>
+      </div>
+      <div id="qr-code" class="col-auto">
+        {% qr_from_text url size="t" image_format="png" error_correction="L" %}
+      </div>
+    </div>
+    <div class="quadrant top-right">&nbsp;</div>
+    <div class="quadrant bottom-left">&nbsp;</div>
+    <div class="quadrant bottom-right">&nbsp;</div>
+      <div id="header" class="container">
+
+      </div>
+  </div>
+  <div class="page">
+      second page
+  </div>
+<script src="{% static "map.js" %}"></script>
+<script>
+map.on('load', function() {
+    {% for house in object.get_houses_into %}
+        set_popup({{ house.id }}, "{{ house.address }}")
+        set_marker({{ house.id }}, {{ house.gps_pos }});
+    {% endfor %}
+    map_fly({{ object.centroid.coords.0|floatformat:"." }}, {{ object.centroid.coords.1|floatformat:"." }});
+    show_all_popups();
+})
+</script>
+</body>
