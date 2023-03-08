@@ -24,7 +24,7 @@ POSTGRES_CONTAINER_ID=$(docker container ls -q -f name=$DATABASE_CONTAINER_NAME)
 CURRENT_DATE=$(date +"%Y-%m-%d_%H-%M-%S")
 
 # Backup database to file
-docker exec -t $POSTGRES_CONTAINER_ID pg_dump -U $DB_USER -Fc $DB_NAME > $BACKUP_DIR/$CURRENT_DATE.dump
+docker exec -t $POSTGRES_CONTAINER_ID pg_dump -U $DB_USER -c $DB_NAME > $BACKUP_DIR/$CURRENT_DATE.dump
 
 # Rotate backups
 if [ $(ls -1 $BACKUP_DIR/*.dump | wc -l) -gt $ROTATE_COUNT ]; then
