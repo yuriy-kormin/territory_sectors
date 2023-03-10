@@ -9,7 +9,6 @@ from territory_sectors.flat.models import Flat
 class HouseForm(forms.ModelForm):
     flats_data = forms.CharField(widget=forms.HiddenInput)
 
-
     class Meta:
         model = House
         # readonly_fields = ['gps_point', ]
@@ -104,10 +103,9 @@ class HouseForm(forms.ModelForm):
                         instance_set_data(instance, flat_set)
                         instance.save()
                 else:
-                    #here is a modify flat action
+                    # here is a modify flat action
                     if flat['id'].find("*remove") != -1:
                         flat_id = int(flat['id'].split("*")[0])
-                        # raise IOError(f'{pos=},{flat_id=}')
                         Flat.objects.get(id=flat_id).delete()
                         continue
                     instance = Flat.objects.get(id=int(flat['id']))

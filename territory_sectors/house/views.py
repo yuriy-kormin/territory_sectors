@@ -3,7 +3,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .forms import HouseForm
-from .mixins import CountFlatsMixin, PaginateMixin, ImageResizeBeforeMixin
+from .mixins import CountFlatsMixin, ImageResizeBeforeMixin
 from .models import House
 from django.utils.translation import gettext_lazy as _
 
