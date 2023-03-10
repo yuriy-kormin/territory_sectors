@@ -71,15 +71,13 @@ class HouseUpdateView(LoginRequiredMixin, ImageResizeBeforeMixin,
     #
 
 
-class HouseListView(LoginRequiredMixin, CountFlatsMixin,
-                    PaginateMixin, ListView):
+class HouseListView(LoginRequiredMixin, CountFlatsMixin, ListView):
     model = House
     template_name = "house/list.html"
     # queryset = House.objects.order_by('-id')
     extra_context = {
         'remove_title': _('remove'),
     }
-    paginate_by = 15
     ordering = 'address'
 
 

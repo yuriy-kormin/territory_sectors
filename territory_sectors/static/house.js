@@ -38,10 +38,9 @@ function update_flats_data(){
   var flats = []
   let children = Array.from(table.children)
   children.forEach(function (child){
-    // console.log(parseInt(child.id))
     if (child.id.search('template') === -1){
       let cur_id = child.id.split("_")[1]
-      flats.push(parseChild(parseInt(cur_id),Array.from(child.children)))
+      flats.push(parseChild(cur_id,Array.from(child.children)))
     }
   })
   document.getElementsByName('flats_data')[0].value = JSON.stringify(flats)
@@ -59,9 +58,6 @@ function fillFlats(){
 }
 
 function set_field_value(div, value){
-  // const name = div.getAttribute('id')
-  // div.children[0].setAttribute('id',name+id.toString())
-  // div.children[0].setAttribute('name',name+id.toString())
   div.children[0].value = value
 }
 function addFlatRow(flat_dict){
@@ -78,11 +74,22 @@ function addFlatRow(flat_dict){
   return clone
 }
 
+function removeRow(button) {
+  var row = button.closest(".form-row");
+  row_id = row.id.split("_")
+  let cur_id =row_id[1]
+  if (row_id[1].length>0){
+    row.style.visibility = 'hidden'
+    row.id += "*remove"
+  }
+  else {
+    row.remove();
+  }
+}
+
 function addRow () {
   var table = Table_to_visible()
   let clone = addFlatRow({})
-  // "id": new_flat_count.toString()
-  // })
   table.appendChild(clone)
 }
 
