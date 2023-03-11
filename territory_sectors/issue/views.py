@@ -1,15 +1,14 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DetailView
 from django.utils.translation import gettext_lazy as _
 
 from .forms import IssueForm, CommentForm
-from ..mixins import SetAuthorMixin
+from ..mixins import SetAuthorMixin, LoginRequiredMixinCustom
 from .models import Issue, Comment
 
 
-class IssueCreateView(LoginRequiredMixin, SetAuthorMixin,
+class IssueCreateView(LoginRequiredMixinCustom, SetAuthorMixin,
                       SuccessMessageMixin, CreateView):
     form_class = IssueForm
     template_name = "issue/create.html"
@@ -22,7 +21,7 @@ class IssueCreateView(LoginRequiredMixin, SetAuthorMixin,
     success_message = _('Issue created successfully')
 
 
-class IssueListView(LoginRequiredMixin, ListView):
+class IssueListView(LoginRequiredMixinCustom, ListView):
     model = Issue
     template_name = "issue/list.html"
     extra_context = {
@@ -42,7 +41,7 @@ class IssueListView(LoginRequiredMixin, ListView):
 #
 
 
-class IssueDetailView(LoginRequiredMixin, SetAuthorMixin, DetailView):
+class IssueDetailView(LoginRequiredMixinCustom, SetAuthorMixin, DetailView):
     model = Issue
     template_name = "issue/detail.html"
     extra_context = {

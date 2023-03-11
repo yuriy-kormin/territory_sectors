@@ -1,4 +1,3 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.gis.db.models.functions import AsGeoJSON
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
@@ -8,19 +7,10 @@ from .models import Sector
 from django.utils.translation import gettext_lazy as _
 from .mixins import GeoJSONAnnotateMixin, ContextAddHousesMixin, \
     CentroidAnnotateMixin
+from ..mixins import LoginRequiredMixinCustom
 
 
-# from territory_sectors.uuid_qr.mixins import ContextAddQrImgData
-# import base64
-# from io import BytesIO
-# from qrcode import make
-# # from django.core.files import File
-# from django.core.files.base import ContentFile
-# from django.core.files.uploadedfile import InMemoryUploadedFile
-# from django.urls import reverse
-
-
-class SectorCreateView(LoginRequiredMixin,
+class SectorCreateView(LoginRequiredMixinCustom,
                        ContextAddHousesMixin, SuccessMessageMixin, CreateView):
     model = Sector
     form_class = SectorForm
@@ -36,7 +26,7 @@ class SectorCreateView(LoginRequiredMixin,
     success_message = _('Sector created successfully')
 
 
-class SectorUpdateView(LoginRequiredMixin, CentroidAnnotateMixin,
+class SectorUpdateView(LoginRequiredMixinCustom, CentroidAnnotateMixin,
                        ContextAddHousesMixin, GeoJSONAnnotateMixin,
                        SuccessMessageMixin, UpdateView):
     model = Sector
@@ -79,7 +69,8 @@ class SectorUpdateView(LoginRequiredMixin, CentroidAnnotateMixin,
     #     return context
 
 
-class SectorPrintView(LoginRequiredMixin, CentroidAnnotateMixin, UpdateView):
+class SectorPrintView(LoginRequiredMixinCustom,
+                      CentroidAnnotateMixin, UpdateView):
     model = Sector
     fields = ['name', 'uuid']
     template_name = "sector/print_sector_quadra.html"
@@ -99,7 +90,7 @@ class SectorPrintView(LoginRequiredMixin, CentroidAnnotateMixin, UpdateView):
         return context
 
 
-class SectorListView(LoginRequiredMixin, ContextAddHousesMixin,
+class SectorListView(LoginRequiredMixinCustom, ContextAddHousesMixin,
                      GeoJSONAnnotateMixin, CentroidAnnotateMixin,
                      ListView):
     model = Sector
@@ -110,7 +101,7 @@ class SectorListView(LoginRequiredMixin, ContextAddHousesMixin,
     }
 
 
-class SectorStatusHistory(LoginRequiredMixin, ListView):
+class SectorStatusHistory(LoginRequiredMixinCustom, ListView):
     model = Sector
     template_name = 'sector/history_status.html'
     extra_context = {
@@ -131,7 +122,7 @@ class SectorStatusHistory(LoginRequiredMixin, ListView):
         return context
 
 
-class SectorDeleteView(LoginRequiredMixin, GeoJSONAnnotateMixin,
+class SectorDeleteView(LoginRequiredMixinCustom, GeoJSONAnnotateMixin,
                        SuccessMessageMixin, DeleteView):
     model = Sector
     template_name = "sector/delete.html"
