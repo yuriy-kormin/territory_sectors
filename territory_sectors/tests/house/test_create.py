@@ -1,6 +1,5 @@
 import json
 import os
-
 from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse, reverse_lazy
@@ -23,15 +22,15 @@ class CreatePage(TestCase):
                              f'?next={reverse_lazy("house_list")}')
 
 
-class Create(TestCase):
+class TestCreate(TestCase):
     def setUp(self):
-        self.user_obj, _ = User.objects.get_or_create(username='testuser')
+        user_obj, _ = User.objects.get_or_create(username='testuser')
         fixture_file = os.path.join(FIXTURE_DIR, 'one_house.json')
         self.test_house = json.load(open(fixture_file))
         fixture_file = os.path.join(FIXTURE_DIR, 'one_flat.json')
         self.test_flat = json.load(open(fixture_file))
         self.lang = Language.objects.create(name='test_lang')
-        self.client.force_login(user=self.user_obj)
+        self.client.force_login(user=user_obj)
 
     def test_open_create_with_login(self):
         response = self.client.get(reverse('house_add'))
