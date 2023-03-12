@@ -1,0 +1,63 @@
+[
+{
+    "model": "language.language",
+    "pk": 1,
+    "fields": {
+        "name": "руссули"
+    }
+},
+{
+    "model": "language.language",
+    "pk": 2,
+    "fields": {
+        "name": "kartuli"
+    }
+},
+{
+    "model": "flat.flat",
+    "pk": 24,
+    "fields": {
+        "date_joined": "2023-02-09T09:06:53.578Z",
+        "date_modified": "2023-02-09T09:23:20.415Z",
+        "house": 6,
+        "number": 12,
+        "entrance": 1,
+        "floor": 4,
+        "way_desc": "справа",
+        "language": 1,
+        "uuid": null
+    }
+},
+{
+    "model": "flat.flat",
+    "pk": 25,
+    "fields": {
+        "date_joined": "2023-02-09T09:07:24.358Z",
+        "date_modified": "2023-02-09T09:07:24.358Z",
+        "house": 6,
+        "number": 1,
+        "entrance": 2,
+        "floor": 2,
+        "way_desc": "слева",
+        "language": 2,
+        "uuid": null
+    }
+},
+{
+    "model": "house.house",
+    "pk": 6,
+    "fields": {
+        "address": "some test address",
+        "date_created": "2023-02-14T08:16:37.043Z",
+        "date_modified": "2023-03-10T09:46:31.567Z",
+        "floor_amount": 33,
+        "entrances": 1,
+        "image": "",
+        "for_search": false,
+        "desc": "null",
+        "gps_point": "SRID=4326;POINT (41.61034956751682 41.63144415364224)",
+        "uuid": null
+    }
+}
+
+]
