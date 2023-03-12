@@ -8,13 +8,15 @@ migrate:
 	${MANAGE} makemigrations
 	${MANAGE} migrate
 collectstatic:
-	poetry run python manage.py collectstatic --no-input --clear
+	${MANAGE} collectstatic --no-input --clear
 test:
 	${MANAGE} test --keepdb
 install:
 	poetry install
 lint:
 	poetry run flake8 territory_sectors --exclude migrations
+coverage:
+	poetry run python -m coverage run manage.py test --keepdb
 translate:
 	${MANAGE} makemessages --locale ru
 	${MANAGE} compilemessages --locale ru

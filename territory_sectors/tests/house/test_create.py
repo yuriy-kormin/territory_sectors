@@ -51,4 +51,3 @@ class Create(TestCase):
     def test_bulk_flats_create(self):
         self.assertEqual(House.objects.all().count(), 0)
         self.client.force_login(user=self.user_obj)
-        flats = [{}]
