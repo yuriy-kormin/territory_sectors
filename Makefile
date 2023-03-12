@@ -10,7 +10,7 @@ migrate:
 collectstatic:
 	poetry run python manage.py collectstatic --no-input --clear
 test:
-	${MANAGE} test
+	${MANAGE} test --keepdb
 install:
 	poetry install
 lint:

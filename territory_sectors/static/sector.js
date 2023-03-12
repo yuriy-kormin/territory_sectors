@@ -38,7 +38,6 @@ function add_map_circles_source(){
 
 
 function add_circles_layer(){
-    console.log(circles)
     map.addLayer({
     'id': 'houses-layer',
     'type': 'circle',

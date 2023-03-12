@@ -1,0 +1,8 @@
+{
+    "address": "test address",
+    "floor_amount": 33,
+    "entrances": 1,
+    "desc": "some desc for",
+    "gps_point": "SRID=4326;POINT(41.61004956751682 41.63144415364224)",
+    "flats_data": "[]"
+}
