@@ -1,6 +1,9 @@
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+from django_filters.views import FilterView
+
+from .filters import AddressFilter
 from .forms import HouseForm
 from .mixins import CountFlatsMixin, ImageResizeBeforeMixin
 from .models import House
@@ -35,11 +38,14 @@ class HouseUpdateView(LoginRequiredMixinCustom, ImageResizeBeforeMixin,
     success_message = _('House updated successfully')
 
 
-class HouseListView(LoginRequiredMixinCustom, CountFlatsMixin, ListView):
+class HouseListView(LoginRequiredMixinCustom, FilterView,
+                    CountFlatsMixin, ListView):
+    filterset_class = AddressFilter
     model = House
     template_name = "house/list.html"
     extra_context = {
-        'remove_title': _('remove'),
+        'remove_title': _('Remove'),
+        'select': _('Select')
     }
     ordering = 'address'
 

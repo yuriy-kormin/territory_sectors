@@ -18,5 +18,5 @@ lint:
 coverage:
 	poetry run python -m coverage run manage.py test --keepdb
 translate:
-	${MANAGE} makemessages --locale ru
+	${MANAGE} makemessages --locale ru --ignore=venv
 	${MANAGE} compilemessages --locale ru
