@@ -89,6 +89,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'territory_sectors.context_processors.google_analytics',
             ],
         },
     },
@@ -96,6 +97,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'territory_sectors.wsgi.application'
 
+GOOGLE_ANALYTICS_KEY = os.environ.get("GOOGLE_ANALYTICS_KEY")
 
 ROLLBAR = {
     'access_token': os.getenv('ROLLBAR_ACCESS_TOKEN'),

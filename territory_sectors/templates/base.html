@@ -10,6 +10,15 @@
     {% bootstrap_javascript jquery=True %}
     {% bootstrap_jquery %}
     {% csrf_token %}
+{% if GA_KEY %}
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id={{ GA_KEY }}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '{{ GA_KEY }}');
+    </script>
+{% endif %}
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css' rel='stylesheet' />
     <script src ="{% static "sector.js" %}"></script>
