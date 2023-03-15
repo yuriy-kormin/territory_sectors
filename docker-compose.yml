@@ -11,7 +11,7 @@ services:
             - type: bind
               source: ./app
               target: /app/
-              read_only: false
+              read_only: true
         expose:
             - 8000
         entrypoint: ./docker-entrypoint.sh
