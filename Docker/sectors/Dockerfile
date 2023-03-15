@@ -6,7 +6,6 @@ ENV PYTHONDONTWRITEBYTECODE 1
 RUN mkdir -p /app/static/ /app/media/
 COPY territory_sectors/ /app/territory_sectors
 COPY ["pyproject.toml","README.md","Makefile","manage.py","Docker/sectors/docker-entrypoint.sh","/app/"]
-COPY .env-compose /app/.env
 
 WORKDIR /app
 

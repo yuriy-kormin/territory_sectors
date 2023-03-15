@@ -9,7 +9,7 @@
 # Apply database migrations
 echo "Apply database migrations"
 poetry run python manage.py migrate --noinput
-poetry run python manage.py createsuperuser --noinput
+#poetry run python manage.py createsuperuser --noinput
 #collect static
 poetry run python manage.py collectstatic --noinput
 
