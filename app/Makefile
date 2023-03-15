@@ -12,7 +12,7 @@ collectstatic:
 test:
 	${MANAGE} test --keepdb
 install:
-	poetry install
+	poetry install --no-root
 lint:
 	poetry run flake8 territory_sectors --exclude migrations
 coverage:
