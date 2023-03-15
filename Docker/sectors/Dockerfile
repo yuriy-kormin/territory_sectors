@@ -15,7 +15,7 @@ RUN apt update && apt install -y libgdal-dev g++ --no-install-recommends && \
     pip3 install gunicorn && \
     pip3 install poetry && \
     poetry config virtualenvs.create false && \
-    poetry install && \
+    poetry install --no-root && \
     apt-get clean -y
 
 # Update C env vars so compiler can find gdal
