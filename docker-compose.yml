@@ -3,7 +3,7 @@ version: "3.9"
 services:
     sectors:
         build:
-            context: .
+            context: ./app
             dockerfile: ./Docker/sectors/Dockerfile
         env_file:
             - .env-compose
