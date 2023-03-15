@@ -3,7 +3,7 @@ FROM python:3.11
 ENV PYTHONUNBUFFERED 1
 ENV PYTHONDONTWRITEBYTECODE 1
 
-COPY ["pyproject.toml","README.md","/app/Makefile","Docker/sectors/docker-entrypoint.sh","/app/"]
+COPY ["pyproject.toml","README.md",".poetry.lock","Docker/sectors/docker-entrypoint.sh","/app/"]
 
 WORKDIR /app
 
