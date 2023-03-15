@@ -4,8 +4,8 @@ ENV PYTHONUNBUFFERED 1
 ENV PYTHONDONTWRITEBYTECODE 1
 
 RUN mkdir -p /app/static/ /app/media/
-COPY territory_sectors/ /app/territory_sectors
-COPY ["pyproject.toml","README.md","Makefile","manage.py","Docker/sectors/docker-entrypoint.sh","/app/"]
+COPY app/territory_sectors/ /app/territory_sectors
+COPY ["pyproject.toml","README.md","/app/Makefile","Docker/sectors/docker-entrypoint.sh","/app/"]
 
 WORKDIR /app
 
