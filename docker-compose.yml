@@ -8,7 +8,7 @@ services:
         env_file:
             - .env-compose
         volumes:
-            - ./app/:/app/
+            - app:/app/
         expose:
             - 8000
         entrypoint: ./docker-entrypoint.sh
@@ -33,7 +33,7 @@ services:
         env_file:
             - .env-compose
         volumes:
-            - ./app/media:/app/media/:rw
+            - app:/app/:rw
         ports:
             - 80:80
         depends_on:
@@ -41,3 +41,9 @@ services:
 
 volumes:
     pgdata:
+    app:
+        driver: local
+        driver_opts:
+            type: none
+            device: ./app
+            o: bind

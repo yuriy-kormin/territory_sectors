@@ -22,4 +22,4 @@ RUN apt update && apt install -y libgdal-dev g++ --no-install-recommends && \
 ENV CPLUS_INCLUDE_PATH=/usr/include/gdal
 ENV C_INCLUDE_PATH=/usr/include/gdal
 
-ENTRYPOINT ["./docker-entrypoint.sh"]
+CMD ["./docker-entrypoint.sh"]
