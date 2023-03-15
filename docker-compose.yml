@@ -9,7 +9,7 @@ services:
             - .env-compose
         volumes:
             - type: bind
-              source: ./app
+              source: ./app/
               target: /app/
               read_only: true
         expose:
