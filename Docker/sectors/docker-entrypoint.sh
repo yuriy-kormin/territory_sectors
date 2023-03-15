@@ -15,4 +15,5 @@ python /app/manage.py collectstatic --noinput
 
 # Start server
 echo "Starting jango app"
-gunicorn /app/territory_sectors.wsgi:application --bind 0.0.0.0:8000
+cd /app/
+gunicorn territory_sectors.wsgi:application --bind 0.0.0.0:8000
