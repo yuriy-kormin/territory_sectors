@@ -3,9 +3,9 @@ FROM python:3.11
 ENV PYTHONUNBUFFERED 1
 ENV PYTHONDONTWRITEBYTECODE 1
 
-COPY ["pyproject.toml","README.md","poetry.lock","Docker/sectors/docker-entrypoint.sh","/app/"]
-
-WORKDIR /app
+COPY ["pyproject.toml","README.md","poetry.lock","/poetry/"]
+COPY Docker/sectors/docker-entrypoint.sh /
+WORKDIR /poetry
 
 # Install GDAL dependencies
 RUN apt update && apt install -y libgdal-dev g++ --no-install-recommends && \
@@ -22,4 +22,4 @@ RUN apt update && apt install -y libgdal-dev g++ --no-install-recommends && \
 ENV CPLUS_INCLUDE_PATH=/usr/include/gdal
 ENV C_INCLUDE_PATH=/usr/include/gdal
 
-CMD ["./docker-entrypoint.sh"]
+CMD ["/docker-entrypoint.sh"]

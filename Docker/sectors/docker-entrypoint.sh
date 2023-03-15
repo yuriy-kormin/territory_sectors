@@ -8,11 +8,11 @@
 
 # Apply database migrations
 echo "Apply database migrations"
-poetry run python manage.py migrate --noinput
+python /app/manage.py migrate --noinput
 #poetry run python manage.py createsuperuser --noinput
 #collect static
-poetry run python manage.py collectstatic --noinput
+python /app/manage.py collectstatic --noinput
 
 # Start server
 echo "Starting jango app"
-gunicorn territory_sectors.wsgi:application --bind 0.0.0.0:8000
+gunicorn /app/territory_sectors.wsgi:application --bind 0.0.0.0:8000
