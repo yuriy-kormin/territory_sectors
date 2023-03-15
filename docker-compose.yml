@@ -11,7 +11,6 @@ services:
             - ./app:/app/
         expose:
             - 8000
-        entrypoint: ./docker-entrypoint.sh
         depends_on:
             - pgdatabase
 
