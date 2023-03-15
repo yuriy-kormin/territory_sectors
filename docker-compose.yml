@@ -9,7 +9,7 @@ services:
             - .env-compose
         volumes:
             - media:/app/media/:rw
-            - ./app/territory_sectors:/app/teritory_sectors
+            - ./app/territory_sectors:/app/territory_sectors
         expose:
             - 8000
         depends_on:
