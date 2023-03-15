@@ -45,4 +45,5 @@ jobs:
           CC_TEST_REPORTER_ID: ${{ secrets.COV }}
         with:
           coverageCommand: python3 -m coverage xml
+          workingDirectory: ./app
           debug: true

@@ -16,7 +16,7 @@ install:
 lint:
 	poetry run flake8 territory_sectors --exclude migrations
 coverage:
-	poetry run python -m coverage run app/manage.py test --keepdb
+	poetry run python -m coverage run manage.py test --keepdb
 translate:
 	${MANAGE} makemessages --locale ru --ignore=venv
 	${MANAGE} compilemessages --locale ru
