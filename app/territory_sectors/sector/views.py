@@ -77,15 +77,15 @@ class SectorPrintView(LoginRequiredMixinCustom,
     success_url = reverse_lazy('sector_list')
     extra_context = {
         'print_header': _('Sector '),
-        'additional_rows': "*"*2,
+        'additional_rows': "*" * 2,
     }
 
     def get_context_data(self, **kwargs):
         """Add context."""
         context = super().get_context_data(**kwargs)
         context['url'] = self.request.build_absolute_uri(
-                    reverse_lazy(
-                        "uuid", kwargs={'pk': self.object.uuid_id})
+            reverse_lazy(
+                "uuid", kwargs={'pk': self.object.uuid_id})
         )
         return context
 
@@ -99,6 +99,13 @@ class SectorListView(LoginRequiredMixinCustom, ContextAddHousesMixin,
     extra_context = {
         'remove_title': _('remove'),
     }
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        status = self.extra_context.get('status')
+        if status == 'for-serve' or not status:
+            return qs.filter(for_search=False)
+        return qs.filter(for_search=True)
 
 
 class SectorStatusHistory(LoginRequiredMixinCustom, ListView):

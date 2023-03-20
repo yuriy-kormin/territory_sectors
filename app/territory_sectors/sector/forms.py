@@ -36,8 +36,15 @@ class SectorForm(forms.ModelForm):
             'uuid',
             'contour',
             'status',
+            'for_search',
             'assigned_to',
         ]
+        labels = {
+            'name': _('Sector name'),
+            'status': _('Sector status'),
+            'for_search': _('for search'),
+            'assigned_to': _('assigned to'),
+        }
         widgets = {
             'name': forms.TextInput(
                 attrs={

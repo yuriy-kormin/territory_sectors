@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-13 10:20+0000\n"
+"POT-Creation-Date: 2023-03-20 07:47+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,7 +24,9 @@ msgstr ""
 msgid ""
 "Please set number, if possible. Elsewhere - stay it empty.use , as separator "
 "for multiply)"
-msgstr "Укажите номер(если возможно). Используйте \",\" как разделитель, если квартир несколько "
+msgstr ""
+"Укажите номер(если возможно). Используйте \",\" как разделитель, если "
+"квартир несколько "
 
 #: territory_sectors/flat/forms.py:42
 msgid "Please set entrance number"
@@ -75,7 +77,7 @@ msgid "Remove flat"
 msgstr "Удалить квартиру"
 
 #: territory_sectors/flat/views.py:54 territory_sectors/house/views.py:60
-#: territory_sectors/sector/views.py:132
+#: territory_sectors/sector/views.py:139
 msgid "Remove "
 msgstr "Удалить "
 
@@ -189,12 +191,34 @@ msgstr "Комментарий добавлен"
 msgid "Please login to access this page"
 msgstr "Пожалуйста введите учетные данные для доступа к данной странице"
 
+#: territory_sectors/sector/forms.py:43
+#, fuzzy
+#| msgid "sector_name"
+msgid "Sector name"
+msgstr "Название участка"
+
+#: territory_sectors/sector/forms.py:44
+#, fuzzy
+#| msgid "Sector "
+msgid "Sector status"
+msgstr "Участок "
+
 #: territory_sectors/sector/forms.py:45
+msgid "for search"
+msgstr "поисковый"
+
+#: territory_sectors/sector/forms.py:46
+#: territory_sectors/templates/sector/history_status.html:11
+#: territory_sectors/templates/sector/list.html:15
+msgid "assigned to"
+msgstr "Назначен возвещателю"
+
+#: territory_sectors/sector/forms.py:52
 msgid "Please enter sector name"
 msgstr "Название участка"
 
 #: territory_sectors/sector/views.py:20
-#: territory_sectors/templates/sector/list.html:6
+#: territory_sectors/templates/sector/list.html:9
 msgid "Create sector"
 msgstr "Создать участок"
 
@@ -214,19 +238,19 @@ msgstr "Данные участка успешно обновлены"
 msgid "Sector "
 msgstr "Участок "
 
-#: territory_sectors/sector/views.py:108
+#: territory_sectors/sector/views.py:115
 msgid "History statuses of "
 msgstr "История статусов участка "
 
-#: territory_sectors/sector/views.py:131
+#: territory_sectors/sector/views.py:138
 msgid "Remove sector"
 msgstr "Удалить участок"
 
-#: territory_sectors/sector/views.py:133
+#: territory_sectors/sector/views.py:140
 msgid "Are you sure delete sector "
 msgstr "Вы уверены, что хотите удалить участок "
 
-#: territory_sectors/sector/views.py:135
+#: territory_sectors/sector/views.py:142
 msgid "Sector deleted successfully"
 msgstr "Участок успешно удален"
 
@@ -255,7 +279,7 @@ msgstr "Обновить статус"
 msgid "Status updated successfully"
 msgstr "Статус успшно обновлен"
 
-#: territory_sectors/templates/base.html:20
+#: territory_sectors/templates/base.html:29
 #: territory_sectors/templates/nav.html:4
 msgid "Territory"
 msgstr "Территория"
@@ -378,21 +402,16 @@ msgid "date"
 msgstr "Дата"
 
 #: territory_sectors/templates/sector/history_status.html:10
-#: territory_sectors/templates/sector/list.html:11
+#: territory_sectors/templates/sector/list.html:14
 msgid "status"
 msgstr "Статус"
 
-#: territory_sectors/templates/sector/history_status.html:11
 #: territory_sectors/templates/sector/list.html:12
-msgid "assigned to"
-msgstr "Назначен возвещателю"
-
-#: territory_sectors/templates/sector/list.html:9
 #: territory_sectors/templates/status/list.html:10
 msgid "name"
 msgstr "Имя"
 
-#: territory_sectors/templates/sector/list.html:10
+#: territory_sectors/templates/sector/list.html:13
 msgid "uuid"
 msgstr ""
 
@@ -402,6 +421,14 @@ msgstr ""
 msgid "desc"
 msgstr "Как найти"
 
+#: territory_sectors/templates/sector/sector_selector.html:6
+msgid "button for serve"
+msgstr "Готовые"
+
+#: territory_sectors/templates/sector/sector_selector.html:11
+msgid "button for search"
+msgstr "Поисковые"
+
 #: territory_sectors/templates/uuid.html:19
 msgid "addresses"
 msgstr " найденных адресов"
@@ -410,11 +437,6 @@ msgstr " найденных адресов"
 #~| msgid "Statuses"
 #~ msgid "Static Files"
 #~ msgstr "Статусы"
-
-#, fuzzy
-#~| msgid "number"
-#~ msgid "Decimal number"
-#~ msgstr "Квартира"
 
 #, fuzzy
 #~| msgid "address"

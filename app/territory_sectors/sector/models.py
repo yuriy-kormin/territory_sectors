@@ -23,6 +23,7 @@ class Sector(models.Model):
     date_modified = models.DateTimeField(auto_now=True)
     name = models.CharField(max_length=300, null=True, unique=True)
     status = models.ForeignKey(Status, null=True, on_delete=models.SET_NULL)
+    for_search = models.BooleanField(default=False, null=False, blank=False)
     assigned_to = models.CharField(max_length=300, null=True, blank=True)
     uuid = models.OneToOneField(to=Uuid, null=True, blank=True,
                                 on_delete=models.SET_NULL)

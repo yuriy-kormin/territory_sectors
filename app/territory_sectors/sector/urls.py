@@ -3,7 +3,12 @@ from .views import SectorListView, SectorCreateView,\
     SectorDeleteView, SectorUpdateView, SectorStatusHistory, SectorPrintView
 
 urlpatterns = [
-    path('', SectorListView.as_view(), name='sector_list'),
+    path('for-serve', SectorListView.as_view(
+        extra_context={'status': 'for-serve'},
+    ), name='sector_list'),
+    path('for-search', SectorListView.as_view(
+        extra_context={'status': 'for-search'},
+    ), name='sector_list_search'),
     path('create/', SectorCreateView.as_view(), name='sector_add'),
     path('<int:pk>/', SectorUpdateView.as_view(), name='sector_update'),
     path('<int:pk>/print/', SectorPrintView.as_view(),

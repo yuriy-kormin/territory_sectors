@@ -3,29 +3,10 @@
 {% load bootstrap4 %}
 {% block page_content %}
    <h1 class="my-4"> {{ marks }}</h1>
+
     <a class="nav-link" href="{% url "house_add" %}">{% translate "Create house" %}</a>
-{#    <div id="accordion">#}
-{#        {% for house in house_list %}#}
-{#            <div class="card">#}
-{#                <button class="btn btn-link" data-toggle="collapse" data-target="#flats_{{ house.id }}" aria-expanded="true" aria-controls="flats_{{ house.id }}">#}
-{#                    <div class="card-header" id="head_{{ house.id }}">#}
-{#                        <h5 class="mb-0">#}
-{#                        {{ house.address }}#}
-{#                                </h5>#}
-{#                    </div>#}
-{#                </button>#}
-{##}
-{##}
-{#                <div id="flats_{{ house.id }}" class="collapse" aria-labelledby="head_{{ house.id }}" data-parent="#accordion">#}
-{#                    <div class="card-body">#}
-{#                        data#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        {% endfor %}#}
-{#    </div>#}
     {% include "house/filter.html" %}
-    <table class = "table table-striped">
+    <table class = "table table-striped collapse">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">{% translate "search<br>status" %}</th>

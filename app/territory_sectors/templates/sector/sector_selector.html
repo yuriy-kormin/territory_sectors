@@ -1,0 +1,18 @@
+{% load i18n %}
+{% load bootstrap4 %}
+<ul class="nav nav-pills">
+  <li class="nav-item">
+    <a class="nav-link {% if status == 'for-serve' %}active{% endif %} py-1" href="{% url "sector_list" %}">
+      {% trans "button for serve" %}
+    </a>
+  </li>
+  <li class="nav-item">
+      <a class="nav-link {% if status == 'for-search' %}active{% endif %} py-1" href="{% url "sector_list_search" %}">
+      {% trans "button for search" %}
+    </a>
+  </li>
+</ul>
+
+
+
+

@@ -2,9 +2,16 @@
 {% load i18n %}
 {% load bootstrap4 %}
 {% block page_content %}
+    <div class="my-3 mt-3 p-3 bg-white rounded shadow-sm overflow-auto">
+        {% include "sector/sector_selector.html" %}
+    </div>
    <h1 class="my-4"> {{ marks }}</h1>
-    <a class="nav-link" href="{% url "sector_add" %}">{% translate "Create sector" %}</a>
-    <table class = "table table-striped">
+    <ul class="navbar-nav">
+        <li class = "nav-item active"><a href="#list_houses" data-toggle="collapse">{% translate "Показать список " %}</a></li>
+        <li class = "nav-item active"><a class="nav-link" href="{% url "sector_add" %}">{% translate "Create sector" %}</a></li>
+    </ul>
+    <table id ="list_houses" class = "table table-striped collapse">
+{#        <tr data-toggle="collapse" data-target="#sector_list" class="clickable"  style = " transition: 0.4s;">#}
         <tr>
             <th>{% translate "name" %}</th>
             <th>{% translate "uuid" %}</th>
