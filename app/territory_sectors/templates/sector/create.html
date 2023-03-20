@@ -10,12 +10,6 @@
         {% with request.scheme|add:"://"|add:request.get_host|add:'/'|add:object.uuid_id as url_string %}
             {% qr_from_text url_string size="t" image_format="png" error_correction="L" %}
         {% endwith %}
-{#        <button class="btn btn-info" onclick="openWindow()">{% translate "Print" %}</button>#}
-{#<script>#}
-{#function openWindow() {#}
-{#  window.open("{% url "sector_print" object.id %}", "_blank");#}
-{#}#}
-{#</script>#}
     <a href="{% url "uuid" object.uuid_id %}" target="_blank">link</a>
     <a href="{% url "sector_print" object.id %}" target="_blank">{% translate "Print" %}</a>
     {% endif %}
@@ -50,16 +44,23 @@
     {% if object %}
         map_fly({{ object.centroid.coords.0|floatformat:"." }},{{ object.centroid.coords.1|floatformat:"." }})
         add_sector_source(
-        {{ object.id }},
-        {{ object.geojson | safe }},
-        "{{ object.name }}"
+            {{ object.id }},
+            {{ object.geojson | safe }},
+            "{{ object.name }}"
         )
         map.on('load', function(){
+            add_map_circles_source();
+            add_circles_layer();
+            add_symbols_layer();
+            map_add_layer();
+            console.log(
+        })
+        draw.add(sectors)
+    {% else %}
+      map.on('load', function(){
         add_map_circles_source();
         add_circles_layer();
         add_symbols_layer();
-        map_add_layer();
     })
-        draw.add(sectors)
     {% endif %}
 {% endblock %}

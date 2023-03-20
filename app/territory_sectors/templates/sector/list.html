@@ -53,7 +53,8 @@
         add_sector_source(
         {{ sector.id }},
         {{ sector.geojson | safe }},
-        "<b> {{ sector.name }}</b> <br>Flats - {{ sector.flat_count }}")
+        {{ for_search|yesno:"true,false" }},
+        "<b> {% translate "sector" %} {{ sector.name }}</b> <br>Flats - {{ sector.flat_count }}")
     {% endfor %}
     map.setZoom(14)
     map.on('click','sectors', sector_popup)

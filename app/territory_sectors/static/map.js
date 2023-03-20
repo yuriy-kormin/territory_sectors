@@ -1,5 +1,4 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoieXVyaXlrb3JtaW4iLCJhIjoiY2xjdTZjMm1jMHJwZTNvbXg1cm1xMGh5ciJ9.uHPoJEdjly2KUEmc8YEOkw';
-
 const map = new mapboxgl.Map({
 container: 'map', // container ID
 style: 'mapbox://styles/mapbox/streets-v12', // style URL
@@ -58,9 +57,9 @@ function circle_text() {
 
 }
 function set_marker (id, lng, lat, color = 'default') {
-    let color_val = "#B917FC";
+    let color_val = serve_status_color;
     if (color !== 'default'){
-        color_val = "#e8b72c"
+        color_val = search_status_color
     }
     markers[id] = new mapboxgl.Marker(
         {
@@ -91,12 +90,13 @@ function move_marker (event) {
     var xy = '"'+coordinates.lng.toString()+','+coordinates.lat.toString()+'"'
 
 }
-function add_sector_source(id, json, popup_data){
+function add_sector_source(id, json,for_search,popup_data){
     sectors.push({
                 'id': id,
                 "type": "Feature",
                 "properties":{
                     'name':popup_data,
+                    'for_search':for_search
                 },
                 "geometry": json,
             });
@@ -121,15 +121,29 @@ function map_add_layer(mark_id = false){
     })
 
         // )
-    map. addLayer({
+    map.addLayer({
         'id': 'sectors',
         'type':'fill',
         'source': 'layers',
         'layout': {},
         'paint':{
-            'fill-color': 'rgba(44,108,183,0.67)', // blue color fill
-            'fill-opacity': 0.5
-        }
+            'fill-color': serve_status_color,
+            'fill-opacity': 0.3
+        },
+        'filter': ['==', 'for_search', false]
+    })
+
+
+    map.addLayer({
+        'id': 'sectors-search',
+        'type':'fill',
+        'source': 'layers',
+        'layout': {},
+        'paint':{
+            'fill-color': search_status_color,
+            'fill-opacity': 0.3
+        },
+        'filter': ['==', 'for_search', true]
     })
 }
 
@@ -137,20 +151,15 @@ function map_add_layer(mark_id = false){
 function sector_popup(e) {
     id = e.features[0].id
     popups[id].setLngLat(e.lngLat).addTo(map);
-        // .setHTML(e.features.properties.id)
-// .addTo(map);
 }
 
 function add_draw_control() {
     draw = new MapboxDraw({
         displayControlsDefault: false,
-        // Select which mapbox-gl-draw control buttons to add to the map.
         controls: {
         polygon: true,
         trash: true
         },
-        // Set mapbox-gl-draw to draw by default.
-        // The user does not have to click the polygon control button first.
         defaultMode: 'draw_polygon'
         });
 

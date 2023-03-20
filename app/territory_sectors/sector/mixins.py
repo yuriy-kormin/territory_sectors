@@ -1,6 +1,5 @@
 from django.contrib.gis.db.models.functions import AsGeoJSON, Centroid
 from django.db.models import Count
-# from django.views.generic.list import MultipleObjectMixin
 from territory_sectors.sector.models import Sector
 
 
@@ -16,10 +15,16 @@ class CentroidAnnotateMixin:
         return qs.annotate(centroid=Centroid('contour'))
 
 
-class ContextAddHousesMixin(object):
+class ContextAllHousesIntoMixin(object):
     def get_context_data(self, **kwargs):
         """Add context."""
         context = super().get_context_data(**kwargs)
-        context['houses'] = Sector.get_all_houses() \
+        houses = Sector.get_all_houses() \
             .annotate(flat_count=Count('flat'))
+        if status := context.get('status'):
+            if status == 'for-serve':
+                houses = houses.filter(for_search=False)
+            elif status == 'for-search':
+                houses = houses.filter(for_search=True)
+        context['houses'] = houses
         return context

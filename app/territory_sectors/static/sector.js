@@ -45,7 +45,7 @@ function add_circles_layer(){
     'paint':{
         'circle-radius': 16,
         'circle-stroke-width': 2,
-        'circle-color': "#B917FC",
+        'circle-color': serve_status_color,
         'circle-stroke-color': 'white'
     },
     'filter': ['==', 'mark', 'default']
@@ -58,7 +58,7 @@ function add_circles_layer(){
     'paint':{
         'circle-radius': 16,
         'circle-stroke-width': 2,
-        'circle-color': "#e8b72c",
+        'circle-color': search_status_color,
         'circle-stroke-color': 'white'
     },
     'filter': ['!=', 'mark', 'default']
@@ -75,7 +75,7 @@ function add_symbols_layer(){
         'text-size': 20
     },
     paint: {
-            'text-color': '#34621f',
+            'text-color': '#383a37',
         }
 });
 }

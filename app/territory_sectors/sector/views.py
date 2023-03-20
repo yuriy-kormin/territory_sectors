@@ -5,13 +5,13 @@ from django.urls import reverse_lazy
 from .forms import SectorForm
 from .models import Sector
 from django.utils.translation import gettext_lazy as _
-from .mixins import GeoJSONAnnotateMixin, ContextAddHousesMixin, \
+from .mixins import GeoJSONAnnotateMixin, ContextAllHousesIntoMixin, \
     CentroidAnnotateMixin
 from ..mixins import LoginRequiredMixinCustom
 
 
-class SectorCreateView(LoginRequiredMixinCustom,
-                       ContextAddHousesMixin, SuccessMessageMixin, CreateView):
+class SectorCreateView(LoginRequiredMixinCustom, ContextAllHousesIntoMixin,
+                       SuccessMessageMixin, CreateView):
     model = Sector
     form_class = SectorForm
     template_name = "sector/create.html"
@@ -27,7 +27,7 @@ class SectorCreateView(LoginRequiredMixinCustom,
 
 
 class SectorUpdateView(LoginRequiredMixinCustom, CentroidAnnotateMixin,
-                       ContextAddHousesMixin, GeoJSONAnnotateMixin,
+                       ContextAllHousesIntoMixin, GeoJSONAnnotateMixin,
                        SuccessMessageMixin, UpdateView):
     model = Sector
     form_class = SectorForm
@@ -90,7 +90,7 @@ class SectorPrintView(LoginRequiredMixinCustom,
         return context
 
 
-class SectorListView(LoginRequiredMixinCustom, ContextAddHousesMixin,
+class SectorListView(LoginRequiredMixinCustom, ContextAllHousesIntoMixin,
                      GeoJSONAnnotateMixin, CentroidAnnotateMixin,
                      ListView):
     model = Sector
@@ -102,10 +102,12 @@ class SectorListView(LoginRequiredMixinCustom, ContextAddHousesMixin,
 
     def get_queryset(self):
         qs = super().get_queryset()
-        status = self.extra_context.get('status')
-        if status == 'for-serve' or not status:
+        status = self.extra_context.get('status', False)
+        if status == 'for-serve':
             return qs.filter(for_search=False)
-        return qs.filter(for_search=True)
+        elif status == 'for-search':
+            return qs.filter(for_search=True)
+        return qs
 
 
 class SectorStatusHistory(LoginRequiredMixinCustom, ListView):
