@@ -40,7 +40,10 @@ class Sector(models.Model):
         return self.name
 
     def get_houses_into(self):
-        return House.objects.filter(gps_point__intersects=self.contour)
+        return House.objects.filter(
+            gps_point__intersects=self.contour,
+            for_search=self.for_search
+        )
 
     @classmethod
     def get_all_houses(cls):
