@@ -5,7 +5,7 @@
     <form method="post" action="." id="houseform" enctype="multipart/form-data">
     {% csrf_token %}
         <div class = "form">
-
+    <h1 class="my-4"> {{ header }}</h1>
 {##}
 {#            {% if field.name == 'image' %}#}
 {#                <div class="form-group">#}
@@ -40,7 +40,7 @@
                 {% bootstrap_button button_title button_type="submit" button_class="mt-3 btn btn-primary" %}
             </div>
         </div>
-        <h1 class="my-4"> {{ header }}</h1>
+
     <input type="hidden" id="id" value="{{ house.id|default:'0' }}">
     </form>
 {#    {% debug %}#}
