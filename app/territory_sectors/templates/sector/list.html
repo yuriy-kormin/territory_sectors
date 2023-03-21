@@ -11,7 +11,6 @@
         <li class = "nav-item active"><a class="nav-link" href="{% url "sector_add" %}">{% translate "Create sector" %}</a></li>
     </ul>
     <table id ="list_houses" class = "table table-striped collapse">
-{#        <tr data-toggle="collapse" data-target="#sector_list" class="clickable"  style = " transition: 0.4s;">#}
         <tr>
             <th>{% translate "name" %}</th>
             <th>{% translate "uuid" %}</th>
@@ -48,12 +47,20 @@
     </table>
 {#    {% for house in houses %} {{ house.flat_count }}{% endfor %}#}
 {% endblock %}
+{% block head %}
+<style>
+#li_serve.nav-pills .nav-link.active,
+#li_serve.nav-pills .show > .nav-link {
+    background-color: {{ serve_status_color }};
+}
+</style>
+{% endblock %}
 {% block markers %}
     {% for sector in object_list %}
         add_sector_source(
         {{ sector.id }},
         {{ sector.geojson | safe }},
-        {{ for_search|yesno:"true,false" }},
+        {{ sector.for_search|yesno:"true,false" }},
         "<b> {% translate "sector" %} {{ sector.name }}</b> <br>Flats - {{ sector.flat_count }}")
     {% endfor %}
     map.setZoom(14)

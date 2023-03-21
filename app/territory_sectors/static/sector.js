@@ -50,7 +50,6 @@ function add_circles_layer(){
     },
     'filter': ['==', 'mark', 'default']
 });
-
     map.addLayer({
     'id': 'houses-search-layer',
     'type': 'circle',

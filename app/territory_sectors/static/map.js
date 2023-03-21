@@ -111,6 +111,7 @@ function add_sector_source(id, json,for_search,popup_data){
     )
 }
 function map_add_layer(mark_id = false){
+
     map.addSource(
             'layers', {
                 'type': 'geojson',
@@ -120,7 +121,6 @@ function map_add_layer(mark_id = false){
                 },
     })
 
-        // )
     map.addLayer({
         'id': 'sectors',
         'type':'fill',
@@ -128,7 +128,7 @@ function map_add_layer(mark_id = false){
         'layout': {},
         'paint':{
             'fill-color': serve_status_color,
-            'fill-opacity': 0.3
+            'fill-opacity': 0.5
         },
         'filter': ['==', 'for_search', false]
     })
@@ -141,7 +141,7 @@ function map_add_layer(mark_id = false){
         'layout': {},
         'paint':{
             'fill-color': search_status_color,
-            'fill-opacity': 0.3
+            'fill-opacity': 0.5
         },
         'filter': ['==', 'for_search', true]
     })
