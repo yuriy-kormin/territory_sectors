@@ -29,13 +29,6 @@
   const serveLinkActive = serveLink.classList.contains('active')
   const all_link = document.getElementById('full list').value;
 
-  if (searchLinkActive){
-    searchLink.parentElement.style.backgroundColor = search_status_color
-  }
-  if (serveLinkActive){
-    serveLink.parentElement.style.backgroundColor = serve_status_color
-  }
-
   serveLink.addEventListener('click', function() {
     if (serveLinkActive){
         if (searchLinkActive) {

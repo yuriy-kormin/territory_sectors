@@ -49,10 +49,12 @@
 {% endblock %}
 {% block head %}
 <style>
-#li_serve.nav-pills .nav-link.active,
-#li_serve.nav-pills .show > .nav-link {
-    background-color: {{ serve_status_color }};
+#for-search.active:not(.nav-link.active){
+    background-color: var(--active-bg-color, ${search_status_color}) !important;
 }
+{##for-serve.active {#}
+{#    background-color: var(--active-bg-color, ${serve_status_color}) !important;#}
+{#}#}
 </style>
 {% endblock %}
 {% block markers %}
