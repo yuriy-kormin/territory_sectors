@@ -46,6 +46,7 @@
         add_sector_source(
             {{ object.id }},
             {{ object.geojson | safe }},
+            {{ sector.for_search|yesno:"true,false" }},
             "{{ object.name }}"
         )
         map.on('load', function(){
