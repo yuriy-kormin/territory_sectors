@@ -132,7 +132,7 @@ class SectorStatusHistory(LoginRequiredMixinCustom, ListView):
 
 
 class SectorDeleteView(LoginRequiredMixinCustom, GeoJSONAnnotateMixin,
-                       SuccessMessageMixin, DeleteView):
+                       CentroidAnnotateMixin, SuccessMessageMixin, DeleteView):
     model = Sector
     template_name = "sector/delete.html"
     success_url = reverse_lazy('sector_list')
