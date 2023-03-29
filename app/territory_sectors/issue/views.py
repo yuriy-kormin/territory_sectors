@@ -1,3 +1,5 @@
+import logging
+
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DetailView
@@ -57,7 +59,7 @@ class IssueDetailView(LoginRequiredMixinCustom, SetAuthorMixin, DetailView):
 
 
 class CommentCreateView(SuccessMessageMixin, CreateView):
-    success_message = _("Comment added")
+    success_message = _("Issue updated")
     model = Comment
     form_class = CommentForm
     template_name = 'issue/comment_form.html'
@@ -66,5 +68,8 @@ class CommentCreateView(SuccessMessageMixin, CreateView):
     def form_valid(self, form):
         form.instance.issue_id = self.kwargs['pk']
         form.instance.author_id = self.request.user.id
-        form.instance.save()
+        issue = Issue.objects.get(pk=form.instance.issue_id)
+        issue.completed = form.cleaned_data['completed']
+        issue.save()
+        # logging.error(form.cleaned_data)
         return super().form_valid(form)

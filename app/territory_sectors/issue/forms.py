@@ -1,3 +1,5 @@
+import logging
+
 from django import forms
 from django.utils.translation import gettext_lazy as _
 from .models import Issue, Comment
@@ -28,6 +30,20 @@ class IssueForm(forms.ModelForm):
 
 
 class CommentForm(forms.ModelForm):
+    completed = forms.BooleanField(
+        initial=False,
+        label=_('Task is completed'),
+        required=False,
+    )
+
+    # def __init__(self, instance=None, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     # instance = kwargs.get('instance')
+    #     # set the initial value of the BooleanField
+    #     # if instance:
+    #     logging.error(instance)
+    #     # self.fields['completed'].initial = instance.
+
     class Meta:
         model = Comment
         fields = ('text',)
@@ -43,24 +59,7 @@ class CommentForm(forms.ModelForm):
         }
         labels = {'text': _('Reply')}
 
-    # def __init__(self, *args, **kwargs):
-    #     # self.is_create = kwargs.get('instance') is None
-    #     super().__init__(*args, **kwargs)
-    #     # if not self.is_create:
-    #     self.fields['new_comment'].initial = ''
-    #     # else:
-    #     #     self.fields['flats_data'].initial = '[]'
-    #
-    # def clean_new_comment(self):
-    #     comment = self.cleaned_data.get('new_comment')
-    #     if not len(comment):
-    #         raise forms.ValidationError("Invalid JSON data.")
-    #     return comment
-    #
-    # def save(self):
-    #     Comment.objects.create(
-    #         author_id=self.request.user.id,
-    #         issue_id=self.instance.id,
-    #         text=self.cleaned_data.get('text')
-    #     )
-    #     return self.instance
+    def save(self, commit=True):
+        if self.cleaned_data.get('text'):
+            return super().save(self)
+        return super().save(commit=False)
