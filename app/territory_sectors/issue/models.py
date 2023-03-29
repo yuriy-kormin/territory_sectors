@@ -9,7 +9,7 @@ class Issue(models.Model):
     text = models.CharField(max_length=3000, null=True, blank=True)
     completed = models.BooleanField(
         default=False,
-        help_text='check if task is completed.Uncheck, if task need to improve',
+        help_text='check if task is completed.Uncheck, if task need to improve'
     )
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

@@ -1,5 +1,3 @@
-import logging
-
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Count
 from django.urls import reverse_lazy
