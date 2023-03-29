@@ -37,17 +37,22 @@ class PaginateMixin:
 
 class ImageResizeBeforeMixin:
     def form_valid(self, form):
+        def calculate_new_size(max_size, width, height):
+            if width > height:
+                return max_size, int(height * (max_size / width))
+            return int(width * (max_size / height)), max_size
+
+
         image = form.cleaned_data.get('image')
         if image:
             img = Image.open(image)
             width, height = img.size
-            if width > height:
-                new_width = self.model.MAX_IMAGE_RESOLUTION
-                new_height = int(height * (new_width / width))
-            else:
-                new_height = self.model.MAX_IMAGE_RESOLUTION
-                new_width = int(width * (new_height / height))
-            img = img.resize((new_width, new_height), Image.ANTIALIAS)
+            image_dimensions = calculate_new_size(
+                self.model.MAX_IMAGE_RESOLUTION, width, height)
+            preview_dimensions = calculate_new_size(
+                self.model.PREVIEW_IMAGE_RESOLUTION, width, height
+            )
+            img = img.resize(image_dimensions, Image.ANTIALIAS)
             img = img.convert('RGB')
             buffer = BytesIO()
             img.save(buffer, format='JPEG', quality=90)
