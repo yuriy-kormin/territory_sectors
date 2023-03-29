@@ -49,18 +49,19 @@
             {{ sector.for_search|yesno:"true,false" }},
             "{{ object.name }}"
         )
-        map.on('load', function(){
-            add_map_circles_source();
-            add_circles_layer();
-            add_symbols_layer();
-            map_add_layer();
-        })
         draw.add(sectors)
-    {% else %}
-      map.on('load', function(){
+    {% endif %}
+{% endblock %}
+{% block maponload %}
+    {% if object %}
+        draw_border();
         add_map_circles_source();
         add_circles_layer();
         add_symbols_layer();
-    })
+        map_add_layer();
+    {% else %}
+        add_map_circles_source();
+        add_circles_layer();
+        add_symbols_layer();
     {% endif %}
 {% endblock %}
