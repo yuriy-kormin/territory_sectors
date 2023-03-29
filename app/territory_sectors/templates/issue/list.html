@@ -1,21 +1,41 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load bootstrap4 %}
+{% load static %}
+{% block head %}
+    <script src ="{% static "issue.js" %}"></script>
+{% endblock %}
 {% block page_content %}
     <h1 class="my-4"> {{ header }}</h1>
-    <a class="nav-link" href="{% url "issue_add" %}">{% translate "Create issue" %}</a>
+    <div >
+        <a href="{% url "issue_add" %}"><button type="button" class="mt-3 mx-2 btn btn-primary">{% translate "Create issue" %}</button></a>
+        <button onClick="hide_show_completed_rows()" type="button" id="toggle" class="mt-3 mx-2  btn btn-primary show">Show all</button>
+    </div>
     <div>
-      <table class = "table table-striped">
+{#    <script>#}
+{#        const button = document.getElementById('toggle-button');#}
+{#        button.addEventListener('click', hide_show_completed_rows(this))#}
+{#    </script>#}
+      <table class = "table table-striped hide_rows">
         <thead>
             <th>{% translate "Issue" %}</th>
             <th>Date created</th>
-
         </thead>
         <tbody>
             {% for issue in object_list %}
-                <tr>
+                <tr {% if issue.completed %}class="d-none hidden"{% endif %}>
                     <td>
                         <a href = {% url "issue_detail" issue.id %}>{{ issue.title }}</a>
+                        {% if issue.completed %}
+                            <span class="badge badge-primary">Complete</span>
+                        {% else %}
+                            {% if issue.comments_count > 0 %}
+                                <span class="badge badge-warning">In work</span>
+                            {% else %}
+                                <span class="badge badge-success">New</span>
+                            {% endif %}
+                        {% endif %}
+
                     </td>
                     <td>
                         {{ issue.date|date:"d M Y" }}

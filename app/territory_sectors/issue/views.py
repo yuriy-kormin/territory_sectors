@@ -1,6 +1,7 @@
 import logging
 
 from django.contrib.messages.views import SuccessMessageMixin
+from django.db.models import Count
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DetailView
 from django.utils.translation import gettext_lazy as _
@@ -30,6 +31,10 @@ class IssueListView(LoginRequiredMixinCustom, ListView):
         'header': _('List issues'),
     }
 
+    def get_queryset(self):
+        qs = super().get_queryset()
+        qs = qs.annotate(comments_count=Count('comment'))
+        return qs
 
 # class CommentCreateView(CreateView):
 #     model = Comment
