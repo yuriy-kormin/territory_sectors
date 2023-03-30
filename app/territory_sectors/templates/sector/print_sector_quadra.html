@@ -35,7 +35,7 @@ position: relative;
 page-break-inside: avoid;
 }
 .col-md-6 {
-border: 1px dotted #484343;
+{#border: 1px dotted #484343;#}
 height: 100%;
 }
 
@@ -61,26 +61,36 @@ visibility: visible;
   <div class="container-fluid h-100">
     <div class="row h-50">
         <div class="col-md-6 ">
-          <div class="container-fluid">
-            <div class="row justify-content-left" >
+          <div class="container-fluid h-100">
+            <div class="row justify-content-left h-25" >
                 <div class="col-md-12">
                     <h1 class="my-4 ">{{ print_header }}{{ object.name }}</h1>
                 </div>
             </div>
-            <div class="row flex-grow-1 d-print-block" >
-                <div class="col-md-12">
-                    {% for house in sector.get_houses_into %}
-                        <div class="row"><p class="h5">{{ house.address }} ({{ house.flat_count }} адресов )</p></div>
-                    {% endfor %}
-                </div>
-                <div id="qrcode" class="col-md-12 d-flex justify-content-end align-items-end">
-                    {% qr_from_text url size=2 image_format="png" error_correction="L" %}
-                </div>
-                 <div class="col-md-12">
-                     <p class="text-left"> Список адресов внутри</p>
-                 </div>
+            <div class="row flex-grow-1 h-50" >
+              <div class="col-md-12">
+                    <div class="row-md-8 h-50">
+                      <div class="col-md">
+                        {% for house in sector.get_houses_into %}
+                            <div class="row"><div class="col-md"><p class="h5">{{ house.address }}{% if house.flat_count > 0 %} ({{ house.flat_count }} адресов ){% endif %}</p></div></div>
+                        {% endfor %}
+                      </div>
+                    </div>
+                    <div class="row-md-4 d-inline-block">
+                        <div class="col-md d-inline-flex d-print-inline-flex">
+                            {% if object.for_search %}
+                                <p>Этот участок предназначен для ПОИСКА русскоговорящих людей
+                                    Пожалуйста, вноси в таблицу внутри ТОЛЬКО то, что поможет найти эту квартиру</p>
+                            {% else %}
+                                <p class="text-left">Список найденных адресов внутри</p>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-auto d-inline justify-content-end align-items-end">
+                            {% qr_from_text url size=2 image_format="png" error_correction="L" %}
+                        </div>
+                    </div>
              </div>
-
+            </div>
           </div>
         </div>
         <div class="col-md-6 "></div>
@@ -102,7 +112,7 @@ visibility: visible;
       </div>
       <div class="row">
         <div class="col-md-12">
-             <table class="table table-sm table-bordered d-print-table">
+             <table class="table table-sm table-bordered d-print-table w-75">
                  <thead>
                  <tr>
                      <th>{% translate "entrance" %}</th>
@@ -120,6 +130,16 @@ visibility: visible;
                         <td class="w-100">{{ flat.way_desc|default_if_none:"" }}</td>
                     </tr>
                  {% endfor %}
+                 {% if object.for_search %}
+                    {% for row in additional_rows %}
+                        <tr class = "py-2">
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    {% endfor %}
+                 {% endif %}
                  </tbody>
              </table>
         </div>

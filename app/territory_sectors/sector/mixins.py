@@ -26,5 +26,6 @@ class ContextAllHousesIntoMixin(object):
                 houses = houses.filter(for_search=False)
             elif status == 'for-search':
                 houses = houses.filter(for_search=True)
+        # context['houses'] = self.object.get_houses_into()
         context['houses'] = houses
         return context

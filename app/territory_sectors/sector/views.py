@@ -87,6 +87,8 @@ class SectorPrintView(LoginRequiredMixinCustom,
             reverse_lazy(
                 "uuid", kwargs={'pk': self.object.uuid_id})
         )
+        if self.object.for_search:
+            context['additional_rows'] = "*"*40
         return context
 
 

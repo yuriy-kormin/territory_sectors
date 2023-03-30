@@ -34,14 +34,6 @@ class CommentForm(forms.ModelForm):
         required=False,
     )
 
-    # def __init__(self, instance=None, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     # instance = kwargs.get('instance')
-    #     # set the initial value of the BooleanField
-    #     # if instance:
-    #     logging.error(instance)
-    #     # self.fields['completed'].initial = instance.
-
     class Meta:
         model = Comment
         fields = ('text',)
