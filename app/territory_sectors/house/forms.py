@@ -13,6 +13,7 @@ class HouseForm(forms.ModelForm):
         model = House
         # readonly_fields = ['gps_point', ]
         fields = [
+            'image_preview',
             'image',
             'address',
             'floor_amount',
