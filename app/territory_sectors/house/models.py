@@ -21,7 +21,7 @@ class House(models.Model):
     #     ordering = ['address']
     # class Meta:
     #     ordering = ('id',)
-    MAX_IMAGE_RESOLUTION = 1024
+    MAX_IMAGE_RESOLUTION = 800
 
     address = models.CharField(max_length=300, unique=True)
     date_created = models.DateTimeField(auto_now_add=True)
@@ -29,12 +29,6 @@ class House(models.Model):
     floor_amount = models.IntegerField(null=True)
     entrances = models.IntegerField(null=True)
     image = models.ImageField(upload_to='house/', null=True, blank=True)
-    # sector = models.ForeignKey('Sector', on_delete=models.CASCADE,
-    #                            related_name='sectors')
-
-    # lift = ???
-    # sector = models.ForeignKey(to=Sector, on_delete=models.SET_NULL,
-    #                            null=True, blank=True)
     for_search = models.BooleanField(default=True, null=False, blank=False)
     desc = models.CharField(max_length=1500, default='', null=True, blank=True)
     gps_point = gis_models.PointField(null=False, blank=False, srid=4326)
