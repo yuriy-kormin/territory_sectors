@@ -42,8 +42,8 @@ class ImageResizeBeforeMixin:
                 return max_size, int(height * (max_size / width))
             return int(width * (max_size / height)), max_size
 
-        def resize_image(image_date, max_size):
-            img = Image.open(image)
+        def resize_image(image_data, max_size):
+            img = Image.open(image_data)
             image_dimensions = calculate_new_size(max_size, *img.size)
             img = img.resize(image_dimensions, Image.ANTIALIAS)
             img = img.convert('RGB')
@@ -56,7 +56,6 @@ class ImageResizeBeforeMixin:
             image_data = resize_image(image, self.model.MAX_IMAGE_RESOLUTION)
             form.instance.image.save(
                 image.name, content=ContentFile(image_data), save=False)
-            image.name = image.name + '_preview.jpg'
             image_data = resize_image(
                 image, self.model.PREVIEW_IMAGE_RESOLUTION)
             form.instance.image_preview.save(

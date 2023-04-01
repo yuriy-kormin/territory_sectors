@@ -27,7 +27,7 @@ class House(models.Model):
     entrances = models.IntegerField(null=True)
     image = models.ImageField(upload_to='house/', null=True, blank=True)
     image_preview = models.ImageField(
-        upload_to='house/', null=True, blank=True)
+        upload_to='house/preview/', null=True, blank=True)
     for_search = models.BooleanField(default=True, null=False, blank=False)
     desc = models.CharField(max_length=1500, default='', null=True, blank=True)
     gps_point = gis_models.PointField(null=False, blank=False, srid=4326)
