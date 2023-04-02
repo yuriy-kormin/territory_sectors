@@ -27,7 +27,7 @@
                 {% if field.name != 'image_preview' %}
                     {% bootstrap_field field %}
                 {% else %}
-                    {% if field.image%}
+                    {% if field.image %}
                         <img src="{{ field.value.url }}" alt="Current image">
                     {% endif %}
                 {% endif %}
