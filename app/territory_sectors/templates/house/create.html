@@ -24,14 +24,13 @@
 {#            {% endfor %}#}
 
             {% for field in form %}
-                <div class = "form-group">
-
-                {% if field.name == 'image_preview' and field.value.url %}
-                        <img src="{{ field.value.url }}" alt="Current image">
-                {% else %}
+                {% if field.name != 'image_preview' %}
                     {% bootstrap_field field %}
+                {% else %}
+                    {% if field.image%}
+                        <img src="{{ field.value.url }}" alt="Current image">
+                    {% endif %}
                 {% endif %}
-                </div>
 
             {% endfor %}
             <div>
