@@ -81,6 +81,7 @@ class HouseForm(forms.ModelForm):
         #     raise forms.ValidationError("Invalid JSON data.")
         return flats_data
 
+
     def save(self):
         def instance_set_data(instance, data):
             for key in data:
@@ -90,6 +91,9 @@ class HouseForm(forms.ModelForm):
                 setattr(instance, key_name, data[key])
 
         obj = super().save()
+        if not self.cleaned_data.get('image'):
+            obj.image_preview.delete()
+            obj.save()
         flats = self.cleaned_data.get('flats_data')
         if flats:
             flats_data = json.loads(flats)
