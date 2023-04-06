@@ -2,6 +2,7 @@ from django.db import models
 from simple_history.models import HistoricalRecords
 from django.utils.translation import gettext_lazy as _
 
+
 # Create your models here.
 class Status(models.Model):
     name_options = (
@@ -14,7 +15,7 @@ class Status(models.Model):
                             choices=name_options,
                             default='free')
     history = HistoricalRecords()
-    # action =
+
     def __str__(self):
         return self.name
     # pass
