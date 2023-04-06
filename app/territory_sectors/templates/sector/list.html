@@ -21,11 +21,33 @@
 
         </tr>
         {% for sector in object_list %}
-            <tr>
+            <tr {% if sector.status.name == 'free' %}class="table-success"{% endif %}
+                {% if sector.status.name == 'assigned' %}class="table-warning"{% endif %}
+                {% if sector.status.name == 'under_construction' %}class="table-danger"{% endif %}
+                {% if sector.status.name == 'completed' %}class="table-primary"{% endif %}
+            >
                 <td> <a href = {% url "sector_update" sector.id %}>{{sector.name}}</a></td>
                 <td> {{sector.uuid}}</td>
                 <td> <a href = {% url "sector_history" sector.id %}>{{sector.status|default:"-"}}</a></td>
-                <td> {{sector.assigned_to|default:""}}</td>
+                <td>
+                    {% if sector.status.name == "assigned" %}
+                        {{sector.assigned_to|default:""}}
+                    {% endif %}
+                    {% if sector.status.name == "free" %}
+                    {% endif %}
+                    {% if sector.status.name == "under_construction" %}
+                        set by
+                        {{ sector.history.latest.history_user }}
+                        at
+                        {{ sector.history.latest.date_modified|date:"d M Y" }}
+                    {% endif %}
+                    {% if sector.status.name == "completed" %}
+                        set by
+                        {{ sector.history.latest.history_user }}
+                        at
+                        {{ sector.history.latest.date_modified|date:"d M Y" }}
+                    {% endif %}
+                </td>
                 <td class="text-right">
                     <form method="get" action="{% url "sector_delete" sector.id %}">
                         <button class="btn btn-outline-danger" button_type="submit" >
