@@ -16,7 +16,7 @@
     "model": "status.status",
     "pk": 3,
     "fields": {
-        "name": "free"
+        "name": "test for free"
     }
 },
 {
