@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-06 13:36+0000\n"
+"POT-Creation-Date: 2023-04-07 15:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -93,19 +93,19 @@ msgstr "Квартира успешно удалена"
 msgid "Filter by address"
 msgstr "Отфильтровать по адресу"
 
-#: territory_sectors/house/forms.py:31
+#: territory_sectors/house/forms.py:30
 msgid "Please enter address of building"
 msgstr "Укажите адрес"
 
-#: territory_sectors/house/forms.py:37
+#: territory_sectors/house/forms.py:36
 msgid "Please set floors amount of building"
 msgstr "Количество этажей"
 
-#: territory_sectors/house/forms.py:43
+#: territory_sectors/house/forms.py:42
 msgid "How much entrances in building"
 msgstr "Количество подъездов"
 
-#: territory_sectors/house/forms.py:54
+#: territory_sectors/house/forms.py:53
 msgid "Some description about house"
 msgstr "Как найти здание"
 
@@ -188,8 +188,6 @@ msgid "Comment"
 msgstr "Комментарий"
 
 #: territory_sectors/issue/views.py:65
-#, fuzzy
-#| msgid "Issue detail"
 msgid "Issue updated"
 msgstr "Детали задачи"
 
@@ -198,14 +196,10 @@ msgid "Please login to access this page"
 msgstr "Пожалуйста введите учетные данные для доступа к данной странице"
 
 #: territory_sectors/sector/forms.py:43
-#, fuzzy
-#| msgid "sector_name"
 msgid "Sector name"
 msgstr "Название участка"
 
 #: territory_sectors/sector/forms.py:44
-#, fuzzy
-#| msgid "Sector "
 msgid "Sector status"
 msgstr "Участок "
 
@@ -263,21 +257,19 @@ msgstr "Участок успешно удален"
 msgid "Please enter status name"
 msgstr "Введите название статуса"
 
-#: territory_sectors/status/models.py:8
+#: territory_sectors/status/models.py:9
 msgid "free"
 msgstr "свободен"
 
-#: territory_sectors/status/models.py:9
-#, fuzzy
-#| msgid "assigned to"
+#: territory_sectors/status/models.py:10
 msgid "assigned"
 msgstr "выдан"
 
-#: territory_sectors/status/models.py:10
+#: territory_sectors/status/models.py:11
 msgid "under_construction"
 msgstr "!!ведутся работы-не выдавать!!"
 
-#: territory_sectors/status/models.py:11
+#: territory_sectors/status/models.py:12
 msgid "completed"
 msgstr "пройден"
 
@@ -373,7 +365,7 @@ msgid "Desc"
 msgstr "Как найти"
 
 #: territory_sectors/templates/house/list.html:18
-#: territory_sectors/templates/sector/list.html:65
+#: territory_sectors/templates/sector/list.html:92
 msgid "sector"
 msgstr "участок"
 
@@ -447,6 +439,10 @@ msgstr ""
 msgid "info"
 msgstr ""
 
+#: territory_sectors/templates/sector/list.html:20
+msgid "houses"
+msgstr "Дома"
+
 #: territory_sectors/templates/sector/print_sector.html:85
 #: territory_sectors/templates/sector/print_sector_quadra.html:121
 #: territory_sectors/templates/uuid.html:31
@@ -464,36 +460,3 @@ msgstr "Поисковые"
 #: territory_sectors/templates/uuid.html:19
 msgid "addresses"
 msgstr " найденных адресов"
-
-#~ msgid "Comment added"
-#~ msgstr "Комментарий добавлен"
-
-#, fuzzy
-#~| msgid "Statuses"
-#~ msgid "Static Files"
-#~ msgstr "Статусы"
-
-#, fuzzy
-#~| msgid "address"
-#~ msgid "Email address"
-#~ msgstr "Адрес"
-
-#, fuzzy
-#~| msgid "address"
-#~ msgid "IPv4 address"
-#~ msgstr "Адрес"
-
-#, fuzzy
-#~| msgid "address"
-#~ msgid "IP address"
-#~ msgstr "Адрес"
-
-#, fuzzy
-#~| msgid "Enter your comment here"
-#~ msgid "Enter a complete value."
-#~ msgstr "Введите ваш комментарий"
-
-#, fuzzy
-#~| msgid "desc"
-#~ msgid "dec"
-#~ msgstr "Как найти"

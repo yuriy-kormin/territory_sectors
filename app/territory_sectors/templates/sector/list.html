@@ -11,24 +11,26 @@
         <li class = "nav-item active"><a href="#list_houses" data-toggle="collapse">{% translate "Показать список " %}</a></li>
         <li class = "nav-item active"><a class="nav-link" href="{% url "sector_add" %}">{% translate "Create sector" %}</a></li>
     </ul>
-    <table id ="list_houses" class = "table table-striped collapse">
-        <tr>
+    <table id ="list_houses" class="table collapse text-center">
+        <thead><tr>
             <th>{% translate "name" %}</th>
             <th>{% translate "uuid" %}</th>
             <th>{% translate "status" %}</th>
             <th>{% translate "info" %}</th>
+            <th>{% translate "houses" %}</th>
             <th></th>
-
         </tr>
+        </thead>
+        <tbody>
         {% for sector in object_list %}
             <tr {% if sector.status.name == 'free' %}class="table-success"{% endif %}
                 {% if sector.status.name == 'assigned' %}class="table-warning"{% endif %}
                 {% if sector.status.name == 'under_construction' %}class="table-danger"{% endif %}
                 {% if sector.status.name == 'completed' %}class="table-primary"{% endif %}
-            >
-                <td> <a href = {% url "sector_update" sector.id %}>{{sector.name}}</a></td>
-                <td> {{sector.uuid}}</td>
-                <td> <a href = {% url "sector_history" sector.id %}>{{sector.status|default:"-"}}</a></td>
+             scope="row">
+                <td class="align-middle"> <a href = {% url "sector_update" sector.id %}>{{sector.name}}</a></td>
+                <td class="align-middle"> {{sector.uuid}}</td>
+                <td class="align-middle"> <a href = {% url "sector_history" sector.id %}>{{sector.status|default:"-"}}</a></td>
                 <td>
                     {% if sector.status.name == "assigned" %}
                         {{sector.assigned_to|default:""}}
@@ -48,7 +50,16 @@
                         {{ sector.history.latest.date_modified|date:"d M Y" }}
                     {% endif %}
                 </td>
-                <td class="text-right">
+                <td class="align-middle">
+                    <table class="table-sm table-borderless text-left">
+                     {% for house in sector.get_houses_into %}
+                         <tr><td><small>
+                            {{ house.address }}({{ house.flat_count }})
+                         </small></td></tr>
+                     {% endfor %}
+                    </table>
+                </td>
+                <td class="text-right align-middle">
                     <form method="get" action="{% url "sector_delete" sector.id %}">
                         <button class="btn btn-outline-danger" button_type="submit" >
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
@@ -59,14 +70,8 @@
                     </form>
                 </td>
             </tr>
-             <tr>
-                 <td colspan="5">
-                     {% for house in sector.get_houses_into %}
-                         {{ house.address }}({{ house.flat_count }}),
-                     {% endfor %}
-                 </td>
-             </tr>
         {% endfor %}
+        </tbody>
     </table>
 {#    {% for house in houses %} {{ house.flat_count }}{% endfor %}#}
 {% endblock %}
