@@ -53,11 +53,11 @@ class ImageResizeBeforeMixin:
 
         image = form.cleaned_data.get('image')
         if image:
-            image_data = resize_image(image, self.model.MAX_IMAGE_RESOLUTION)
+            image_data = resize_image(image, form.instance.MAX_IMAGE_RESOLUTION)
             form.instance.image.save(
                 image.name, content=ContentFile(image_data), save=False)
             image_data = resize_image(
-                image, self.model.PREVIEW_IMAGE_RESOLUTION)
+                image, form.instance.PREVIEW_IMAGE_RESOLUTION)
             form.instance.image_preview.save(
                 image.name, content=ContentFile(image_data), save=False)
 

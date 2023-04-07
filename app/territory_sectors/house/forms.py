@@ -11,7 +11,6 @@ class HouseForm(forms.ModelForm):
 
     class Meta:
         model = House
-        # readonly_fields = ['gps_point', ]
         fields = [
             'image_preview',
             'image',
