@@ -31,7 +31,7 @@
                 <td class="align-middle"> <a href = {% url "sector_update" sector.id %}>{{sector.name}}</a></td>
                 <td class="align-middle"> {{sector.uuid}}</td>
                 <td class="align-middle"> <a href = {% url "sector_history" sector.id %}>{{sector.status|default:"-"}}</a></td>
-                <td>
+                <td class="align-middle">
                     {% if sector.status.name == "assigned" %}
                         {{sector.assigned_to|default:""}}
                     {% endif %}
