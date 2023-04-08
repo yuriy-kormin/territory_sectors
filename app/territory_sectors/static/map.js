@@ -29,13 +29,14 @@ function map_fly(point_x,point_y){
     })
 }
 function set_popup (id, text) {
+    console.log(text)
     popups[id] = new mapboxgl.Popup(
         {
             offset: 25,
             closeButton: false,
             closeOnClick: true,
         },
-    ).setText(text)
+    ).setHTML(text)
 }
 
 function circle_text() {
@@ -96,7 +97,8 @@ function add_sector_source(id, json,for_search,popup_data){
                 "type": "Feature",
                 "properties":{
                     'name':popup_data,
-                    'for_search':for_search
+                    'for_search':for_search,
+                    'id': id,
                 },
                 "geometry": json,
             });
@@ -149,8 +151,10 @@ function map_add_layer(mark_id = false){
 
 
 function sector_popup(e) {
-    id = e.features[0].id
+    id = e.features[0].properties.id
+    console.log(popups[id])
     popups[id].setLngLat(e.lngLat).addTo(map);
+    // console.log(popups)
 }
 
 function add_draw_control() {

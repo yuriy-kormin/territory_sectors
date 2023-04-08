@@ -91,9 +91,12 @@
         {{ sector.for_search|yesno:"true,false" }},
         "<b> {% translate "sector" %} {{ sector.name }}</b> <br>Flats - {{ sector.flat_count }}")
     {% endfor %}
+{% include "sector/houses_circles.html" %}
     map.setZoom(14)
     map.on('click','sectors', sector_popup)
-{% include "sector/houses_circles.html" %}
+    map.on('click','sectors-search', sector_popup)
+    map.on('click','houses-layer', sector_popup)
+    map.on('click','houses-search-layer', sector_popup)
 {% endblock %}
 {% block maponload %}
 draw_border();

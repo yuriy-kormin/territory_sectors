@@ -13,6 +13,7 @@ function add_circle_source(id, msg, mark ="default",lng, lat){
         "properties": {
             "title": msg,
             "mark":mark,
+            "id":`house_${id}`,
         },
     })
 
@@ -38,7 +39,6 @@ function add_map_circles_source(){
 
 
 function add_circles_layer(){
-    console.log(map.getSource('circles'))
     map.addLayer({
     'id': 'houses-layer',
     'type': 'circle',
