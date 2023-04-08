@@ -69,14 +69,15 @@ visibility: visible;
             </div>
             <div class="row flex-grow-1 h-50" >
               <div class="col-md-12">
-                    <div class="row-md-8 h-50">
+                    <div class="row-md-8 h-60">
                       <div class="col-md">
                         {% for house in sector.get_houses_into %}
                             <div class="row"><div class="col-md"><p class="h5">{{ house.address }}{% if house.flat_count > 0 %} ({{ house.flat_count }} адресов ){% endif %}</p></div></div>
+                            <div class="row"><div class="col-md">{% if house.desc %}<div style="line-height: 0.8;">{{ house.desc|linebreaks }}</div>{% endif %}</div></div>
                         {% endfor %}
                       </div>
                     </div>
-                    <div class="row-md-4 d-inline-block">
+                    <div class="row-md-4 d-inline-block py-0">
                         <div class="col-md d-inline-flex d-print-inline-flex">
                             {% if object.for_search %}
                                 <p>Этот участок предназначен для ПОИСКА русскоговорящих людей
