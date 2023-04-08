@@ -53,6 +53,7 @@ class FlatForm(forms.ModelForm):
                     'class': 'form-control',
                     'placeholder': _('Please describe flat place on floor'),
                     'rows': 5,
+                    'style': "white-space: pre-wrap;",
                 }
             ),
             'language': forms.Select(

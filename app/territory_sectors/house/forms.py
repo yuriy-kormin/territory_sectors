@@ -52,6 +52,7 @@ class HouseForm(forms.ModelForm):
                     'class': 'form-control',
                     'placeholder': _('Some description about house'),
                     'rows': 2,
+                    'style': "white-space: pre-wrap;"
                 }
             ),
             'gps_point': forms.HiddenInput(
