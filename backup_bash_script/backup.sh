@@ -21,7 +21,7 @@ export $(python3 -c "import dj_database_url; print('\n'.join(f'DB_{k.upper()}={v
 
 # Create backup directory if it doesn't exist
 mkdir -p $BACKUP_DIR/$CURRENT_DATE
-zip -r "$BACKUP_DIR//$CURRENT_DATE/app" "$FOLDER_TO_BACKUP"
+zip -r "$BACKUP_DIR/$CURRENT_DATE/app" "$FOLDER_TO_BACKUP"
 
 POSTGRES_CONTAINER_ID=$(docker container ls -q -f name=$DATABASE_CONTAINER_NAME)
 
