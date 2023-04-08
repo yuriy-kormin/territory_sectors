@@ -54,7 +54,7 @@
                     <table class="table-sm table-borderless text-left">
                      {% for house in sector.get_houses_into %}
                          <tr><td><small>
-                            {{ house.address }}({{ house.flat_count }})
+                             <a href="{% url "house_update" house.pk %}">{{ house.address }}({{ house.flat_count }})</a>
                          </small></td></tr>
                      {% endfor %}
                     </table>
