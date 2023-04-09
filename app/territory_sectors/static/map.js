@@ -29,7 +29,6 @@ function map_fly(point_x,point_y){
     })
 }
 function set_popup (id, text) {
-    console.log(text)
     popups[id] = new mapboxgl.Popup(
         {
             offset: 25,
@@ -152,7 +151,6 @@ function map_add_layer(mark_id = false){
 
 function sector_popup(e) {
     id = e.features[0].properties.id
-    console.log(popups[id])
     popups[id].setLngLat(e.lngLat).addTo(map);
     // console.log(popups)
 }
