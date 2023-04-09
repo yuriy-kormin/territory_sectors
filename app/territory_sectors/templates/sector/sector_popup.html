@@ -9,7 +9,7 @@
             <div class="btn-group-sm" role="group">
                 <a href ="{% url "sector_update" sector.id %}" class="btn btn-outline-info" role="button" aria-disabled="true"><i class="fas fa-edit"></i></a>
                 <a href ="{% url "sector_delete" sector.id %}" class="btn btn-outline-danger" role="button" style="margin-left: 10px;"><i class="fas fa-trash"></i></a>
-{#                <button class="btn btn-outline-warning" role="button" style="margin-left: 10px;"><i class="fas fa-history"></i></button>#}
+                <a href ="{% url "sector_history" sector.id %}" class="btn btn-outline-warning" role="button" style="margin-left: 10px;"><i class="fas fa-history"></i></a>
             </div>
         </div>
     </div>
