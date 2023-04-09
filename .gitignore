@@ -35,3 +35,4 @@ pip-log.txt
 pip-wheel-metadata
 /poetry.toml
 
+/app/media/
