@@ -25,6 +25,11 @@ class SectorCreateView(LoginRequiredMixinCustom, ContextAllHousesIntoMixin,
     }
     success_message = _('Sector created successfully')
 
+    def form_valid(self, form):
+        sector = form.save(commit=False)
+        sector.assign_uuid()
+        return super().form_valid(form)
+
 
 class SectorUpdateView(LoginRequiredMixinCustom, CentroidAnnotateMixin,
                        ContextAllHousesIntoMixin, GeoJSONAnnotateMixin,

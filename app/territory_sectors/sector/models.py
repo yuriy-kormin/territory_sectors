@@ -45,6 +45,9 @@ class Sector(models.Model):
             for_search=self.for_search
         )
 
+    def assign_uuid(self):
+        self.uuid = Uuid.objects.create()
+
     @classmethod
     def get_all_houses(cls):
         return House.objects.all()
