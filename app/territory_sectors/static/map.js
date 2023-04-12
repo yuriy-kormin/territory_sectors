@@ -90,13 +90,14 @@ function move_marker (event) {
     var xy = '"'+coordinates.lng.toString()+','+coordinates.lat.toString()+'"'
 
 }
-function add_sector_source(id, json,for_search,popup_data){
+function add_sector_source(id,status,json,for_search,popup_data){
     sectors.push({
                 'id': id,
                 "type": "Feature",
                 "properties":{
                     'name':popup_data,
                     'for_search':for_search,
+                    'status':status,
                     'id': id,
                 },
                 "geometry": json,
@@ -122,30 +123,46 @@ function map_add_layer(mark_id = false){
                 },
     })
 
-    map.addLayer({
-        'id': 'sectors',
-        'type':'fill',
+        map.addLayer({
+        'id': "sectors_search",
+        'type':'line',
         'source': 'layers',
         'layout': {},
         'paint':{
-            'fill-color': serve_status_color,
-            'fill-opacity': 0.5
+            'line-color': search_status[true],
+            'line-width': 2,
+        },
+        'filter': ['==', 'for_search', true]
+    })
+
+    map.addLayer({
+        'id': "sectors_ready",
+        'type':'line',
+        'source': 'layers',
+        'layout': {},
+        'paint':{
+            'line-color': search_status[false],
+            'line-width': 2,
         },
         'filter': ['==', 'for_search', false]
     })
 
-
-    map.addLayer({
-        'id': 'sectors-search',
-        'type':'fill',
+    for (status_name in sector_status){
+        map.addLayer({
+        'id': 'outline_'+status_name,
+        'type': 'fill',
         'source': 'layers',
         'layout': {},
-        'paint':{
-            'fill-color': search_status_color,
+        'paint': {
+            'fill-color': sector_status[status_name],
             'fill-opacity': 0.5
+            // 'line-color': sector_status[status_name],
+            // 'line-width': 4
         },
-        'filter': ['==', 'for_search', true]
-    })
+        'filter': ['==', 'status', status_name]
+        })
+    }
+
 }
 
 

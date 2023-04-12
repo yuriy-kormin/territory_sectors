@@ -45,6 +45,7 @@
         map_fly({{ object.centroid.coords.0|floatformat:"." }},{{ object.centroid.coords.1|floatformat:"." }})
         add_sector_source(
             {{ object.id }},
+            "{{ sector.status }}",
             {{ object.geojson | safe }},
             {{ sector.for_search|yesno:"true,false" }},
             "{{ object.name }}"

@@ -46,7 +46,7 @@ function add_circles_layer(){
     'paint':{
         'circle-radius': 16,
         'circle-stroke-width': 2,
-        'circle-color': serve_status_color,
+        'circle-color': search_status[false],
         'circle-stroke-color': 'white'
     },
     'filter': ['==', 'mark', 'default']
@@ -58,7 +58,7 @@ function add_circles_layer(){
     'paint':{
         'circle-radius': 16,
         'circle-stroke-width': 2,
-        'circle-color': search_status_color,
+        'circle-color': search_status[true],
         'circle-stroke-color': 'white'
     },
     'filter': ['!=', 'mark', 'default']

@@ -73,6 +73,7 @@
         {% endfor %}
         </tbody>
     </table>
+
 {#    {% for house in houses %} {{ house.flat_count }}{% endfor %}#}
 {% endblock %}
 {% block head %}
@@ -88,6 +89,7 @@
     {% for sector in object_list %}
         add_sector_source(
         {{ sector.id }},
+        "{{ sector.status }}",
         {{ sector.geojson | safe }},
         {{ sector.for_search|yesno:"true,false" }},
         '{% spaceless %}{% include "./sector_popup.html" %}{% endspaceless %}')
