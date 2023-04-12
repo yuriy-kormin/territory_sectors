@@ -95,7 +95,7 @@ function add_sector_source(id,status,json,for_search,popup_data){
                 'id': id,
                 "type": "Feature",
                 "properties":{
-                    'name':popup_data,
+                    'name':status,
                     'for_search':for_search,
                     'status':status,
                     'id': id,
@@ -124,7 +124,7 @@ function map_add_layer(mark_id = false){
     })
 
         map.addLayer({
-        'id': "sectors_search",
+        'id': "outline_sector_search",
         'type':'line',
         'source': 'layers',
         'layout': {},
@@ -136,7 +136,7 @@ function map_add_layer(mark_id = false){
     })
 
     map.addLayer({
-        'id': "sectors_ready",
+        'id': "outline_sector_ready",
         'type':'line',
         'source': 'layers',
         'layout': {},
@@ -149,7 +149,7 @@ function map_add_layer(mark_id = false){
 
     for (status_name in sector_status){
         map.addLayer({
-        'id': 'outline_'+status_name,
+        'id': 'sector_'+status_name,
         'type': 'fill',
         'source': 'layers',
         'layout': {},
@@ -169,7 +169,60 @@ function map_add_layer(mark_id = false){
 function sector_popup(e) {
     id = e.features[0].properties.id
     popups[id].setLngLat(e.lngLat).addTo(map);
-    // console.log(popups)
+    // console.log(map.getStyle().layers)
+
+}
+
+function handleClickEvent(e) {
+     // var features = map.queryRenderedFeatures(e.point);
+
+      // var layerList = features.map(function(feature) {
+      //   return feature.layer.id;
+      // });
+
+    //
+    let sectors_layers_names = [
+        'sector_free',
+        'sector_assigned',
+        'sector_completed',
+        'sector_under_construction'
+    ]
+    let houses_layers_names = [
+        'circle-houses-layer',
+        'circle-houses-search-layer'
+    ]
+
+    var layerList = map.queryRenderedFeatures(e.point, { layers: sectors_layers_names.concat(houses_layers_names) });
+    house_layer = layerList.filter(function(value) {
+                                   return houses_layers_names.indexOf(value.layer.id) > -1;
+                               });
+    sector_layer = layerList.filter(function(value) {
+                                   return sectors_layers_names.indexOf(value.layer.id) > -1;
+                               });
+    if (house_layer.length){
+        id = house_layer[0].properties.id;
+        popups[id].setLngLat(e.lngLat).addTo(map);
+    } else {
+        if (sector_layer.length){
+            id = sector_layer[0].properties.id;
+            popups[id].setLngLat(e.lngLat).addTo(map);
+        }
+    }
+
+
+    // if (is_house) {
+    //     // console.log(e)
+    //     var features = map.queryRenderedFeatures(e.podFeatures(e.point, { layers: sectors_layers_names }));
+    //     // if (is_sector){
+    //     //     // id = features[0].properties.id
+    //     //     // popups[id].setLngLat(e.lngLat).addTo(map);
+    //     // }
+    // }int, { layers: houses_layers_names });
+    //     id = features[0].properties.id
+    //     popups[id].setLngLat(e.lngLat).addTo(map);
+    // } else {
+    //     var features = map.queryRendere
+
 }
 
 function add_draw_control() {

@@ -40,7 +40,7 @@ function add_map_circles_source(){
 
 function add_circles_layer(){
     map.addLayer({
-    'id': 'houses-layer',
+    'id': 'circle-houses-layer',
     'type': 'circle',
     'source': 'circles',
     'paint':{
@@ -52,7 +52,7 @@ function add_circles_layer(){
     'filter': ['==', 'mark', 'default']
 });
     map.addLayer({
-    'id': 'houses-search-layer',
+    'id': 'circle-houses-search-layer',
     'type': 'circle',
     'source': 'circles',
     'paint':{
