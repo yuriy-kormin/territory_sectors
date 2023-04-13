@@ -57,9 +57,9 @@ function circle_text() {
 
 }
 function set_marker (id, lng, lat, color = 'default') {
-    let color_val = serve_status_color;
+    let color_val = search_status[false];
     if (color !== 'default'){
-        color_val = search_status_color
+        color_val = search_status[true]
     }
     markers[id] = new mapboxgl.Marker(
         {
