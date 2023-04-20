@@ -12,9 +12,7 @@
                     <output id="id_sector" class="form-control">{{object.house.sector.name}}</output>
             {% endif %}
             {%  for field in form %}
-{#                <div class = "form-group">#}
-                    {% bootstrap_field field %}
-{#                </div>#}
+                {% bootstrap_field field %}
             {% endfor %}
                 <div class = "form-group">
                      {% bootstrap_button button_title button_type="submit" button_class="mt-3 btn btn-primary" %}

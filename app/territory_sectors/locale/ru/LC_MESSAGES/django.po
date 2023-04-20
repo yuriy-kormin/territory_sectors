@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-12 12:19+0000\n"
+"POT-Creation-Date: 2023-04-19 13:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -56,6 +56,7 @@ msgid "Flat created successfully"
 msgstr "Квартира успешно создана"
 
 #: territory_sectors/flat/views.py:30 territory_sectors/sector/views.py:107
+#: territory_sectors/templates/sector/sector_popup.html:18
 msgid "remove"
 msgstr "удалить"
 
@@ -111,6 +112,7 @@ msgstr "Как найти здание"
 
 #: territory_sectors/house/views.py:20
 #: territory_sectors/templates/house/list.html:7
+#: territory_sectors/templates/nav.html:23
 msgid "Create house"
 msgstr "Создать дом"
 
@@ -216,7 +218,7 @@ msgstr "Назначен возвещателю"
 msgid "Please enter sector name"
 msgstr "Название участка"
 
-#: territory_sectors/sector/views.py:20
+#: territory_sectors/sector/views.py:20 territory_sectors/templates/nav.html:15
 #: territory_sectors/templates/sector/list.html:12
 msgid "Create sector"
 msgstr "Создать участок"
@@ -252,6 +254,30 @@ msgstr "Вы уверены, что хотите удалить участок "
 #: territory_sectors/sector/views.py:151
 msgid "Sector deleted successfully"
 msgstr "Участок успешно удален"
+
+#: territory_sectors/sector/views.py:171
+#, fuzzy
+#| msgid "Create sector"
+msgid "Check out sector"
+msgstr "Создать участок"
+
+#: territory_sectors/sector/views.py:172
+msgid "Check out"
+msgstr ""
+
+#: territory_sectors/sector/views.py:174
+#, fuzzy
+#| msgid "Create sector"
+msgid "Check in sector"
+msgstr "Создать участок"
+
+#: territory_sectors/sector/views.py:175
+msgid "Check in"
+msgstr ""
+
+#: territory_sectors/sector/views.py:177
+msgid "<p style=\"color:red\">Sector in service mode.Pay attention</p>"
+msgstr ""
 
 #: territory_sectors/status/forms.py:15
 msgid "Please enter status name"
@@ -383,30 +409,39 @@ msgstr "Список комментариев"
 msgid "Issue"
 msgstr "Задачи"
 
-#: territory_sectors/templates/nav.html:11
+#: territory_sectors/templates/nav.html:12
 msgid "Sectors"
 msgstr "Участки"
 
-#: territory_sectors/templates/nav.html:12
+#: territory_sectors/templates/nav.html:14
+msgid "List sectors"
+msgstr "Список участков"
+
+#: territory_sectors/templates/nav.html:20
 msgid "Houses"
 msgstr "Дома"
 
-#: territory_sectors/templates/nav.html:14
+#: territory_sectors/templates/nav.html:22
+msgid "List houses"
+msgstr "Список домов"
+
+#: territory_sectors/templates/nav.html:26
 msgid "Statuses"
 msgstr "Статусы"
 
-#: territory_sectors/templates/nav.html:15
+#: territory_sectors/templates/nav.html:27
 msgid "Issues"
 msgstr "Задачи"
 
-#: territory_sectors/templates/nav.html:21
+#: territory_sectors/templates/nav.html:33
 msgid "Logout"
 msgstr "Выход"
 
-#: territory_sectors/templates/nav.html:23
+#: territory_sectors/templates/nav.html:35
 msgid "Enter"
 msgstr "Вход"
 
+#: territory_sectors/templates/sector/checkinout.html:14
 #: territory_sectors/templates/sector/create.html:14
 msgid "Print"
 msgstr "Печать"
@@ -479,11 +514,29 @@ msgstr "Рабочий"
 msgid "desc"
 msgstr "Как найти"
 
-#: territory_sectors/templates/sector/sector_popup.html:6
-#, fuzzy
-#| msgid "Statuses"
-msgid "Status"
-msgstr "Статусы"
+#: territory_sectors/templates/sector/sector_popup.html:12
+msgid "edit"
+msgstr "Редактировать"
+
+#: territory_sectors/templates/sector/sector_popup.html:16
+msgid "view"
+msgstr "Просмотр"
+
+#: territory_sectors/templates/sector/sector_popup.html:17
+msgid "print"
+msgstr "Печать"
+
+#: territory_sectors/templates/sector/sector_popup.html:23
+msgid "history"
+msgstr "История"
+
+#: territory_sectors/templates/sector/sector_popup.html:24
+msgid "check out"
+msgstr "Cдать"
+
+#: territory_sectors/templates/sector/sector_popup.html:24
+msgid "check in"
+msgstr "Выдать"
 
 #: territory_sectors/templates/sector/sector_selector.html:6
 msgid "button for serve"
@@ -496,6 +549,3 @@ msgstr "Поисковые"
 #: territory_sectors/templates/uuid.html:18
 msgid "addresses"
 msgstr " найденных адресов"
-
-#~ msgid "Показать список "
-#~ msgstr " "

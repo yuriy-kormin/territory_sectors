@@ -79,3 +79,57 @@ function add_symbols_layer(){
         }
 });
 }
+function getCookie(name) {
+  var cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+    var cookies = document.cookie.split(';');
+    for (var i = 0; i < cookies.length; i++) {
+      var cookie = cookies[i].trim();
+      if (cookie.substring(0, name.length + 1) === (name + '=')) {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
+    }
+  }
+  return cookieValue;
+}
+
+function encodeFormData(data) {
+  var encodedData = '';
+  for (var prop in data) {
+    if (data.hasOwnProperty(prop)) {
+      if (encodedData.length > 0) {
+        encodedData += '&';
+      }
+      encodedData += encodeURIComponent(prop) + '=' + encodeURIComponent(data[prop]);
+    }
+  }
+  return encodedData;
+}
+
+function checkinout(markerId, action) {
+  var csrfToken = getCookie('csrftoken');
+
+  const data_to_send = {
+      action: action,
+  }
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', `/sector/${markerId}/checkinout/`);
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhr.setRequestHeader('X-CSRFToken', csrfToken);
+  xhr.withCredentials = true;  // Add this line to enable authentication credentials
+  xhr.send(JSON.stringify(data_to_send))
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      // Show a success message if the request is successful
+      var response = JSON.parse(xhr.responseText);
+      alert(response.message);
+    }
+  };
+  xhr.send(encodeFormData(markerId));
+}
+
+
+
+
+

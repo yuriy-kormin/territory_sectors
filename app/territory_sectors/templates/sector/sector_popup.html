@@ -1,15 +1,25 @@
 {% load i18n %}
-<div class="card">
+{% load bootstrap4 %}
+<div class="card" xmlns="http://www.w3.org/1999/html">
     <div class="card-body m-0 p-1">
-        <h5 class="card-title">{{ sector.name }}</h5>
-{#        <p class="card-text">{{ house.desc|linebreaksbr }}</p>#}
-{#        <p class="card-text">{% trans "Status" %}: {{ sector.status }}</p>#}
-{#        <p class="card-text">{% trans "Floors" %}: {{ house.floor_amount }}</p>#}
-        <div class="btn-toolbar d-flex justify-content-center" role="toolbar">
+        <h5 class="card-title">Участок: {{ sector.name }}</h5>
+        <h6>Status: {{ sector.status }}</h6>
+        <div class="btn-toolbar d-flex justify-content-center" style="display: inline-block;" role="toolbar">
             <div class="btn-group-sm" role="group">
-                <a href ="{% url "sector_update" sector.id %}" class="btn btn-outline-info" role="button" aria-disabled="true"><i class="fas fa-edit"></i></a>
-                <a href ="{% url "sector_delete" sector.id %}" class="btn btn-outline-danger" role="button" style="margin-left: 10px;"><i class="fas fa-trash"></i></a>
-                <a href ="{% url "sector_history" sector.id %}" class="btn btn-outline-warning" role="button" style="margin-left: 10px;"><i class="fas fa-history"></i></a>
+                <div class="btn-group-sm">
+                    <a href ="{% url "sector_update" sector.id %}" class="btn btn-outline-primary"><i class="fas fa-edit"></i> {% trans "edit" %}</a>
+                    <button type="button" class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-expanded="false"><span class="sr-only">Toggle Dropdown</span></button>
+                    <div class="dropdown-menu">
+                        <div class="btn-group-sm" role="group">
+                            <a href ="{% url "uuid" sector.uuid_id %}" class="btn btn-outline-info" role="button"><i class="fas fa-qrcode"></i> {% trans "view" %}</a>
+                            <a href ="{% url "sector_print" sector.id %}" class="btn btn-outline-secondary" role="button" ><i class="fas fa-print"></i> {% trans "print" %}</a>
+                            <a href ="{% url "sector_delete" sector.id %}" class="btn btn-outline-danger" role="button" ><i class="fas fa-trash"></i> {% trans "remove" %}</a>
+                        </div>
+                    </div>
+                </div>
+                <a href ="{% url "sector_history" sector.id %}" class="btn btn-outline-warning" role="button"><i class="fas fa-history"></i>  {% trans "history" %}</a>
+{#                <button type="button" class="btn btn-outline-success" onclick="checkinout({{ sector.id }},'assigned')">{% if sector.status.name == 'assigned' %}<i class="fas fa-reply"></i> {% trans "check out" %}{% else %}<i class="fas fa-share"></i> {% trans "check in" %}{% endif %}</button>#}
+{#                <a href ="{% url "sector_checkinout" sector.id %}" class="btn btn-outline-success" role="button">{% if sector.status.name == 'assigned' %}<i class="fas fa-reply"></i> {% trans "check out" %}{% else %}<i class="fas fa-share"></i> {% trans "check in" %}{% endif %}</a>#}
             </div>
         </div>
     </div>

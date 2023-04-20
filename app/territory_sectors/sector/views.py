@@ -1,14 +1,17 @@
 from django.contrib.gis.db.models.functions import AsGeoJSON
 from django.contrib.messages.views import SuccessMessageMixin
+from django.db.models import Value
+from django.forms import CharField
+from django.http import JsonResponse
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from .forms import SectorForm
+from .forms import SectorForm, SetStatusSectorForm
 from .models import Sector
 from django.utils.translation import gettext_lazy as _
 from .mixins import GeoJSONAnnotateMixin, ContextAllHousesIntoMixin, \
     CentroidAnnotateMixin
 from ..mixins import LoginRequiredMixinCustom
-
+from django.views import View
 
 class SectorCreateView(LoginRequiredMixinCustom, ContextAllHousesIntoMixin,
                        SuccessMessageMixin, CreateView):
@@ -98,10 +101,8 @@ class SectorPrintView(LoginRequiredMixinCustom,
 
 
 class SectorListView(LoginRequiredMixinCustom, ContextAllHousesIntoMixin,
-                     GeoJSONAnnotateMixin, CentroidAnnotateMixin,
-                     ListView):
+                     GeoJSONAnnotateMixin, CentroidAnnotateMixin, ListView):
     model = Sector
-    # paginate_by = model
     template_name = "sector/list.html"
     extra_context = {
         'remove_title': _('remove'),
@@ -109,11 +110,13 @@ class SectorListView(LoginRequiredMixinCustom, ContextAllHousesIntoMixin,
 
     def get_queryset(self):
         qs = super().get_queryset()
+
         status = self.extra_context.get('status', False)
         if status == 'for-serve':
             return qs.filter(for_search=False)
         elif status == 'for-search':
             return qs.filter(for_search=True)
+
         return qs
 
 
@@ -149,3 +152,46 @@ class SectorDeleteView(LoginRequiredMixinCustom, GeoJSONAnnotateMixin,
         'message': _('Are you sure delete sector '),
     }
     success_message = _('Sector deleted successfully')
+
+
+
+class SectorCheckInOutView(LoginRequiredMixinCustom, View):
+    def post(self, request, *args, **kwargs):
+        sector_id = self.kwargs.get('pk')
+        data = request.body.decode()
+        # sector = Sector.objects.get(id=sector_id)
+        # sector.status
+        # sector.save()
+
+        # Return a JSON response with a success message
+        return JsonResponse({'message': f'Marker {sector_id} updated successfully.\n {data=}'})
+    # model = Sector
+    # form_class = SectorForm
+    # template_name = "sector/checkinout.html"
+    # success_url = reverse_lazy('sector_list')
+    # extra_context = {
+    #     'sectors': model.objects.all().annotate(
+    #         geojson=AsGeoJSON('contour')
+    #     )
+    # }
+    # success_message = _('Sector updated successfully')
+
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     # raise IOError(self.object.status.name)
+    #     if self.object.status.name == 'assigned':
+    #         context['header'] = _('Check out sector'),
+    #         context['button_title'] = _('Check out'),
+    #     if self.object.status.name in ('free', 'completed'):
+    #         context['header'] = _('Check in sector'),
+    #         context['button_title'] = _('Check in'),
+    #     if self.object.status.name == 'under_construction':
+    #         context['header'] = _('<p style="color:red">Sector in service mode.Pay attention</p>'),
+    #     return context
+    #
+    # def get_success_message(self, cleaned_data):
+    #     return cleaned_data
+    #     # if self.object.status.name == 'assigned':
+    #     #     return _("Sector successfully checked out")
+    #     # elif self.object.status.name in ('free', 'completed'):
+    #     #     return _("Sector successfully checked in to ")

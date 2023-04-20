@@ -8,9 +8,21 @@
     <div class="collapse navbar-collapse" id="navbarToggleExternalContent">
     <ul class="navbar-nav mr-auto">
         {% if request.user.is_authenticated %}
-            <li class = "nav-item active"><a class="nav-link active" href="{% url "sector_list" %}">{% translate "Sectors" %}</a></li>
-            <li class = "nav-item active"><a class="nav-link active" href="{% url "house_list" %}">{% translate "Houses" %}</a></li>
-{#            <li class = "nav-item active"><a class="nav-link active" href="{% url "flat_list" %}">{% translate "Flats" %}</a></li>#}
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle active" href="#" role="button" data-toggle="dropdown" aria-expanded="false">{% translate "Sectors" %}</a>
+                <div class="dropdown-menu ">
+                  <a class="dropdown-item" href="{% url "sector_list" %}">{% translate "List sectors" %}</a>
+                  <a class="dropdown-item" href="{% url "sector_add" %}">{%translate "Create sector" %}</a>
+                </div>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle active" href="#" role="button" data-toggle="dropdown" aria-expanded="false">{% translate "Houses" %}</a>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item " href="{% url "house_list" %}">{% translate "List houses" %}</a>
+                  <a class="dropdown-item " href="{% url "house_add" %}">{%translate "Create house" %}</a>
+                </div>
+            </li>
             <li class = "nav-item active"><a class="nav-link active" href="{% url "status_list" %}">{% translate "Statuses" %}</a></li>
             <li class = "nav-item active"><a class="nav-link active" href="{% url "issue_list" %}">{% translate "Issues" %}</a></li>
         {% endif %}

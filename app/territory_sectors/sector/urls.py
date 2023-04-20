@@ -1,6 +1,7 @@
 from django.urls import path
 from .views import SectorListView, SectorCreateView, \
-    SectorDeleteView, SectorUpdateView, SectorStatusHistory, SectorPrintView
+    SectorDeleteView, SectorUpdateView, SectorStatusHistory,\
+    SectorPrintView, SectorCheckInOutView
 
 urlpatterns = [
     path('for-serve', SectorListView.as_view(
@@ -12,6 +13,8 @@ urlpatterns = [
     path('', SectorListView.as_view(), name='sector_list'),
     path('create/', SectorCreateView.as_view(), name='sector_add'),
     path('<int:pk>/', SectorUpdateView.as_view(), name='sector_update'),
+    path('<int:pk>/checkinout/', SectorCheckInOutView.as_view(),
+         name='sector_checkinout'),
     path('<int:pk>/print/', SectorPrintView.as_view(),
          name='sector_print'),
     path('<int:pk>/delete/', SectorDeleteView.as_view(),

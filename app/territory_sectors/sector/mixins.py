@@ -1,6 +1,10 @@
 from django.contrib.gis.db.models.functions import AsGeoJSON, Centroid
 from django.db.models import Count
-from territory_sectors.sector.models import Sector
+from .forms import SetStatusSectorForm
+from .models import Sector
+
+
+# from app.territory_sectors.sector.forms import SetStatusSectorForm
 
 
 class GeoJSONAnnotateMixin:
@@ -17,7 +21,7 @@ class CentroidAnnotateMixin:
 
 class ContextAllHousesIntoMixin(object):
     def get_context_data(self, **kwargs):
-        """Add context."""
+        """Add list all houses into context"""
         context = super().get_context_data(**kwargs)
         houses = Sector.get_all_houses() \
             .annotate(flat_count=Count('flat'))

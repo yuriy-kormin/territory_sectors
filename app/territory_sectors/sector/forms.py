@@ -79,3 +79,9 @@ class SectorForm(forms.ModelForm):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+
+
+class SetStatusSectorForm(forms.ModelForm):
+    class Meta:
+        model = Sector
+        fields = 'status', 'assigned_to'
