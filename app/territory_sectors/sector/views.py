@@ -1,17 +1,16 @@
 from django.contrib.gis.db.models.functions import AsGeoJSON
 from django.contrib.messages.views import SuccessMessageMixin
-from django.db.models import Value
-from django.forms import CharField
 from django.http import JsonResponse
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from .forms import SectorForm, SetStatusSectorForm
+from .forms import SectorForm
 from .models import Sector
 from django.utils.translation import gettext_lazy as _
 from .mixins import GeoJSONAnnotateMixin, ContextAllHousesIntoMixin, \
     CentroidAnnotateMixin
 from ..mixins import LoginRequiredMixinCustom
 from django.views import View
+
 
 class SectorCreateView(LoginRequiredMixinCustom, ContextAllHousesIntoMixin,
                        SuccessMessageMixin, CreateView):
@@ -154,7 +153,6 @@ class SectorDeleteView(LoginRequiredMixinCustom, GeoJSONAnnotateMixin,
     success_message = _('Sector deleted successfully')
 
 
-
 class SectorCheckInOutView(LoginRequiredMixinCustom, View):
     def post(self, request, *args, **kwargs):
         sector_id = self.kwargs.get('pk')
@@ -164,7 +162,8 @@ class SectorCheckInOutView(LoginRequiredMixinCustom, View):
         # sector.save()
 
         # Return a JSON response with a success message
-        return JsonResponse({'message': f'Marker {sector_id} updated successfully.\n {data=}'})
+        return JsonResponse(
+            {'message': f'Marker {sector_id} updated successfully.\n {data=}'})
     # model = Sector
     # form_class = SectorForm
     # template_name = "sector/checkinout.html"
@@ -186,7 +185,8 @@ class SectorCheckInOutView(LoginRequiredMixinCustom, View):
     #         context['header'] = _('Check in sector'),
     #         context['button_title'] = _('Check in'),
     #     if self.object.status.name == 'under_construction':
-    #         context['header'] = _('<p style="color:red">Sector in service mode.Pay attention</p>'),
+    #         context['header'] = _(
+    #         '<p style="color:red">Sector in service mode.Pay attention</p>'),
     #     return context
     #
     # def get_success_message(self, cleaned_data):

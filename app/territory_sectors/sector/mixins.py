@@ -1,10 +1,6 @@
 from django.contrib.gis.db.models.functions import AsGeoJSON, Centroid
 from django.db.models import Count
-from .forms import SetStatusSectorForm
 from .models import Sector
-
-
-# from app.territory_sectors.sector.forms import SetStatusSectorForm
 
 
 class GeoJSONAnnotateMixin:
@@ -30,6 +26,5 @@ class ContextAllHousesIntoMixin(object):
                 houses = houses.filter(for_search=False)
             elif status == 'for-search':
                 houses = houses.filter(for_search=True)
-        # context['houses'] = self.object.get_houses_into()
         context['houses'] = houses
         return context
