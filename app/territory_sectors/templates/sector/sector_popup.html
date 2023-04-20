@@ -3,7 +3,7 @@
 <div class="card" xmlns="http://www.w3.org/1999/html">
     <div class="card-body m-0 p-1">
         <h5 class="card-title">Участок: {{ sector.name }}</h5>
-        <h6>Status: {{ sector.status }}</h6>
+        <h6>Status: {{ sector.status }}{% if sector.status.name == "assigned" %}: {{ sector.assigned_to }}{% endif %}</h6>
         <div class="btn-toolbar d-flex justify-content-center" style="display: inline-block;" role="toolbar">
             <div class="btn-group-sm" role="group">
                 <div class="btn-group-sm">
