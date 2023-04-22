@@ -6,7 +6,7 @@ center: [41.612803, 41.632153], // starting position [lng, lat]
 zoom: 16, // starting zoom
 language: 'ru-RU'
 });
-map.addControl(new mapboxgl.FullscreenControl());
+map.addControl(new mapboxgl.FullscreenControl({container: document.querySelector('#map')}));
 map.addControl(new mapboxgl.GeolocateControl({
     positionOptions: {
         enableHighAccuracy: true
@@ -14,7 +14,7 @@ map.addControl(new mapboxgl.GeolocateControl({
     trackUserLocation: true,
     showUserHeading: true
 }));
-map.addControl(new mapboxgl.NavigationControl());
+// map.addControl(new mapboxgl.NavigationControl({showZoom:false}));
 // mapboxgl.setRTLTextPlugin('https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js');
 // map.addControl(new MapboxLanguage({defaultLanguage: 'ru'}));
 var markers = {};
