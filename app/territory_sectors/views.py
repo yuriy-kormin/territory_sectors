@@ -15,7 +15,7 @@ class IndexView(TemplateView):
 
 class UserLoginView(LoginView):
     template_name = 'login.html'
-    next_page = reverse_lazy('root')
+    next_page = reverse_lazy('sector_list')
 
 
 class UserLogoutView(LogoutView):
