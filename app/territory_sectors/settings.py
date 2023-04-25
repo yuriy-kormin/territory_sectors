@@ -90,6 +90,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'territory_sectors.context_processors.google_analytics',
+                'territory_sectors.context_processors.mapbox',
             ],
         },
     },
