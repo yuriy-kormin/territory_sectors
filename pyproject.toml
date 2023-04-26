@@ -25,6 +25,8 @@ django-simple-history = "^3.2.0"
 rollbar = "^0.16.3"
 coverage = "^7.2.1"
 django-filter = "^22.1"
+coverage = "^7.2.1"
+reportlab = "^3.6.12"
 
 [tool.poetry.group.dev.dependencies]
 django-extensions = "^3.2.1"
