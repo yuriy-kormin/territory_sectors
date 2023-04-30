@@ -1,6 +1,6 @@
 const map = new mapboxgl.Map({
 container: 'map', // container ID
-style: 'mapbox://styles/mapbox/streets-v12', // style URL
+style: 'mapbox://styles/yuriykormin/clgyzsbgn00gs01pg4gmabbng', // style URL
 center: [41.612803, 41.632153], // starting position [lng, lat]
 zoom: 16, // starting zoom
 language: 'ru-RU'

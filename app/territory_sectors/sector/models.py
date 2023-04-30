@@ -1,10 +1,13 @@
-from django.db import models
+import json
 
+from django.db import models
+from urllib.parse import quote
 from territory_sectors.house.models import House
 from territory_sectors.status.models import Status
 from territory_sectors.uuid_qr.models import Uuid
 from django.contrib.gis.db import models as gis_models
 from simple_history.models import HistoricalRecords
+from geojson import Feature, Point, FeatureCollection
 
 
 class SectorManager(models.Manager):
@@ -45,13 +48,32 @@ class Sector(models.Model):
             for_search=self.for_search
         )
 
+    def get_mapbox_json(self):
+        houses = self.get_houses_into()
+        features = []
+        for house in houses:
+            feature = Feature(
+                geometry=Point(house.gps_point),
+                properties={
+                    "marker-color": "#B917FC",
+                    "marker-size": "large",
+                    "text": "some text",
+                }
+            )
+            features.append(feature)
+        feature_collection = FeatureCollection(features)
+        geojson_str = json.dumps(feature_collection)
+        return quote(geojson_str)
+
+    def get_center_coords(self):
+        return Point(self.contour.centroid)['coordinates']
+
     def assign_uuid(self):
         self.uuid = Uuid.objects.create()
 
     @classmethod
     def get_all_houses(cls):
         return House.objects.all()
-
 
 # class Intersection(models.Model):
 #     house = models.ForeignKey('House', on_delete=models.CASCADE)

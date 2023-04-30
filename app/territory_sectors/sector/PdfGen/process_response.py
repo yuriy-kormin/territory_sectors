@@ -2,7 +2,9 @@ import io
 
 from django.http import HttpResponse
 from reportlab.pdfgen import canvas
-from reportlab.lib.pagesizes import A4, landscape
+from reportlab.lib.pagesizes import A4, landscape, portrait
+
+from .generate_table import print_tables
 from .process_images import print_image
 from .utils import get_xy
 
@@ -16,18 +18,21 @@ def draw_quadrants_lines(pdf):
 def print_header_houses(pdf, sector):
     pdf.setFont("Arial", 14)
     total_flats = 0
+    house_count = 0
     for i, house in enumerate(sector.get_houses_into()):
         flats_data = ''
+        house_count += 1
         if (flat_count := house.flat_count()) > 0:
             total_flats += flat_count
             flats_data = f' ({flat_count} адресов)'
-        pdf.drawString(*get_xy(2, 2.5 + (1 * i)), house.address + flats_data)
+        pdf.drawString(*get_xy(2, 3 + (1 * i)), house.address + flats_data)
     # print header
     pdf.setFont("Arial", 26)
-    header = f"Участок {sector.name} "
-    if total_flats:
-        header += f'({total_flats} адресов)'
+    header = f"Участок {sector.name}"
     pdf.drawString(*get_xy(1, 1.5), header)
+    if total_flats and house_count > 1:
+        pdf.setFont("Arial", 12)
+        pdf.drawString(*get_xy(1, 2.2), f'({total_flats} адресов)')
 
 
 def make_response(request, sector_instance):
@@ -42,6 +47,11 @@ def make_response(request, sector_instance):
     for obj in 'map', 'qr':
         print_image(pdf, obj, request, sector_instance)
     pdf.showPage()
+
+    pdf.setPageSize(portrait(A4))
+    print_tables(pdf, sector_instance)
+    pdf.showPage()
+
     pdf.save()
     buffer.seek(0)
     pdf = buffer.getvalue()

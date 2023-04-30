@@ -18,9 +18,9 @@
       gtag('config', '{{ GA_KEY }}');
     </script>
 {% endif %}
-    <script>mapboxgl.accessToken='{{MAPBOX_API_KEY}}'</script>
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css' rel='stylesheet' />
+    <script>mapboxgl.accessToken='{{MAPBOX_API_KEY}}'</script>
     <script src ="{% static "sector.js" %}"></script>
     <script src ="{% static "const.js" %}"></script>
         {% block head %}

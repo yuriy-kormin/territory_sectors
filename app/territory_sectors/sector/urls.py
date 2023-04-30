@@ -1,7 +1,8 @@
 from django.urls import path
 from .views import SectorListView, SectorCreateView, \
     SectorDeleteView, SectorUpdateView, SectorStatusHistory,\
-    SectorPrintView, SectorCheckInOutView
+    SectorCheckInOutView
+from .viewPDFprint import SectorPrintPDF
 
 urlpatterns = [
     path('for-serve', SectorListView.as_view(
@@ -15,7 +16,7 @@ urlpatterns = [
     path('<int:pk>/', SectorUpdateView.as_view(), name='sector_update'),
     path('<int:pk>/checkinout/', SectorCheckInOutView.as_view(),
          name='sector_checkinout'),
-    path('<int:pk>/print/', SectorPrintView.as_view(),
+    path('<int:pk>/print/', SectorPrintPDF.as_view(),
          name='sector_print'),
     path('<int:pk>/delete/', SectorDeleteView.as_view(),
          name='sector_delete'),
