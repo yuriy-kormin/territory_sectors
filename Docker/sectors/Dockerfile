@@ -8,7 +8,8 @@ COPY Docker/sectors/docker-entrypoint.sh /
 WORKDIR /poetry
 
 # Install GDAL dependencies
-RUN apt update && apt install -y libgdal-dev g++ --no-install-recommends && \
+RUN apt update && apt install -y libgdal-dev ttf-mscorefonts-installer \
+    g++ --no-install-recommends && \
     python3 -m pip install --upgrade pip &&\
     pip3 install pipenv && \
     pip3 install whitenoise && \
