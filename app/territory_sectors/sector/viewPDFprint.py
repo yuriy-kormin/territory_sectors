@@ -4,8 +4,8 @@ from reportlab.pdfbase import pdfmetrics
 from .models import Sector
 from .PdfGen.process_response import make_response
 
-# pdfmetrics.registerFont(TTFont('Arial', 'arial.ttf'))
-
+pdfmetrics.registerFont(TTFont('Arial', 'arial.ttf'))
+# pdfmetrics.registerFont(TTFont('TimesCyr', 'times.ttf'))
 
 class SectorPrintPDF(View):
     def get(self, request, pk):
