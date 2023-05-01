@@ -18,7 +18,7 @@ class HouseManager(models.Manager):
 
 class House(models.Model):
     MAX_IMAGE_RESOLUTION = 1024
-    PREVIEW_IMAGE_RESOLUTION = 100
+    PREVIEW_IMAGE_RESOLUTION = 200
 
     address = models.CharField(max_length=300, unique=True)
     date_created = models.DateTimeField(auto_now_add=True)
