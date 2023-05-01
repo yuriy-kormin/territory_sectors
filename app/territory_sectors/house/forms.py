@@ -20,6 +20,7 @@ class HouseForm(forms.ModelForm):
             'for_search',
             'gps_point',
             'desc',
+            'tech_desc',
             'id',
             # 'flats_data',
         ]
@@ -50,7 +51,17 @@ class HouseForm(forms.ModelForm):
             'desc': forms.Textarea(
                 attrs={
                     'class': 'form-control',
-                    'placeholder': _('Some description about house'),
+                    'placeholder': _('Description HOW TO FIND house('
+                                     ' will be seen on sector print)'),
+                    'rows': 2,
+                    'style': "white-space: pre-wrap;"
+                }
+            ),
+            'tech_desc': forms.Textarea(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': _('Technical description. Can see'
+                                     ' only by logged in users'),
                     'rows': 2,
                     'style': "white-space: pre-wrap;"
                 }

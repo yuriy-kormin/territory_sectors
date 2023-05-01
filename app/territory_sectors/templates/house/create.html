@@ -6,23 +6,6 @@
     {% csrf_token %}
         <div class = "form">
     <h1 class="my-4"> {{ header }}</h1>
-{##}
-{#            {% if field.name == 'image' %}#}
-{#                <div class="form-group">#}
-{#                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>#}
-{#                    {% if form.instance.pk %}#}
-{#                        <img src="{{ field.value.url }}" alt="Current image">#}
-{#                    {% endif %}#}
-{#                    <input type="file" name="{{ field.name }}" id="{{ field.id_for_label }}">#}
-{#                </div>#}
-{#            {% else %}#}
-{#                <div class="form-group">#}
-{#                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>#}
-{#                    {{ field }}#}
-{#                </div>#}
-{#            {% endif %}#}
-{#            {% endfor %}#}
-
             {% for field in form %}
                 {% if field.name == 'image_preview' %}
                     {% if field.value %}

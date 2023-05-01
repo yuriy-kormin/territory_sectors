@@ -17,6 +17,7 @@ font_path = os.path.join(
 pdfmetrics.registerFont(TTFont('Arial', font_path))
 # pdfmetrics.registerFont(TTFont('TimesCyr', 'times.ttf'))
 
+
 class SectorPrintPDF(View):
     def get(self, request, pk):
         sector = Sector.objects.get(pk=pk)

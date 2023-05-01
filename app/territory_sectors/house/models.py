@@ -30,6 +30,8 @@ class House(models.Model):
         upload_to='house/preview/', null=True, blank=True)
     for_search = models.BooleanField(default=True, null=False, blank=False)
     desc = models.CharField(max_length=1500, default='', null=True, blank=True)
+    tech_desc = models.CharField(
+        max_length=1500, default='', null=True, blank=True)
     gps_point = gis_models.PointField(null=False, blank=False, srid=4326)
     uuid = models.OneToOneField(to=Uuid, null=True, blank=True,
                                 on_delete=models.SET_NULL)

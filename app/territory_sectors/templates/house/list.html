@@ -14,7 +14,8 @@
                 <th scope="col">{% translate "entrances" %}</th>
                 <th scope="col">{% translate "floors" %}</th>
                 <th scope="col">{% translate "Founded addresses" %}</th>
-                <th scope="col">{% translate "Desc" %}</th>
+                <th scope="col">{% translate "How to find house" %}</th>
+                <th scope="col">{% translate "Technical description" %}</th>
                 <th scope="col">{% translate "sector" %}</th>
                 <th scope="col"></th>
             </tr>
@@ -27,7 +28,8 @@
                 <td> {{house.entrances}}</td>
                 <td> {{house.floor_amount}}</td>
                 <td> {{house.flat__count}}</td>
-                <td> {{house.desc}}</td>
+                <td> {{house.desc|default_if_none:""}}</td>
+                <td> {{house.tech_desc|default_if_none:""}}</td>
                 <td> {{house.sector}}</td>
                 <td>
                     <form method="get" action="{% url "house_delete" house.id %}">
