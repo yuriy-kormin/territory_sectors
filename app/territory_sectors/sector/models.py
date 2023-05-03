@@ -37,7 +37,7 @@ class Sector(models.Model):
 
     # flat_count = SectorManager.get_houses_into().aggregate(Sum('flat'))
     class Meta:
-        ordering = 'name',
+        ordering = 'status', 'name'
 
     def __str__(self):
         return self.name
