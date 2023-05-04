@@ -32,7 +32,6 @@ urlpatterns = [
     path('sector/', include('territory_sectors.sector.urls')),
     path('uuid/', include('territory_sectors.uuid_qr.urls')),
     path('issue/', include('territory_sectors.issue.urls')),
-    path('status/', include('territory_sectors.status.urls')),
     path('__debug__/', include('debug_toolbar.urls')),
 ]
 if settings.DEBUG:
