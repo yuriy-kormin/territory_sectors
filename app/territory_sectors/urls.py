@@ -32,8 +32,8 @@ urlpatterns = [
     path('sector/', include('territory_sectors.sector.urls')),
     path('uuid/', include('territory_sectors.uuid_qr.urls')),
     path('issue/', include('territory_sectors.issue.urls')),
-    path('__debug__/', include('debug_toolbar.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)
+    urlpatterns += path('__debug__/', include('debug_toolbar.urls'))
