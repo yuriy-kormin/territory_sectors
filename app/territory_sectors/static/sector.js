@@ -129,7 +129,22 @@ function checkinout(markerId, action) {
   xhr.send(encodeFormData(markerId));
 }
 
+$(function() {
+    function showModal(imageUrl) {
+    var image = $('<img>').attr('src', imageUrl);
+    $('#imagemodal .modal-body').html(image);
+    $('#imagemodal').modal('show');
+  }
 
-
+  $('.pop').on('click', function(event) {
+    // var imageUrl = url;
+    // var image = $('<img>').attr('src', imageUrl);
+    // $('#imagemodal .modal-body').html(image);
+    // $('#imagemodal').modal('show');
+    event.preventDefault();
+    var fullImageUrl = $(this).data('url');
+    showModal(fullImageUrl);
+  });
+});
 
 
