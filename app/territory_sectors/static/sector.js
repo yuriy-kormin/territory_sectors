@@ -133,7 +133,7 @@ $(function() {
     function showModal(imageUrl) {
     var image = $('<img>').attr('src', imageUrl);
     image.id = "modal-image"
-        image.addClass("img-fluid")
+    image.addClass("img-fluid")
     $('#imagemodal .modal-body').html(image);
     $('#imagemodal').modal('show');
   }

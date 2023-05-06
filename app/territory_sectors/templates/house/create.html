@@ -9,7 +9,7 @@
             {% for field in form %}
                 {% if field.name == 'image_preview' %}
                     {% if field.value %}
-                      <a href="#" class="pop">
+                      <a href="#" class="pop_modal">
                         <img src="{{ field.value.url }}">
                       </a>
                     {% endif %}
@@ -28,7 +28,7 @@
                         </div>
                        <script type="text/javascript">
                         $(function() {
-                                $('.pop').on('click', function() {
+                                $('.pop_modal').on('click', function() {
                                     $('#imagemodal').modal('show');
 		                        });
                         });
