@@ -1,6 +1,4 @@
-# from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.gis.db.models.functions import Centroid
-# from django.views import View
 from django.views.generic import TemplateView, DetailView
 from django.contrib.auth import logout
 from django.contrib.auth.views import LoginView, LogoutView
@@ -42,6 +40,3 @@ class UUIDView(DetailView):
     #     uuid = self.kwargs.get('uuid')
     #     # id = shortuuid.decode(uuid)
     #     return self.model.objects.get(id=uuid)
-
-# class Stat(LoginRequiredMixin, View):
-#     template

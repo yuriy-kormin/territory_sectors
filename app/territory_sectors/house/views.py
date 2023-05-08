@@ -38,8 +38,8 @@ class HouseUpdateView(LoginRequiredMixinCustom, ImageResizeBeforeMixin,
     success_message = _('House updated successfully')
 
 
-class HouseListView(LoginRequiredMixinCustom, CountFlatsMixin, FilterView,
-                    ListView):
+class HouseListView(LoginRequiredMixinCustom, FilterView,
+                    CountFlatsMixin, ListView):
     filterset_class = AddressFilter
     model = House
     template_name = "house/list.html"
