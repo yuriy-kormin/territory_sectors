@@ -16,14 +16,7 @@
         <h1 class="my-4"> {{ header }}</h1>
         <div class = "form">
             {%  for field in form %}
-                <div class = "form-group">
-                    {% bootstrap_field field %}
-                    {% if field.name == 'uuid' %}
-                        <div class = "form">
-                            <a href="{% url "uuid_gen" %}" target="_blank" rel="noopener">create uuid</a>
-                        </div>
-                    {% endif %}
-                </div>
+                {% bootstrap_field field %}
             {% endfor %}
                 <div class = "form-group">
                      {% bootstrap_button button_title button_type="submit" button_class="mt-3 btn btn-primary" %}

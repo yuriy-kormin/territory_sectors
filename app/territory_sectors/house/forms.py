@@ -24,6 +24,15 @@ class HouseForm(forms.ModelForm):
             'id',
             # 'flats_data',
         ]
+        labels = {
+            'address': _('Address'),
+            'floor_amount': _('Floors amount'),
+            'entrances': _('Entrances amount'),
+            'for_search': _('for_search'),
+            'desc': _('Desc to find house'),
+            'name': _('Tech desc'),
+            'image': _('image')
+        }
         widgets = {
             'address': forms.TextInput(
                 attrs={
@@ -137,9 +146,4 @@ class HouseForm(forms.ModelForm):
                             instance_set_data(instance, flat_set)
                             instance.save()
                 instances.append(instance)
-            #     # fields.append(key)
-            # raise IOError(instances)
-            # Flat.objects.abulk_update(instances,
-            #                           ['entrance', 'floor',
-            #                           'number', 'way_desc'])
         return obj

@@ -1,50 +1,52 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load bootstrap4 %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static "sector.css" %}">
+{% endblock %}
 {% block page_content %}
     <form method="post" action="." id="houseform" enctype="multipart/form-data">
     {% csrf_token %}
-        <div class = "form">
-    <h1 class="my-4"> {{ header }}</h1>
-            {% for field in form %}
-                {% if field.name == 'image_preview' %}
-                    {% if field.value %}
-                      <a href="#" class="pop_modal">
-                        <img src="{{ field.value.url }}">
-                      </a>
-                    {% endif %}
-                {% else %}
-                    {% if field.name == 'image' %}
-                      {% if field.value %}
-                        <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-                          <div class="modal-dialog">
-                            <div class="modal-content">
-                              <div class="modal-body">
-                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                <img src="{{ field.value.url }}" class="imagepreview" style="width: 100%;" >
-                              </div>
-                            </div>
+    <div class = "form">
+      <h1 class="my-4"> {{ header }}</h1>
+        {% for field in form %}
+            {% if field.name == 'image_preview' %}
+                {% if field.value %}
+                  <a href="#" class="pop_modal"><img src="{{ field.value.url }}"></a>
+                {% endif %}
+            {% else %}
+                {% if field.name == 'image' %}
+                  {% if field.value %}
+                    <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-body">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            <img src="{{ field.value.url }}" class="imagepreview" style="width: 100%;" >
                           </div>
                         </div>
-                       <script type="text/javascript">
-                        $(function() {
-                                $('.pop_modal').on('click', function() {
-                                    $('#imagemodal').modal('show');
-		                        });
-                        });
-                       </script>
-                      {% endif %}
-                    {% endif %}
-                    {% bootstrap_field field %}
+                      </div>
+                    </div>
+                   <script type="text/javascript">
+                    $(function() {
+                            $('.pop_modal').on('click', function() {
+                                $('#imagemodal').modal('show');
+                            });
+                    });
+                   </script>
+                  {% endif %}
                 {% endif %}
-            {% endfor %}
-            <div>
-                {% include "house/bulk_flat_create_update.html" %}
-            </div>
-            <div class = "form-group">
-                {% bootstrap_button button_title button_type="submit" button_class="mt-3 btn btn-primary" %}
-            </div>
+            {% bootstrap_field field %}
+            {% endif %}
+        {% endfor %}
+        <div>
+            {% include "house/bulk_flat_create_update.html" %}
         </div>
+        <div class = "form-group">
+            {% bootstrap_button button_title button_type="submit" button_class="mt-3 btn btn-primary" %}
+        </div>
+    </div>
 
     <input type="hidden" id="id" value="{{ house.id|default:'0' }}">
     </form>
