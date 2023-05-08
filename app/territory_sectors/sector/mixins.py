@@ -1,6 +1,16 @@
 from django.contrib.gis.db.models.functions import AsGeoJSON, Centroid
 from django.db.models import Count
 from .models import Sector
+from natsort import natsorted
+
+
+class NatSortMixin:
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return natsorted(queryset,
+                         key=lambda s: (s.status_id, s.name)
+                         )
+
 
 
 class GeoJSONAnnotateMixin:
