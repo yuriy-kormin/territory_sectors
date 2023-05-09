@@ -4,12 +4,11 @@
 {% load static %}
 {% block page_content %}
     <div class="my-3 mt-3 p-3 bg-white rounded shadow-sm overflow-auto">
-        {% include "sector/sector_selector.html" %}
+{#        {% include "sector/sector_selector.html" %}#}
     </div>
    <h1 class="my-4"> {{ marks }}</h1>
     <ul class="navbar-nav">
         <li class = "nav-item active"><a href="#list_houses" data-toggle="collapse">{% translate "show list" %}</a></li>
-        <li class = "nav-item active"><a class="nav-link" href="{% url "sector_add" %}">{% translate "Create sector" %}</a></li>
     </ul>
     <table id ="list_houses" class="table collapse text-center">
         <thead><tr>

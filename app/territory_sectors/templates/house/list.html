@@ -3,8 +3,6 @@
 {% load bootstrap4 %}
 {% block page_content %}
    <h1 class="my-4"> {{ marks }}</h1>
-
-    <a class="nav-link" href="{% url "house_add" %}">{% translate "Create house" %}</a>
     {% include "house/filter.html" %}
     <table class = "table table-striped">
         <thead class="thead-dark">
