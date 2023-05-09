@@ -12,7 +12,6 @@ class NatSortMixin:
                          )
 
 
-
 class GeoJSONAnnotateMixin:
     def get_queryset(self):
         qs = super(GeoJSONAnnotateMixin, self).get_queryset()
