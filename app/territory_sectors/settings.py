@@ -37,27 +37,36 @@ ALLOWED_HOSTS = ['*']
 
 # Application definition
 
-INSTALLED_APPS = [
+DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.gis',
+]
+
+THIRD_PARTY_APPS = [
     'django_extensions',
     'bootstrap4',
     'simple_history',
+    "qr_code",
+]
+
+PROJECT_APPS = [
     'territory_sectors',
     'territory_sectors.flat',
     'territory_sectors.house',
-    'django.contrib.gis',
     'territory_sectors.sector',
     'territory_sectors.language',
     'territory_sectors.uuid_qr',
-    "qr_code",
     "territory_sectors.issue",
     "territory_sectors.status",
 ]
+
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APPS
+
 if DEBUG:
     INSTALLED_APPS.append("debug_toolbar")
 
