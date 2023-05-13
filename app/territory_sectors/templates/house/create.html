@@ -4,6 +4,7 @@
 {% load static %}
 {% block head %}
     <link rel="stylesheet" href="{% static "sector.css" %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/autosize.js/4.0.2/autosize.min.js"></script>
 {% endblock %}
 {% block page_content %}
     <form method="post" action="." id="houseform" enctype="multipart/form-data">
@@ -55,6 +56,11 @@
 
 {% block markers %}
     {% if object %}
+        $(document).ready(function() {
+          $('.form-control').each(function() {
+            autosize(this);
+          });
+        });
         set_popup({{ house.id }}, "{{ house.address }}")
         set_marker({{ house.id }}, {{ house.gps_pos }});
         map_fly({{ house.gps_pos }});
