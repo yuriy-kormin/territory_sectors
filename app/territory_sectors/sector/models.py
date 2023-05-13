@@ -34,6 +34,7 @@ class StatManager(models.Manager):
     def completed_count(self):
         return self.filter(status__name='completed').count()
 
+
 class Sector(models.Model):
     date_joined = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)

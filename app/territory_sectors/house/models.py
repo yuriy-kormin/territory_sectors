@@ -5,6 +5,7 @@ from simple_history.models import HistoricalRecords
 from territory_sectors.language.models import Language
 import json
 from django.core.serializers.json import DjangoJSONEncoder
+from django.apps import apps
 
 
 class HouseManager(models.Manager):
@@ -14,6 +15,7 @@ class HouseManager(models.Manager):
             'language'
         )
         return json.dumps(list(flats), cls=DjangoJSONEncoder)
+
 
 class StatManager(models.Manager):
     def total_count(self):
@@ -87,3 +89,12 @@ class House(models.Model):
     @classmethod
     def get_lang_list_qs(cls):
         return Language.objects.all()
+
+    def sectors(self):
+        Sector = apps.get_model(model_name='Sector',
+                                app_label='sector')
+
+        return Sector.objects.filter(
+            contour__intersects=self.gps_point,
+            for_search=self.for_search
+        )
