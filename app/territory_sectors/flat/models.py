@@ -6,7 +6,14 @@ from territory_sectors.uuid_qr.models import Uuid
 from simple_history.models import HistoricalRecords
 
 
-# Create your models here.
+class StatManager(models.Manager):
+    def total_count(self):
+        return self.count()
+
+    def total_ru_count(self):
+        return self.filter(language__id=1).count()
+
+
 class Flat(models.Model):
     date_joined = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
@@ -20,6 +27,8 @@ class Flat(models.Model):
     uuid = models.OneToOneField(to=Uuid, null=True, blank=True,
                                 on_delete=models.SET_NULL)
     history = HistoricalRecords()
+    objects = models.Manager()
+    stat = StatManager()
 
     class Meta:
         ordering = ['house', 'entrance', 'floor', 'number']

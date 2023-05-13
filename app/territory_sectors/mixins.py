@@ -7,6 +7,9 @@ from django.contrib.auth.views import redirect_to_login
 from django.shortcuts import resolve_url
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
+from .house.models import House
+from .sector.models import Sector
+from .flat.models import Flat
 
 
 class SetAuthorMixin:
@@ -37,3 +40,19 @@ class LoginRequiredMixinCustom(LoginRequiredMixin):
             resolved_login_url,
             self.get_redirect_field_name(),
         )
+
+
+class StatMixin:
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['total_houses'] = House.stat.total_count()
+        context['total_flats'] = Flat.stat.total_count()
+        context['total_ru_flats'] = Flat.stat.total_ru_count()
+        context['total_non_ru_flats'] = \
+            context['total_flats'] - context['total_ru_flats']
+        context['total_sectors'] = Sector.stat.total_count()
+        context['sector_free'] = Sector.stat.free_count()
+        context['sector_assigned'] = Sector.stat.assigned_count()
+        context['sector_completed'] = Sector.stat.completed_count()
+
+        return context

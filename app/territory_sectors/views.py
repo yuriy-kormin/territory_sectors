@@ -1,14 +1,14 @@
-# from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.gis.db.models.functions import Centroid
-# from django.views import View
 from django.views.generic import TemplateView, DetailView
 from django.contrib.auth import logout
 from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 
-# from territory_sectors.uuid_qr.mixins import ContextAddQrImgData
 from territory_sectors.uuid_qr.models import Uuid
+
+from .mixins import StatMixin
 
 
 class IndexView(TemplateView):
@@ -34,14 +34,7 @@ class UUIDView(DetailView):
     def get_queryset(self):
         qs = super().get_queryset()
         return qs.annotate(centroid=Centroid('sector__contour'))
-    #     return qs.annotate(
-    #         flat_count=Count('sector__house__flat')
-    #     )
-    #
-    # def get_object(self, queryset=None):
-    #     uuid = self.kwargs.get('uuid')
-    #     # id = shortuuid.decode(uuid)
-    #     return self.model.objects.get(id=uuid)
 
-# class Stat(LoginRequiredMixin, View):
-#     template
+
+class StatView(LoginRequiredMixin, StatMixin, TemplateView):
+    template_name = 'stat/stat.html'
