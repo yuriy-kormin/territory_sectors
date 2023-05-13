@@ -21,6 +21,19 @@ class SectorManager(models.Manager):
         return result
 
 
+class StatManager(models.Manager):
+    def total_count(self):
+        return self.count()
+
+    def free_count(self):
+        return self.filter(status__name='free').count()
+
+    def assigned_count(self):
+        return self.filter(status__name='assigned').count()
+
+    def completed_count(self):
+        return self.filter(status__name='completed').count()
+
 class Sector(models.Model):
     date_joined = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
@@ -34,6 +47,7 @@ class Sector(models.Model):
     objects = models.Manager()
     js = SectorManager.json_polygons
     history = HistoricalRecords()
+    stat = StatManager()
 
     # flat_count = SectorManager.get_houses_into().aggregate(Sum('flat'))
     # class Meta:

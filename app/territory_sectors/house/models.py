@@ -15,6 +15,13 @@ class HouseManager(models.Manager):
         )
         return json.dumps(list(flats), cls=DjangoJSONEncoder)
 
+class StatManager(models.Manager):
+    def total_count(self):
+        return self.count()
+
+    def flat_count(self):
+        return self.flat_set.count()
+
 
 class House(models.Model):
     MAX_IMAGE_RESOLUTION = 1024
@@ -35,8 +42,10 @@ class House(models.Model):
     gps_point = gis_models.PointField(null=False, blank=False, srid=4326)
     uuid = models.OneToOneField(to=Uuid, null=True, blank=True,
                                 on_delete=models.SET_NULL)
+    objects = models.Manager()
     history = HistoricalRecords()
     flats_json = HouseManager.flats_json
+    stat = StatManager()
     # flats_ids = HouseManager
     # Shop.objects.annotate(
     #     contained_points=
