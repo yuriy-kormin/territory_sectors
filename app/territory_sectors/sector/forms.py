@@ -1,6 +1,7 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
 from .models import Sector
+from ..status.models import Status
 
 
 class SectorForm(forms.ModelForm):
@@ -26,7 +27,9 @@ class SectorForm(forms.ModelForm):
     #             )
     #         )
 
-    # status = forms.ModelChoiceField(queryset=Status.objects.all())
+    status = forms.ModelChoiceField(queryset=Status.objects.all(),
+                                    initial=Status.objects.first())
+
     class Meta:
         model = Sector
         fields = [
