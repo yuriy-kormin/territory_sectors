@@ -10,11 +10,11 @@
             <th>{% translate "status" %}</th>
             <th>{% translate "assigned to" %}</th>
         </tr>
-        {% for record in historicalsector_list %}
+        {% for record in object_list %}
             <tr>
-                <td> {{record.history_user}}</td>
+                <td> {{record.history_user|default:"tork"}}</td>
                 <td> {{record.history_date|date:"d M Y"}}</td>
-                <td> {{record.status|default:""}}</td>
+                <td> {{record.status|default:"created"}}</td>
                 <td> {{record.assigned_to|default:""}}</td>
             </tr>
         {% endfor %}
