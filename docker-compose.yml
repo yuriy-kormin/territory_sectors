@@ -4,9 +4,11 @@ services:
     sectors:
         build:
             context: .
-            dockerfile: ./Docker/sectors/Dockerfile
+            dockerfile: Docker/sectors/Dockerfile
         env_file:
             - .env-compose
+        volumes:
+            - ./app:/app/
         expose:
             - 8000
         depends_on:
@@ -33,8 +35,10 @@ services:
             - letsencrypt:/etc/letsencrypt/:ro
             - acme:/var/www/letsencrypt:ro
             - nginx-conf:/etc/nginx/conf.d
+            - ./app/media:/app/media/:rw
         ports:
             - 80:80
+            - 443:443
         depends_on:
             - sectors
     certbot:
