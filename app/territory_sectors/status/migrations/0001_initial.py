@@ -4,6 +4,14 @@ from django.conf import settings
 from django.db import migrations, models
 import django.db.models.deletion
 import simple_history.models
+from ..models import Status
+
+
+
+def create_status_instances(apps, schema_editor):
+    for status in [status_name for status_name,_ in Status.name_options]:
+        instance = Status.objects.create(name=status)
+        instance.save()
 
 
 class Migration(migrations.Migration):
@@ -41,4 +49,5 @@ class Migration(migrations.Migration):
             },
             bases=(simple_history.models.HistoricalChanges, models.Model),
         ),
+        migrations.RunPython(create_status_instances),
     ]
