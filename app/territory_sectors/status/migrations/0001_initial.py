@@ -7,15 +7,13 @@ import simple_history.models
 from ..models import Status
 
 
-
 def create_status_instances(apps, schema_editor):
-    for status in [status_name for status_name,_ in Status.name_options]:
+    for status in [status_name for status_name, _ in Status.name_options]:
         instance = Status.objects.create(name=status)
         instance.save()
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -26,20 +24,38 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Status',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(choices=[('free', 'free'), ('assigned', 'assigned'), ('under_construction', 'under_construction'), ('completed', 'completed')], default='free', max_length=200, unique=True)),
+                ('id', models.BigAutoField(auto_created=True, primary_key=True,
+                                           serialize=False, verbose_name='ID')),
+                ('name', models.CharField(
+                    choices=[('free', 'free'), ('assigned', 'assigned'),
+                             ('under_construction', 'under_construction'),
+                             ('completed', 'completed')], default='free',
+                    max_length=200, unique=True)),
             ],
         ),
         migrations.CreateModel(
             name='HistoricalStatus',
             fields=[
-                ('id', models.BigIntegerField(auto_created=True, blank=True, db_index=True, verbose_name='ID')),
-                ('name', models.CharField(choices=[('free', 'free'), ('assigned', 'assigned'), ('under_construction', 'under_construction'), ('completed', 'completed')], db_index=True, default='free', max_length=200)),
-                ('history_id', models.AutoField(primary_key=True, serialize=False)),
+                ('id', models.BigIntegerField(auto_created=True, blank=True,
+                                              db_index=True,
+                                              verbose_name='ID')),
+                ('name', models.CharField(
+                    choices=[('free', 'free'), ('assigned', 'assigned'),
+                             ('under_construction', 'under_construction'),
+                             ('completed', 'completed')], db_index=True,
+                    default='free', max_length=200)),
+                ('history_id',
+                 models.AutoField(primary_key=True, serialize=False)),
                 ('history_date', models.DateTimeField(db_index=True)),
-                ('history_change_reason', models.CharField(max_length=100, null=True)),
-                ('history_type', models.CharField(choices=[('+', 'Created'), ('~', 'Changed'), ('-', 'Deleted')], max_length=1)),
-                ('history_user', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to=settings.AUTH_USER_MODEL)),
+                ('history_change_reason',
+                 models.CharField(max_length=100, null=True)),
+                ('history_type', models.CharField(
+                    choices=[('+', 'Created'), ('~', 'Changed'),
+                             ('-', 'Deleted')], max_length=1)),
+                ('history_user', models.ForeignKey(null=True,
+                                                   on_delete=django.db.models.deletion.SET_NULL,
+                                                   related_name='+',
+                                                   to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'verbose_name': 'historical status',
