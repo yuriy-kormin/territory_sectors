@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta charset="UTF-8">
+    {% load static %}
+    {% load i18n %}
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery=True %}
+    {% csrf_token %}
+{% if GA_KEY %}
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id={{ GA_KEY }}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '{{ GA_KEY }}');
+    </script>
+{% endif %}
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css' rel='stylesheet' />
+    <script>mapboxgl.accessToken='{{MAPBOX_API_KEY}}'</script>
+    <script src ="{% static "sector.js" %}"></script>
+    <script src ="{% static "const.js" %}"></script>
+        {% block head %}
+        {% endblock %}
+    <title>{% translate "Territory" %}</title>
+</head>
+<body class="bg-light d-flex flex-column min-vh-100">
+{% include "nav.html" %}
+<main role="main" class="container">
+    <div class="my-3 mt-3 p-3 bg-white rounded shadow-sm overflow-auto">
+        {% bootstrap_messages %}
+        {% block page_content %}
+        {% endblock %}
+    </div>
+    {% block top_map %}
+    {% endblock %}
+    <div id="map" style="height:40vh"></div>
+    <script src="{% static "map.js" %}"></script>
+    <script src ="{% static "border.js" %}"></script>
+    <script>
+        {% block markers %}
+        {% endblock %}
+
+    map.on('load', function(){
+        {% block maponload %}
+        {% endblock %}
+    })
+    </script>
+</main>
+</body>
+</html>
+

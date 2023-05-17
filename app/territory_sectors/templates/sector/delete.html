@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load bootstrap4 %}
+{% block page_content %}
+    <h1 class="my-4"> {{ header }}</h1>
+    <form method="post" action=".">
+    {% csrf_token %}
+        <p>{{ message }} "{{ object.name }}"  ?</p>
+{% bootstrap_button button_title button_type="submit" button_class="btn btn-danger" %}    </form>
+{% endblock %}
+{% block markers %}
+    map_fly({{ object.centroid.coords.0|floatformat:"." }},{{ object.centroid.coords.1|floatformat:"." }})
+    add_sector_source(
+        {{ object.id }},
+        "{{ sector.status }}",
+        {{ object.geojson | safe }},
+        {{ sector.for_search|yesno:"true,false" }},
+        "{{ object.name }}"
+        )
+    map.on('click','sectors', sector_popup)
+{% endblock %}
+{% block maponload %}
+    map_add_layer()
+{% endblock %}

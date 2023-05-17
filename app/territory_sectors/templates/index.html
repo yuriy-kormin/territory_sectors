@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block page_content %}
+    {% csrf_token %}
+        <h1 class="my-4"> {{ header }}</h1>
+        <div class = "text">
+            {% translate "Gamardjoba " %}{{ request.user.username }}
+        </div>
+    </form>
+{% endblock %}
+{% block markers %}
+    {% include "issue/map_hide.html" %}
+{% endblock %}

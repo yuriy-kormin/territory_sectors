@@ -1,20 +1,20 @@
-MANAGE := poetry run python3 manage.py
+build:
+	docker-compose build --parallel
+up:
+	docker-compose up -d
+logs:
+	docker-compose logs
+down:
+	docker-compose down --remove-orphans
+clean:
+	docker image prune -a
 
-start:
-	${MANAGE} runserver 127.0.0.1:8000
-shell:
-	${MANAGE} shell_plus --plain
-migrate:
-	${MANAGE} makemigrations
-	${MANAGE} migrate
-collectstatic:
-	poetry run python manage.py collectstatic --no-input --clear
-test:
-	${MANAGE} test
-install:
-	poetry install
-lint:
-	poetry run flake8 territory_sectors --exclude migrations
-translate:
-	${MANAGE} makemessages --locale ru
-	${MANAGE} compilemessages --locale ru
+APP_DIR := app
+TARGET := $(MAKECMDGOALS)
+
+include $(APP_DIR)/Makefile
+
+.PHONY: $(TARGET)
+$(TARGET):
+	cd $(APP_DIR) && $(MAKE) $(TARGET)
+	@true

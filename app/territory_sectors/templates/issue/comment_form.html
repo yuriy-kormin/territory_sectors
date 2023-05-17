@@ -1,0 +1,13 @@
+{% load bootstrap4 %}
+<div class = "card mt-3 px-4">
+    <form method="post" action="{% url 'comment_create' issue.pk %}">
+    {% csrf_token %}
+        {% for field in new_comment %}
+            {% bootstrap_field field %}
+        {% endfor %}
+        {% if issue.completed %}
+            <script>document.getElementById('id_completed').checked= true;</script>
+        {% endif %}
+        {% bootstrap_button button_title button_type="submit" button_class="mt-3 btn btn-primary" %}
+    </form>
+</div>

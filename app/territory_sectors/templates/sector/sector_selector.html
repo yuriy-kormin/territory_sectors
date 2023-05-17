@@ -1,0 +1,55 @@
+{% load i18n %}
+{% load bootstrap4 %}
+<ul class="nav nav-pills">
+  <li class="nav-item mx-1" id="li_serve">
+    <a id="for-serve" class="nav-link {% if status == 'for-serve' or not status %}active{% endif %} py-1" href="{% url "sector_list_serve" %}">
+      {% trans "button for serve" %}
+    </a>
+  </li>
+  <li class="nav-item mx-1" id="li_search">
+      <a id="for-search" class="nav-link {% if status == 'for-search' or not status %}active{% endif %} py-1" href="{% url "sector_list_search" %}">
+      {% trans "button for search" %}
+    </a>
+  </li>
+</ul>
+<input id="full list" type = "hidden" value="{% url "sector_list" %}">
+<script>
+  {#li_search = document.getElementById('li_search')#}
+  {#li_serve = document.getElementById('li_serve');#}
+  {#if (li_search.classList.contains('active')) {#}
+  {#    li_search.style.backgroundColor = search_status_color;#}
+  {#}#}
+  {#if (li_serve.classList.contains('active')) {#}
+  {#    li_serve.style.backgroundColor = serve_status_color;#}
+  {#}#}
+
+  var serveLink = document.getElementById('for-serve');
+  var searchLink = document.getElementById('for-search');
+  const searchLinkActive = searchLink.classList.contains('active')
+  const serveLinkActive = serveLink.classList.contains('active')
+  const all_link = document.getElementById('full list').value;
+
+  serveLink.addEventListener('click', function() {
+    if (serveLinkActive){
+        if (searchLinkActive) {
+            serveLink.href = searchLink.href;
+        }
+    }
+    else {
+        serveLink.href = all_link;
+    }
+  });
+
+  searchLink.addEventListener('click', function() {
+    if (searchLinkActive) {
+        if (serveLinkActive) {
+            searchLink.href = serveLink.href;
+        }
+    }
+    else {
+        searchLink.href = all_link;
+    }
+  });
+</script>
+
+

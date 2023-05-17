@@ -1,0 +1,10 @@
+[{
+  "model": "flat.flat",
+  "pk": 10,
+  "fields": {
+    "house": null,
+    "number": null,
+    "entrance": null,
+    "way_desc": ""
+}
+}]

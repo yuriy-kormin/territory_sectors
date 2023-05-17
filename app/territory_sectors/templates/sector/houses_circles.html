@@ -1,0 +1,4 @@
+{% for house in houses %}
+    add_circle_source({{ house.id }},{{ house.flat_count }},mark = {% if house.for_search %}"for_search"{% else %}"default"{% endif %},{{ house.gps_pos }})
+    set_popup('house_{{ house.id }}','{% spaceless %}{% include "./house_popup.html" %}{% endspaceless %}')
+{% endfor %}

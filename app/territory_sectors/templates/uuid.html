@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+{% load i18n %}
+{% load qr_code %}
+{% load static %}
+{% block page_content %}
+    {% if request.user.is_authenticated %}
+        {% qr_from_text request.build_absolute_uri size="t" image_format="png" error_correction="L" %}
+        <p>Это сообщение отображается только если пользователь залогинен</p>
+        Внизу раскрывающийся список с квартирами, которые были найдены в текущем доме<br>
+        !!! Отображаются только квартиры в которых язык устновлен в id=1(русский)</p>
+    {% endif %}
+    <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+        <div id="accordion">
+            {% for house in object.sector.get_houses_into %}
+              <div class="card">
+                <div class="card-header" id="headingOne">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{ house.id }}" aria-expanded="true" aria-controls="collapse{{ house.id }}">
+                        {{house.address}}({{ house.flat_count }} {% translate "addresses" %})
+                    </button>
+                    {% if house.desc %}<div>{{ house.desc|linebreaks }}</div>{% endif %}
+                </div>
+
+                <div id="collapse{{ house.id }}" class="collapse" aria-labelledby="heading{{ house.id }}" data-parent="#accordion">
+                  <div class="card-body">
+                      {% if house.image %}<a href="#" class="pop" data-url="{{ house.image.url }}"><img src="{{ house.image_preview.url }}"></a>{% endif %}
+                      <table class = "table table-striped">
+                        <tr>
+                            <th>{% translate "entrance" %}</th>
+                            <th>{% translate "floor" %}</th>
+                            <th>{% translate "number" %}</th>
+                            <th>{% translate "desc" %}</th>
+                        </tr>
+                        {% for flat in house.get_ru_flats %}
+                            <tr>
+                                <td>{% if flat.entrance %} {{ flat.entrance}} {% translate "entrance" %}{% endif %}</td>
+                                <td>{% if flat.floor %}{{ flat.floor }} {% translate "floor" %}{% endif %}</td>
+                                <td>{% if flat.number %}{{ flat.number }} {% translate "number" %}{% endif %}</td>
+                                <td>{{ flat.way_desc|default_if_none:"" }}</td>
+                            </tr>
+                        {% endfor %}
+                      </table>
+                  </div>
+                </div>
+              </div>
+        {% endfor %}
+        </div>
+{% endblock %}
+{% block markers %}
+    map_fly({{ object.centroid.coords.0|floatformat:"." }},{{ object.centroid.coords.1|floatformat:"." }})
+    {% for house in object.sector.get_houses_into %}
+        set_popup({{ house.id }},"{{ house }}({{ house.flat_count }})")
+        set_marker({{ house.id }}, {{ house.gps_pos }})
+    {% endfor %}
+{% endblock %}

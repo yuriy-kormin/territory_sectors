@@ -1,0 +1,574 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-05-13 17:59+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: territory_sectors/flat/forms.py:33
+msgid ""
+"Please set number, if possible. Elsewhere - stay it empty.use , as separator "
+"for multiply)"
+msgstr ""
+"Укажите номер(если возможно). Используйте \",\" как разделитель, если "
+"квартир несколько "
+
+#: territory_sectors/flat/forms.py:42
+msgid "Please set entrance number"
+msgstr "Номер подъезда"
+
+#: territory_sectors/flat/forms.py:48
+msgid "Please set floor number"
+msgstr "Этаж"
+
+#: territory_sectors/flat/forms.py:54
+msgid "Please describe flat place on floor"
+msgstr "Как найти квартиру на этаже"
+
+#: territory_sectors/flat/views.py:20
+#: territory_sectors/templates/flat/list.html:6
+msgid "Create flat"
+msgstr "Создать квартиру"
+
+#: territory_sectors/flat/views.py:21 territory_sectors/house/views.py:21
+#: territory_sectors/issue/views.py:20 territory_sectors/sector/views.py:23
+msgid "Create"
+msgstr "Создать"
+
+#: territory_sectors/flat/views.py:23
+msgid "Flat created successfully"
+msgstr "Квартира успешно создана"
+
+#: territory_sectors/flat/views.py:30 territory_sectors/sector/views.py:108
+#: territory_sectors/templates/sector/sector_popup.html:16
+msgid "remove"
+msgstr "удалить"
+
+#: territory_sectors/flat/views.py:41
+msgid "Update Flat"
+msgstr "Изменить квартиру"
+
+#: territory_sectors/flat/views.py:42 territory_sectors/house/views.py:35
+#: territory_sectors/sector/views.py:45
+msgid "Update"
+msgstr "Изменить"
+
+#: territory_sectors/flat/views.py:44
+msgid "Flat updated successfully"
+msgstr "Данные квартиры успешно изменены"
+
+#: territory_sectors/flat/views.py:53
+msgid "Remove flat"
+msgstr "Удалить квартиру"
+
+#: territory_sectors/flat/views.py:54 territory_sectors/house/views.py:60
+#: territory_sectors/sector/views.py:152
+msgid "Remove "
+msgstr "Удалить "
+
+#: territory_sectors/flat/views.py:55
+msgid "Are you sure delete flat "
+msgstr "Вы точно хотите удалить квартиру "
+
+#: territory_sectors/flat/views.py:57
+msgid "Flat deleted successfully"
+msgstr "Квартира успешно удалена"
+
+#: territory_sectors/house/filters.py:9
+msgid "Filter by address"
+msgstr "Отфильтровать по адресу"
+
+#: territory_sectors/house/forms.py:28
+msgid "Address"
+msgstr "Адрес"
+
+#: territory_sectors/house/forms.py:29
+msgid "Floors amount"
+msgstr "Этажей"
+
+#: territory_sectors/house/forms.py:30
+msgid "Entrances amount"
+msgstr "Подъездов"
+
+#: territory_sectors/house/forms.py:31
+msgid "for_search"
+msgstr "поисковый"
+
+#: territory_sectors/house/forms.py:32
+msgid "Desc to find house"
+msgstr "Как найти дом"
+
+#: territory_sectors/house/forms.py:33
+msgid "Tech desc"
+msgstr "Техническое описание"
+
+#: territory_sectors/house/forms.py:34
+msgid "image"
+msgstr "Фото"
+
+#: territory_sectors/house/forms.py:40
+msgid "Please enter address of building"
+msgstr "Укажите адрес"
+
+#: territory_sectors/house/forms.py:46
+msgid "Please set floors amount of building"
+msgstr "Количество этажей"
+
+#: territory_sectors/house/forms.py:52
+msgid "How much entrances in building"
+msgstr "Количество подъездов"
+
+#: territory_sectors/house/forms.py:63
+msgid "Description HOW TO FIND house( will be seen on sector print)"
+msgstr "Описание, КАК НАЙТИ ДОМ (будет видно на карточке участка)"
+
+#: territory_sectors/house/forms.py:72
+msgid "Technical description. Can see only by logged in users"
+msgstr ""
+"Техническое описание - количество квартир на этаже и пр. Видно только "
+"залогиненным пользователям"
+
+#: territory_sectors/house/views.py:20 territory_sectors/templates/nav.html:23
+msgid "Create house"
+msgstr "Создать дом"
+
+#: territory_sectors/house/views.py:24
+msgid "House created successfully"
+msgstr "Дом успешно создан"
+
+#: territory_sectors/house/views.py:34
+msgid "Update house"
+msgstr "Обновить данные дома"
+
+#: territory_sectors/house/views.py:38
+msgid "House updated successfully"
+msgstr "Данные дома успешно обновлены"
+
+#: territory_sectors/house/views.py:47
+msgid "Remove"
+msgstr "Удалить"
+
+#: territory_sectors/house/views.py:48
+msgid "Select"
+msgstr "Выбрать"
+
+#: territory_sectors/house/views.py:59
+msgid "Remove house"
+msgstr "Удалить дом"
+
+#: territory_sectors/house/views.py:61
+msgid "Are you sure delete house "
+msgstr "Вы точно хотите удалить дом "
+
+#: territory_sectors/house/views.py:63
+msgid "House deleted successfully"
+msgstr "Дом успешно удален"
+
+#: territory_sectors/issue/forms.py:17
+msgid "Please enter issue name"
+msgstr "Заголовок задачи"
+
+#: territory_sectors/issue/forms.py:23
+msgid "Please enter issue text"
+msgstr "Описание задачи"
+
+#: territory_sectors/issue/forms.py:33
+msgid "Task is completed"
+msgstr "Задача выполнена"
+
+#: territory_sectors/issue/forms.py:44
+msgid "Enter your comment here"
+msgstr "Введите ваш комментарий"
+
+#: territory_sectors/issue/forms.py:50
+msgid "Reply"
+msgstr "Добавить"
+
+#: territory_sectors/issue/views.py:19
+#: territory_sectors/templates/issue/list.html:11
+msgid "Create issue"
+msgstr "Создать задачу"
+
+#: territory_sectors/issue/views.py:22
+msgid "Issue created successfully"
+msgstr "Задача успешно создана"
+
+#: territory_sectors/issue/views.py:29
+msgid "List issues"
+msgstr "Список задач"
+
+#: territory_sectors/issue/views.py:53
+msgid "Issue detail"
+msgstr "Детали задачи"
+
+#: territory_sectors/issue/views.py:54
+msgid "Comment"
+msgstr "Комментарий"
+
+#: territory_sectors/issue/views.py:65
+msgid "Issue updated"
+msgstr "Детали задачи"
+
+#: territory_sectors/mixins.py:24
+msgid "Please login to access this page"
+msgstr "Пожалуйста введите учетные данные для доступа к данной странице"
+
+#: territory_sectors/sector/forms.py:43
+msgid "Sector name"
+msgstr "Название участка"
+
+#: territory_sectors/sector/forms.py:44
+msgid "Sector status"
+msgstr "Статус участка "
+
+#: territory_sectors/sector/forms.py:45
+msgid "for search"
+msgstr "поисковый"
+
+#: territory_sectors/sector/forms.py:46
+#: territory_sectors/templates/sector/history_status.html:11
+msgid "assigned to"
+msgstr "Назначен возвещателю"
+
+#: territory_sectors/sector/forms.py:52
+msgid "Please enter sector name"
+msgstr "Название участка"
+
+#: territory_sectors/sector/views.py:22 territory_sectors/templates/nav.html:15
+msgid "Create sector"
+msgstr "Создать участок"
+
+#: territory_sectors/sector/views.py:28
+msgid "Sector created successfully"
+msgstr "Участок успешно создан"
+
+#: territory_sectors/sector/views.py:44
+msgid "Update Sector"
+msgstr "Обновить данные участка"
+
+#: territory_sectors/sector/views.py:50
+msgid "Sector updated successfully"
+msgstr "Данные участка успешно обновлены"
+
+#: territory_sectors/sector/views.py:86
+msgid "Sector "
+msgstr "Участок "
+
+#: territory_sectors/sector/views.py:128
+msgid "History statuses of "
+msgstr "История статусов участка "
+
+#: territory_sectors/sector/views.py:151
+msgid "Remove sector"
+msgstr "Удалить участок"
+
+#: territory_sectors/sector/views.py:153
+msgid "Are you sure delete sector "
+msgstr "Вы уверены, что хотите удалить участок "
+
+#: territory_sectors/sector/views.py:155
+msgid "Sector deleted successfully"
+msgstr "Участок успешно удален"
+
+#: territory_sectors/status/models.py:9
+#: territory_sectors/templates/sector/list.html:93
+msgid "free"
+msgstr "свободен"
+
+#: territory_sectors/status/models.py:10
+#: territory_sectors/templates/sector/list.html:98
+msgid "assigned"
+msgstr "выдан"
+
+#: territory_sectors/status/models.py:11
+msgid "under_construction"
+msgstr "!!ведутся работы-не выдавать!!"
+
+#: territory_sectors/status/models.py:12
+#: territory_sectors/templates/sector/list.html:108
+msgid "completed"
+msgstr "пройден"
+
+#: territory_sectors/templates/base.html:28
+#: territory_sectors/templates/nav.html:4
+msgid "Territory"
+msgstr "Территория"
+
+#: territory_sectors/templates/flat/list.html:23
+#: territory_sectors/templates/house/bulk_flat_create_update.html:11
+#: territory_sectors/templates/house/list_flat.html:7
+#: territory_sectors/templates/sector/print_sector.html:82
+#: territory_sectors/templates/sector/print_sector_quadra.html:119
+#: territory_sectors/templates/uuid.html:37
+#: territory_sectors/templates/uuid.html:44
+msgid "entrance"
+msgstr "Подъезд"
+
+#: territory_sectors/templates/flat/list.html:24
+#: territory_sectors/templates/house/bulk_flat_create_update.html:19
+#: territory_sectors/templates/house/list_flat.html:9
+#: territory_sectors/templates/sector/print_sector.html:83
+#: territory_sectors/templates/sector/print_sector_quadra.html:120
+#: territory_sectors/templates/uuid.html:38
+#: territory_sectors/templates/uuid.html:45
+msgid "floor"
+msgstr "Этаж"
+
+#: territory_sectors/templates/flat/list.html:25
+#: territory_sectors/templates/house/list_flat.html:8
+#: territory_sectors/templates/sector/print_sector.html:84
+#: territory_sectors/templates/sector/print_sector_quadra.html:121
+#: territory_sectors/templates/uuid.html:39
+#: territory_sectors/templates/uuid.html:46
+msgid "number"
+msgstr "Квартира"
+
+#: territory_sectors/templates/flat/list.html:26
+#: territory_sectors/templates/house/list_flat.html:10
+msgid "language"
+msgstr "Язык"
+
+#: territory_sectors/templates/flat/list.html:27
+#: territory_sectors/templates/house/list_flat.html:11
+msgid "way desc"
+msgstr "Как найти"
+
+#: territory_sectors/templates/flat/list.html:28
+msgid "sector_name"
+msgstr "Название участка"
+
+#: territory_sectors/templates/house/bulk_flat_create_update.html:15
+msgid "number(',' is delimiter)"
+msgstr "Квартира(-ы ',')"
+
+#: territory_sectors/templates/house/bulk_flat_create_update.html:23
+msgid "way_desc"
+msgstr "Как найти"
+
+#: territory_sectors/templates/house/list.html:10
+msgid "search<br>status"
+msgstr "Поисковый"
+
+#: territory_sectors/templates/house/list.html:11
+msgid "address"
+msgstr "Адрес"
+
+#: territory_sectors/templates/house/list.html:12
+msgid "entrances"
+msgstr "Подъездов"
+
+#: territory_sectors/templates/house/list.html:13
+msgid "floors"
+msgstr "Этажей"
+
+#: territory_sectors/templates/house/list.html:14
+msgid "Founded addresses"
+msgstr "Найденных адресов"
+
+#: territory_sectors/templates/house/list.html:15
+msgid "How to find house"
+msgstr "Как найти дом"
+
+#: territory_sectors/templates/house/list.html:16
+msgid "Technical description"
+msgstr "Техническая инфа"
+
+#: territory_sectors/templates/house/list.html:17
+msgid "sector"
+msgstr "Участок"
+
+#: territory_sectors/templates/index.html:7
+msgid "Gamardjoba "
+msgstr "ჰამარჯობა "
+
+#: territory_sectors/templates/issue/comment_list.html:4
+msgid "Comments"
+msgstr "Список комментариев"
+
+#: territory_sectors/templates/issue/list.html:21
+msgid "Issue"
+msgstr "Задачи"
+
+#: territory_sectors/templates/nav.html:12
+msgid "Sectors"
+msgstr "Участки"
+
+#: territory_sectors/templates/nav.html:14
+msgid "List sectors"
+msgstr "Список участков"
+
+#: territory_sectors/templates/nav.html:20
+msgid "Houses"
+msgstr "Дома"
+
+#: territory_sectors/templates/nav.html:22
+msgid "List houses"
+msgstr "Список домов"
+
+#: territory_sectors/templates/nav.html:26
+msgid "Statistics"
+msgstr "Статистика"
+
+#: territory_sectors/templates/nav.html:27
+msgid "Issues"
+msgstr "Задачи"
+
+#: territory_sectors/templates/nav.html:33
+msgid "Logout"
+msgstr "Выход"
+
+#: territory_sectors/templates/nav.html:35
+msgid "Enter"
+msgstr "Вход"
+
+#: territory_sectors/templates/sector/create.html:14
+msgid "Print"
+msgstr "Печать"
+
+#: territory_sectors/templates/sector/history_status.html:8
+msgid "author"
+msgstr "Автор"
+
+#: territory_sectors/templates/sector/history_status.html:9
+msgid "date"
+msgstr "Дата"
+
+#: territory_sectors/templates/sector/history_status.html:10
+#: territory_sectors/templates/sector/list.html:17
+msgid "status"
+msgstr "Статус"
+
+#: territory_sectors/templates/sector/house_popup.html:9
+msgid "Entrances"
+msgstr "Подъездов"
+
+#: territory_sectors/templates/sector/house_popup.html:10
+msgid "Floors"
+msgstr "Этажей"
+
+#: territory_sectors/templates/sector/list.html:11
+msgid "show list"
+msgstr "Показать список"
+
+#: territory_sectors/templates/sector/list.html:15
+#: territory_sectors/templates/status/list.html:10
+msgid "name"
+msgstr "Имя"
+
+#: territory_sectors/templates/sector/list.html:16
+msgid "uuid"
+msgstr ""
+
+#: territory_sectors/templates/sector/list.html:18
+msgid "info"
+msgstr "Информация"
+
+#: territory_sectors/templates/sector/list.html:19
+msgid "houses"
+msgstr "Дома"
+
+#: territory_sectors/templates/sector/list.html:103
+msgid "under constuction"
+msgstr "!!ведутся работы-не выдавать!!"
+
+#: territory_sectors/templates/sector/list.html:113
+msgid "search"
+msgstr "Поисковый"
+
+#: territory_sectors/templates/sector/list.html:118
+msgid "ready"
+msgstr "Рабочий"
+
+#: territory_sectors/templates/sector/print_sector.html:85
+#: territory_sectors/templates/sector/print_sector_quadra.html:122
+#: territory_sectors/templates/uuid.html:40
+msgid "desc"
+msgstr "Как найти"
+
+#: territory_sectors/templates/sector/sector_popup.html:10
+msgid "edit"
+msgstr "Редактировать"
+
+#: territory_sectors/templates/sector/sector_popup.html:14
+msgid "view"
+msgstr "Просмотр"
+
+#: territory_sectors/templates/sector/sector_popup.html:15
+msgid "print"
+msgstr "Печать"
+
+#: territory_sectors/templates/sector/sector_popup.html:20
+msgid "history"
+msgstr "История"
+
+#: territory_sectors/templates/sector/sector_selector.html:6
+msgid "button for serve"
+msgstr "Готовые"
+
+#: territory_sectors/templates/sector/sector_selector.html:11
+msgid "button for search"
+msgstr "Поисковые"
+
+#: territory_sectors/templates/stat/stat.html:8
+msgid "Sectors stat"
+msgstr "Статистика по уасткам"
+
+#: territory_sectors/templates/stat/stat.html:13
+#: territory_sectors/templates/stat/stat.html:29
+msgid "Total"
+msgstr "Итого"
+
+#: territory_sectors/templates/stat/stat.html:15
+msgid "Free"
+msgstr "Свободные"
+
+#: territory_sectors/templates/stat/stat.html:17
+msgid "Assigned"
+msgstr "В работе"
+
+#: territory_sectors/templates/stat/stat.html:19
+msgid "Completed"
+msgstr "Обработаны"
+
+#: territory_sectors/templates/stat/stat.html:24
+msgid "House stat"
+msgstr "Статистика по домам"
+
+#: territory_sectors/templates/stat/stat.html:33
+msgid "Flat stat"
+msgstr "Статистика по квартирам"
+
+#: territory_sectors/templates/stat/stat.html:38
+msgid "Total ru flats"
+msgstr "Всего русских квартир"
+
+#: territory_sectors/templates/stat/stat.html:40
+msgid "Foreighn language flats"
+msgstr "Всего иноязычных квартир"
+
+#: territory_sectors/templates/stat/stat.html:42
+msgid "Total flats"
+msgstr "Всего квартир"
+
+#: territory_sectors/templates/status/list.html:6
+msgid "Create status"
+msgstr "Создать статус"
+
+#: territory_sectors/templates/uuid.html:27
+msgid "addresses"
+msgstr " найденных адресов"

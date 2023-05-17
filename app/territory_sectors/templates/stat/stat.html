@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load bootstrap4 %}
+{% block page_content %}
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th colspan="2" class="text-center">{% trans "Sectors stat" %}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr scope="row">
+            <th>{% trans "Total" %}</th><td>{{ total_sectors }}</td>
+        </tr><tr scope="row">
+            <td>{% trans "Free" %}</td><td>{{ sector_free }}</td>
+        </tr><tr scope="row">
+            <td>{% trans "Assigned" %}</td><td>{{ sector_assigned }}</td>
+        </tr><tr scope="row">
+            <td>{% trans "Completed" %}</td><td>{{ sector_completed }}</td>
+        </tr>
+        </tbody>
+        <thead>
+        <tr>
+            <th colspan="2" class="text-center">{% trans "House stat" %}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr scope="row">
+            <th>{% trans "Total" %}</th><td>{{ total_houses }}</td>
+        </tbody>
+        <thead>
+        <tr>
+            <th colspan="2" class="text-center">{% trans "Flat stat" %}</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tr><tr scope="row">
+            <td>{% trans "Total ru flats" %}</td><td>{{ total_ru_flats }}</td>
+        </tr><tr scope="row">
+            <td>{% trans "Foreighn language flats" %}</td><td>{{ total_non_ru_flats }}</td>
+        </tr><tr scope="row">
+            <td>{% trans "Total flats" %}</td><td>{{ total_flats }}</td>
+        </tr>
+        </tbody>
+    </table>
+{#Hello#}
+{% endblock %}
+{% block markers %}
+    map_div = document.getElementById("map");
+    map_div.style.display = "none";
+{% endblock %}

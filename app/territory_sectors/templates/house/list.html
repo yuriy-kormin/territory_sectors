@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load bootstrap4 %}
+{% block page_content %}
+   <h1 class="my-4"> {{ marks }}</h1>
+    {% include "house/filter.html" %}
+    <ul class="navbar-nav">
+        <li class = "nav-item active"><a href="#list_houses" data-toggle="collapse">{% translate "show list" %}</a></li>
+    </ul>
+    <table  id ="list_houses"  class="table table-striped collapse">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">{% translate "search<br>status" %}</th>
+                <th scope="col">{% translate "address" %}</th>
+                <th scope="col">{% translate "entrances" %}</th>
+                <th scope="col">{% translate "floors" %}</th>
+                <th scope="col">{% translate "Founded addresses" %}</th>
+                <th scope="col">{% translate "How to find house" %}</th>
+                <th scope="col">{% translate "Technical description" %}</th>
+                <th scope="col">{% translate "sector" %}</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for house in object_list %}
+            <tr id = "house{{ house.id }}" data-toggle="collapse" data-target="#house_{{ house.id }}" class="clickable {% if house.for_search %}table-warning{% else %}table-success{% endif %}"  style = " transition: 0.4s;">
+                <td> <input type="checkbox" id="my_checkbox" name="my_checkbox" value="1" {% if house.for_search %}checked{% endif %} disabled></td>
+                <th scope="row"> <a href = {% url "house_update" house.id %}>{{house.address}}</a></th>
+                <td> {{house.entrances}}</td>
+                <td> {{house.floor_amount}}</td>
+                <td> {{house.flat__count}}</td>
+                <td> {{house.desc|default_if_none:""}}</td>
+                <td> {{house.tech_desc|default_if_none:""}}</td>
+                <td> {{house.sector}}</td>
+                <td>
+                    <form method="get" action="{% url "house_delete" house.id %}">
+                        <button class="btn btn-outline-danger" button_type="submit" >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                              <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"></path>
+                              <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"></path>
+                            </svg>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            <tr class = "collapse" id="house_{{ house.id }}">
+                <td colspan="6">
+                    {% include "house/list_flat.html" %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{#    {% include "house/pagination.html" %}#}
+{% endblock %}
+{% block markers %}
+    {% for house in object_list %}
+        set_popup({{ house.id }},"{{ house.address }}({{ house.flat__count }})")
+        set_marker({{ house.id }},{{ house.gps_pos }},color = {% if house.for_search %}"search"{% else %}"default"{% endif %})
+    {% endfor %}
+{% endblock %}

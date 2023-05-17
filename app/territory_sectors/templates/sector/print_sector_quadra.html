@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ru">
+{% load static %}
+<head>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js"></script>
+    <script src ="{% static "const.js" %}"></script>
+    {% load i18n %}
+{% load qr_code %}
+{% load bootstrap4 %}
+
+    <style>
+@page:first {
+size: A4 landscape;
+margin: 1cm;
+border: 1cm solid black;
+    padding: 0;
+}
+@page {
+    size: A4 portrait;
+    margin: 1cm;
+    padding: 0;
+    border: 1cm solid black;
+    page-break-inside: avoid;
+}
+
+.page {
+box-sizing: border-box;
+width: 100vw;
+height: 100vh;
+position: relative;
+page-break-inside: avoid;
+}
+.col-md-6 {
+{#border: 1px dotted #484343;#}
+height: 100%;
+}
+
+.table td,
+.table th {
+line-height: 1.1;
+padding: 0;
+font-size: 13px;
+padding-right: 5px;
+padding-left: 5px;
+}
+
+#map {
+width: 99%;
+height: 99%;
+visibility: visible;
+}
+
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="container-fluid h-100">
+    <div class="row h-50">
+        <div class="col-md-6 ">
+          <div class="container-fluid h-100">
+            <div class="row justify-content-left h-25" >
+                <div class="col-md-12">
+                    <h1 class="my-4 ">{{ print_header }}{{ object.name }}</h1>
+                </div>
+            </div>
+            <div class="row flex-grow-1 h-50" >
+              <div class="col-md-12">
+                    <div class="row-md-8 h-60">
+                      <div class="col-md">
+                        {% for house in sector.get_houses_into %}
+                            <div class="row"><div class="col-md"><p class="h5">{{ house.address }}{% if house.flat_count > 0 %} ({{ house.flat_count }} адресов ){% endif %}</p></div></div>
+                            <div class="row"><div class="col-md">{% if house.desc %}<div style="line-height: 0.8;">{{ house.desc|linebreaks }}</div>{% endif %}</div></div>
+                        {% endfor %}
+                      </div>
+                    </div>
+                    <div class="row-md-4 d-inline-block py-0">
+                        <div class="col-md d-inline-flex d-print-inline-flex">
+                            {% if object.for_search %}
+                                <p>Этот участок предназначен для ПОИСКА русскоговорящих людей
+                                    Пожалуйста, вноси в таблицу внутри ТОЛЬКО то, что поможет найти эту квартиру</p>
+                            {% else %}
+                                <p class="text-left">Список найденных адресов внутри</p>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-auto d-inline justify-content-end align-items-end">
+                            {% qr_from_text url size=2 image_format="png" error_correction="L" %}
+                        </div>
+                    </div>
+             </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 "></div>
+    </div>
+    <div class="row h-50">
+        <div class="col-md-6 ">
+            <div class="row" id="map" style="visibility: visible;"></div>
+        </div>
+        <div class="col-md-6 quadrant bottom-right"></div>
+    </div>
+  </div>
+</div>
+  <div class="page" >
+    {% for house in sector.get_houses_into %}
+      <div class="row">
+        <div class="col-md-12">
+            <h5>{{ house.address }}</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+             <table class="table table-sm table-bordered d-print-table w-75">
+                 <thead>
+                 <tr>
+                     <th>{% translate "entrance" %}</th>
+                     <th>{% translate "floor" %}</th>
+                     <th>{% translate "number" %}</th>
+                     <th>{% translate "desc" %}</th>
+                 </tr>
+                 </thead>
+                 <tbody>
+                 {% for flat in house.get_ru_flats %}
+                    <tr>
+                        <td class="text-center">{{ flat.entrance|default_if_none:""}}</td>
+                        <td class="text-center">{{ flat.floor|default_if_none:"" }}</td>
+                        <td class="text-center">{{ flat.number|default_if_none:"" }}</td>
+                        <td class="w-100">{{ flat.way_desc|default_if_none:"" }}</td>
+                    </tr>
+                 {% endfor %}
+                 {% if object.for_search %}
+                    {% for row in additional_rows %}
+                        <tr class = "py-2">
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td class="">&nbsp;</td>
+                    </tr>
+                    {% endfor %}
+                 {% endif %}
+                 </tbody>
+             </table>
+        </div>
+      </div>
+    {% empty %}
+        <h3>house list is empty</h3>
+    {% endfor %}
+  </div>
+<script src="{% static "map.js" %}"></script>
+<script>
+map.on('load', function() {
+    {% for house in object.get_houses_into %}
+        set_popup({{ house.id }}, "{{ house.address }}")
+        set_marker({{ house.id }}, {{ house.gps_pos }});
+    {% endfor %}
+    map_fly({{ object.centroid.coords.0|floatformat:"." }}, {{ object.centroid.coords.1|floatformat:"." }});
+    show_all_popups();
+})
+</script>
+</body>

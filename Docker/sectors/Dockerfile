@@ -3,12 +3,9 @@ FROM python:3.11
 ENV PYTHONUNBUFFERED 1
 ENV PYTHONDONTWRITEBYTECODE 1
 
-RUN mkdir -p /app/static/ /app/media/
-COPY territory_sectors/ /app/territory_sectors
-COPY ["pyproject.toml","README.md","Makefile","manage.py","Docker/sectors/docker-entrypoint.sh","/app/"]
-COPY .env-compose /app/.env
-
-WORKDIR /app
+COPY ["pyproject.toml","README.md","poetry.lock","/poetry/"]
+COPY Docker/sectors/docker-entrypoint.sh /
+WORKDIR /poetry
 
 # Install GDAL dependencies
 RUN apt update && apt install -y libgdal-dev g++ --no-install-recommends && \
@@ -18,11 +15,11 @@ RUN apt update && apt install -y libgdal-dev g++ --no-install-recommends && \
     pip3 install gunicorn && \
     pip3 install poetry && \
     poetry config virtualenvs.create false && \
-    poetry install && \
+    poetry install --no-root && \
     apt-get clean -y
 
 # Update C env vars so compiler can find gdal
 ENV CPLUS_INCLUDE_PATH=/usr/include/gdal
 ENV C_INCLUDE_PATH=/usr/include/gdal
 
-CMD ["./docker-entrypoint.sh"]
+CMD ["/docker-entrypoint.sh"]
