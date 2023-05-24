@@ -27,8 +27,8 @@ class SectorForm(forms.ModelForm):
     #             )
     #         )
 
-    status = forms.ModelChoiceField(queryset=Status.objects.all(),
-                                    initial=Status.objects.first())
+    # status = forms.ModelChoiceField(queryset=Status.objects.all(),
+    #                                 initial=Status.objects.first())
 
     class Meta:
         model = Sector
