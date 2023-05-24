@@ -15,9 +15,7 @@ services:
             - pgdatabase
 
     pgdatabase:
-        build:
-            context: .
-            dockerfile: ./Docker/postgis/Dockerfile
+        image: "postgis/postgis:latest"
         env_file:
             -   ./Docker/postgis/env
         expose:
