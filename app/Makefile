@@ -16,7 +16,7 @@ test:
 install:
 	poetry install --no-root
 lint:
-	poetry run flake8 territory_sectors --exclude migrations
+	poetry run flake8 territory_sectors --exclude migrations,migrations-old,migrations_old
 coverage:
 	poetry run python -m coverage run manage.py test
 translate:
