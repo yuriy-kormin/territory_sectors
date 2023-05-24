@@ -26,7 +26,8 @@ class SectorForm(forms.ModelForm):
     #                 id=kwargs['instance'].uuid
     #             )
     #         )
-
+    # ПО ДЕФОЛТУ СТАВИТ ЗНАЧЕНИЕ СТАТУСА УЧАСТКА В ПЕРВОЕ ЗНАЧЕНИЕ ИЗ БАЗЫ
+    # СТАБИЛЬНО ПАДАЕТ НА ПУСТОЙ БАЗЕ
     # status = forms.ModelChoiceField(queryset=Status.objects.all(),
     #                                 initial=Status.objects.first())
 
