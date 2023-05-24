@@ -31,10 +31,6 @@ class Migration(migrations.Migration):
                 'ordering': ('id',),
             },
         ),
-        migrations.RunPython(
-            code=init_lang_id_1,
-            reverse_code=remove_all_instances
-        ),
         migrations.CreateModel(
             name='HistoricalLanguage',
             fields=[
@@ -53,5 +49,9 @@ class Migration(migrations.Migration):
                 'get_latest_by': ('history_date', 'history_id'),
             },
             bases=(simple_history.models.HistoricalChanges, models.Model),
+        ),
+        migrations.RunPython(
+            code=init_lang_id_1,
+            reverse_code=remove_all_instances
         ),
     ]
