@@ -1,7 +1,7 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
 from .models import Sector
-from ..status.models import Status
+# from ..status.models import Status
 
 
 class SectorForm(forms.ModelForm):
