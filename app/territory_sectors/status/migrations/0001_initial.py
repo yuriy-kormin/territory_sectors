@@ -36,10 +36,6 @@ class Migration(migrations.Migration):
                     max_length=200, unique=True)),
             ],
         ),
-        migrations.RunPython(
-            code=reinit_all_instances,
-            reverse_code=remove_all_instances,
-        ),
         migrations.CreateModel(
             name='HistoricalStatus',
             fields=[
@@ -71,5 +67,9 @@ class Migration(migrations.Migration):
                 'get_latest_by': ('history_date', 'history_id'),
             },
             bases=(simple_history.models.HistoricalChanges, models.Model),
+        ),
+        migrations.RunPython(
+            code=reinit_all_instances,
+            reverse_code=remove_all_instances,
         ),
     ]
