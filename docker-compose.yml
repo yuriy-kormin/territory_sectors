@@ -9,6 +9,7 @@ services:
             - .env-compose
         volumes:
             - ./app:/app/
+            - log:/var/log/:rw
         expose:
             - 8000
         depends_on:
@@ -17,12 +18,13 @@ services:
     pgdatabase:
         image: "postgis/postgis:latest"
         env_file:
-            -   ./Docker/postgis/env
+            - ./Docker/postgis/env
         expose:
             - 5432
         restart: always
         volumes:
             - pgdata:/var/lib/postgresql/data/:rw
+            - - log:/var/log/:rw
     nginx:
         build:
             context: .
@@ -34,6 +36,7 @@ services:
             - acme:/var/www/letsencrypt:ro
             - nginx-conf:/etc/nginx/conf.d
             - ./app/media:/app/media/:rw
+            - log:/var/log/:rw
         ports:
             - 80:80
             - 443:443
@@ -49,6 +52,7 @@ services:
             - letsencrypt:/etc/letsencrypt/
             - acme:/var/www/letsencrypt/
             - nginx-conf:/nginx/
+            - log:/var/log/:rw
         depends_on:
             - nginx
 
@@ -57,3 +61,4 @@ volumes:
     letsencrypt:
     acme:
     nginx-conf:
+    log:
