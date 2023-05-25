@@ -35,9 +35,9 @@
         {% block page_content %}
         {% endblock %}
     </div>
-    {% block top_map %}
-    {% endblock %}
     <div id="map" style="height:40vh"></div>
+{% block bottom_map %}
+{% endblock %}
     <script src="{% static "map.js" %}"></script>
     <script src ="{% static "border.js" %}"></script>
     <script>
