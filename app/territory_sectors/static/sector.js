@@ -16,15 +16,6 @@ function add_circle_source(id, msg, mark ="default",lng, lat){
             "id":`house_${id}`,
         },
     })
-
-//     circles[id] = new mapboxgl.so(
-//         {
-//         // color: "#B917FC",
-//         scale:1.5,
-//         // sy
-//     }
-//     ).setLngLat([lng, lat])
-//         .addTo(map);
 }
 
 function add_map_circles_source(){
@@ -44,7 +35,7 @@ function add_circles_layer(){
     'type': 'circle',
     'source': 'circles',
     'paint':{
-        'circle-radius': 16,
+        'circle-radius': 8,
         'circle-stroke-width': 2,
         'circle-color': search_status[false],
         'circle-stroke-color': 'white'
@@ -56,7 +47,7 @@ function add_circles_layer(){
     'type': 'circle',
     'source': 'circles',
     'paint':{
-        'circle-radius': 16,
+        'circle-radius': 8,
         'circle-stroke-width': 2,
         'circle-color': search_status[true],
         'circle-stroke-color': 'white'
@@ -72,7 +63,7 @@ function add_symbols_layer(){
     layout: {
         'text-field': "{title}",
         'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-        'text-size': 20
+        'text-size': 8
     },
     paint: {
             'text-color': '#383a37',

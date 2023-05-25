@@ -71,12 +71,6 @@ function set_marker (id, lng, lat, color = 'default') {
         .addTo(map);
 
 }
-const reverseGeocoding = function (longitude,latitude) {
-    var url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/'
-            + longitude + ',' + latitude
-            + '.json&access_token=' + mapboxgl.accessToken;
-   return xmlHttp.responseText;
-}
 function move_marker (event) {
     var coordinates = event.lngLat;
     var id = document.getElementById("id").value
@@ -155,8 +149,6 @@ function map_add_layer(mark_id = false){
         'paint': {
             'fill-color': sector_status[status_name],
             'fill-opacity': 0.5
-            // 'line-color': sector_status[status_name],
-            // 'line-width': 4
         },
         'filter': ['==', 'status', status_name]
         })
@@ -168,18 +160,9 @@ function map_add_layer(mark_id = false){
 function sector_popup(e) {
     id = e.features[0].properties.id
     popups[id].setLngLat(e.lngLat).addTo(map);
-    // console.log(map.getStyle().layers)
-
 }
 
 function handleClickEvent(e) {
-     // var features = map.queryRenderedFeatures(e.point);
-
-      // var layerList = features.map(function(feature) {
-      //   return feature.layer.id;
-      // });
-
-    //
     let sectors_layers_names = [
         'sector_free',
         'sector_assigned',
@@ -208,19 +191,6 @@ function handleClickEvent(e) {
         }
     }
 
-
-    // if (is_house) {
-    //     // console.log(e)
-    //     var features = map.queryRenderedFeatures(e.podFeatures(e.point, { layers: sectors_layers_names }));
-    //     // if (is_sector){
-    //     //     // id = features[0].properties.id
-    //     //     // popups[id].setLngLat(e.lngLat).addTo(map);
-    //     // }
-    // }int, { layers: houses_layers_names });
-    //     id = features[0].properties.id
-    //     popups[id].setLngLat(e.lngLat).addTo(map);
-    // } else {
-    //     var features = map.queryRendere
 
 }
 
