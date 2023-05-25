@@ -24,7 +24,7 @@ services:
         restart: always
         volumes:
             - pgdata:/var/lib/postgresql/data/:rw
-            - - log:/var/log/:rw
+            - log:/var/log/:rw
     nginx:
         build:
             context: .
