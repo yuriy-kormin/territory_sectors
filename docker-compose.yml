@@ -33,8 +33,8 @@ services:
             - .env-compose
         volumes:
             - letsencrypt:/etc/letsencrypt/:ro
-            - acme:/var/www/letsencrypt:ro
-            - nginx-conf:/etc/nginx/conf.d
+            - acme:/var/www/letsencrypt/:ro
+            - nginx-conf:/etc/nginx/conf.d/
             - ./app/media:/app/media/:rw
             - log:/var/log/:rw
         ports:
@@ -49,9 +49,9 @@ services:
         env_file:
             - .env-compose
         volumes:
-            - letsencrypt:/etc/letsencrypt/
-            - acme:/var/www/letsencrypt/
-            - nginx-conf:/nginx/
+            - letsencrypt:/etc/letsencrypt/:rw
+            - acme:/var/www/letsencrypt/:rw
+            - nginx-conf:/nginx/:rw
             - log:/var/log/:rw
         depends_on:
             - nginx
