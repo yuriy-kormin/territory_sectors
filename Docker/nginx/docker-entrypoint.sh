@@ -38,7 +38,7 @@ echo "Created $error_log_file with root:root ownership"
 function run_command {
   # Replace this with the command you want to run
   echo "Config file changed! Reloading nginx..."
-  nginx -s reload
+  service nginx reload
 }
 
 # Use inotifywait to monitor the directory for changes

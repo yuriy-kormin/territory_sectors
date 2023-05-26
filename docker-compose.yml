@@ -32,9 +32,9 @@ services:
         env_file:
             - .env-compose
         volumes:
-            - letsencrypt:/etc/letsencrypt/:ro
-            - acme:/var/www/letsencrypt/:ro
-            - nginx-conf:/etc/nginx/conf.d/
+            - letsencrypt:/etc/letsencrypt/:rw
+            - acme:/var/www/letsencrypt/:rw
+            - nginx-conf:/etc/nginx/conf.d/:rw
             - ./app/media:/app/media/:rw
             - log:/var/log/:rw
         ports:
