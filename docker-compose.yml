@@ -9,7 +9,7 @@ services:
             - .env-compose
         volumes:
             - ./app:/app/
-            - log:/var/log/:rw
+            - ./log:/var/log/:rw
         expose:
             - 8000
         depends_on:
@@ -24,7 +24,7 @@ services:
         restart: always
         volumes:
             - pgdata:/var/lib/postgresql/data/:rw
-            - log:/var/log/:rw
+            - ./log:/var/log/:rw
     nginx:
         build:
             context: .
@@ -32,11 +32,11 @@ services:
         env_file:
             - .env-compose
         volumes:
-            - letsencrypt:/etc/letsencrypt/:rw
-            - acme:/var/www/letsencrypt/:rw
+            - letsencrypt:/etc/letsencrypt/:ro
+            - acme:/var/www/letsencrypt/:ro
             - nginx-conf:/etc/nginx/conf.d/:rw
             - ./app/media:/app/media/:rw
-            - log:/var/log/:rw
+            - ./log:/var/log/:rw
         ports:
             - 80:80
             - 443:443
@@ -52,7 +52,7 @@ services:
             - letsencrypt:/etc/letsencrypt/:rw
             - acme:/var/www/letsencrypt/:rw
             - nginx-conf:/nginx/:rw
-            - log:/var/log/:rw
+            - ./log:/var/log/:rw
         depends_on:
             - nginx
 
