@@ -188,3 +188,6 @@ LANGUAGE_CODE = 'ru-ru'
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, "territory_sectors", "locale"),
 )
+
+USE_X_FORWARDED_HOST = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
