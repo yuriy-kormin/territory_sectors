@@ -1,7 +1,8 @@
 from django.contrib.gis.db.models.functions import AsGeoJSON
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import JsonResponse
-from django.views.generic import CreateView, ListView, UpdateView, DeleteView
+from django.views.generic import CreateView, ListView, UpdateView, DetailView, \
+    DeleteView
 from django.urls import reverse_lazy
 from .forms import SectorForm
 from .models import Sector
@@ -121,28 +122,28 @@ class SectorListView(LoginRequiredMixinCustom, NatSortMixin,
         return qs
 
 
-class SectorStatusHistory(LoginRequiredMixinCustom, ListView):
+class SectorStatusHistory(LoginRequiredMixinCustom, DetailView):
     model = Sector
     template_name = 'sector/history_status.html'
     extra_context = {
         'header': _('History statuses of '),
     }
 
-    def get_queryset(self):
-        sector_id = self.kwargs['pk']
-        sector = Sector.objects.get(id=sector_id)
-        history = sector.history.all().order_by(
-            'history_date')
-        records = [history[0]]
-        for record in history:
-            delta = record.diff_against(records[-1])
-            if any(
-                    (field in delta.changed_fields for field in
-                     ('status', 'assigned_to')
-                     )
-            ):
-                records.append(record)
-        return records[::-1]
+    # def get_queryset(self):
+    #     sector_id = self.kwargs['pk']
+    #     sector = Sector.objects.get(id=sector_id)
+    #     history = sector.history.all().order_by(
+    #         'history_date')
+    #     records = [history[0]]
+    #     for record in history:
+    #         delta = record.diff_against(records[-1])
+    #         if any(
+    #                 (field in delta.changed_fields for field in
+    #                  ('status', 'assigned_to')
+    #                  )
+    #         ):
+    #             records.append(record)
+    #     return records[::-1]
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

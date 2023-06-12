@@ -10,7 +10,7 @@
             <th>{% translate "status" %}</th>
             <th>{% translate "assigned to" %}</th>
         </tr>
-        {% for record in object_list %}
+        {% for record in object.get_changes_history %}
             <tr>
                 <td> {{record.history_user|default:"tork"}}</td>
                 <td> {{record.history_date|date:"d M Y"}}</td>

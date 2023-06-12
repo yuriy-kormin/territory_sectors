@@ -86,13 +86,17 @@ class Sector(models.Model):
     def get_all_houses(cls):
         return House.objects.all()
 
-# class Intersection(models.Model):
-#     house = models.ForeignKey('House', on_delete=models.CASCADE)
-#     sector = models.ForeignKey('Sector', on_delete=models.CASCADE)
+    def get_changes_history(self):
+        history = self.history.all().order_by(
+            'history_date')
+        records = [history[0]]
+        for record in history:
+            delta = record.diff_against(records[-1])
+            if any(
+                    (field in delta.changed_fields for field in
+                     ('status', 'assigned_to')
+                     )
+            ):
+                records.append(record)
 
-# class SectorStatus(models.Model):
-#     sector = models.ForeignKey(Sector, on_delete=models.CASCADE)
-#     status = models.ForeignKey(Status, on_delete=models.SET_NULL, null=True)
-#     date = models.DateTimeField(auto_now_add=True)
-#     author = models.ForeignKey(User, on_delete=models.CASCADE)
-#     issued_to_publisher = models.CharField(max_length=300, null=True)
+        return records[::-1]
