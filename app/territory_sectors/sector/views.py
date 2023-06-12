@@ -1,8 +1,8 @@
 from django.contrib.gis.db.models.functions import AsGeoJSON
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import JsonResponse
-from django.views.generic import CreateView, ListView, UpdateView, DetailView, \
-    DeleteView
+from django.views.generic import CreateView, ListView, UpdateView, \
+    DetailView, DeleteView
 from django.urls import reverse_lazy
 from .forms import SectorForm
 from .models import Sector

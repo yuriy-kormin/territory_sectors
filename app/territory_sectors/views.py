@@ -38,3 +38,12 @@ class UUIDView(DetailView):
 
 class StatView(LoginRequiredMixin, StatMixin, TemplateView):
     template_name = 'stat/stat.html'
+
+
+class AssigmentsStatView(LoginRequiredMixin, TemplateView):
+    template_name = 'stat/stat.html'
+
+    # def get_queryset(self):
+    #     sectors = Sector.objects.all()
+    #     for sector in sectors:
+    #
