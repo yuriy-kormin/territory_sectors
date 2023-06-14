@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-14 14:19+0000\n"
+"POT-Creation-Date: 2023-06-14 14:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -430,7 +430,6 @@ msgid "Statistics"
 msgstr "Статистика"
 
 #: territory_sectors/templates/nav.html:27
-#| msgid "Assigned"
 msgid "Assignments"
 msgstr "s-26"
 
@@ -580,6 +579,5 @@ msgid "addresses"
 msgstr " найденных адресов"
 
 #: territory_sectors/views.py:48
-#| msgid "Sector status"
 msgid "Sector assignments status"
 msgstr "Назначения участков "
