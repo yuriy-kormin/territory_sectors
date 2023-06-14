@@ -41,7 +41,7 @@ class HouseUpdateView(LoginRequiredMixinCustom, ImageResizeBeforeMixin,
 class HouseListView(LoginRequiredMixinCustom, CountFlatsMixin, FilterView,
                     ListView):
     filterset_class = AddressFilter
-    model = House
+    queryset = House.objects.prefetch_related('flat_set', 'flat_set__language')
     template_name = "house/list.html"
     extra_context = {
         'remove_title': _('Remove'),
