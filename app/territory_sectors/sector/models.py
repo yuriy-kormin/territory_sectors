@@ -1,7 +1,11 @@
 import json
 
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from urllib.parse import quote
+
+from django.db.models import F, Value
+from django.db.models.functions import Concat
 from territory_sectors.house.models import House
 from territory_sectors.status.models import Status
 from territory_sectors.uuid_qr.models import Uuid
@@ -47,7 +51,7 @@ class Sector(models.Model):
     contour = gis_models.PolygonField(null=False, blank=False, srid=4326)
     objects = models.Manager()
     js = SectorManager.json_polygons
-    history = HistoricalRecords()
+    history = HistoricalRecords(related_name='historical')
     stat = StatManager()
 
     def __str__(self):
@@ -87,16 +91,29 @@ class Sector(models.Model):
         return House.objects.all()
 
     def get_changes_history(self):
-        history = self.history.all().order_by(
-            'history_date')
-        records = [history[0]]
-        for record in history:
-            delta = record.diff_against(records[-1])
-            if any(
-                    (field in delta.changed_fields for field in
-                     ('status', 'assigned_to')
-                     )
-            ):
-                records.append(record)
+        def get_related_status(obj):
+            try:
+                name = obj.status.name
+            except (ObjectDoesNotExist, AttributeError):
+                return
+            return name
 
-        return records[::-1]
+        history = self.history.prefetch_related('status',
+                                                'history_user').annotate(
+            full_name=Concat(
+                F('history_user__last_name'),
+                Value(' '),
+                F('history_user__first_name')
+            )
+        ).order_by('history_date')
+        exclude_records = [history[0].history_id]
+        prev_record = history[0]
+        if len(history) > 1:
+            for record in history[1:]:
+                if len(set(
+                        map(get_related_status, (record, prev_record))
+                )) == 1 and record.assigned_to == prev_record.assigned_to:
+                    exclude_records.append(record.history_id)
+                else:
+                    prev_record = record
+        return history.exclude(history_id__in=exclude_records).reverse()

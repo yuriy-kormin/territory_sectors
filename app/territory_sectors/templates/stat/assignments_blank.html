@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load bootstrap4 %}
+{% block page_content %}
+    <div class="container border">
+        <div class="row"><div class="col-12"><h1 class="my-4">{{ header }}</h1></div>
+        </div>
+        {% for sector in object_list %}
+            <div class="row justify-content-start my-1 text-center">
+            {{ sector.history_test }}
+              <div title="Статус: {{ sector.status }}" class="col-2 {% with sector as obj %}{% include "stat/status_bg-color.html" %}{% endwith %}">
+                <div class="row">
+                    <div class="col-12"><b><a class="text-secondary" href="{% url "sector_update" sector.id %}">{{ sector.name }}</a></b></div>
+                </div>
+                <div class="row">
+                    <div class="col-12"><small>{{ sector.date_joined|date:"d M Y"}}</small></div>
+                </div>
+              </div>
+                {% for record in sector.get_changes_history reversed %}
+                    <div title="{{record.full_name|default:""}}" class="col-2 {% with record as obj %}{% include "stat/status_bg-color.html" %}{% endwith %} mx-1">
+                        {% if record.status.name == "assigned" or record.status.name  == "completed" %}
+                            {% if record.assigned_to %}
+                                <div class="row"><div class="col-12">{{ record.assigned_to }}</div></div>
+                            {% endif %}
+                        {% endif %}
+                        <div class="row"><div class="col-12"><small>{{record.history_date|date:"d/m/y"}}</small></div></div>
+
+                    </div>
+                {% endfor %}
+
+            </div>
+        {% endfor %}
+    </div>
+
+
+{% endblock %}
+{% block markers %}
+    {% include "issue/map_hide.html" %}
+{% endblock %}

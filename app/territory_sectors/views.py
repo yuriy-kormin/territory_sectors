@@ -1,14 +1,16 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.gis.db.models.functions import Centroid
-from django.views.generic import TemplateView, DetailView
+from django.views.generic import TemplateView, DetailView, ListView
 from django.contrib.auth import logout
 from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
+from django.utils.translation import gettext_lazy as _
 
 from territory_sectors.uuid_qr.models import Uuid
 
 from .mixins import StatMixin
+from .sector.models import Sector
 
 
 class IndexView(TemplateView):
@@ -40,10 +42,19 @@ class StatView(LoginRequiredMixin, StatMixin, TemplateView):
     template_name = 'stat/stat.html'
 
 
-class AssigmentsStatView(LoginRequiredMixin, TemplateView):
-    template_name = 'stat/stat.html'
+class AssigmentsStatView(LoginRequiredMixin, ListView):
+    template_name = 'stat/assignments_blank.html'
+    extra_context = {
+        'header': _('Sector assignments status'),
+    }
+    queryset = Sector.objects.select_related("status")
+    # .prefetch_related(
+    #     Prefetch(
+    #         'historical',
+    #         # queryset=Sector.history.all(),
+    #         # select_related('history_user', 'status'),
+    #         # to_attr='history_test'
+    #     )
+    # )[:1]
 
-    # def get_queryset(self):
-    #     sectors = Sector.objects.all()
-    #     for sector in sectors:
-    #
+# qs = Sector.history.

@@ -12,9 +12,9 @@
         </tr>
         {% for record in object.get_changes_history %}
             <tr>
-                <td> {{record.history_user|default:"tork"}}</td>
+                <td> {{record.full_name|default:""}}</td>
                 <td> {{record.history_date|date:"d M Y"}}</td>
-                <td> {{record.status|default:"created"}}</td>
+                <td> {{record.status|default:""}}</td>
                 <td> {{record.assigned_to|default:""}}</td>
             </tr>
         {% endfor %}

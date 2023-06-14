@@ -1,0 +1,9 @@
+{% spaceless %}
+{% if obj.status.name %}
+    {% if obj.status.name == 'free' %}table-success{% endif %}
+    {% if obj.status.name == 'assigned' %}table-warning{% endif %}
+    {% if obj.status.name == 'under_construction' %}table-danger{% endif %}
+    {% if obj.status.name == 'completed' %}table-primary{% endif %}
+    {% if not obj.status.name %}table-secondary{% endif %}
+{% endif %}
+{% endspaceless %}
