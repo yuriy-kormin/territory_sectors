@@ -2,7 +2,7 @@
 .venv/
 env/
 venv/
-*.env
+*.env-*
 
 *.pyc
 db.sqlite3
@@ -36,3 +36,5 @@ pip-wheel-metadata
 /poetry.toml
 
 /app/media/
+
+*backup*
