@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-13 17:59+0000\n"
+"POT-Creation-Date: 2023-06-14 14:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,7 +46,7 @@ msgid "Create flat"
 msgstr "Создать квартиру"
 
 #: territory_sectors/flat/views.py:21 territory_sectors/house/views.py:21
-#: territory_sectors/issue/views.py:20 territory_sectors/sector/views.py:23
+#: territory_sectors/issue/views.py:20 territory_sectors/sector/views.py:24
 msgid "Create"
 msgstr "Создать"
 
@@ -54,7 +54,7 @@ msgstr "Создать"
 msgid "Flat created successfully"
 msgstr "Квартира успешно создана"
 
-#: territory_sectors/flat/views.py:30 territory_sectors/sector/views.py:108
+#: territory_sectors/flat/views.py:30 territory_sectors/sector/views.py:109
 #: territory_sectors/templates/sector/sector_popup.html:16
 msgid "remove"
 msgstr "удалить"
@@ -64,7 +64,7 @@ msgid "Update Flat"
 msgstr "Изменить квартиру"
 
 #: territory_sectors/flat/views.py:42 territory_sectors/house/views.py:35
-#: territory_sectors/sector/views.py:45
+#: territory_sectors/sector/views.py:46
 msgid "Update"
 msgstr "Изменить"
 
@@ -77,7 +77,7 @@ msgid "Remove flat"
 msgstr "Удалить квартиру"
 
 #: territory_sectors/flat/views.py:54 territory_sectors/house/views.py:60
-#: territory_sectors/sector/views.py:152
+#: territory_sectors/sector/views.py:146
 msgid "Remove "
 msgstr "Удалить "
 
@@ -228,60 +228,60 @@ msgstr "Детали задачи"
 msgid "Please login to access this page"
 msgstr "Пожалуйста введите учетные данные для доступа к данной странице"
 
-#: territory_sectors/sector/forms.py:43
+#: territory_sectors/sector/forms.py:44
 msgid "Sector name"
 msgstr "Название участка"
 
-#: territory_sectors/sector/forms.py:44
+#: territory_sectors/sector/forms.py:45
 msgid "Sector status"
 msgstr "Статус участка "
 
-#: territory_sectors/sector/forms.py:45
+#: territory_sectors/sector/forms.py:46
 msgid "for search"
 msgstr "поисковый"
 
-#: territory_sectors/sector/forms.py:46
+#: territory_sectors/sector/forms.py:47
 #: territory_sectors/templates/sector/history_status.html:11
 msgid "assigned to"
 msgstr "Назначен возвещателю"
 
-#: territory_sectors/sector/forms.py:52
+#: territory_sectors/sector/forms.py:53
 msgid "Please enter sector name"
 msgstr "Название участка"
 
-#: territory_sectors/sector/views.py:22 territory_sectors/templates/nav.html:15
+#: territory_sectors/sector/views.py:23 territory_sectors/templates/nav.html:15
 msgid "Create sector"
 msgstr "Создать участок"
 
-#: territory_sectors/sector/views.py:28
+#: territory_sectors/sector/views.py:29
 msgid "Sector created successfully"
 msgstr "Участок успешно создан"
 
-#: territory_sectors/sector/views.py:44
+#: territory_sectors/sector/views.py:45
 msgid "Update Sector"
 msgstr "Обновить данные участка"
 
-#: territory_sectors/sector/views.py:50
+#: territory_sectors/sector/views.py:51
 msgid "Sector updated successfully"
 msgstr "Данные участка успешно обновлены"
 
-#: territory_sectors/sector/views.py:86
+#: territory_sectors/sector/views.py:87
 msgid "Sector "
 msgstr "Участок "
 
-#: territory_sectors/sector/views.py:128
+#: territory_sectors/sector/views.py:129
 msgid "History statuses of "
 msgstr "История статусов участка "
 
-#: territory_sectors/sector/views.py:151
+#: territory_sectors/sector/views.py:145
 msgid "Remove sector"
 msgstr "Удалить участок"
 
-#: territory_sectors/sector/views.py:153
+#: territory_sectors/sector/views.py:147
 msgid "Are you sure delete sector "
 msgstr "Вы уверены, что хотите удалить участок "
 
-#: territory_sectors/sector/views.py:155
+#: territory_sectors/sector/views.py:149
 msgid "Sector deleted successfully"
 msgstr "Участок успешно удален"
 
@@ -360,35 +360,40 @@ msgstr "Квартира(-ы ',')"
 msgid "way_desc"
 msgstr "Как найти"
 
-#: territory_sectors/templates/house/list.html:10
+#: territory_sectors/templates/house/list.html:8
+#: territory_sectors/templates/sector/list.html:11
+msgid "show list"
+msgstr "Показать список"
+
+#: territory_sectors/templates/house/list.html:13
 msgid "search<br>status"
 msgstr "Поисковый"
 
-#: territory_sectors/templates/house/list.html:11
+#: territory_sectors/templates/house/list.html:14
 msgid "address"
 msgstr "Адрес"
 
-#: territory_sectors/templates/house/list.html:12
+#: territory_sectors/templates/house/list.html:15
 msgid "entrances"
 msgstr "Подъездов"
 
-#: territory_sectors/templates/house/list.html:13
+#: territory_sectors/templates/house/list.html:16
 msgid "floors"
 msgstr "Этажей"
 
-#: territory_sectors/templates/house/list.html:14
+#: territory_sectors/templates/house/list.html:17
 msgid "Founded addresses"
 msgstr "Найденных адресов"
 
-#: territory_sectors/templates/house/list.html:15
+#: territory_sectors/templates/house/list.html:18
 msgid "How to find house"
 msgstr "Как найти дом"
 
-#: territory_sectors/templates/house/list.html:16
+#: territory_sectors/templates/house/list.html:19
 msgid "Technical description"
 msgstr "Техническая инфа"
 
-#: territory_sectors/templates/house/list.html:17
+#: territory_sectors/templates/house/list.html:20
 msgid "sector"
 msgstr "Участок"
 
@@ -425,14 +430,19 @@ msgid "Statistics"
 msgstr "Статистика"
 
 #: territory_sectors/templates/nav.html:27
+#| msgid "Assigned"
+msgid "Assignments"
+msgstr "s-26"
+
+#: territory_sectors/templates/nav.html:28
 msgid "Issues"
 msgstr "Задачи"
 
-#: territory_sectors/templates/nav.html:33
+#: territory_sectors/templates/nav.html:34
 msgid "Logout"
 msgstr "Выход"
 
-#: territory_sectors/templates/nav.html:35
+#: territory_sectors/templates/nav.html:36
 msgid "Enter"
 msgstr "Вход"
 
@@ -460,10 +470,6 @@ msgstr "Подъездов"
 #: territory_sectors/templates/sector/house_popup.html:10
 msgid "Floors"
 msgstr "Этажей"
-
-#: territory_sectors/templates/sector/list.html:11
-msgid "show list"
-msgstr "Показать список"
 
 #: territory_sectors/templates/sector/list.html:15
 #: territory_sectors/templates/status/list.html:10
@@ -526,7 +532,7 @@ msgstr "Поисковые"
 
 #: territory_sectors/templates/stat/stat.html:8
 msgid "Sectors stat"
-msgstr "Статистика по уасткам"
+msgstr "Статистика по участкам"
 
 #: territory_sectors/templates/stat/stat.html:13
 #: territory_sectors/templates/stat/stat.html:29
@@ -572,3 +578,8 @@ msgstr "Создать статус"
 #: territory_sectors/templates/uuid.html:27
 msgid "addresses"
 msgstr " найденных адресов"
+
+#: territory_sectors/views.py:48
+#| msgid "Sector status"
+msgid "Sector assignments status"
+msgstr "Назначения участков "
