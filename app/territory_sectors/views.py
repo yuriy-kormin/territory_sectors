@@ -10,6 +10,7 @@ from django.utils.translation import gettext_lazy as _
 from territory_sectors.uuid_qr.models import Uuid
 
 from .mixins import StatMixin
+from .sector.mixins import AddContextGetChangesHistoryMixin
 from .sector.models import Sector
 
 
@@ -42,7 +43,8 @@ class StatView(LoginRequiredMixin, StatMixin, TemplateView):
     template_name = 'stat/stat.html'
 
 
-class AssigmentsStatView(LoginRequiredMixin, ListView):
+class AssigmentsStatView(LoginRequiredMixin, AddContextGetChangesHistoryMixin,
+                         ListView):
     template_name = 'stat/assignments_blank.html'
     extra_context = {
         'header': _('Sector assignments status'),
