@@ -16,7 +16,7 @@
                 </div>
               </div>
 
-              {% for cell in sector.assigments %}
+              {% for cell in sector.assignments %}
                 <div class="col-3 ml-1">
                     {% for record in cell %}
                         <div title=" {{ record.status }}: {{record.full_name|default:""}}" class="row text-left pl-0 {% with record as obj %}{% include "stat/status_bg-color.html" %}{% endwith %}">
