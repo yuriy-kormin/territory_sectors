@@ -106,7 +106,9 @@ class Sector(models.Model):
                 F('history_user__first_name')
             )
         ).order_by('history_date')
-        exclude_records = [history[0].history_id]
+        exclude_records = []
+        if not get_related_status(history[0]):
+            exclude_records.append(history[0].history_id)
         prev_record = history[0]
         if len(history) > 1:
             for record in history[1:]:
