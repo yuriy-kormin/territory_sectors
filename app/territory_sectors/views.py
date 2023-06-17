@@ -49,7 +49,7 @@ class AssigmentsStatView(LoginRequiredMixin, AddContextGetChangesHistoryMixin,
     extra_context = {
         'header': _('Sector assignments status'),
     }
-    queryset = Sector.objects.select_related("status")
+    queryset = Sector.objects.select_related("status").order_by('name')
     # .prefetch_related(
     #     Prefetch(
     #         'historical',
