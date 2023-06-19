@@ -10,70 +10,7 @@
     <ul class="navbar-nav">
         <li class = "nav-item active"><a href="#list_houses" data-toggle="collapse">{% translate "show list" %}</a></li>
     </ul>
-    <table id ="list_houses" class="table collapse text-center">
-        <thead><tr>
-            <th>{% translate "name" %}</th>
-            <th>{% translate "uuid" %}</th>
-            <th>{% translate "status" %}</th>
-            <th>{% translate "info" %}</th>
-            <th>{% translate "houses" %}</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for sector in object_list %}
-            <tr {% if sector.status.name == 'free' %}class="table-success"{% endif %}
-                {% if sector.status.name == 'assigned' %}class="table-warning"{% endif %}
-                {% if sector.status.name == 'under_construction' %}class="table-danger"{% endif %}
-                {% if sector.status.name == 'completed' %}class="table-primary"{% endif %}
-             scope="row">
-                <td class="align-middle"> <a href = {% url "sector_update" sector.id %}>{{sector.name}}</a></td>
-                <td class="align-middle"> {{sector.uuid}}</td>
-                <td class="align-middle"> <a href = {% url "sector_history" sector.id %}>{{sector.status|default:"-"}}</a></td>
-                <td class="align-middle">
-                    {% if sector.status.name == "assigned" %}
-                        {{sector.assigned_to|default:""}}
-                    {% endif %}
-                    {% if sector.status.name == "free" %}
-                    {% endif %}
-                    {% if sector.status.name == "under_construction" %}
-                        set by
-                        {{ sector.history.latest.history_user }}
-                        at
-                        {{ sector.history.latest.date_modified|date:"d M Y" }}
-                    {% endif %}
-                    {% if sector.status.name == "completed" %}
-                        set by
-                        {{ sector.history.latest.history_user }}
-                        at
-                        {{ sector.history.latest.date_modified|date:"d M Y" }}
-                    {% endif %}
-                </td>
-                <td class="align-middle">
-                    <table class="table-sm table-borderless text-left">
-                     {% for house in sector.get_houses_into %}
-                         <tr><td><small>
-                             <a href="{% url "house_update" house.pk %}">{{ house.address }}({{ house.flat_count }})</a>
-                         </small></td></tr>
-                     {% endfor %}
-                    </table>
-                </td>
-                <td class="text-right align-middle">
-                    <form method="get" action="{% url "sector_delete" sector.id %}">
-                        <button class="btn btn-outline-danger" button_type="submit" >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                              <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"></path>
-                              <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"></path>
-                            </svg>
-                        </button>
-                    </form>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-{#    {% for house in houses %} {{ house.flat_count }}{% endfor %}#}
+    {% spaceless %}{% include "./sectors_table.html"%}{% endspaceless %}
 {% endblock %}
 {% block head %}
 {#<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />#}
