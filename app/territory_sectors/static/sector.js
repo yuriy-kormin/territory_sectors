@@ -1,22 +1,7 @@
 function create_uuid(){
     fetch('/uuid/gen')
 }
-let circles = []
-function add_circle_source(id, msg, mark ="default",lng, lat){
-    circles.push({
-        "type": "Feature",
-        "geometry": {
-            "type": "Point",
-            "coordinates": [lng, lat],
-
-        },
-        "properties": {
-            "title": msg,
-            "mark":mark,
-            "id":`house_${id}`,
-        },
-    })
-}
+// let circles = []
 
 function add_map_circles_source(){
      map.addSource("circles", {
@@ -26,6 +11,15 @@ function add_map_circles_source(){
              "features": circles
          }
      })
+    circles.forEach(house => {
+        popups[house['id']]= new mapboxgl.Popup(
+            {
+                offset: 25,
+                closeButton: false,
+                closeOnClick: true,
+            },
+        ).setHTML(house['popup'])
+    })
 }
 
 

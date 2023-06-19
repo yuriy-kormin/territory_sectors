@@ -8,7 +8,7 @@ from .forms import SectorForm
 from .models import Sector
 from django.utils.translation import gettext_lazy as _
 from .mixins import GeoJSONAnnotateMixin, ContextAllHousesIntoMixin, \
-    CentroidAnnotateMixin, NatSortMixin
+    CentroidAnnotateMixin, NatSortMixin, AddContextFullJSONMixin
 from ..mixins import LoginRequiredMixinCustom
 from django.views import View
 
@@ -101,14 +101,15 @@ class SectorPrintView(LoginRequiredMixinCustom,
 
 
 class SectorListView(LoginRequiredMixinCustom, NatSortMixin,
-                     ContextAllHousesIntoMixin, GeoJSONAnnotateMixin,
+                     ContextAllHousesIntoMixin,
+                     AddContextFullJSONMixin,
                      CentroidAnnotateMixin, ListView):
     model = Sector
+    queryset = Sector.objects.select_related('status', 'uuid')
     template_name = "sector/list.html"
     extra_context = {
         'remove_title': _('remove'),
     }
-    # ordering = 'name',
 
     def get_queryset(self):
         qs = super().get_queryset()

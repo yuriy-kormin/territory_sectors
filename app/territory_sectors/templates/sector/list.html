@@ -123,15 +123,8 @@
 </div>
 {% endblock %}
 {% block markers %}
-    {% for sector in object_list %}
-        add_sector_source(
-        {{ sector.id }},
-        "{{ sector.status }}",
-        {{ sector.geojson | safe }},
-        {{ sector.for_search|yesno:"true,false" }},
-        '{% spaceless %}{% include "./sector_popup.html" %}{% endspaceless %}')
-    {% endfor %}
-{% include "sector/houses_circles.html" %}
+    var sectors = JSON.parse('{{ sectors_json|escapejs }}');
+    var circles = JSON.parse('{{ houses_json|escapejs }}');
     map.setZoom(14)
     map.on('click',handleClickEvent);
     map.on('zoom', function () {

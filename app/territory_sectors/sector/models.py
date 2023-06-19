@@ -88,7 +88,7 @@ class Sector(models.Model):
 
     @classmethod
     def get_all_houses(cls):
-        return House.objects.all()
+        return House.objects.prefetch_related('flat_set')
 
     def get_changes_history(self):
         def get_related_status(obj):
@@ -119,3 +119,18 @@ class Sector(models.Model):
                 else:
                     prev_record = record
         return history.exclude(history_id__in=exclude_records).reverse()
+
+    def get_js_source(self):
+        return {
+            'id': self.id,
+            'type': 'Feature',
+            'properties': {
+                'name': self.status.name if self.status else None,
+                'for_search': self.for_search,
+                'status': self.status.name if self.status else None,
+                'id': self.id,
+            },
+            'geometry': json.loads(self.geojson)
+            # to fetch this qs must be annotated with
+            # geojson=AsGeoJSON('contour'))
+        }

@@ -38,7 +38,6 @@ function set_popup (id, text) {
 }
 
 function circle_text() {
-
     map.addLayer({
                 'id': 'poi-labels',
                 'type': 'symbol',
@@ -115,7 +114,15 @@ function map_add_layer(mark_id = false){
                     'features': sectors,
                 },
     })
-
+    sectors.forEach(sector => {
+        popups[sector['id']]= new mapboxgl.Popup(
+            {
+                offset: 25,
+                closeButton: false,
+                closeOnClick: true,
+            },
+        ).setHTML(sector['popup'])
+    })
         map.addLayer({
         'id': "outline_sector_search",
         'type':'line',
