@@ -58,7 +58,7 @@ class Sector(models.Model):
         return self.name
 
     def get_houses_into(self):
-        return House.objects.filter(
+        return House.objects.prefetch_related('flat_set').filter(
             gps_point__intersects=self.contour,
             for_search=self.for_search
         )

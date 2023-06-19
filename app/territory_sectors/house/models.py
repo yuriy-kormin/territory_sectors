@@ -22,7 +22,7 @@ class StatManager(models.Manager):
         return self.count()
 
     def flat_count(self):
-        return self.flat_set.count()
+        return self.prefetch_related('flat_set').count()
 
 
 class House(models.Model):
