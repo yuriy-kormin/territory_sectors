@@ -7,7 +7,6 @@ readme = "README.md"
 packages = [{include = "app/territory_sectors"}]
 
 [tool.poetry.dependencies]
-#python = "^3.10"
 python = ">=3.10,<3.12"
 python-dotenv = "^0.21.0"
 dj-database-url = "^1.2.0"
@@ -15,7 +14,6 @@ django-bootstrap4 = "^22.3"
 postgis = "^1.0.4"
 shortuuid = "^1.0.11"
 psycopg2-binary = "^2.9.5"
-django-debug-toolbar = "^3.8.1"
 numpy = "^1.24.1"
 gunicorn = "^20.1.0"
 django-qr-code = "^3.1.1"
@@ -29,8 +27,11 @@ django-filter = "^22.1"
 reportlab = "^3.6.12"
 geojson = "^3.0.1"
 natsort = "^8.3.1"
+djangorestframework = "^3.14.0"
+graphene-django = "^3.1.2"
 
 [tool.poetry.group.dev.dependencies]
+django-debug-toolbar = "^3.8.1"
 django-extensions = "^3.2.1"
 flake8 = "^6.0.0"
 
