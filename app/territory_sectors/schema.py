@@ -1,6 +1,5 @@
 import graphene
 from territory_sectors.sector.schema import Query as SectorQuery
-    # Mutation as StatusMutation
 
 
 class Query(
