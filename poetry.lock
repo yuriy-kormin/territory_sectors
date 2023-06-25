@@ -435,6 +435,24 @@ rest-framework = ["djangorestframework (>=3.6.3)"]
 test = ["coveralls", "django-filter (>=22.1)", "djangorestframework (>=3.6.3)", "mock", "pytest (>=7.3.1)", "pytest-cov", "pytest-django (>=4.5.2)", "pytest-random-order", "pytz"]
 
 [[package]]
+name = "graphene-gis"
+version = "0.0.8"
+description = "GIS support for graphene-django"
+optional = false
+python-versions = "*"
+files = [
+    {file = "graphene-gis-0.0.8.tar.gz", hash = "sha256:75fcdafcf79205bd697ebc4b376c38964a3d8c174f72505bccddf55dafc0fb9c"},
+]
+
+[package.dependencies]
+graphene = ">=3.0.0,<4"
+graphene-django = ">=3.0.0,<4"
+
+[package.extras]
+dev = ["black (==19.3b0)", "flake8 (==3.7.8)", "pytest (>=5.1.2)", "pytest-cov (==2.7.1)", "pytest-django (>=3.5.1)"]
+test = ["pytest (>=5.1.2)", "pytest-cov (==2.7.1)", "pytest-django (>=3.5.1)"]
+
+[[package]]
 name = "graphql-core"
 version = "3.2.3"
 description = "GraphQL implementation for Python, a port of GraphQL.js, the JavaScript reference implementation for GraphQL."
@@ -1104,4 +1122,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<3.12"
-content-hash = "451d805e903abd6ccc69239c24362cd56b07fccf60b8b8b87d5bbc31cc712f24"
+content-hash = "7d58a282211b2e019e8423e8f7babeefb66159b1d3a0298f43c595a7c0278910"

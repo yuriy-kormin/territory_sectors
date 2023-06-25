@@ -53,6 +53,8 @@ THIRD_PARTY_APPS = [
     'simple_history',
     "qr_code",
     'graphene_django',
+    'graphene_gis',
+
 ]
 
 PROJECT_APPS = [
