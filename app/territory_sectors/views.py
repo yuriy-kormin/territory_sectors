@@ -51,17 +51,7 @@ class AssigmentsStatView(LoginRequiredMixin, AddContextGetChangesHistoryMixin,
         'header': _('Sector assignments status'),
     }
     queryset = Sector.objects.select_related("status").order_by('name')
-    # .prefetch_related(
-    #     Prefetch(
-    #         'historical',
-    #         # queryset=Sector.history.all(),
-    #         # select_related('history_user', 'status'),
-    #         # to_attr='history_test'
-    #     )
-    # )[:1]
 
-
-# qs = Sector.history.
 
 class CustomGraphqlView(LoginRequiredMixin, GraphQLView):
     graphiql = True
