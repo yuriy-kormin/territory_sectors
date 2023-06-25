@@ -52,6 +52,7 @@ THIRD_PARTY_APPS = [
     'bootstrap4',
     'simple_history',
     "qr_code",
+    'graphene_django',
 ]
 
 PROJECT_APPS = [
@@ -159,12 +160,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
-# STATICFILES_DIRS = (
-#     os.path.join(
-#         BASE_DIR,
-#         'territory_sectors',
-#         "static"),
-# )
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
@@ -173,7 +168,8 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-INTERNAL_IPS = ('127.0.0.1',)
+if DEBUG:
+    INTERNAL_IPS = ('127.0.0.1',)
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
@@ -191,3 +187,7 @@ LOCALE_PATHS = (
 
 USE_X_FORWARDED_HOST = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+GRAPHENE = {
+    'SCHEMA': 'territory_sectors.schema.schema'
+}

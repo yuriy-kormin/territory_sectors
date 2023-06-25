@@ -15,12 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from .views import IndexView, UserLoginView, UserLogoutView, UUIDView,\
-    StatView, AssigmentsStatView
+from .views import IndexView, UserLoginView, UserLogoutView, UUIDView, \
+    StatView, AssigmentsStatView, CustomGraphqlView
 from django.conf import settings
 from django.conf.urls.static import static
-
-# import shortuuid
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -35,6 +33,7 @@ urlpatterns = [
     path('sector/', include('territory_sectors.sector.urls')),
     path('uuid/', include('territory_sectors.uuid_qr.urls')),
     path('issue/', include('territory_sectors.issue.urls')),
+    path("graphql/", CustomGraphqlView.as_view(), name='graphql'),
 ]
 if settings.DEBUG:
     urlpatterns.append(path('__debug__/', include('debug_toolbar.urls')))

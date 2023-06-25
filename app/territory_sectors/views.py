@@ -6,6 +6,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
+from graphene_django.views import GraphQLView
 
 from territory_sectors.uuid_qr.models import Uuid
 
@@ -59,4 +60,8 @@ class AssigmentsStatView(LoginRequiredMixin, AddContextGetChangesHistoryMixin,
     #     )
     # )[:1]
 
+
 # qs = Sector.history.
+
+class CustomGraphqlView(LoginRequiredMixin, GraphQLView):
+    graphiql = True
