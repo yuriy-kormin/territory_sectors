@@ -3,29 +3,7 @@ from django.urls import reverse_lazy
 from graphene_django import DjangoObjectType
 from graphene_gis.converter import gis_converter  # noqa
 from .models import Sector
-from ..status.models import Status
-from ..house.models import House
-
-
-class StatusType(DjangoObjectType):
-    class Meta:
-        model = Status
-        fields = 'name',
-
-
-class HouseNode(DjangoObjectType):
-    update_href = graphene.String()
-    flat_count = graphene.Int()
-
-    class Meta:
-        model = House
-        fields = '__all__'
-
-    def resolve_update_href(self, info):
-        return reverse_lazy('house_update', kwargs={'pk': self.id})
-
-    def resolve_flat_count(self, info):
-        return self.flat_count()
+from ..house.schema import HouseNode
 
 
 class SectorNode(DjangoObjectType):
