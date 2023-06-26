@@ -55,3 +55,4 @@ class AssigmentsStatView(LoginRequiredMixin, AddContextGetChangesHistoryMixin,
 
 class CustomGraphqlView(LoginRequiredMixin, GraphQLView):
     graphiql = True
+    login_url = reverse_lazy('user_login')

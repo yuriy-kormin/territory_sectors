@@ -8,9 +8,10 @@
 {#    </div>#}
    <h1 class="my-4"> {{ marks }}</h1>
     <ul class="navbar-nav">
-        <li class = "nav-item active"><a href="#list_houses" data-toggle="collapse">{% translate "show list" %}</a></li>
+<!--        <li class = "nav-item active"><a href="#list_houses" data-toggle="collapse">{% translate "show list" %}</a></li>-->
+    <button id="toggleButton" class="btn btn-primary" onclick="toggleSectorList()">Show List</button>
     </ul>
-    {% spaceless %}{% include "./sectors_table.html"%}{% endspaceless %}
+    {% include "./sectors_table2.html" %}
 {% endblock %}
 {% block head %}
 {#<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />#}
@@ -75,8 +76,8 @@
 {% endblock %}
 {% block maponload %}
 draw_border();
-add_map_circles_source();
-add_circles_layer();
-add_symbols_layer();
+<!--add_map_circles_source();-->
+<!--add_circles_layer();-->
+<!--add_symbols_layer();-->
 map_add_layer();
 {% endblock %}
