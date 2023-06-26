@@ -62,7 +62,7 @@ class Query(graphene.ObjectType):
     sector_by_id = graphene.Field(SectorNode, id=graphene.Int())
 
     def resolve_sector_listing(self, info):
-        return Sector.objects.select_related('status', 'uuid')
+        return Sector.objects.select_related('status', 'uuid').order_by('status__id')
 
     def resolve_sector_by_id(self, info, id):
         return Sector.objects.get(id=id)
