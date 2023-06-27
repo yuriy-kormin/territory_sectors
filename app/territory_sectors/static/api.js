@@ -144,19 +144,20 @@ async function toggleSectorList() {
         //create row
         let rowDiv = document.createElement("div");
         rowDiv.classList.add("row","my-1","text-left", "align-middle");
+        rowDiv.title=sector_json['uuid']
         const colorClass = statusRowColor(sector_json['status'])
         if (colorClass.trim() !== ""){rowDiv.classList.add(colorClass)}
 
             //create name col
-            let cellDiv = createCellDiv("col-1")
+            let cellDiv = createCellDiv("col-2")
                 let link = createLink(sector_json['updateHref'],sector_json['name'])
                 cellDiv.appendChild(link)
             rowDiv.appendChild(cellDiv);
 
-            //create uuid col
-            cellDiv = createCellDiv("col-2")
-                cellDiv.textContent = sector_json['uuid'];
-                rowDiv.appendChild(cellDiv);
+            // //create uuid col
+            // cellDiv = createCellDiv("col-2")
+            //     cellDiv.textContent = sector_json['uuid'];
+            //     rowDiv.appendChild(cellDiv);
 
             //create status col
             cellDiv = createCellDiv("col-2")

@@ -11,7 +11,9 @@
 <!--        <li class = "nav-item active"><a href="#list_houses" data-toggle="collapse">{% translate "show list" %}</a></li>-->
     <button id="toggleButton" class="btn btn-primary" onclick="toggleSectorList()">Show List</button>
     </ul>
-    {% include "./sectors_table2.html" %}
+
+<div class="p-2">{% include "./sectors_table2.html" %}</div>
+
 {% endblock %}
 {% block head %}
 {#<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />#}

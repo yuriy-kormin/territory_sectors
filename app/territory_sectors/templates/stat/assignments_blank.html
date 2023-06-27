@@ -20,19 +20,6 @@
                     {% endfor %}
                 </div>
               {% endfor %}
-
-{#                    <div title="{{record.full_name|default:""}}"#}
-{#                    <div title="{{record.full_name|default:""}}" class="col-2 {% with record as obj %}{% include "stat/status_bg-color.html" %}{% endwith %} mx-1">#}
-{#                        {% if record.status.name == "assigned" or record.status.name  == "completed" %}#}
-{#                            {% if record.assigned_to %}#}
-{#                                <div class="row"><div class="col-12">{{ record.assigned_to }}</div></div>#}
-{#                            {% endif %}#}
-{#                        {% endif %}#}
-{#                        <div class="row"><div class="col-12"><small>{{record.history_date|date:"d/m/y"}}</small></div></div>#}
-
-{#                    </div>#}
-{#                {% endfor %}#}
-{#            {% endfor %}#}
             </div>
         {% endfor %}
     </div>
