@@ -118,6 +118,12 @@ function createRemoveButtonDiv(href){
     return rootDiv;
 }
 
+function clearTable(containerDiv){
+  while (containerDiv.firstChild) {
+    clearTable(containerDiv.firstChild);
+    containerDiv.removeChild(containerDiv.firstChild);
+  }
+}
 
 async function toggleSectorList() {
   var listDiv = document.getElementById("sectorList");
@@ -180,6 +186,7 @@ async function toggleSectorList() {
   } else {
     listDiv.style.display = "none";
     toggleButton.innerHTML = "Show List";
+    clearTable(containerDiv)
   }
 }
 
