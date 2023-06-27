@@ -57,7 +57,6 @@
 {% block markers %}
     map_fly({{ object.centroid.coords.0|floatformat:"." }},{{ object.centroid.coords.1|floatformat:"." }})
     {% for house in object.sector.get_houses_into %}
-        set_popup({{ house.id }},"{{ house }}({{ house.flat_count }})")
-        set_marker({{ house.id }}, {{ house.gps_pos }})
+        set_marker({{ house.id }}, {{ house.gps_pos }},undefined,"{{ house }}({{ house.flat_count }})")
     {% endfor %}
 {% endblock %}

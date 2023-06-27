@@ -1,4 +1,7 @@
+import re
+
 import graphene
+from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from graphene_django import DjangoObjectType
 from graphene_gis.converter import gis_converter  # noqa
@@ -14,6 +17,7 @@ class SectorNode(DjangoObjectType):
     history_href = graphene.String()
     remove_href = graphene.String()
     houses = graphene.List(HouseNode)
+    popup = graphene.String()
 
     class Meta:
         model = Sector
@@ -34,13 +38,23 @@ class SectorNode(DjangoObjectType):
     def resolve_houses(self, info):
         return self.get_houses_into()
 
+    def resolve_popup(self, info):
+        return re.sub(
+            r'\s{2}',
+            '',
+            render_to_string(
+                'sector/sector_popup.html',
+                {'sector': Sector.objects.get(pk=self.id)}
+            )
+        )
+
 
 class Query(graphene.ObjectType):
     sector_listing = graphene.List(SectorNode)
     sector_by_id = graphene.Field(SectorNode, id=graphene.Int())
 
     def resolve_sector_listing(self, info):
-        return Sector.objects.select_related('status', 'uuid')\
+        return Sector.objects.select_related('status', 'uuid') \
             .order_by('status__id')
 
     def resolve_sector_by_id(self, info, id):

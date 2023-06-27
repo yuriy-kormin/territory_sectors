@@ -11,15 +11,15 @@ function add_map_circles_source(){
              "features": circles
          }
      })
-    circles.forEach(house => {
-        popups[house['id']]= new mapboxgl.Popup(
-            {
-                offset: 25,
-                closeButton: false,
-                closeOnClick: true,
-            },
-        ).setHTML(house['popup'])
-    })
+    // circles.forEach(house => {
+    //     popups[house['id']]= new mapboxgl.Popup(
+    //         {
+    //             offset: 25,
+    //             closeButton: false,
+    //             closeOnClick: true,
+    //         },
+    //     ).setHTML(house['popup'])
+    // })
 }
 
 
@@ -124,10 +124,6 @@ $(function() {
   }
 
   $('.pop').on('click', function(event) {
-    // var imageUrl = url;
-    // var image = $('<img>').attr('src', imageUrl);
-    // $('#imagemodal .modal-body').html(image);
-    // $('#imagemodal').modal('show');
     event.preventDefault();
     var fullImageUrl = $(this).data('url');
     showModal(fullImageUrl);

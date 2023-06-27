@@ -18,7 +18,7 @@ map.addControl(new mapboxgl.GeolocateControl({
 // mapboxgl.setRTLTextPlugin('https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js');
 // map.addControl(new MapboxLanguage({defaultLanguage: 'ru'}));
 var markers = {};
-var popups = {};
+// var popups = {};
 var sectors = [];
 
 // var sector_sources = {};
@@ -28,15 +28,15 @@ function map_fly(point_x,point_y){
         center: [point_x,point_y]
     })
 }
-function set_popup (id, text) {
-    popups[id] = new mapboxgl.Popup(
-        {
-            offset: 25,
-            closeButton: false,
-            closeOnClick: true,
-        },
-    ).setHTML(text)
-}
+// function set_popup (id, text) {
+//     popups[id] = new mapboxgl.Popup(
+//         {
+//             offset: 25,
+//             closeButton: false,
+//             closeOnClick: true,
+//         },
+//     ).setHTML(text)
+// }
 
 function circle_text() {
     map.addLayer({
@@ -55,20 +55,27 @@ function circle_text() {
 
 
 }
-function set_marker (id, lng, lat, color = 'default') {
+function set_marker (id, lng, lat, color = 'default', text_data='') {
     let color_val = search_status[false];
     if (color !== 'default'){
         color_val = search_status[true]
     }
+    const popup = new mapboxgl.Popup(
+        {
+            offset: 25,
+            closeButton: false,
+            closeOnClick: true,
+        },
+    ).setHTML(text_data)
+
     markers[id] = new mapboxgl.Marker(
         {
         color: color_val,
         scale:1.5,
         // sy
-    }
-    ).setPopup(popups[id])
-        .setLngLat([lng, lat])
-        .addTo(map);
+    }).setPopup(popup)
+    .setLngLat([lng, lat])
+    .addTo(map);
 
 }
 function move_marker (event) {
@@ -94,17 +101,18 @@ function add_sector_source(id,status,json,for_search,popup_data){
                     'id': id,
                 },
                 "geometry": json,
-            });
-    popups[id] = new mapboxgl.Popup(
-            {
-                offset: 25,
-                closeButton: false,
-                closeOnClick: true,
-            },
-        ).setHTML(
-            popup_data
-    )
+            })
+    // popups[id] = new mapboxgl.Popup(
+    //         {
+    //             offset: 25,
+    //             closeButton: false,
+    //             closeOnClick: true,
+    //         },
+    //     ).setHTML(
+    //         popup_data
+    // )
 }
+
 function map_add_layer(mark_id = false){
 
     map.addSource(
@@ -115,15 +123,15 @@ function map_add_layer(mark_id = false){
                     'features': sectors,
                 },
     })
-    sectors.forEach(sector => {
-        popups[sector['id']]= new mapboxgl.Popup(
-            {
-                offset: 25,
-                closeButton: false,
-                closeOnClick: true,
-            },
-        ).setHTML(sector['popup'])
-    })
+    // sectors.forEach(sector => {
+    //     popups[sector['id']]= new mapboxgl.Popup(
+    //         {
+    //             offset: 25,
+    //             closeButton: false,
+    //             closeOnClick: true,
+    //         },
+    //     ).setHTML(sector['popup'])
+    // })
         map.addLayer({
         'id': "outline_sector_search",
         'type':'line',
@@ -165,11 +173,16 @@ function map_add_layer(mark_id = false){
 }
 
 
-function sector_popup(e) {
-    id = e.features[0].properties.id
-    popups[id].setLngLat(e.lngLat).addTo(map);
-}
+// function sector_popup(e) {
+//     id = e.features[0].properties.id
+//     popups[id].setLngLat(e.lngLat).addTo(map);
+// }
 
+const loading_spinner = `
+        <div className="spinner-border text-primary" role="status">
+            <span className="sr-only">Loading...</span>
+        </div>
+        `
 function handleClickEvent(e) {
     let sectors_layers_names = [
         'sector_free',
@@ -189,14 +202,32 @@ function handleClickEvent(e) {
     sector_layer = layerList.filter(function(value) {
                                    return sectors_layers_names.indexOf(value.layer.id) > -1;
                                });
-    if (house_layer.length){
+    let id = -1;
+    let type = '';
+    if (house_layer.length) {
         id = house_layer[0].properties.id;
-        popups[id].setLngLat(e.lngLat).addTo(map);
+        type = 'house'
     } else {
-        if (sector_layer.length){
+        if (sector_layer.length) {
             id = sector_layer[0].properties.id;
-            popups[id].setLngLat(e.lngLat).addTo(map);
+            type = 'sector'
         }
+    }
+    if (type !== '' && id !== -1) {
+        const popup = new mapboxgl.Popup(
+            {
+                closeOnClick: true,
+                offset: 25,
+                closeButton: false,
+            }
+        ).setLngLat(e.lngLat)
+            .setHTML(loading_spinner)
+            .addTo(map);
+        getPopupHTML(type, id)
+            .then(result =>{
+                popup.setHTML(result)
+                })
+
     }
 
 
@@ -229,7 +260,6 @@ function update_sector(event) {
     var coordinates = draw.getAll()['features'][0]['geometry']['coordinates'][0]
     document.getElementById("contour").setAttribute(
         'value',"SRID=4326;POLYGON"+list2string(coordinates))
-    // console.log(document.getElementById('contour').value)
 }
 
 function show_all_popups(){

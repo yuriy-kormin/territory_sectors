@@ -1,3 +1,21 @@
+async function getApiResponse(query){
+    const csrftoken = getCookie('csrftoken');
+    try {
+      const response = await fetch('/graphql/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrftoken,
+        },
+        body: JSON.stringify({query}),
+      });
+      const data = await response.json();
+       return data['data']
+    } catch (error) {
+     console.error('Error:', error);
+    }
+}
+
 async function get_sector_list(){
     const query = `
     query {
@@ -18,23 +36,8 @@ async function get_sector_list(){
       }
     }
   `;
-    const csrftoken = getCookie('csrftoken');
-    try {
-      const response = await fetch('/graphql/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRFToken': csrftoken,
-        },
-        body: JSON.stringify({query}),
-      });
-      const data = await response.json();
-      // return JSON.parse(data)
-       return data['data']['sectorListing']
-    } catch (error) {
-     console.error('Error:', error);
-    }
-
+  const response = await getApiResponse(query)
+  return response['sectorListing']
 }
 
 function statusRowColor(statusName){
@@ -178,4 +181,26 @@ async function toggleSectorList() {
     listDiv.style.display = "none";
     toggleButton.innerHTML = "Show List";
   }
+}
+
+async function getPopupHTML(type,id) {
+    let querytype = ''
+    if (type === 'house') {
+        querytype = 'houseById'
+    } else if (type === 'sector') {
+        querytype = 'houseById'
+    } else {
+        return null
+    }
+    const query = `
+            query {
+              ${querytype}(id:${id}){
+                popup
+              }
+            }
+            `
+    const response = await getApiResponse(query)
+    if (response !== null) {
+        return response[querytype]['popup']
+    }
 }

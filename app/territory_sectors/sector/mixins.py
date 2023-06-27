@@ -1,11 +1,7 @@
-import re
-
 from django.contrib.gis.db.models.functions import AsGeoJSON, Centroid
 from django.core.exceptions import ObjectDoesNotExist
 import json
 from django.db.models import Count
-from django.template.loader import render_to_string
-
 from .models import Sector
 from natsort import natsorted
 
@@ -55,11 +51,11 @@ class ContextAllHousesIntoMixin:
                     "title": f'{house.flat_count}',
                     "mark": house.for_search if house.for_search
                     else 'default',
-                    "id": f'house_{house.id}',
+                    "id": f'{house.id}',
                 },
-                "popup": render_to_string(
-                    'sector/house_popup.html',
-                    {'house': house})
+                #     "popup": render_to_string(
+                #         'sector/house_popup.html',
+                #         {'house': house})
             })
 
         context['houses_json'] = json.dumps(result_json)
@@ -103,13 +99,13 @@ class AddContextFullJSONMixin(GeoJSONAnnotateMixin):
         sectors = []
         for sector in qs:
             sector_data = sector.get_js_source()
-            sector_data['popup'] = re.sub(
-                r'\s{2}',
-                '',
-                render_to_string(
-                    'sector/sector_popup.html',
-                    {'sector': sector})
-            )
+            # sector_data['popup'] = re.sub(
+            #     r'\s{2}',
+            #     '',
+            #     render_to_string(
+            #         'sector/sector_popup.html',
+            #         {'sector': sector})
+            # )
             sectors.append(sector_data)
 
         context['sectors_json'] = json.dumps(sectors)
