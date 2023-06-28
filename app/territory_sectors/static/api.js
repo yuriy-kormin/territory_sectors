@@ -196,7 +196,7 @@ async function getPopupHTML(type,id) {
     if (type === 'house') {
         querytype = 'houseById'
     } else if (type === 'sector') {
-        querytype = 'houseById'
+        querytype = 'sectorById'
     } else {
         return null
     }
