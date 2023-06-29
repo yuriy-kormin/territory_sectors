@@ -1,6 +1,4 @@
 import re
-from datetime import datetime
-
 import graphene
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
@@ -62,7 +60,7 @@ class Query(graphene.ObjectType):
     sector_by_id = graphene.Field(SectorNode, id=graphene.Int())
 
     def resolve_sector_listing(self, info):
-        return Sector.objects.select_related('uuid','status') \
+        return Sector.objects.select_related('uuid', 'status') \
             .order_by('status__id', 'assigned_to')
 
     def resolve_sector_by_id(self, info, id):
