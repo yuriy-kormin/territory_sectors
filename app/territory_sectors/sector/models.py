@@ -7,6 +7,7 @@ from urllib.parse import quote
 from django.db.models import F, Value
 from django.db.models.functions import Concat
 from territory_sectors.house.models import House
+from territory_sectors.sector.consts_from_js import sector_status
 from territory_sectors.status.models import Status
 from territory_sectors.uuid_qr.models import Uuid
 from django.contrib.gis.db import models as gis_models
@@ -121,14 +122,18 @@ class Sector(models.Model):
         return history.exclude(history_id__in=exclude_records).reverse()
 
     def get_js_source(self):
+        status_name = self.status.name if self.status else None
+        sector_color = sector_status.get(status_name, '') if status_name else ''
+
         return {
             'id': self.id,
             'type': 'Feature',
             'properties': {
-                'name': self.status.name if self.status else None,
+                'name': status_name,
                 'for_search': self.for_search,
-                'status': self.status.name if self.status else None,
+                'status': status_name,
                 'id': self.id,
+                'color': sector_color,
             },
             'geometry': json.loads(self.geojson)
             # to fetch this qs must be annotated with

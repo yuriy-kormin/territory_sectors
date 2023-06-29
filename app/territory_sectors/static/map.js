@@ -116,59 +116,47 @@ function add_sector_source(id,status,json,for_search,popup_data){
 function map_add_layer(mark_id = false){
 
     map.addSource(
-            'layers', {
-                'type': 'geojson',
-                'data': {
-                    'type': 'FeatureCollection',
-                    'features': sectors,
-                },
+        'layers', {
+            'type': 'geojson',
+            'data': {
+                'type': 'FeatureCollection',
+                'features': sectors,
+            },
     })
-    // sectors.forEach(sector => {
-    //     popups[sector['id']]= new mapboxgl.Popup(
-    //         {
-    //             offset: 25,
-    //             closeButton: false,
-    //             closeOnClick: true,
-    //         },
-    //     ).setHTML(sector['popup'])
+    //     map.addLayer({
+    //     'id': "outline_sector_search",
+    //     'type':'line',
+    //     'source': 'layers',
+    //     'layout': {},
+    //     'paint':{
+    //         'line-color': search_status[true],
+    //         'line-width': 2,
+    //     },
+    //     'filter': ['==', 'for_search', true]
     // })
-        map.addLayer({
-        'id': "outline_sector_search",
-        'type':'line',
-        'source': 'layers',
-        'layout': {},
-        'paint':{
-            'line-color': search_status[true],
-            'line-width': 2,
-        },
-        'filter': ['==', 'for_search', true]
-    })
+
+    // map.addLayer({
+    //     'id': "outline_sector_ready",
+    //     'type':'line',
+    //     'source': 'layers',
+    //     'layout': {},
+    //     'paint':{
+    //         'line-color': search_status[false],
+    //         'line-width': 2,
+    //     },
+    //     'filter': ['==', 'for_search', false]
+    // })
 
     map.addLayer({
-        'id': "outline_sector_ready",
-        'type':'line',
-        'source': 'layers',
-        'layout': {},
-        'paint':{
-            'line-color': search_status[false],
-            'line-width': 2,
-        },
-        'filter': ['==', 'for_search', false]
-    })
-
-    for (status_name in sector_status){
-        map.addLayer({
-        'id': 'sector_'+status_name,
+        'id': 'sectors',
         'type': 'fill',
         'source': 'layers',
         'layout': {},
         'paint': {
-            'fill-color': sector_status[status_name],
-            'fill-opacity': 0.5
+            'fill-color': ['get', 'color'],
+            'fill-opacity': 0.6
         },
-        'filter': ['==', 'status', status_name]
         })
-    }
 
 }
 
