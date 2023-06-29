@@ -7,7 +7,7 @@ from urllib.parse import quote
 from django.db.models import F, Value
 from django.db.models.functions import Concat
 from territory_sectors.house.models import House
-from territory_sectors.sector.consts_from_js import sector_status
+from territory_sectors.consts_from_js import sector_status
 from territory_sectors.status.models import Status
 from territory_sectors.uuid_qr.models import Uuid
 from django.contrib.gis.db import models as gis_models

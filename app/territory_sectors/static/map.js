@@ -172,35 +172,23 @@ const loading_spinner = `
         </div>
         `
 function handleClickEvent(e) {
-    let sectors_layers_names = [
-        'sector_free',
-        'sector_assigned',
-        'sector_completed',
-        'sector_under_construction'
-    ]
-    let houses_layers_names = [
-        'circle-houses-layer',
-        'circle-houses-search-layer'
-    ]
+    const sectors_layers_name = 'sectors'
+    const houses_layers_names = 'circle-houses'
 
-    var layerList = map.queryRenderedFeatures(e.point, { layers: sectors_layers_names.concat(houses_layers_names) });
-    house_layer = layerList.filter(function(value) {
-                                   return houses_layers_names.indexOf(value.layer.id) > -1;
-                               });
-    sector_layer = layerList.filter(function(value) {
-                                   return sectors_layers_names.indexOf(value.layer.id) > -1;
-                               });
-    let id = -1;
-    let type = '';
-    if (house_layer.length) {
-        id = house_layer[0].properties.id;
-        type = 'house'
-    } else {
-        if (sector_layer.length) {
-            id = sector_layer[0].properties.id;
-            type = 'sector'
-        }
-    }
+    var layerList = map.queryRenderedFeatures(e.point) //, { layers: [sectors_layers_name,houses_layers_names] });
+    // console.log('layers',typeof layerList)
+    let type = "";
+    if (layerList.length > 0) {
+        layerList.forEach(layer=> {
+            if (layer.layer.id === houses_layers_names){
+                type = 'house';
+                id = layer.properties.id;
+            } else if (layer.layer.id === sectors_layers_name){
+                type = 'sector';
+                id = layer.properties.id;
+            }
+        })
+  }
     if (type !== '' && id !== -1) {
         const popup = new mapboxgl.Popup(
             {
@@ -217,8 +205,6 @@ function handleClickEvent(e) {
                 })
 
     }
-
-
 }
 
 function add_draw_control() {

@@ -5,6 +5,8 @@ from django.db.models import Count
 from .models import Sector
 from natsort import natsorted
 
+from ..consts_from_js import search_status
+
 
 class NatSortMixin:
     def get_queryset(self):
@@ -52,6 +54,7 @@ class ContextAllHousesIntoMixin:
                     "mark": house.for_search if house.for_search
                     else 'default',
                     "id": f'{house.id}',
+                    "color": search_status[house.for_search]
                 },
                 #     "popup": render_to_string(
                 #         'sector/house_popup.html',

@@ -11,43 +11,34 @@ function add_map_circles_source(){
              "features": circles
          }
      })
-    // circles.forEach(house => {
-    //     popups[house['id']]= new mapboxgl.Popup(
-    //         {
-    //             offset: 25,
-    //             closeButton: false,
-    //             closeOnClick: true,
-    //         },
-    //     ).setHTML(house['popup'])
-    // })
 }
 
 
 function add_circles_layer(){
     map.addLayer({
-    'id': 'circle-houses-layer',
+    'id': 'circle-houses',
     'type': 'circle',
     'source': 'circles',
     'paint':{
         'circle-radius': 8,
         'circle-stroke-width': 2,
-        'circle-color': search_status[false],
+        'circle-color': ['get', 'color'],
         'circle-stroke-color': 'white'
     },
-    'filter': ['==', 'mark', 'default']
+    // 'filter': ['==', 'mark', 'default']
 });
-    map.addLayer({
-    'id': 'circle-houses-search-layer',
-    'type': 'circle',
-    'source': 'circles',
-    'paint':{
-        'circle-radius': 8,
-        'circle-stroke-width': 2,
-        'circle-color': search_status[true],
-        'circle-stroke-color': 'white'
-    },
-    'filter': ['!=', 'mark', 'default']
-});
+//     map.addLayer({
+//     'id': 'circle-houses-search-layer',
+//     'type': 'circle',
+//     'source': 'circles',
+//     'paint':{
+//         'circle-radius': 8,
+//         'circle-stroke-width': 2,
+//         'circle-color': search_status[true],
+//         'circle-stroke-color': 'white'
+//     },
+//     'filter': ['!=', 'mark', 'default']
+// });
 }
 function add_symbols_layer(){
     map.addLayer({

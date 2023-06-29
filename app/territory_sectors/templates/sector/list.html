@@ -71,8 +71,7 @@
           var currentZoom = map.getZoom();
           var baseRadius = 8; // Define the base radius for the circles
           var newRadius = baseRadius + 5*(currentZoom -14)
-          map.setPaintProperty('circle-houses-layer', 'circle-radius', newRadius);
-          map.setPaintProperty('circle-houses-search-layer', 'circle-radius', newRadius);
+          map.setPaintProperty('circle-houses', 'circle-radius', newRadius);
           map.setLayoutProperty('houses-msg-layer', 'text-size', newRadius);
         });
 {% endblock %}

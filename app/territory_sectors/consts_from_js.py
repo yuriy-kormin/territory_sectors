@@ -4,3 +4,8 @@ sector_status = {
     'free': "rgb(13,231,64)",
     'completed': "rgb(3,124,248)"
 }
+
+search_status = {
+    True: "#fa8005",
+    False: "#B917FC"
+}
