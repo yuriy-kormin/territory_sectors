@@ -123,7 +123,8 @@ class Sector(models.Model):
 
     def get_js_source(self):
         status_name = self.status.name if self.status else None
-        sector_color = sector_status.get(status_name, '') if status_name else ''
+        sector_color = sector_status.get(status_name, '')\
+            if status_name else ''
 
         return {
             'id': self.id,
