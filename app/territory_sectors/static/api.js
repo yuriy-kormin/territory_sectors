@@ -33,6 +33,7 @@ async function get_sector_list(){
             flatCount
         }
         removeHref
+        statusAge
       }
     }
   `;
@@ -70,8 +71,7 @@ function createCellDiv(className){
 function createHouseListDiv(houseList){
     let rootDiv = document.createElement("div");
     houseList.forEach(function(house){
-        let houseDiv = document.createElement("div");
-        houseDiv.classList.add('row');
+        const houseDiv = createCellDiv('row')
             let cellDiv =createCellDiv('col-12');
                 const linkName = `${house['address']}(${house['flatCount']})`;
                 let link = createLink(house['updateHref'],linkName);
@@ -80,6 +80,17 @@ function createHouseListDiv(houseList){
         rootDiv.appendChild(houseDiv);
     })
     return rootDiv;
+}
+function createStatusDiv(name,info) {
+    const rootDiv = createCellDiv('row')
+        const nameDiv = createCellDiv('col-12')
+        nameDiv.innerHTML = name
+        rootDiv.appendChild(nameDiv)
+
+        const infoDiv = createCellDiv('col-12')
+        infoDiv.innerHTML = `<small>${info}</small>`
+        rootDiv.appendChild(infoDiv)
+    return rootDiv
 }
 
 function createRemoveSVG(){
@@ -154,15 +165,10 @@ async function toggleSectorList() {
                 cellDiv.appendChild(link)
             rowDiv.appendChild(cellDiv);
 
-            // //create uuid col
-            // cellDiv = createCellDiv("col-2")
-            //     cellDiv.textContent = sector_json['uuid'];
-            //     rowDiv.appendChild(cellDiv);
-
             //create status col
-            cellDiv = createCellDiv("col-2")
-                link = createLink(sector_json['historyHref'],sector_json['status'])
-                cellDiv.appendChild(link)
+            link = createLink(sector_json['historyHref'],sector_json['status'])
+            cellDiv = createStatusDiv(link.outerHTML,`(${sector_json['statusAge']} месяцев)`)
+            cellDiv.classList.add('col-3');
                 rowDiv.appendChild(cellDiv);
 
             //create info(assigned_to) col

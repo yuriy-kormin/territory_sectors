@@ -1,4 +1,5 @@
 import re
+from datetime import datetime
 
 import graphene
 from django.template.loader import render_to_string
@@ -7,6 +8,7 @@ from graphene_django import DjangoObjectType
 from graphene_gis.converter import gis_converter  # noqa
 from .models import Sector
 from ..house.schema import HouseNode
+from django.utils import timezone
 
 
 class SectorNode(DjangoObjectType):
@@ -18,6 +20,7 @@ class SectorNode(DjangoObjectType):
     remove_href = graphene.String()
     houses = graphene.List(HouseNode)
     popup = graphene.String()
+    status_age = graphene.String()
 
     class Meta:
         model = Sector
@@ -48,13 +51,18 @@ class SectorNode(DjangoObjectType):
             )
         )
 
+    def resolve_status_age(self, info):
+        status_set_datetime = self.get_changes_history()[0].date_modified
+        delta = timezone.now() - status_set_datetime
+        return str(round(delta.days / 30, 1))
+
 
 class Query(graphene.ObjectType):
     sector_listing = graphene.List(SectorNode)
     sector_by_id = graphene.Field(SectorNode, id=graphene.Int())
 
     def resolve_sector_listing(self, info):
-        return Sector.objects.select_related('status', 'uuid') \
+        return Sector.objects.select_related('uuid','status') \
             .order_by('status__id', 'assigned_to')
 
     def resolve_sector_by_id(self, info, id):

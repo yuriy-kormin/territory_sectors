@@ -98,8 +98,8 @@ class Sector(models.Model):
                 return
             return name
 
-        history = self.history.prefetch_related('status',
-                                                'history_user').annotate(
+        history = self.history.select_related('status', 'history_user')\
+            .annotate(
             full_name=Concat(
                 F('history_user__last_name'),
                 Value(' '),
