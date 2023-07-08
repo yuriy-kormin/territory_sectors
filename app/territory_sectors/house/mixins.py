@@ -42,13 +42,30 @@ class ImageResizeBeforeMixin:
                 return max_size, int(height * (max_size / width))
             return int(width * (max_size / height)), max_size
 
+        def process_rotation_based_on_exif(img):
+            exif = img._getexif()
+            # if image has exif data about orientation, let's rotate it
+            orientation_key = 274  # cf ExifTags
+            if exif and orientation_key in exif:
+                orientation = exif[orientation_key]
+
+                rotate_values = {
+                    3: Image.ROTATE_180,
+                    6: Image.ROTATE_270,
+                    8: Image.ROTATE_90
+                }
+
+                if orientation in rotate_values:
+                    img = img.transpose(rotate_values[orientation])
+
         def resize_image(image_data, max_size):
-            img = Image.open(image_data)
-            image_dimensions = calculate_new_size(max_size, *img.size)
-            img = img.resize(image_dimensions, Image.ANTIALIAS)
-            img = img.convert('RGB')
-            buffer = BytesIO()
-            img.save(buffer, format='JPEG', quality=90)
+            with Image.open(image_data) as img:
+                process_rotation_based_on_exif(img)
+                image_dimensions = calculate_new_size(max_size, *img.size)
+                img = img.resize(image_dimensions, Image.ANTIALIAS)
+                img = img.convert('RGB')
+                buffer = BytesIO()
+                img.save(buffer, format='JPEG', quality=90)
             return buffer.getvalue()
 
         image = form.cleaned_data.get('image')
