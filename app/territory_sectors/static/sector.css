@@ -15,7 +15,7 @@
 .form-control:focus + .form-control-placeholder,
 .form-control:not(:placeholder-shown) + .form-control-placeholder
  {
-  font-size: 75%;
-  transform: translate3d(0, -100%, 0);
+  font-size: 60%;
+  transform: translate3d(0, -50%, 0);
   opacity: 1;
 }
