@@ -32,8 +32,12 @@ SECRET_KEY = os.getenv('DJANGO_SECRET')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG') == 'True'
 
-ALLOWED_HOSTS = ['*']
+CERTBOT_DOMAINS = os.getenv('CERTBOT_DOMAINS')
 
+ALLOWED_HOSTS = [f'{scheme}://{domain}'
+                 for domain in CERTBOT_DOMAINS.split(',')
+                 for scheme in ('http', 'https')
+                 ] if CERTBOT_DOMAINS else ['*']
 
 # Application definition
 
