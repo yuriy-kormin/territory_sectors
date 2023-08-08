@@ -16,9 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from .views import IndexView, UserLoginView, UserLogoutView, UUIDView, \
-    StatView, AssigmentsStatView, CustomGraphqlView
+    StatView, AssigmentsStatView
 from django.conf import settings
 from django.conf.urls.static import static
+from graphene_django.views import GraphQLView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -33,9 +35,15 @@ urlpatterns = [
     path('sector/', include('territory_sectors.sector.urls')),
     path('uuid/', include('territory_sectors.uuid_qr.urls')),
     path('issue/', include('territory_sectors.issue.urls')),
-    path("graphql/", CustomGraphqlView.as_view(), name='graphql'),
 ]
+
+graphiql = False
+
 if settings.DEBUG:
     urlpatterns.append(path('__debug__/', include('debug_toolbar.urls')))
     urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)
+    graphiql = True
+
+urlpatterns.append(
+    path("graphql/", GraphQLView.as_view(graphiql=graphiql), name='graphql'))

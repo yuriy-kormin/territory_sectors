@@ -1,50 +1,61 @@
 import React, {useRef, useState} from 'react';
-import TextInput from "./components/input/TextInput";
-import NewButton from "./components/button/NewButton";
+import TextInput from "./input/TextInput";
+import NewButton from "./button/NewButton";
 import {Form} from "react-bootstrap";
 import {useDispatch} from "react-redux";
 import {faUser, faLock} from '@fortawesome/free-solid-svg-icons';
-import Loading from "./components/spinner/Loading";
-import ErrorAlert from "./components/Alert/ErrorAlert";
+import Loading from "./spinner/Loading";
+import ErrorAlert from "./Alert/ErrorAlert";
+import {useBackendExchange} from "../hooks/useBackendExchange";
+import {LoginQUERY} from "../api-helpers/queries/userQueries";
+import {getResponseData} from "../api-helpers/lib";
 
 const LoginForm = () => {
     const dispatch = useDispatch()
-    const [loginError, setLoginError] = useState({error: false, message:''});
-
+    const [showModal,setShowModal] =useState(false)
+    const [fetchResult, setFetchResult] = useState({
+        fetching:false,
+        result:undefined,
+        error:undefined,
+    });
 
     const loginInputRef = useRef();
     const passwordInputRef = useRef();
+    const callback = useBackendExchange(LoginQUERY);
 
     const submitAction = (e) => {
         e.preventDefault()
-        processUserLogin(
-            loginInputRef.current.value,
-            passwordInputRef.current.value,
-            processLogin,
-            dispatch
-        ).then(loginResult => {
-            if (!loginResult.result) {
-                setLoginError({error: true, message: loginResult.info.message})
+        setFetchResult({...fetchResult, fetching:true})
+        const regexp=/(?<=^\[.*\]\s+)\S.*/gm
+
+        callback({
+            username: loginInputRef.current.value,
+            password: passwordInputRef.current.value
+        }).then((result)=>{
+            setFetchResult({
+                fetching: false,
+                error: regexp.exec(result.error.message),
+                result:getResponseData(result?.data||{})
+            })
+            if (result.error){
+                setShowModal(true);
             }
         })
     }
-
     return (
-        <Form className={"mt-5"} data-testid='loginForm'>
+        <Form className={"mt-5 mx-4"} data-testid='loginForm'>
             {
-                loginError.error && !result.fetching && (
                 <ErrorAlert
-                    show={loginError}
-                    onClose={() => setLoginError(false)}
-                >{loginError.message}</ErrorAlert>
-                )
+                    show={showModal}
+                    onClose={() => setShowModal(false)}
+                >{fetchResult.error}</ErrorAlert>
             }
             <TextInput
                    id="login_field"
                    label="Login"
                    data-testid='login'
                    icon={faUser}
-                   className = {loginError.error && !result.fetching?'is-invalid':''}
+                   className = {fetchResult.error && !fetchResult.fetching?'is-invalid':''}
                    _ref = {loginInputRef}
                    autoComplete='username'
             />
@@ -53,7 +64,7 @@ const LoginForm = () => {
                 label="Password"
                 data-testid='password'
                 icon={faLock}
-                className = {loginError.error && !result.fetching?'is-invalid':''}
+                className = {fetchResult.error && !fetchResult.fetching?'is-invalid':''}
                 _ref = {passwordInputRef}
                 autoComplete='password'
                 is_password={true}
@@ -64,9 +75,10 @@ const LoginForm = () => {
                 data-testid='login_btn'
                 type="submit"
                 onClick={submitAction}
-                disabled={result.fetching?'disabled':''}
-            > {result.fetching ?<Loading />:''}
-                {result.fetching?'Loading...':'Login'}</NewButton>
+                disabled={fetchResult.fetching?'disabled':''}
+            >
+                Login {fetchResult.fetching?<Loading />:<Loading className='visually-hidden' />}
+            </NewButton>
         </Form>
     );
 };

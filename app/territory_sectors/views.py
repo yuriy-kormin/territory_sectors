@@ -53,6 +53,6 @@ class AssigmentsStatView(LoginRequiredMixin, AddContextGetChangesHistoryMixin,
     queryset = Sector.objects.select_related("status").order_by('name')
 
 
-class CustomGraphqlView(LoginRequiredMixin, GraphQLView):
-    graphiql = True
-    login_url = reverse_lazy('user_login')
+# class CustomGraphqlView(LoginRequiredMixin, GraphQLView):
+#     graphiql = True
+#     login_url = reverse_lazy('user_login')

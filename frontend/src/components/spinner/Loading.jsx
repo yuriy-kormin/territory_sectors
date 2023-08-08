@@ -1,14 +1,15 @@
 import React from 'react';
 import {Spinner} from "react-bootstrap";
 
-const Loading = () => {
+const Loading = ({className, ...props}) => {
     return (
             <Spinner
-                className='mx-2'
-                as="span"
+                className={className}
+                as="div"
                 animation="border"
                 size="sm"
                 aria-hidden="true"
+                {...props}
             />
     );
 };
