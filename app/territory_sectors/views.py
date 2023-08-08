@@ -6,7 +6,6 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
-from graphene_django.views import GraphQLView
 
 from territory_sectors.uuid_qr.models import Uuid
 
@@ -51,8 +50,3 @@ class AssigmentsStatView(LoginRequiredMixin, AddContextGetChangesHistoryMixin,
         'header': _('Sector assignments status'),
     }
     queryset = Sector.objects.select_related("status").order_by('name')
-
-
-# class CustomGraphqlView(LoginRequiredMixin, GraphQLView):
-#     graphiql = True
-#     login_url = reverse_lazy('user_login')
