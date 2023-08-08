@@ -58,6 +58,7 @@ THIRD_PARTY_APPS = [
     'simple_history',
     "qr_code",
     'graphene_django',
+    "graphql_jwt.refresh_token.apps.RefreshTokenConfig",
     'graphene_gis',
     'corsheaders',
 ]

@@ -8,10 +8,9 @@ const getOperationName = gql =>
     gql.definitions[0].selectionSet.selections[0].name.value
 
 export const getResponseData = (response) => {
-    const keys = Object.keys(response);
-    if (keys.length > 0) {
-        const firstKey = keys[0];
-        return response[firstKey];
+    const opName = getOperationName(response.operation.query)
+    if (response.data.hasOwnProperty(opName)) {
+        return response.data[opName]
     }
     return undefined;
 }

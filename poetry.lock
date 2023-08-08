@@ -335,6 +335,27 @@ files = [
 Django = ">=3.2"
 
 [[package]]
+name = "django-graphql-jwt"
+version = "0.4.0"
+description = "JSON Web Token for Django GraphQL."
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "django_graphql_jwt-0.4.0-py3-none-any.whl", hash = "sha256:5823aa8ac9bf0b7a6e3b2febd029598b332c41fe9043d89900c116fcecd23f5e"},
+    {file = "django_graphql_jwt-0.4.0.tar.gz", hash = "sha256:537972519f0deeec7a0e4a306ddfed1fe385266ef61c9f78c54cd04ac01a171e"},
+]
+
+[package.dependencies]
+django = ">=2.0"
+graphene = ">=2.1.5"
+graphene-django = ">=2.0.0"
+pyjwt = ">=2,<3"
+
+[package.extras]
+doc = ["sphinx"]
+test = ["black", "codecov", "cryptography", "flake8", "isort", "pytest", "pytest-cov", "pytest-django"]
+
+[[package]]
 name = "django-qr-code"
 version = "3.1.1"
 description = "An application that provides tools for displaying QR codes on your Django site."
@@ -838,6 +859,23 @@ files = [
 ]
 
 [[package]]
+name = "pyjwt"
+version = "2.8.0"
+description = "JSON Web Token implementation in Python"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "PyJWT-2.8.0-py3-none-any.whl", hash = "sha256:59127c392cc44c2da5bb3192169a91f429924e17aff6534d70fdc02ab3e04320"},
+    {file = "PyJWT-2.8.0.tar.gz", hash = "sha256:57e28d156e3d5c10088e0c68abb90bfac3df82b40a71bd0daa20c65ccd5c23de"},
+]
+
+[package.extras]
+crypto = ["cryptography (>=3.4.0)"]
+dev = ["coverage[toml] (==5.0.4)", "cryptography (>=3.4.0)", "pre-commit", "pytest (>=6.0.0,<7.0.0)", "sphinx (>=4.5.0,<5.0.0)", "sphinx-rtd-theme", "zope.interface"]
+docs = ["sphinx (>=4.5.0,<5.0.0)", "sphinx-rtd-theme", "zope.interface"]
+tests = ["coverage[toml] (==5.0.4)", "pytest (>=6.0.0,<7.0.0)"]
+
+[[package]]
 name = "pypng"
 version = "0.20220715.0"
 description = "Pure Python library for saving and loading PNG images"
@@ -1136,4 +1174,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<3.12"
-content-hash = "8935f0c5dcf533f62ee371b484d3279cd201e9f985470134ee5c5b0feec8b6a8"
+content-hash = "eb20dbf09ffd094ad84d7ff72e0fd2678151e4065749aa7040eee32d4f2dbaec"

@@ -9,6 +9,7 @@ import ErrorAlert from "./Alert/ErrorAlert";
 import {useBackendExchange} from "../hooks/useBackendExchange";
 import {LoginQUERY} from "../api-helpers/queries/userQueries";
 import {getResponseData} from "../api-helpers/lib";
+import {userSetAction} from "../store/UserReducer";
 
 const LoginForm = () => {
     const dispatch = useDispatch()
@@ -32,13 +33,18 @@ const LoginForm = () => {
             username: loginInputRef.current.value,
             password: passwordInputRef.current.value
         }).then((result)=>{
+
+            const resultParsed=getResponseData(result)
+            console.log('parsed data', resultParsed)
             setFetchResult({
                 fetching: false,
-                error: regexp.exec(result.error.message),
-                result:getResponseData(result?.data||{})
+                error: regexp.exec(result.error?.message || ''),
+                result:resultParsed
             })
             if (result.error){
                 setShowModal(true);
+            } else {
+                dispatch(userSetAction(resultParsed))
             }
         })
     }
