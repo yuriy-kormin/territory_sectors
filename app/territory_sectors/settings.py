@@ -224,12 +224,12 @@ if DEBUG:
     # CSRF_TRUSTED_ORIGINS = ['http://localhost:3000']
 
 else:
-    ALLOWED_HOSTS_ENV = os.getenv('ALLOWED_HOSTS', '*')
-    if ALLOWED_HOSTS_ENV:
-        ALLOWED_HOSTS = [
-            host.strip() for host
-            in ALLOWED_HOSTS_ENV.split(',')
-        ]
+    # ALLOWED_HOSTS_ENV = os.getenv('CERTBOT_DOMAINS', '*')
+    # if ALLOWED_HOSTS_ENV:
+    #     ALLOWED_HOSTS = [
+    #         host.strip() for host
+    #         in ALLOWED_HOSTS_ENV.split(',')
+    #     ]
 
     CORS_ALLOWED_ORIGINS = ALLOWED_HOSTS
 

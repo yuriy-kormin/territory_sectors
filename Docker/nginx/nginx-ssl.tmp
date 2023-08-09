@@ -1,5 +1,9 @@
-upstream django_backend {
+upstream backend {
     server sectors:8000;
+}
+
+upstream frontend {
+    server react:3000;
 }
 
 server {
@@ -21,7 +25,7 @@ server {
 server {
     listen 443 ssl;
     client_max_body_size 20m;
-    server_name  $CERTBOT_DOMAINS;
+    server_name $CERTBOT_DOMAINS;
     ssl_certificate /etc/letsencrypt/live/$CERTBOT_DOMAINS/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/$CERTBOT_DOMAINS/privkey.pem;
 
@@ -31,12 +35,16 @@ server {
     ssl_ciphers "EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH";
 
     location / {
-        root   /usr/share/nginx/html;
-        index  index.html index.htm;
+        proxy_pass http://frontend;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_redirect off;
     }
 
     location /graphql {
-        proxy_pass http://django_backend;
+        proxy_pass http://backend;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-Proto $scheme;

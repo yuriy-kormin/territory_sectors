@@ -16,6 +16,19 @@ services:
             - 8000
         depends_on:
             - pgdatabase
+    react:
+        build:
+            context: .
+            dockerfile: Docker/react/Dockerfile
+        env_file:
+            - .env-compose
+        volumes:
+            - ./frontend:/app/
+            - ./log:/var/log/:rw
+        expose:
+            - 3000
+        depends_on:
+            - sectors
 
     pgdatabase:
         image: "postgis/postgis:latest"
