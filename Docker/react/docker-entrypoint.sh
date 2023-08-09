@@ -10,9 +10,9 @@ else
 fi
 
 cd /app/
+
 echo "npm run build"
 npm build
 
 echo "Starting react app"
-
 npm start
