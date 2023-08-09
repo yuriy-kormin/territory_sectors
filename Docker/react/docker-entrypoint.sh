@@ -12,7 +12,7 @@ fi
 cd /app/
 
 echo "npm run build"
-npm build
+npm run build
 
 echo "Starting react app"
 npm start
