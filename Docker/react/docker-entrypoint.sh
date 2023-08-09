@@ -1,5 +1,5 @@
 #!/bin/sh
-echo "certboot domains = ${CERTBOT_DOMAINS}"
+
 if [ -n "$CERTBOT_DOMAINS" ]; then
   DOMAIN=$(echo "$CERTBOT_DOMAINS" | cut -d',' -f1)
   REACT_APP_BACKEND_URL="https://${DOMAIN}/graphql/"
@@ -8,3 +8,11 @@ if [ -n "$CERTBOT_DOMAINS" ]; then
 else
   echo "CERTBOT_DOMAINS environment variable is not set. REACT_APP_BACKEND_URL will use default."
 fi
+
+cd /app/
+echo "npm run build"
+npm build
+
+echo "Starting react app"
+
+npm start
