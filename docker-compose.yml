@@ -28,11 +28,13 @@ services:
             - pgdata:/var/lib/postgresql/data/:rw
             - ./log:/var/log/:rw
     nginx:
+        env_file:
+            - .env-compose
         build:
             context: .
             dockerfile: ./Docker/nginx/Dockerfile
-        env_file:
-            - .env-compose
+        environment:
+            - CERTBOT_DOMAINS=${CERTBOT_DOMAINS}
         volumes:
             - letsencrypt:/etc/letsencrypt/:ro
             - acme:/var/www/letsencrypt/:ro
