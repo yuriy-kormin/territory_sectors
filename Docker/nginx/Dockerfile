@@ -16,16 +16,14 @@ COPY ["frontend/", "/Docker/nginx/docker-setenv.sh" , "./"]
 
 RUN echo $REACT_APP_BACKEND_URL
 
-RUN chmod +x docker-setenv.sh && \
-    ./docker-setenv.sh  && \
-    npm install --omit=dev && \
+# RUN chmod +x docker-setenv.sh && \
+#    ./docker-setenv.sh  && \
+RUN npm install --omit=dev && \
     npm run build
 
 #chmod +x docker-setenv.sh && \
 #    ./docker-setenv.sh  && \
 
-
-RUN echo "REACT_APP_BACKEND_URL" && echo $REACT_APP_BACKEND_URL
 
 FROM nginx
 
