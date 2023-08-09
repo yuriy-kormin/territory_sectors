@@ -1,4 +1,4 @@
-upstream hello_django {
+upstream django_backend {
     server sectors:8000;
 }
 
@@ -30,10 +30,13 @@ server {
     ssl_prefer_server_ciphers on;
     ssl_ciphers "EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH";
 
-
-
     location / {
-        proxy_pass http://hello_django;
+        root   /usr/share/nginx/html;
+        index  index.html index.htm;
+    }
+
+    location /graphql {
+        proxy_pass http://django_backend;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-Proto $scheme;

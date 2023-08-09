@@ -15,7 +15,6 @@ import os
 from pathlib import Path
 from datetime import timedelta
 
-
 from dotenv import load_dotenv
 import dj_database_url
 
@@ -79,7 +78,6 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APPS
 if DEBUG:
     INSTALLED_APPS.append("debug_toolbar")
 
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'corsheaders.middleware.CorsMiddleware',
@@ -129,6 +127,23 @@ ROLLBAR = {
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASE_URL=postgis://sectors:sectors@localhost:5432/sectors
+db_conf = {
+    'username': os.environ.get("POSTGRES_USER"),
+    'password': os.environ.get("POSTGRES_PASSWORD"),
+    'db_name': os.environ.get("POSTGRES_DB"),
+}
+docker_db_host = os.environ.get("DOCKER_DB_HOST", '')
+db_conf['hostname'] = docker_db_host \
+    if docker_db_host else CERTBOT_DOMAINS.split(',')[0]
+
+if all(db_conf.values()):
+    database_url = f"postgis://{db_conf['username']}:{db_conf['password']}@" \
+                   f"{db_conf['hostname']}:5432/{db_conf['db_name']}"
+else:
+    database_url = 'spatialite:///db.sqlite3'
+os.environ['DATABASE_URL'] = database_url
+print(database_url)
 
 DATABASES = {
     'default': dj_database_url.config(
@@ -136,7 +151,6 @@ DATABASES = {
         # conn_max_age=600,
     )
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -155,7 +169,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
@@ -228,8 +241,9 @@ from django.conf import settings
 #     if setting.isupper():
 #         print(f"{setting}: {getattr(settings, setting)}")
 
-TOKEN_EXPIRATION = os.getenv('TOKEN_EXPIRATION', 5*60)  #5 minutes
-REFRESH_EXPIRATION = os.getenv('REFRESH_EXPIRATION', 7*60*60*24) # 7 days default
+TOKEN_EXPIRATION = os.getenv('TOKEN_EXPIRATION', 5 * 60)  # 5 minutes
+REFRESH_EXPIRATION = os.getenv('REFRESH_EXPIRATION',
+                               7 * 60 * 60 * 24)  # 7 days default
 
 GRAPHQL_JWT = {
     "JWT_VERIFY_EXPIRATION": True,

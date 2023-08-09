@@ -7,6 +7,8 @@ services:
             dockerfile: Docker/sectors/Dockerfile
         env_file:
             - .env-compose
+        environment:
+            - DOCKER_DB_HOST=pgdatabase
         volumes:
             - ./app:/app/
             - ./log:/var/log/:rw
@@ -18,7 +20,7 @@ services:
     pgdatabase:
         image: "postgis/postgis:latest"
         env_file:
-            - ./Docker/postgis/env
+            - .env-compose
         expose:
             - 5432
         restart: always
