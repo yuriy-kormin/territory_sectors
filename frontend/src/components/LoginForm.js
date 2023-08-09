@@ -8,7 +8,7 @@ import Loading from "./spinner/Loading";
 import ErrorAlert from "./Alert/ErrorAlert";
 import {useBackendExchange} from "../hooks/useBackendExchange";
 import {LoginQUERY} from "../api-helpers/queries/userQueries";
-import {getResponseData} from "../api-helpers/lib";
+import {parseAuthResult} from "../api-helpers/lib";
 import {userSetAction} from "../store/UserReducer";
 
 const LoginForm = () => {
@@ -34,8 +34,7 @@ const LoginForm = () => {
             password: passwordInputRef.current.value
         }).then((result)=>{
 
-            const resultParsed=getResponseData(result)
-            console.log('parsed data', resultParsed)
+            const resultParsed=parseAuthResult(result)
             setFetchResult({
                 fetching: false,
                 error: regexp.exec(result.error?.message || ''),

@@ -1,4 +1,4 @@
-import {setTokensToStorage} from "./tokenStore";
+import {removeTokensFromStorage, setTokensToStorage} from "./tokenStore";
 
 const setUser = "SET_USER"
 const logout = "LOGOUT"
@@ -9,6 +9,7 @@ export const userReducer = (state = {is_login:false}, action) =>{
             setTokensToStorage(action.payload)
             return {...state,is_login: true, ...action.payload}
         case logout:
+            removeTokensFromStorage()
             return {is_login: false}
         default:
             return state

@@ -6,6 +6,7 @@ import LoginForm from "./components/LoginForm";
 import {Provider} from 'urql';
 import {useURQLClient} from "./hooks/useURQLClient";
 
+
 function App({urqlClient=undefined}) {
     const user = useSelector(getUser);
     const client = useURQLClient()
