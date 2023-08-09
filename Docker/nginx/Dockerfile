@@ -1,6 +1,6 @@
 FROM node:alpine as build
 #ARG REACT_APP_BACKEND_URL="http://localhost/graphql/"
-ARG CERTBOT_DOMAINS="localhost"
+#ARG CERTBOT_DOMAINS="localhost"
 
 #RUN DOMAIN=$(echo $CERTBOT_DOMAINS | cut -d',' -f1)
 #ENV REACT_APP_BACKEND_URL "$REACT_APP_BACKEND_URL:"http://$DOMAIN/graphql/""
