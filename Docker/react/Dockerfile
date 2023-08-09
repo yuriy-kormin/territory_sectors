@@ -1,8 +1,8 @@
 FROM node:alpine
 
 COPY ["frontend/package.json","Docker/react/docker-entrypoint.sh","/"]
-
-RUN npm install --production -g -f --save &&\
+WORKDIR /
+RUN npm install --omit-dev -g -f  &&\
     npm ci &&  \
     npm cache clean --force
 CMD ["/docker-entrypoint.sh"]
