@@ -1,6 +1,6 @@
 FROM node:alpine
 
-COPY ["frontend/package-lock.json","/npm/"]
+COPY ["frontend/package.json","/npm/"]
 COPY Docker/react/docker-entrypoint.sh /
 WORKDIR /npm/
 
