@@ -12,6 +12,10 @@ python manage.py createsuperuser --noinput \
       --username $DJANGO_SUPERUSER_USERNAME \
       --email $DJANGO_SUPERUSER_EMAIL
 
-echo "Starting jango app"
+echo "creating log dir if not exist"
+mkdir -p /var/log/gunocorn
 
-gunicorn territory_sectors.wsgi:application --bind 0.0.0.0:8000
+echo "Starting jango app"
+gunicorn territory_sectors.wsgi:application --bind 0.0.0.0:8000 \
+    --access-logfile /var/log/gunicorn/access.log \
+    --error-logfile /var/log/gunicorn/error.log
