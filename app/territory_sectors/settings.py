@@ -34,10 +34,8 @@ DEBUG = os.getenv('DEBUG') == 'True'
 
 CERTBOT_DOMAINS = os.getenv('CERTBOT_DOMAINS')
 
-ALLOWED_HOSTS = [f'{scheme}://{domain}'
-                 for domain in CERTBOT_DOMAINS.split(',')
-                 for scheme in ('http', 'https')
-                 ] if CERTBOT_DOMAINS else ['*']
+ALLOWED_HOSTS = [domain for domain in CERTBOT_DOMAINS.split(',')]\
+    if CERTBOT_DOMAINS else ['*']
 
 # Application definition
 
@@ -143,7 +141,6 @@ if all(db_conf.values()):
 else:
     database_url = 'spatialite:///db.sqlite3'
 os.environ['DATABASE_URL'] = database_url
-print(database_url)
 
 DATABASES = {
     'default': dj_database_url.config(
@@ -233,7 +230,7 @@ else:
 
     CORS_ALLOWED_ORIGINS = ALLOWED_HOSTS
 
-from django.conf import settings
+# from django.conf import settings
 
 # Print all settings
 # print("Django Settings:")
