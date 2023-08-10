@@ -36,6 +36,7 @@ jobs:
         env:
           DJANGO_SECRET: ${{ secrets.DJANGO_SECRET }}
           DATABASE_URL: postgis://test:test@localhost:5432/test
+          DEBUG: True
           GDAL_LIBRARY_PATH: /usr/lib/libgdal.so
         run: |
           make coverage
