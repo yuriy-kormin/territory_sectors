@@ -25,6 +25,7 @@ services:
         volumes:
             - ./frontend:/app/
             - ./log:/var/log/:rw
+            - react-build:/app/build/
         expose:
             - 3000
         depends_on:
@@ -52,6 +53,7 @@ services:
             - nginx-conf:/etc/nginx/conf.d/:rw
             - ./app/media:/app/media/:rw
             - ./log:/var/log/:rw
+            - react-build:/usr/share/nginx/html/
         ports:
             - 80:80
             - 443:443
@@ -77,3 +79,4 @@ volumes:
     acme:
     nginx-conf:
     log:
+    react-build:
