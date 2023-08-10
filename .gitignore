@@ -38,3 +38,4 @@ pip-wheel-metadata
 /app/media/
 
 *backup*
+*node_modules*
