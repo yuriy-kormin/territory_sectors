@@ -1,4 +1,5 @@
 import Map, { NavigationControl, GeolocateControl } from 'react-map-gl';
+import "./hideLogo.css";
 
 const DivMap = () => {
     const MAPBOX_TOKEN = 'pk.eyJ1IjoieXVyaXlrb3JtaW4iLCJhIjoiY2xjdTZjMm1jMHJwZTNvbXg1cm1xMGh5ciJ9.uHPoJEdjly2KUEmc8YEOkw';
