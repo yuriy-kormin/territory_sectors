@@ -13,27 +13,29 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 import os
 from pathlib import Path
+from datetime import timedelta
+
 from dotenv import load_dotenv
 import dj_database_url
-
-# dotenv_path = os.path.join(os.path.dirname(__file__), '.env_example')
-load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+dotenv_path = os.path.join(BASE_DIR.parent, '.env-compose')
+load_dotenv(dotenv_path)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('DJANGO_SECRET')
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG') == 'True'
 
-ALLOWED_HOSTS = ['*']
+CERTBOT_DOMAINS = os.getenv('CERTBOT_DOMAINS')
 
+ALLOWED_HOSTS = [domain for domain in CERTBOT_DOMAINS.split(',')]\
+    if CERTBOT_DOMAINS else ['*']
 
 # Application definition
 
@@ -53,8 +55,9 @@ THIRD_PARTY_APPS = [
     'simple_history',
     "qr_code",
     'graphene_django',
+    "graphql_jwt.refresh_token.apps.RefreshTokenConfig",
     'graphene_gis',
-
+    'corsheaders',
 ]
 
 PROJECT_APPS = [
@@ -73,13 +76,13 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APPS
 if DEBUG:
     INSTALLED_APPS.append("debug_toolbar")
 
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'simple_history.middleware.HistoryRequestMiddleware',
@@ -122,6 +125,22 @@ ROLLBAR = {
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASE_URL=postgis://sectors:sectors@localhost:5432/sectors
+db_conf = {
+    'username': os.environ.get("POSTGRES_USER"),
+    'password': os.environ.get("POSTGRES_PASSWORD"),
+    'db_name': os.environ.get("POSTGRES_DB"),
+}
+docker_db_host = os.environ.get("DOCKER_DB_HOST", '')
+db_conf['hostname'] = docker_db_host \
+    if docker_db_host else CERTBOT_DOMAINS.split(',')[0]
+
+if all(db_conf.values()):
+    database_url = f"postgis://{db_conf['username']}:{db_conf['password']}@" \
+                   f"{db_conf['hostname']}:5432/{db_conf['db_name']}"
+else:
+    database_url = 'spatialite:///db.sqlite3'
+os.environ['DATABASE_URL'] = database_url
 
 DATABASES = {
     'default': dj_database_url.config(
@@ -129,7 +148,6 @@ DATABASES = {
         # conn_max_age=600,
     )
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -148,7 +166,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
@@ -192,4 +209,43 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 GRAPHENE = {
     'SCHEMA': 'territory_sectors.schema.schema'
+}
+
+if DEBUG:
+    CORS_ALLOW_ALL_ORIGINS = True
+    # CORS_ALLOW_ALL_HEADERS = True
+    # CORS_ALLOW_CREDENTIALS = True
+    # CORS_ALLOW_METHODS = default_methods
+    # CSRF_TRUSTED_ORIGINS = ['*']
+    # CORS_ORIGIN_WHITELIST = ['http://localhost:3000']
+    # CSRF_TRUSTED_ORIGINS = ['http://localhost:3000']
+
+else:
+    # ALLOWED_HOSTS_ENV = os.getenv('CERTBOT_DOMAINS', '*')
+    # if ALLOWED_HOSTS_ENV:
+    #     ALLOWED_HOSTS = [
+    #         host.strip() for host
+    #         in ALLOWED_HOSTS_ENV.split(',')
+    #     ]
+
+    CORS_ALLOWED_ORIGINS = ALLOWED_HOSTS
+
+# from django.conf import settings
+
+# Print all settings
+# print("Django Settings:")
+# for setting in dir(settings):
+#     if setting.isupper():
+#         print(f"{setting}: {getattr(settings, setting)}")
+
+TOKEN_EXPIRATION = os.getenv('TOKEN_EXPIRATION', 5 * 60)  # 5 minutes
+REFRESH_EXPIRATION = os.getenv('REFRESH_EXPIRATION',
+                               7 * 60 * 60 * 24)  # 7 days default
+
+GRAPHQL_JWT = {
+    "JWT_VERIFY_EXPIRATION": True,
+    "JWT_LONG_RUNNING_REFRESH_TOKEN": True,
+    "JWT_EXPIRATION_DELTA": timedelta(seconds=int(TOKEN_EXPIRATION)),
+    "JWT_REFRESH_EXPIRATION_DELTA": timedelta(seconds=int(REFRESH_EXPIRATION)),
+    "JWT_AUTH_HEADER_PREFIX": "Bearer",
 }
