@@ -26,7 +26,7 @@ zip -r "$BACKUP_DIR/$CURRENT_DATE/app" "$FOLDER_TO_BACKUP"
 POSTGRES_CONTAINER_ID=$(docker container ls -q -f name=$DATABASE_CONTAINER_NAME)
 
 # Backup database to filecd ..
-docker exec -t $POSTGRES_CONTAINER_ID pg_dump -U $DB_USER -c $DB_NAME > $BACKUP_DIR/$CURRENT_DATE/$CURRENT_DATE.dump
+docker exec -t $POSTGRES_CONTAINER_ID pg_dump -U $DB_USER -d $DB_NAME > $BACKUP_DIR/$CURRENT_DATE/$CURRENT_DATE.dump
 
 # Rotate backups
 if [ $(ls -1 $BACKUP_DIR/* | wc -l) -gt $ROTATE_COUNT ]; then
