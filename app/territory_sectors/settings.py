@@ -32,7 +32,7 @@ SECRET_KEY = os.getenv('DJANGO_SECRET')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG') == 'True'
 
-CERTBOT_DOMAINS = os.getenv('CERTBOT_DOMAINS', '')
+CERTBOT_DOMAINS = os.getenv('CERTBOT_DOMAINS')
 
 ALLOWED_HOSTS = [domain for domain in CERTBOT_DOMAINS.split(',')]\
     if CERTBOT_DOMAINS else ['*']
@@ -140,8 +140,7 @@ if all(db_conf.values()):
                    f"{db_conf['hostname']}:5432/{db_conf['db_name']}"
 else:
     database_url = 'spatialite:///db.sqlite3'
-if not os.environ.get("DATABASE_URL"):
-    os.environ['DATABASE_URL'] = database_url
+os.environ['DATABASE_URL'] = database_url
 
 DATABASES = {
     'default': dj_database_url.config(
