@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import SectorListView, SectorCreateView, \
-    SectorDeleteView, SectorUpdateView, SectorStatusHistory,\
+    SectorDeleteView, SectorUpdateView, SectorStatusHistory, \
     SectorCheckInOutView
 from .viewPDFprint import SectorPrintPDF
 

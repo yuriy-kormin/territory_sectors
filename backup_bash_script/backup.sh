@@ -10,14 +10,11 @@ set +o allexport
 CURRENT_DATE=$(date +"%Y-%m-%d")
 
 # Configuration
-DATABASE_URL="$DATABASE_URL"
 BACKUP_DIR="backups"
 FOLDER_TO_BACKUP="territory_sectors/app/media"
 ROTATE_COUNT=30
 DATABASE_CONTAINER_NAME="pgdatabase"
 
-# Parse database connection settings from DATABASE_URL
-export $(python3 -c "import dj_database_url; print('\n'.join(f'DB_{k.upper()}={v}' for k, v in dj_database_url.parse('$DATABASE_URL').items()))")
 
 # Create backup directory if it doesn't exist
 mkdir -p $BACKUP_DIR/$CURRENT_DATE
@@ -26,7 +23,7 @@ zip -r "$BACKUP_DIR/$CURRENT_DATE/app" "$FOLDER_TO_BACKUP"
 POSTGRES_CONTAINER_ID=$(docker container ls -q -f name=$DATABASE_CONTAINER_NAME)
 
 # Backup database to filecd ..
-docker exec -t $POSTGRES_CONTAINER_ID pg_dump -U $DB_USER -d $DB_NAME > $BACKUP_DIR/$CURRENT_DATE/$CURRENT_DATE.dump
+docker exec -t $POSTGRES_CONTAINER_ID pg_dump -U $POSTGRES_USER -d $POSTGRES_DB > $BACKUP_DIR/$CURRENT_DATE/$CURRENT_DATE.dump
 
 # Rotate backups
 if [ $(ls -1 $BACKUP_DIR/* | wc -l) -gt $ROTATE_COUNT ]; then
