@@ -11,7 +11,7 @@ CURRENT_DATE=$(date +"%Y-%m-%d")
 
 # Configuration
 BACKUP_DIR="backups"
-FOLDER_TO_BACKUP="territory_sectors/app/media"
+FOLDER_TO_BACKUP="app/territory_sectors/app/media"
 ROTATE_COUNT=30
 DATABASE_CONTAINER_NAME="pgdatabase"
 
@@ -22,6 +22,8 @@ zip -r "$BACKUP_DIR/$CURRENT_DATE/app" "$FOLDER_TO_BACKUP"
 
 POSTGRES_CONTAINER_ID=$(docker container ls -q -f name=$DATABASE_CONTAINER_NAME)
 
+echo "$POSTGRES_USER"
+echo "$POSTGRES_DB"
 # Backup database to filecd ..
 docker exec -t $POSTGRES_CONTAINER_ID pg_dump -U $POSTGRES_USER -d $POSTGRES_DB > $BACKUP_DIR/$CURRENT_DATE/$CURRENT_DATE.dump
 
