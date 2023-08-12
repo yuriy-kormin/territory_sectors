@@ -7,6 +7,7 @@ from reportlab.lib.pagesizes import A4, landscape, portrait
 from .generate_table import print_tables
 from .process_images import print_image
 from .utils import get_xy
+from ..models import Sector
 
 
 def draw_quadrants_lines(pdf):
@@ -59,3 +60,18 @@ def make_response(request, sector_instance):
     # write the PDF content to the response object
     response.write(pdf)
     return response
+
+
+from django.test import Client
+from django.conf import settings
+
+def process_backup_sectors():
+    # client = Client()
+    BACKUP_FOLDER = ""
+
+    queryset = Sector.objects.all()[:1]
+
+    for sector in queryset:
+        # request = client.get('/')
+        # pdf_response = make_response(request, sector)
+        print( f'{settings.BASE_DIR=}')
