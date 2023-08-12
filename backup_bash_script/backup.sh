@@ -11,7 +11,7 @@ CURRENT_DATE=$(date +"%Y-%m-%d")
 
 # Configuration
 BACKUP_DIR="backups"
-FOLDER_TO_BACKUP="app/territory_sectors/app/media"
+FOLDER_TO_BACKUP="territory_sectors/app/media"
 ROTATE_COUNT=30
 DATABASE_CONTAINER_NAME="pgdatabase"
 
