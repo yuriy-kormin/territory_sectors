@@ -9,9 +9,11 @@ services:
             - .env-compose
         environment:
             - DOCKER_DB_HOST=pgdatabase
+            - DJANGO_SETTINGS_MODULE:"territory_sectors.settings"
         volumes:
             - ./app:/app/
             - ./log:/var/log/:rw
+            - ./backup:/backup/
         expose:
             - 8000
         depends_on:
