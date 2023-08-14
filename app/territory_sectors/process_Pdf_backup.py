@@ -30,7 +30,7 @@ from territory_sectors.sector.models import Sector
 
 set_font()
 request_factory = RequestFactory()
-queryset = Sector.objects.all()[:2]
+queryset = Sector.objects.all()
 
 for sector in queryset:
     request = request_factory.get('/')
