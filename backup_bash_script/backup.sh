@@ -13,7 +13,7 @@ FOLDER_WITH_PDFS="territory_sectors/backup"
 ROTATE_COUNT=30
 DATABASE_CONTAINER_NAME="pgdatabase"
 DJANGO_CONTAINER_NAME="sectors-sectors"
-REMOTE_NAME="my"  # The name of the remote configured in rclone
+REMOTE_NAME="batum"  # The name of the remote configured in rclone
 REMOTE_STORE_FOLDER="backup_sectors"  # The name of the remote folder in rclone
 REMOTE_ROTATE_COUNT=3 # Count of the remote backups stored
 
