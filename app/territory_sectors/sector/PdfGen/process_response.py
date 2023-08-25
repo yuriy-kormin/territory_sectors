@@ -6,8 +6,7 @@ from reportlab.lib.pagesizes import A4, landscape, portrait
 
 from .generate_table import print_tables
 from .process_images import print_image
-from .utils import get_xy, set_font
-from ..models import Sector
+from .utils import get_xy
 
 
 def draw_quadrants_lines(pdf):

@@ -1,32 +1,33 @@
-## чтобы функция заработала в скрипте
+# чтобы функция заработала в скрипте
 # from territory_sectors.sector.PdfGen import process_Pdf_backup
-    ##
-    ## 1) установить env DJANGO_SETTINGS_MODULE.
-    ## 2) from django.conf import settings
-    ## 3) from django.apps import apps
-    ## 4) apps.populate(settings.INSTALLED_APPS)
-    ##
-    ##     заработает импорт модели
-    ##     from territory_sectors.sector.models import Sector
-    ## 5) руками добавить testserver в settings.ALLOWED_HOSTS
-    ## 6) добавить шрифт как в viewPDFprint
+#
+# 1) установить env DJANGO_SETTINGS_MODULE.
+# 2) from django.conf import settings
+# 3) from django.apps import apps
+# 4) apps.populate(settings.INSTALLED_APPS)
+#
+#     заработает импорт модели
+#     from territory_sectors.sector.models import Sector
+# 5) руками добавить testserver в settings.ALLOWED_HOSTS
+# 6) добавить шрифт как в viewPDFprint
 import os
 import sys
 from pathlib import Path
 
-PROJECT_ROOT = os.path.dirname(Path(__file__).resolve().parent)
-sys.path.insert(0, PROJECT_ROOT)
 from django.test import RequestFactory
 from django.conf import settings
 from django.apps import apps
 
-settings.ALLOWED_HOSTS.append('testserver')
-apps.populate(settings.INSTALLED_APPS)
-backup_folder = "/backup/"
-
 from territory_sectors.sector.PdfGen.utils import set_font
 from territory_sectors.sector.PdfGen.process_response import make_response
 from territory_sectors.sector.models import Sector
+
+PROJECT_ROOT = os.path.dirname(Path(__file__).resolve().parent)
+sys.path.insert(0, PROJECT_ROOT)
+
+settings.ALLOWED_HOSTS.append('testserver')
+apps.populate(settings.INSTALLED_APPS)
+backup_folder = "/backup/"
 
 set_font()
 request_factory = RequestFactory()

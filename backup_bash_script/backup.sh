@@ -72,7 +72,7 @@ sorted_folders=$(echo "$sorted_folders_and_dates" | cut -d ' ' -f 1)
 keep_count=$(($(echo "$sorted_folders" | wc -l) - $REMOTE_ROTATE_COUNT))
 
 # Extract the folders to delete
-folders_to_delete=$(echo "$sorted_folders" | tail -n $keep_count)
+folders_to_delete=$(echo "$sorted_folders" | head -n $keep_count)
 
 # Loop through and delete folders
 for folder in $folders_to_delete; do
