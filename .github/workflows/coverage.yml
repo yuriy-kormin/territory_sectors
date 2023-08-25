@@ -48,6 +48,6 @@ jobs:
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.COV }}
         with:
-          coverageCommand: make coverage
+          coverageCommand: python3 -m coverage xml
           workingDirectory: ./app
           debug: true
