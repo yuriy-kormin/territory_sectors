@@ -10,7 +10,7 @@
 BACKUP_DIR="backups"
 FOLDER_TO_BACKUP="territory_sectors/app/media"
 FOLDER_WITH_PDFS="territory_sectors/backup"
-ROTATE_COUNT=30
+ROTATE_COUNT=15
 DATABASE_CONTAINER_NAME="pgdatabase"
 DJANGO_CONTAINER_NAME="sectors-sectors"
 REMOTE_NAME="my"  # The name of the remote configured in rclone
@@ -44,9 +44,9 @@ docker exec $DJANGO_CONTAINER_ID bash -c "export DJANGO_SETTINGS_MODULE='territo
 zip -r "$BACKUP_DIR/$CURRENT_DATE/pdf" "$FOLDER_WITH_PDFS"
 
 # Rotate backups
-if [ $(ls -1 $BACKUP_DIR/* | wc -l) -gt $ROTATE_COUNT ]; then
-  ls -t $BACKUP_DIR/* | tail -n +$(( $ROTATE_COUNT + 1 ))
-  ls -t $BACKUP_DIR/* | tail -n +$(( $ROTATE_COUNT + 1 )) | xargs rm -r --
+if [ $(ls -1 $BACKUP_DIR | wc -l) -gt $ROTATE_COUNT ]; then
+  ls -t $BACKUP_DIR | tail -n +$(( $ROTATE_COUNT + 1 ))
+  ls -t $BACKUP_DIR | tail -n +$(( $ROTATE_COUNT + 1 )) | xargs rm -r --
 fi
 
 ####################################
