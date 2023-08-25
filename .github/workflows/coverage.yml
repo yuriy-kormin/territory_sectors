@@ -48,6 +48,8 @@ jobs:
         uses: paambaati/codeclimate-action@v3.2.0
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.COV }}
+          DEBUG: 'True'
+          DJANGO_SECRET: ${{ secrets.DJANGO_SECRET }}
         with:
           coverageCommand: make coverage
           workingDirectory: ./app
