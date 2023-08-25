@@ -34,6 +34,7 @@ jobs:
           sudo apt-get install gdal-bin libgdal-dev -y
       - name: run test coverage calculating
         env:
+          DEBUG: 'True'
           DJANGO_SECRET: ${{ secrets.DJANGO_SECRET }}
           DATABASE_URL: postgis://test:test@localhost:5432/test
           GDAL_LIBRARY_PATH: /usr/lib/libgdal.so
