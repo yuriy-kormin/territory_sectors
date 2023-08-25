@@ -2,7 +2,10 @@ name: test
 on: push
 env:
   DJANGO_SECRET: ${{ secrets.DJANGO_SECRET }}
-  DATABASE_URL: 'postgis://postgres:postgres@localhost:5432/postgres'
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: postgres
+  POSTGRES_DB: postgres
+  DOCKER_DB_HOST: 'postgis:5432'
   CPLUS_INCLUDE_PATH: '/usr/include/gdal'
   C_INCLUDE_PATH: '/usr/include/gdal'
   DEBUG: 'True'
