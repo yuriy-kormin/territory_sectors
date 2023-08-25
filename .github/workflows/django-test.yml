@@ -5,7 +5,7 @@ env:
   POSTGRES_USER: postgres
   POSTGRES_PASSWORD: postgres
   POSTGRES_DB: postgres
-  DOCKER_DB_HOST: postgis
+  DOCKER_DB_HOST: localhost
   CPLUS_INCLUDE_PATH: '/usr/include/gdal'
   C_INCLUDE_PATH: '/usr/include/gdal'
   DEBUG: 'True'
