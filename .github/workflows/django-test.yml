@@ -5,6 +5,7 @@ env:
   DATABASE_URL: 'postgis://postgres:postgres@localhost:5432/postgres'
   CPLUS_INCLUDE_PATH: '/usr/include/gdal'
   C_INCLUDE_PATH: '/usr/include/gdal'
+  DEBUG: 'True'
 jobs:
   my-job:
     services:
