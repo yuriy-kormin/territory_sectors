@@ -4,9 +4,9 @@ const getExchangeHook = (query)=>{
     const operation = query?.definitions[0]?.operation || ''
     switch (operation) {
         case "mutation":
-            return useMutation
+            return 'mutation'
         case "query":
-            return useQuery
+            return 'query'
         default:
             throw new Error('Invalid operation type');
     }
@@ -16,5 +16,21 @@ const getExchangeHook = (query)=>{
 
 export const useBackendExchange = (query) => {
     const exchangeHook = getExchangeHook(query)
-    return exchangeHook(query)[1]
+    // console.log('test',exchangeHook)
+    const queryHook = useQuery
+    switch (exchangeHook) {
+        case 'mutation':
+            const hook = useMutation
+            return hook(query)[1]
+        case "query":
+            const result = (vars) => {
+                return queryHook({
+                    query: query,
+                    variables: vars,
+                    pause: true
+                })[0]
+            }
+            return result
+            // return ''
+    }
 }

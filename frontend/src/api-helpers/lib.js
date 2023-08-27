@@ -25,3 +25,7 @@ export const parseAuthResult = (response) => {
         tokenExpiresIn:authData?.payload?.exp
     }
 }
+
+export const parseUuidExchangeResult = (response) => {
+    return getResponseData(response)
+}

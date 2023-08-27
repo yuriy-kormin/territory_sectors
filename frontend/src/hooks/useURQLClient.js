@@ -10,7 +10,11 @@ import {RefreshTokenMUTATION} from "../api-helpers/queries/userQueries";
 import {IsTimemarkValid} from "../api-helpers/lib";
 
 export const useURQLClient = () =>{
-    const authEx = authExchange(
+    const user = useSelector(getUser);
+
+    const authEx = user.is_anon
+        ?''
+        :authExchange(
     async utils => {
         console.log('begin getAuth');
         if (!user.is_login) {
@@ -71,16 +75,9 @@ export const useURQLClient = () =>{
 })
 
     const [refreshState,setRefreshState] = useState(false)
-    const user = useSelector(getUser);
     const dispatch = useDispatch()
     const backendUrl = process.env.REACT_APP_BACKEND_URL
-    const exchanges = user.is_anon
-        ?[
-            devtoolsExchange,
-            cacheExchange,
-            fetchExchange,
-        ]
-        :[
+    const exchanges = [
             devtoolsExchange,
             cacheExchange,
             authEx,

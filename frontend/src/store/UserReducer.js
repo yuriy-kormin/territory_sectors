@@ -1,20 +1,30 @@
-import {removeTokensFromStorage, setTokensToStorage} from "./tokenStore";
+import { removeTokensFromStorage, setTokensToStorage } from "./tokenStore";
 
-const setUser = "SET_USER"
-const logout = "LOGOUT"
+const SET_USER = "SET_USER";
+const SET_ANON_USER = "SET_ANON_USER";
+const LOGOUT = "LOGOUT";
 
-export const userReducer = (state = {is_login:false}, action) =>{
-    switch (action.type) {
-        case setUser:
-            setTokensToStorage(action.payload)
-            return {...state,is_login: true, ...action.payload}
-        case logout:
-            removeTokensFromStorage()
-            return {is_login: false}
-        default:
-            return state
-    }
-}
+const initialState = {
+  is_login: false,
+  is_anon: false,
+};
 
-export const userSetAction = payload => ({type:setUser,payload:payload})
-export const userLogout = () => ({type:logout})
+export const userReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case SET_USER:
+      setTokensToStorage(action.payload);
+      return { ...state, is_login: true, is_anon: false, ...action.payload };
+    case SET_ANON_USER:
+      removeTokensFromStorage();
+      return { ...state, is_anon: true, is_login: false };
+    case LOGOUT:
+      removeTokensFromStorage();
+      return { ...initialState };
+    default:
+      return state;
+  }
+};
+
+export const userSetAction = (payload) => ({ type: SET_USER, payload });
+export const userAnonSetAction = () => ({ type: SET_ANON_USER });
+export const userLogout = () => ({ type: LOGOUT });

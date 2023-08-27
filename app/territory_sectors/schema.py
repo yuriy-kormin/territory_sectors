@@ -1,6 +1,7 @@
 import graphene
 from territory_sectors.sector.schema import Query as SectorQuery
 from territory_sectors.house.schema import Query as HouseQuery
+from territory_sectors.uuid_qr.schema import Query as QRQuery
 import graphql_jwt
 from django.contrib.auth import get_user_model
 from graphene_django import DjangoObjectType
@@ -21,6 +22,7 @@ class AuthMutation(graphene.ObjectType):
 class Query(
     SectorQuery,
     HouseQuery,
+    QRQuery,
 ):
     pass
 

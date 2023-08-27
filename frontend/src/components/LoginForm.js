@@ -33,7 +33,6 @@ const LoginForm = () => {
             username: loginInputRef.current.value,
             password: passwordInputRef.current.value
         }).then((result)=>{
-
             const resultParsed=parseAuthResult(result)
             setFetchResult({
                 fetching: false,
