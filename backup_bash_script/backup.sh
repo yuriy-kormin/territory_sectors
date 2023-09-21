@@ -45,8 +45,7 @@ zip -r "$BACKUP_DIR/$CURRENT_DATE/pdf" "$FOLDER_WITH_PDFS"
 
 # Rotate backups
 if [ $(ls -1 $BACKUP_DIR | wc -l) -gt $ROTATE_COUNT ]; then
-  ls -t $BACKUP_DIR | tail -n +$(( $ROTATE_COUNT + 1 ))
-  ls -t $BACKUP_DIR | tail -n +$(( $ROTATE_COUNT + 1 )) | xargs rm -r --
+  ls -t $BACKUP_DIR | tail -n +$(( $ROTATE_COUNT + 1 )) | while read -r folder; do rm -r "backups/$folder"; done
 fi
 
 ####################################
