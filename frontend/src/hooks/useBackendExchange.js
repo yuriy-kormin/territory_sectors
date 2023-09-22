@@ -31,6 +31,5 @@ export const useBackendExchange = (query) => {
                 })[0]
             }
             return result
-            // return ''
     }
 }

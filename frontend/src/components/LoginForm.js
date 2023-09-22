@@ -27,22 +27,22 @@ const LoginForm = () => {
     const submitAction = (e) => {
         e.preventDefault()
         setFetchResult({...fetchResult, fetching:true})
-        const regexp=/(?<=^\[.*\]\s+)\S.*/gm
-
+        // try to cut off just a error message
+        //
+        // const regexp=/(?<=^\[.*\]\s+)\S.*/gm
         callback({
             username: loginInputRef.current.value,
             password: passwordInputRef.current.value
         }).then((result)=>{
-            const resultParsed=parseAuthResult(result)
             setFetchResult({
                 fetching: false,
-                error: regexp.exec(result.error?.message || ''),
-                result:resultParsed
+                error: result.error?.message,
+                result: parseAuthResult(result)
             })
-            if (result.error){
+            if (result.error) {
                 setShowModal(true);
             } else {
-                dispatch(userSetAction(resultParsed))
+                dispatch(userSetAction(fetchResult.result))
             }
         })
     }

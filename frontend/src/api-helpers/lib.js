@@ -8,6 +8,9 @@ const getOperationName = gql =>
     gql.definitions[0].selectionSet.selections[0].name.value
 
 const getResponseData = (response) => {
+    if (response.error) {
+        return undefined;
+    }
     const opName = getOperationName(response.operation.query)
     if (response.data.hasOwnProperty(opName)) {
         return response.data[opName]
@@ -17,13 +20,16 @@ const getResponseData = (response) => {
 
 export const parseAuthResult = (response) => {
     const authData = getResponseData(response)
-    return {
-        token: authData?.token,
-        refreshToken: authData?.refreshToken,
-        refreshExpiresIn: authData?.refreshExpiresIn,
-        username: authData?.payload?.username,
-        tokenExpiresIn:authData?.payload?.exp
+    if (authData){
+        return {
+            token: authData?.token,
+            refreshToken: authData?.refreshToken,
+            refreshExpiresIn: authData?.refreshExpiresIn,
+            username: authData?.payload?.username,
+            tokenExpiresIn:authData?.payload?.exp
+        }
     }
+    return undefined;
 }
 
 export const parseUuidExchangeResult = (response) => {

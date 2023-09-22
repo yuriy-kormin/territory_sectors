@@ -3,7 +3,7 @@ import {Provider} from 'urql';
 import {useURQLClient} from "./hooks/useURQLClient";
 import AppRouter from "./components/AppRouter";
 
-j
+
 function App({urqlClient=undefined}) {
     const client = useURQLClient()
 

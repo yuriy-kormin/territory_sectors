@@ -6,7 +6,7 @@ import {parseUuidExchangeResult} from "../api-helpers/lib";
 import useFetchResult from "../hooks/useFetchResult";
 import {useQuery} from "urql";
 import {useDispatch, useSelector} from "react-redux";
-import {userAnonSetAction, userSetAction} from "../store/UserReducer";
+import {userSetAction} from "../store/UserReducer";
 import {LoginQUERY} from "../api-helpers/queries/userQueries";
 import {getUser} from "../store/selectors/getUser";
 
@@ -14,8 +14,6 @@ const SectorByQr = () => {
     const params = useParams()
     const dispatch = useDispatch()
     const user = useSelector(getUser);
-    console.log('user is ',user)
-    dispatch(userAnonSetAction())
     console.log('user is ',user)
 
     // // params.sectorId

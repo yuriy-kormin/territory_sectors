@@ -12,9 +12,7 @@ import {IsTimemarkValid} from "../api-helpers/lib";
 export const useURQLClient = () =>{
     const user = useSelector(getUser);
 
-    const authEx = user.is_anon
-        ?''
-        :authExchange(
+    const authEx = authExchange(
     async utils => {
         console.log('begin getAuth');
         if (!user.is_login) {
@@ -77,13 +75,19 @@ export const useURQLClient = () =>{
     const [refreshState,setRefreshState] = useState(false)
     const dispatch = useDispatch()
     const backendUrl = process.env.REACT_APP_BACKEND_URL
-    const exchanges = [
+    const [exchanges,setExchanges] = useState([
+            devtoolsExchange,
+            cacheExchange,
+            fetchExchange,
+        ])
+    if (user.is_login) {
+        setExchanges([
             devtoolsExchange,
             cacheExchange,
             authEx,
             fetchExchange,
-        ]
-
+        ])
+    }
     const URQLclient = new Client({
         url: backendUrl,
         exchanges: exchanges
