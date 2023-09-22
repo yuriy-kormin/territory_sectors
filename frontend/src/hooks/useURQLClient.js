@@ -1,4 +1,4 @@
-import {cacheExchange, Client, dedupExchange, fetchExchange} from "urql";
+import {cacheExchange, Client, fetchExchange} from "urql";
 import {devtoolsExchange} from "@urql/devtools";
 import {useState} from "react";
 import {useSelector} from "react-redux";
