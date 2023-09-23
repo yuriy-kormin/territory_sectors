@@ -10,6 +10,7 @@ const initialState = {
 export const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_USER:
+      console.log('payload is ', action)
       setTokensToStorage(action.payload);
       return { ...state, is_login: true, ...action.payload };
     case LOGOUT:

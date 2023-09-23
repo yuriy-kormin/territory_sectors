@@ -6,8 +6,10 @@ import {IsTimemarkValid} from "../api-helpers/lib";
 import {RefreshTokenMUTATION} from "../api-helpers/queries/userQueries";
 import {useDispatch, useSelector} from "react-redux";
 import {getUser} from "../store/selectors/getUser";
+import {devtoolsExchange} from "@urql/devtools";
+import {cacheExchange, fetchExchange} from "urql";
 
-const AuthEx = () => {
+const AuthEx = ({ client, forward }) => {
     const user = useSelector(getUser);
     const [refreshState,setRefreshState] = useState(false)
     const dispatch = useDispatch()
@@ -16,13 +18,17 @@ const AuthEx = () => {
     async utils => {
         console.log('begin getAuth');
         if (!user.is_login) {
-            const tokens = await getTokensFromStorage();
-            if (tokens) {
+            const tokenData = await getTokensFromStorage();
+            if (tokenData) {
                 console.log('tokens found');
-                dispatch(userSetAction(tokens))
-                return tokens;
+                dispatch(userSetAction(tokenData))
+                return tokenData;
             }
             console.log('token not found');
+            return operations$ => {
+                const operationResult$ = forward(operations$);
+                return operationResult$;
+            };
         }
         return {
             addAuthToOperation: operation => {
@@ -73,6 +79,28 @@ const AuthEx = () => {
 })
     );
 };
+
+// const noopExchange = ({ client, forward }) => {
+//   return operations$ => {
+//     // <-- The ExchangeIO function
+//     const operationResult$ = forward(operations$);
+//     return operationResult$;
+//   };
+// };
+
+export const defExchanges = [
+            devtoolsExchange,
+            cacheExchange,
+            AuthEx,
+            fetchExchange,
+        ]
+
+export const isLoginExchanges = [
+            devtoolsExchange,
+            cacheExchange,
+            AuthEx,
+            fetchExchange,
+        ]
 
 export default AuthEx;
 

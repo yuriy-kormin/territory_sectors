@@ -37,12 +37,11 @@ const LoginForm = () => {
             setFetchResult({
                 fetching: false,
                 error: result.error?.message,
-                result: parseAuthResult(result)
             })
             if (result.error) {
                 setShowModal(true);
             } else {
-                dispatch(userSetAction(fetchResult.result))
+                dispatch(userSetAction(parseAuthResult(result)))
             }
         })
     }
