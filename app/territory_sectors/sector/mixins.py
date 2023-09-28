@@ -125,8 +125,7 @@ class AddDebtorsMixin:
             }
 
         context = super().get_context_data(**kwargs)
-        # sectors = Sector.objects.filter(status__name__contains='assigned'). \
-        sectors = Sector.objects.all(). \
+        sectors = Sector.objects.filter(status__name__contains='assigned'). \
             select_related('status').order_by('assigned_to')
 
         debtors = [
