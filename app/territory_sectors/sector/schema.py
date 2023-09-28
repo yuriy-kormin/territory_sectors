@@ -6,7 +6,6 @@ from graphene_django import DjangoObjectType
 from graphene_gis.converter import gis_converter  # noqa
 from .models import Sector
 from ..house.schema import HouseNode
-from django.utils import timezone
 
 
 class SectorNode(DjangoObjectType):
@@ -50,9 +49,7 @@ class SectorNode(DjangoObjectType):
         )
 
     def resolve_status_age(self, info):
-        status_set_datetime = self.get_changes_history()[0].date_modified
-        delta = timezone.now() - status_set_datetime
-        return str(round(delta.days / 30, 1))
+        return str(self.get_status_age_in_months())
 
 
 class Query(graphene.ObjectType):

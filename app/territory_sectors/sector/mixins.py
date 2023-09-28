@@ -4,6 +4,7 @@ import json
 from django.db.models import Count
 from .models import Sector
 from natsort import natsorted
+from itertools import groupby
 
 from ..consts_from_js import search_status
 
@@ -102,14 +103,51 @@ class AddContextFullJSONMixin(GeoJSONAnnotateMixin):
         sectors = []
         for sector in qs:
             sector_data = sector.get_js_source()
-            # sector_data['popup'] = re.sub(
-            #     r'\s{2}',
-            #     '',
-            #     render_to_string(
-            #         'sector/sector_popup.html',
-            #         {'sector': sector})
-            # )
             sectors.append(sector_data)
 
         context['sectors_json'] = json.dumps(sectors)
+        return context
+
+
+class AddDebtorsMixin:
+    def get_context_data(self, **kwargs):
+        """Add list of debtors into context"""
+
+        DEBT_AGE = 4
+        DEBT_PRE_AGE = 3
+
+        def get_related_info(sector):
+            return {
+                'name': sector.name,
+                'status': sector.status.name,
+                'status_age': sector.get_status_age_in_months(),
+                'houses': [house.address for house in sector.get_houses_into()]
+            }
+
+        context = super().get_context_data(**kwargs)
+        # sectors = Sector.objects.filter(status__name__contains='assigned'). \
+        sectors = Sector.objects.all(). \
+            select_related('status').order_by('assigned_to')
+
+        debtors = [
+            s for s in sectors if s.get_status_age_in_months() >= DEBT_AGE]
+        pre_debtors = [s for s in sectors if
+                       DEBT_PRE_AGE <= s.get_status_age_in_months() < DEBT_AGE
+                       ]
+
+        context['debtors'] = {
+            debtor: list(map(get_related_info, sectors))
+            for debtor, sectors in groupby(
+                debtors,
+                key=lambda sector: str(sector.assigned_to).strip().lower()
+            )
+        }
+        context['pre_debtors'] = {
+            debtor: list(map(get_related_info, sectors))
+            for debtor, sectors in groupby(
+                pre_debtors,
+                key=lambda sector: str(sector.assigned_to).strip().lower()
+            )
+        }
+
         return context

@@ -1,0 +1,32 @@
+<div class="container-fluid striped py-4">
+    <div class="row">
+        <div class="col-3 col-sm-4">Имя</div>
+        <div class="col-9 col-sm-8">
+            <div class="row">
+                <div class="col-1 col-sm-3">Участок</div>
+                <div class="col-3">Прошло</div>
+                <div class="col-8 col-sm-6">Дома</div>
+            </div>
+        </div>
+    </div>
+    {% for debtor,sectors in list.items %}
+        <div class="row border">
+            <div class="col-3 col-sm-4">{{debtor}}</div>
+            <div class="col-9 col-sm-8">
+                {% for sector in sectors %}
+                    <div class="row border">
+                        <div class="col-1 col-sm-3">{{sector.name}}</div>
+                        <div class="col-3">{{sector.status_age}}</div>
+                        <div class="col-8 col-sm-6">
+                            <div class="row">
+                                {% for house in sector.houses %}
+                                    <div class="col-12">{{house}}</div>
+                                {%endfor %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+</div>

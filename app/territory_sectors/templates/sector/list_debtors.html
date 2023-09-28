@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load bootstrap4 %}
+{% block page_content %}
+    <h2> {% trans "Sector debtors list" %} </h2>
+  {% include 'sector/debt_sectors.html' with list=debtors %}
+    <h2> {% trans "Sector PRE debtors list" %} </h2>
+  {% include 'sector/debt_sectors.html' with list=pre_debtors %}
+
+{% endblock %}
+{% block markers %}
+    map_div = document.getElementById("map");
+    map_div.style.display = "none";
+{% endblock %}
