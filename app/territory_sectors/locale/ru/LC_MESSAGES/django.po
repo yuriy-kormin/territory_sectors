@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-28 08:53+0000\n"
+"POT-Creation-Date: 2023-09-28 09:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -434,10 +434,8 @@ msgid "List houses"
 msgstr "Список домов"
 
 #: territory_sectors/templates/nav.html:26
-#, fuzzy
-#| msgid "Sectors"
 msgid "Debtors"
-msgstr "Участки"
+msgstr "Должники"
 
 #: territory_sectors/templates/nav.html:27
 msgid "Statistics"
@@ -492,14 +490,12 @@ msgid "ready"
 msgstr "Рабочий"
 
 #: territory_sectors/templates/sector/list_debtors.html:5
-#, fuzzy
-#| msgid "Sectors stat"
 msgid "Sector debtors list"
 msgstr "Подошло время сдавать"
 
 #: territory_sectors/templates/sector/list_debtors.html:7
 msgid "Sector PRE debtors list"
-msgstr "Скоро будут таковыми"
+msgstr "Скоро надо будет сдавать"
 
 #: territory_sectors/templates/sector/print_sector.html:85
 #: territory_sectors/templates/sector/print_sector_quadra.html:122
@@ -587,6 +583,10 @@ msgstr " найденных адресов"
 #: territory_sectors/views.py:51
 msgid "Sector assignments status"
 msgstr "Назначения участков "
+
+#~| msgid "Sectors"
+#~ msgid "Должники"
+#~ msgstr "Участки"
 
 #~ msgid "info"
 #~ msgstr "Информация"
