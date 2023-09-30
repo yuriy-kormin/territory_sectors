@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-27 18:51+0000\n"
+"POT-Creation-Date: 2023-09-28 09:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,7 +46,7 @@ msgid "Create flat"
 msgstr "Создать квартиру"
 
 #: territory_sectors/flat/views.py:21 territory_sectors/house/views.py:21
-#: territory_sectors/issue/views.py:20 territory_sectors/sector/views.py:24
+#: territory_sectors/issue/views.py:20 territory_sectors/sector/views.py:25
 msgid "Create"
 msgstr "Создать"
 
@@ -54,7 +54,7 @@ msgstr "Создать"
 msgid "Flat created successfully"
 msgstr "Квартира успешно создана"
 
-#: territory_sectors/flat/views.py:30 territory_sectors/sector/views.py:111
+#: territory_sectors/flat/views.py:30 territory_sectors/sector/views.py:118
 #: territory_sectors/templates/sector/sector_popup.html:16
 msgid "remove"
 msgstr "удалить"
@@ -64,7 +64,7 @@ msgid "Update Flat"
 msgstr "Изменить квартиру"
 
 #: territory_sectors/flat/views.py:42 territory_sectors/house/views.py:35
-#: territory_sectors/sector/views.py:46
+#: territory_sectors/sector/views.py:47
 msgid "Update"
 msgstr "Изменить"
 
@@ -77,7 +77,7 @@ msgid "Remove flat"
 msgstr "Удалить квартиру"
 
 #: territory_sectors/flat/views.py:54 territory_sectors/house/views.py:60
-#: territory_sectors/sector/views.py:147
+#: territory_sectors/sector/views.py:154
 msgid "Remove "
 msgstr "Удалить "
 
@@ -249,39 +249,39 @@ msgstr "Назначен возвещателю"
 msgid "Please enter sector name"
 msgstr "Название участка"
 
-#: territory_sectors/sector/views.py:23 territory_sectors/templates/nav.html:15
+#: territory_sectors/sector/views.py:24 territory_sectors/templates/nav.html:15
 msgid "Create sector"
 msgstr "Создать участок"
 
-#: territory_sectors/sector/views.py:29
+#: territory_sectors/sector/views.py:30
 msgid "Sector created successfully"
 msgstr "Участок успешно создан"
 
-#: territory_sectors/sector/views.py:45
+#: territory_sectors/sector/views.py:46
 msgid "Update Sector"
 msgstr "Обновить данные участка"
 
-#: territory_sectors/sector/views.py:51
+#: territory_sectors/sector/views.py:52
 msgid "Sector updated successfully"
 msgstr "Данные участка успешно обновлены"
 
-#: territory_sectors/sector/views.py:87
+#: territory_sectors/sector/views.py:94
 msgid "Sector "
 msgstr "Участок "
 
-#: territory_sectors/sector/views.py:130
+#: territory_sectors/sector/views.py:137
 msgid "History statuses of "
 msgstr "История статусов участка "
 
-#: territory_sectors/sector/views.py:146
+#: territory_sectors/sector/views.py:153
 msgid "Remove sector"
 msgstr "Удалить участок"
 
-#: territory_sectors/sector/views.py:148
+#: territory_sectors/sector/views.py:155
 msgid "Are you sure delete sector "
 msgstr "Вы уверены, что хотите удалить участок "
 
-#: territory_sectors/sector/views.py:150
+#: territory_sectors/sector/views.py:157
 msgid "Sector deleted successfully"
 msgstr "Участок успешно удален"
 
@@ -434,26 +434,30 @@ msgid "List houses"
 msgstr "Список домов"
 
 #: territory_sectors/templates/nav.html:26
+msgid "Debtors"
+msgstr "Должники"
+
+#: territory_sectors/templates/nav.html:27
 msgid "Statistics"
 msgstr "Статистика"
 
-#: territory_sectors/templates/nav.html:27
+#: territory_sectors/templates/nav.html:28
 msgid "Assignments"
 msgstr "s-26"
 
-#: territory_sectors/templates/nav.html:28
+#: territory_sectors/templates/nav.html:29
 msgid "Issues"
 msgstr "Задачи"
 
-#: territory_sectors/templates/nav.html:29
+#: territory_sectors/templates/nav.html:30
 msgid "GraphQL"
 msgstr ""
 
-#: territory_sectors/templates/nav.html:35
+#: territory_sectors/templates/nav.html:36
 msgid "Logout"
 msgstr "Выход"
 
-#: territory_sectors/templates/nav.html:37
+#: territory_sectors/templates/nav.html:38
 msgid "Enter"
 msgstr "Вход"
 
@@ -484,6 +488,14 @@ msgstr "Поисковый"
 #: territory_sectors/templates/sector/list.html:58
 msgid "ready"
 msgstr "Рабочий"
+
+#: territory_sectors/templates/sector/list_debtors.html:5
+msgid "Sector debtors list"
+msgstr "Подошло время сдавать"
+
+#: territory_sectors/templates/sector/list_debtors.html:7
+msgid "Sector PRE debtors list"
+msgstr "Скоро надо будет сдавать"
 
 #: territory_sectors/templates/sector/print_sector.html:85
 #: territory_sectors/templates/sector/print_sector_quadra.html:122
@@ -571,6 +583,10 @@ msgstr " найденных адресов"
 #: territory_sectors/views.py:51
 msgid "Sector assignments status"
 msgstr "Назначения участков "
+
+#~| msgid "Sectors"
+#~ msgid "Должники"
+#~ msgstr "Участки"
 
 #~ msgid "info"
 #~ msgstr "Информация"

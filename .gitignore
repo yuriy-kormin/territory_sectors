@@ -2,8 +2,7 @@
 .venv/
 env/
 venv/
-.env*
-
+*.env-*
 
 *.pyc
 db.sqlite3
@@ -39,6 +38,4 @@ pip-wheel-metadata
 /app/media/
 
 *backup*
-
-### node
-node_modules
+*node_modules*

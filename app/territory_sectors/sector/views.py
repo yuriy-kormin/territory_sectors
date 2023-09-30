@@ -8,7 +8,8 @@ from .forms import SectorForm
 from .models import Sector
 from django.utils.translation import gettext_lazy as _
 from .mixins import GeoJSONAnnotateMixin, ContextAllHousesIntoMixin, \
-    CentroidAnnotateMixin, NatSortMixin, AddContextFullJSONMixin
+    CentroidAnnotateMixin, NatSortMixin, AddContextFullJSONMixin, \
+    AddDebtorsMixin
 from ..mixins import LoginRequiredMixinCustom
 from django.views import View
 
@@ -75,6 +76,12 @@ class SectorUpdateView(LoginRequiredMixinCustom, CentroidAnnotateMixin,
     #
     #     context['qr_img_data'] = img_data
     #     return context
+
+
+class SectorDeptorsListView(LoginRequiredMixinCustom, AddDebtorsMixin,
+                            ListView):
+    model = Sector
+    template_name = "sector/list_debtors.html"
 
 
 class SectorPrintView(LoginRequiredMixinCustom,

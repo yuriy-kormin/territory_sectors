@@ -6,6 +6,7 @@ from urllib.parse import quote
 
 from django.db.models import F, Value
 from django.db.models.functions import Concat
+from django.utils import timezone
 from territory_sectors.house.models import House
 from territory_sectors.consts_from_js import sector_status
 from territory_sectors.status.models import Status
@@ -140,3 +141,8 @@ class Sector(models.Model):
             # to fetch this qs must be annotated with
             # geojson=AsGeoJSON('contour'))
         }
+
+    def get_status_age_in_months(self):
+        status_set_datetime = self.get_changes_history()[0].date_modified
+        delta = timezone.now() - status_set_datetime
+        return round(delta.days / 30, 1)

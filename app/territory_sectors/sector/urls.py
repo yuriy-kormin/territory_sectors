@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import SectorListView, SectorCreateView, \
-    SectorDeleteView, SectorUpdateView, SectorStatusHistory,\
-    SectorCheckInOutView
+    SectorDeleteView, SectorUpdateView, SectorStatusHistory, \
+    SectorCheckInOutView, SectorDeptorsListView
 from .viewPDFprint import SectorPrintPDF
 
 urlpatterns = [
@@ -11,6 +11,7 @@ urlpatterns = [
     path('for-search', SectorListView.as_view(
         extra_context={'status': 'for-search'},
     ), name='sector_list_search'),
+    path('debtors', SectorDeptorsListView.as_view(), name='debtors'),
     path('', SectorListView.as_view(), name='sector_list'),
     path('create/', SectorCreateView.as_view(), name='sector_add'),
     path('<int:pk>/', SectorUpdateView.as_view(), name='sector_update'),
