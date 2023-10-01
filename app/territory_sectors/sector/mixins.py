@@ -116,26 +116,6 @@ class AddDebtorsMixin:
         DEBT_AGE = 4
         DEBT_PRE_AGE = 3
 
-        def process_name_surname(s: str) -> str:
-            """ In grouping elements have a bug with mostly same name
-                Like "Adam Smith" & "smiTh Adam"
-
-            Function take a string and sort name+surname in alphabetical order
-            It returns same value "adam smith" for both examples
-            """
-            work_s = str(s).strip().lower()
-            space_pos = work_s.find(' ')
-            if space_pos < 0:
-                return work_s
-
-            name, surname = work_s[:space_pos], work_s[space_pos + 1:]
-            i = 0
-            while name[i].lower() == surname[i].lower():
-                i += 1
-            if name[i] < surname[i]:
-                return work_s
-            return " ".join((surname, name))
-
         def get_related_info(sector):
             return {
                 'name': sector.name,
@@ -158,14 +138,14 @@ class AddDebtorsMixin:
             debtor: list(map(get_related_info, sectors))
             for debtor, sectors in groupby(
                 debtors,
-                key=lambda sector: process_name_surname(sector.assigned_to)
+                key=lambda sector: str(sector.assigned_to).strip().lower()
             )
         }
         context['pre_debtors'] = {
             debtor: list(map(get_related_info, sectors))
             for debtor, sectors in groupby(
                 pre_debtors,
-                key=lambda sector: process_name_surname(sector.assigned_to)
+                key=lambda sector: str(sector.assigned_to).strip().lower()
             )
         }
 
