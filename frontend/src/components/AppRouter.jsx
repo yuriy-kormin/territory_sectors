@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, Routes, useNavigate, useParams} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import Start from "../pages/Start";
 import SectorByQr from "../pages/SectorByQr";
 

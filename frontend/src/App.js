@@ -9,7 +9,7 @@ function App({urqlClient=undefined}) {
 
 return (
     <Provider value={urqlClient || client}>
-        <div className="App" className="app-container d-flex flex-column vh-100">
+        <div className="App app-container d-flex flex-column vh-100">
             <NavBar />
             <AppRouter />
         </div>

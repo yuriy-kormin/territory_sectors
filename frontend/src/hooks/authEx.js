@@ -13,23 +13,29 @@ const AuthEx = ({ client, forward }) => {
     const user = useSelector(getUser);
     const [refreshState,setRefreshState] = useState(false)
     const dispatch = useDispatch()
+    console.log('user is ', user)
+    if (!user.is_login){
+        const tokenData = getTokensFromStorage();
+        if (tokenData) {
+            console.log('tokens found');
+            dispatch(userSetAction(tokenData))
+            return tokenData;
+        }
+        console.log('token not found');
+        return operations$ => {
+            const operationResult$ = forward(operations$);
+            return operationResult$;
+        };
+    }
     return (
     authExchange(
     async utils => {
         console.log('begin getAuth');
-        if (!user.is_login) {
-            const tokenData = await getTokensFromStorage();
-            if (tokenData) {
-                console.log('tokens found');
-                dispatch(userSetAction(tokenData))
-                return tokenData;
-            }
-            console.log('token not found');
-            return operations$ => {
-                const operationResult$ = forward(operations$);
-                return operationResult$;
-            };
-        }
+        // if (!user.is_login) {
+        //
+        //
+        // }
+        console.log('user state  ', user)
         return {
             addAuthToOperation: operation => {
                 console.log('begin addAuthToOperation');
@@ -80,27 +86,14 @@ const AuthEx = ({ client, forward }) => {
     );
 };
 
-// const noopExchange = ({ client, forward }) => {
-//   return operations$ => {
-//     // <-- The ExchangeIO function
-//     const operationResult$ = forward(operations$);
-//     return operationResult$;
-//   };
-// };
 
-export const defExchanges = [
+export const Exchanges = [
             devtoolsExchange,
             cacheExchange,
             AuthEx,
             fetchExchange,
         ]
 
-export const isLoginExchanges = [
-            devtoolsExchange,
-            cacheExchange,
-            AuthEx,
-            fetchExchange,
-        ]
 
 export default AuthEx;
 

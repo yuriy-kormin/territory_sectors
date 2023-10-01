@@ -1,7 +1,7 @@
 const KEY_NAME = 'JWT'
 
 
-export const getTokensFromStorage = async() => {
+export const getTokensFromStorage = () => {
     const data = localStorage.getItem(KEY_NAME);
     if (data) {return JSON.parse(data)}
 }
