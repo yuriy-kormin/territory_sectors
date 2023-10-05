@@ -31,7 +31,7 @@
 
                 <div id="collapse{{ house.id }}" class="collapse" aria-labelledby="heading{{ house.id }}" data-parent="#accordion">
                   <div class="card-body">
-                      {% if house.image %}<a href="#" class="pop" data-url="{{ house.image.url }}"><img src="{{ house.image_preview.url }}"></a>{% endif %}
+                      {% if house.image and house.image_preview %}<a href="#" class="pop" data-url="{{ house.image.url }}"><img src="{{ house.image_preview.url }}"></a>{% endif %}
                       <table class = "table table-striped">
                         <tr>
                             <th>{% translate "entrance" %}</th>
