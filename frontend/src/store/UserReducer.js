@@ -1,6 +1,7 @@
 import { removeTokensFromStorage, setTokensToStorage } from "./tokenStore";
 
 const SET_USER = "SET_USER";
+const SET_STORAGE = "SET_STORAGE";
 const LOGOUT = "LOGOUT";
 
 const initialState = {
@@ -10,7 +11,8 @@ const initialState = {
 export const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_USER:
-      console.log('payload is ', action)
+      return { ...state, is_login: true, ...action.payload };
+    case SET_STORAGE:
       setTokensToStorage(action.payload);
       return { ...state, is_login: true, ...action.payload };
     case LOGOUT:
@@ -22,4 +24,5 @@ export const userReducer = (state = initialState, action) => {
 };
 
 export const userSetAction = (payload) => ({ type: SET_USER, payload });
+export const storageSetAction = (payload) => ({ type: SET_STORAGE, payload });
 export const userLogout = () => ({ type: LOGOUT });

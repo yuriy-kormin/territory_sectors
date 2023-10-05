@@ -9,7 +9,7 @@ import ErrorAlert from "./Alert/ErrorAlert";
 import {useBackendExchange} from "../hooks/useBackendExchange";
 import {LoginQUERY} from "../api-helpers/queries/userQueries";
 import {parseAuthResult} from "../api-helpers/lib";
-import {userSetAction} from "../store/UserReducer";
+import {storageSetAction} from "../store/UserReducer";
 
 const LoginForm = () => {
     const dispatch = useDispatch()
@@ -41,7 +41,7 @@ const LoginForm = () => {
             if (result.error) {
                 setShowModal(true);
             } else {
-                dispatch(userSetAction(parseAuthResult(result)))
+                dispatch(storageSetAction(parseAuthResult(result)))
             }
         })
     }
