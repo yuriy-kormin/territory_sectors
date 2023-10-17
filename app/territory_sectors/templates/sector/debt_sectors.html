@@ -19,8 +19,8 @@
                         <div class="col-3">{{sector.status_age}}</div>
                         <div class="col-8 col-sm-6">
                             <div class="row">
-                                {% for house in sector.houses %}
-                                    <div class="col-12">{{house}}</div>
+                                {% for house_id,house_address in sector.houses.items %}
+                                    <div class="col-12">{% url "house_update" house_id %}>{{house_address}}</a></div>
                                 {%endfor %}
                             </div>
                         </div>
