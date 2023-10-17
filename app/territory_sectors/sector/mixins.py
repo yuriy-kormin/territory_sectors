@@ -119,6 +119,7 @@ class AddDebtorsMixin:
         def get_related_info(sector):
             return {
                 'name': sector.name,
+                'id': sector.id,
                 'status': sector.status.name,
                 'status_age': sector.get_status_age_in_months(),
                 'houses': [house.address for house in sector.get_houses_into()]
