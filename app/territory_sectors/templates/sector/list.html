@@ -24,44 +24,44 @@
 }
 </style>
 {% endblock %}
-{% block bottom_map %}
-<div class="mt-3 bg-white rounded shadow-sm overflow-auto">
-    <div class="container my-3 p-2">
-        <div class="row">
-            <div class="col-md-2 col-sm-12 my-2">
-                <span class="p-2 table-success rounded-lg">
-                    {% translate "free" %}
-                </span>
-            </div>
-            <div class="col-md-2 col-sm-12 my-2">
-                    <span class="p-2 table-warning rounded-lg">
-                        {% translate "assigned" %}
-                    </span>
-            </div>
-            <div class="col-md-2 col-sm-12 my-2">
-                    <span class="p-2 table-danger rounded-lg ">
-                        {% translate "under constuction" %}
-                    </span>
-            </div>
-            <div class="col-md-2 col-sm-12 my-2">
-                <span class="p-2 table-primary rounded-lg ">
-                    {% translate "completed" %}
-                </span>
-        </div>
-            <div class="col-md-2 col-sm-12 my-2">
-                <span class="p-2 rounded-lg" style="border: 3px solid #fa8005;">
-                    {% translate "search" %}
-                </span>
-        </div>
-            <div class="col-md-2 col-sm-12 my-2">
-                <span class="p-2 rounded-lg" style="border: 3px solid #B917FC;">
-                    {% translate "ready" %}
-                </span>
-        </div>
-        </div>
-    </div>
-</div>
-{% endblock %}
+{#{% block bottom_map %}#}
+{#<div class="mt-3 bg-white rounded shadow-sm overflow-auto">#}
+{#    <div class="container my-3 p-2">#}
+{#        <div class="row">#}
+{#            <div class="col-md-2 col-sm-12 my-2">#}
+{#                <span class="p-2 table-success rounded-lg">#}
+{#                    {% translate "free" %}#}
+{#                </span>#}
+{#            </div>#}
+{#            <div class="col-md-2 col-sm-12 my-2">#}
+{#                    <span class="p-2 table-warning rounded-lg">#}
+{#                        {% translate "assigned" %}#}
+{#                    </span>#}
+{#            </div>#}
+{#            <div class="col-md-2 col-sm-12 my-2">#}
+{#                    <span class="p-2 table-danger rounded-lg ">#}
+{#                        {% translate "under constuction" %}#}
+{#                    </span>#}
+{#            </div>#}
+{#            <div class="col-md-2 col-sm-12 my-2">#}
+{#                <span class="p-2 table-primary rounded-lg ">#}
+{#                    {% translate "completed" %}#}
+{#                </span>#}
+{#        </div>#}
+{#            <div class="col-md-2 col-sm-12 my-2">#}
+{#                <span class="p-2 rounded-lg" style="border: 3px solid #fa8005;">#}
+{#                    {% translate "search" %}#}
+{#                </span>#}
+{#        </div>#}
+{#            <div class="col-md-2 col-sm-12 my-2">#}
+{#                <span class="p-2 rounded-lg" style="border: 3px solid #B917FC;">#}
+{#                    {% translate "ready" %}#}
+{#                </span>#}
+{#        </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
+{#{% endblock %}#}
 {% block markers %}
     var sectors = JSON.parse('{{ sectors_json|escapejs }}');
     var circles = JSON.parse('{{ houses_json|escapejs }}');
