@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 {% load bootstrap4 %}
 {% load i18n %}
-{% load qr_code %}
+{#{% load qr_code %}#}
 {% load static %}
 {% block page_content %}
-    {% if request.user.is_authenticated %}
-        {% qr_from_text request.build_absolute_uri size="t" image_format="png" error_correction="L" %}
-        <p>Это сообщение отображается только если пользователь залогинен</p>
-        Внизу раскрывающийся список с квартирами, которые были найдены в текущем доме<br>
-        !!! Отображаются только квартиры в которых язык устновлен в id=1(русский)</p>
-    {% endif %}
+{#    {% if request.user.is_authenticated %}#}
+{#        {% qr_from_text request.build_absolute_uri size="t" image_format="png" error_correction="L" %}#}
+{#        <p>Это сообщение отображается только если пользователь залогинен</p>#}
+{#        Внизу раскрывающийся список с квартирами, которые были найдены в текущем доме<br>#}
+{#        !!! Отображаются только квартиры в которых язык устновлен в id=1(русский)</p>#}
+{#    {% endif %}#}
     <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
       <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
@@ -30,25 +30,7 @@
                 </div>
 
                 <div id="collapse{{ house.id }}" class="collapse" aria-labelledby="heading{{ house.id }}" data-parent="#accordion">
-                  <div class="card-body">
-                      {% if house.image and house.image_preview %}<a href="#" class="pop" data-url="{{ house.image.url }}"><img src="{{ house.image_preview.url }}"></a>{% endif %}
-                      <table class = "table table-striped">
-                        <tr>
-                            <th>{% translate "entrance" %}</th>
-                            <th>{% translate "floor" %}</th>
-                            <th>{% translate "number" %}</th>
-                            <th>{% translate "desc" %}</th>
-                        </tr>
-                        {% for flat in house.get_ru_flats %}
-                            <tr>
-                                <td>{% if flat.entrance %} {{ flat.entrance}} {% translate "entrance" %}{% endif %}</td>
-                                <td>{% if flat.floor %}{{ flat.floor }} {% translate "floor" %}{% endif %}</td>
-                                <td>{% if flat.number %}{{ flat.number }} {% translate "number" %}{% endif %}</td>
-                                <td>{{ flat.way_desc|default_if_none:"" }}</td>
-                            </tr>
-                        {% endfor %}
-                      </table>
-                  </div>
+                  {% include "uuid-house-detail.html" %}
                 </div>
               </div>
         {% endfor %}

@@ -1,0 +1,21 @@
+{% load bootstrap4 %}
+{% load i18n %}
+<div class="card-body">
+  {% if house.image and house.image_preview %}<a href="#" class="pop" data-url="{{ house.image.url }}"><img src="{{ house.image_preview.url }}"></a>{% endif %}
+  <table class = "table table-striped">
+    <tr>
+        <th>{% translate "entrance" %}</th>
+        <th>{% translate "floor" %}</th>
+        <th>{% translate "number" %}</th>
+        <th>{% translate "desc" %}</th>
+    </tr>
+    {% for flat in house.get_ru_flats %}
+        <tr>
+            <td>{% if flat.entrance %} {{ flat.entrance}} {% translate "entrance" %}{% endif %}</td>
+            <td>{% if flat.floor %}{{ flat.floor }} {% translate "floor" %}{% endif %}</td>
+            <td>{% if flat.number %}{{ flat.number }} {% translate "number" %}{% endif %}</td>
+            <td>{{ flat.way_desc|default_if_none:"" }}</td>
+        </tr>
+    {% endfor %}
+  </table>
+</div>
