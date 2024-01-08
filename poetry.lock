@@ -435,12 +435,12 @@ pyflakes = ">=3.1.0,<3.2.0"
 
 [[package]]
 name = "gdal"
-version = "3.8.2"
+version = "3.7.0"
 description = "GDAL: Geospatial Data Abstraction Library"
 optional = false
 python-versions = ">=3.6.0"
 files = [
-    {file = "GDAL-3.8.2.tar.gz", hash = "sha256:4e0e8b5e7decb23b37e02de14c0b1abae471c5b447ef49f06dad69f65edd44bb"},
+    {file = "GDAL-3.7.0.tar.gz", hash = "sha256:116a924dd340f517ab4ccaea9fb6b333ce132e10f2b3120b0d539593719fd79a"},
 ]
 
 [package.extras]
@@ -1310,4 +1310,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<3.12"
-content-hash = "d0dcf2deb3d2fd6a43223c5e95faf62fa72061fc92bc3271e180e7f51ac96de0"
+content-hash = "33fb40b49c3fe5a923ec9963759dbd35525f65c0857321adbb59cd60357926ff"
