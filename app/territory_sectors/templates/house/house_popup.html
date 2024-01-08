@@ -2,9 +2,9 @@
 <div class="card">
     <div class="card-body m-0 p-1">
         <h5 class="card-title">{{ house.address }}</h5>
-        <p class="card-text">{% trans "Entrances" %}: {{ house.entrances }}</p>
-        <p class="card-text">{% trans "Floors" %}: {{ house.floor_amount }}</p>
-        <div class="btn-toolbar d-flex justify-content-center" role="toolbar">
+        <p class="card-text">{% trans "Entrances" %}: {{ house.entrances }}
+        {% trans "Floors" %}: {{ house.floor_amount }}</p>
+        <div class="btn-toolbar d-flex justify-content-center mb-3" role="toolbar">
             <div class="btn-group-sm" role="group">
                 <a href ="{% url "house_update" house.id %}" class="btn btn-outline-info" role="button" aria-disabled="true"><i class="fas fa-edit"></i></a>
                 <a href ="{% url "house_delete" house.id %}" class="btn btn-outline-danger" role="button" style="margin-left: 10px;"><i class="fas fa-trash"></i></a>
