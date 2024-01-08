@@ -4,19 +4,19 @@
 {% if house.image and house.image_preview %}<a href="#" class="pop" data-url="{{ house.image.url }}"><img class="center" src="{{ house.image_preview.url }}"></a>{% endif %}
     <div class="card-body">
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-2"><b>{% translate "entrance" %}</b></div>
-                <div class="col-2"><b>{% translate "floor" %}</b></div>
-                <div class="col-2"><b>{% translate "number" %}</b></div>
-                <div class="col-6"><b>{% translate "desc" %}</b></div>
+            <div class="row border-bottom">
+                <div class="col-2 font-weight-bold text-spacing">{% translate "entrance" %}</div>
+                <div class="col-2 font-weight-bold text-spacing">{% translate "floor" %}</div>
+                <div class="col-2 font-weight-bold text-spacing">{% translate "number" %}</div>
+                <div class="col font-weight-bold text-spacing">{% translate "desc" %}</div>
             </div>
 
             {% for flat in house.get_ru_flats %}
-                <div class="row">
-                    <div class="col-2">{% if flat.entrance %} {{ flat.entrance}} {% translate "entrance_short" %}{% endif %}</div>
-                    <div class="col-2">{% if flat.floor %}{{ flat.floor }} {% translate "floor_short" %}{% endif %}</div>
-                    <div class="col-2">{% if flat.number %}{{ flat.number }} {% translate "number_short" %}{% endif %}</div>
-                    <div class="col-6">{{ flat.way_desc|default_if_none:"" }}</div>
+                <div class="row border-bottom">
+                    <div class="col-2 text-nowrap">{% if flat.entrance %} {{ flat.entrance}} {% translate "entrance_short" %}{% endif %}</div>
+                    <div class="col-2 text-nowrap">{% if flat.floor %}{{ flat.floor }} {% translate "floor_short" %}{% endif %}</div>
+                    <div class="col-2 text-nowrap">{% if flat.number %}{{ flat.number }} {% translate "number_short" %}{% endif %}</div>
+                    <div class="col">{{ flat.way_desc|default_if_none:"" }}</div>
                 </div>
 
             {% endfor %}
