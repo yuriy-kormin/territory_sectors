@@ -1,21 +1,41 @@
 {% load bootstrap4 %}
 {% load i18n %}
-<div class="card-body">
-  {% if house.image and house.image_preview %}<a href="#" class="pop" data-url="{{ house.image.url }}"><img src="{{ house.image_preview.url }}"></a>{% endif %}
-  <table class = "table table-striped">
-    <tr>
-        <th>{% translate "entrance" %}</th>
-        <th>{% translate "floor" %}</th>
-        <th>{% translate "number" %}</th>
-        <th>{% translate "desc" %}</th>
-    </tr>
-    {% for flat in house.get_ru_flats %}
-        <tr>
-            <td>{% if flat.entrance %} {{ flat.entrance}} {% translate "entrance" %}{% endif %}</td>
-            <td>{% if flat.floor %}{{ flat.floor }} {% translate "floor" %}{% endif %}</td>
-            <td>{% if flat.number %}{{ flat.number }} {% translate "number" %}{% endif %}</td>
-            <td>{{ flat.way_desc|default_if_none:"" }}</td>
-        </tr>
-    {% endfor %}
-  </table>
+<div class="card" style="display: block;">
+{% if house.image and house.image_preview %}<a href="#" class="pop" data-url="{{ house.image.url }}"><img class="center" src="{{ house.image_preview.url }}"></a>{% endif %}
+    <div class="card-body">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-2"><b>{% translate "entrance" %}</b></div>
+                <div class="col-2"><b>{% translate "floor" %}</b></div>
+                <div class="col-2"><b>{% translate "number" %}</b></div>
+                <div class="col-6"><b>{% translate "desc" %}</b></div>
+            </div>
+
+            {% for flat in house.get_ru_flats %}
+                <div class="row">
+                    <div class="col-2">{% if flat.entrance %} {{ flat.entrance}} {% translate "entrance_short" %}{% endif %}</div>
+                    <div class="col-2">{% if flat.floor %}{{ flat.floor }} {% translate "floor_short" %}{% endif %}</div>
+                    <div class="col-2">{% if flat.number %}{{ flat.number }} {% translate "number_short" %}{% endif %}</div>
+                    <div class="col-6">{{ flat.way_desc|default_if_none:"" }}</div>
+                </div>
+
+            {% endfor %}
+        </div>
+    {#  <table class = "table table-striped">#}
+    {#    <tr>#}
+    {#        <th>{% translate "entrance" %}</th>#}
+    {#        <th>{% translate "floor" %}</th>#}
+    {#        <th>{% translate "number" %}</th>#}
+    {#        <th>{% translate "desc" %}</th>#}
+    {#    </tr>#}
+    {#    {% for flat in house.get_ru_flats %}#}
+    {#        <tr>#}
+    {#            <td>{% if flat.entrance %} {{ flat.entrance}} {% translate "entrance" %}{% endif %}</td>#}
+    {#            <td>{% if flat.floor %}{{ flat.floor }} {% translate "floor" %}{% endif %}</td>#}
+    {#            <td>{% if flat.number %}{{ flat.number }} {% translate "number" %}{% endif %}</td>#}
+    {#            <td>{{ flat.way_desc|default_if_none:"" }}</td>#}
+    {#        </tr>#}
+    {#    {% endfor %}#}
+    {#  </table>#}
+    </div>
 </div>

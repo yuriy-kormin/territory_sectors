@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-28 09:19+0000\n"
+"POT-Creation-Date: 2024-01-08 08:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -286,12 +286,10 @@ msgid "Sector deleted successfully"
 msgstr "Участок успешно удален"
 
 #: territory_sectors/status/models.py:9
-#: territory_sectors/templates/sector/list.html:33
 msgid "free"
 msgstr "свободен"
 
 #: territory_sectors/status/models.py:10
-#: territory_sectors/templates/sector/list.html:38
 msgid "assigned"
 msgstr "выдан"
 
@@ -300,7 +298,6 @@ msgid "under_construction"
 msgstr "!!ведутся работы-не выдавать!!"
 
 #: territory_sectors/status/models.py:12
-#: territory_sectors/templates/sector/list.html:48
 msgid "completed"
 msgstr "пройден"
 
@@ -311,40 +308,32 @@ msgstr "Территория"
 
 #: territory_sectors/templates/flat/list.html:23
 #: territory_sectors/templates/house/bulk_flat_create_update.html:11
-#: territory_sectors/templates/house/list_flat.html:7
 #: territory_sectors/templates/sector/print_sector.html:82
 #: territory_sectors/templates/sector/print_sector_quadra.html:119
-#: territory_sectors/templates/uuid.html:37
-#: territory_sectors/templates/uuid.html:44
+#: territory_sectors/templates/uuid-house-detail.html:8
 msgid "entrance"
 msgstr "Подъезд"
 
 #: territory_sectors/templates/flat/list.html:24
 #: territory_sectors/templates/house/bulk_flat_create_update.html:19
-#: territory_sectors/templates/house/list_flat.html:9
 #: territory_sectors/templates/sector/print_sector.html:83
 #: territory_sectors/templates/sector/print_sector_quadra.html:120
-#: territory_sectors/templates/uuid.html:38
-#: territory_sectors/templates/uuid.html:45
+#: territory_sectors/templates/uuid-house-detail.html:9
 msgid "floor"
 msgstr "Этаж"
 
 #: territory_sectors/templates/flat/list.html:25
-#: territory_sectors/templates/house/list_flat.html:8
 #: territory_sectors/templates/sector/print_sector.html:84
 #: territory_sectors/templates/sector/print_sector_quadra.html:121
-#: territory_sectors/templates/uuid.html:39
-#: territory_sectors/templates/uuid.html:46
+#: territory_sectors/templates/uuid-house-detail.html:10
 msgid "number"
 msgstr "Квартира"
 
 #: territory_sectors/templates/flat/list.html:26
-#: territory_sectors/templates/house/list_flat.html:10
 msgid "language"
 msgstr "Язык"
 
 #: territory_sectors/templates/flat/list.html:27
-#: territory_sectors/templates/house/list_flat.html:11
 msgid "way desc"
 msgstr "Как найти"
 
@@ -360,11 +349,11 @@ msgstr "Квартира"
 msgid "way_desc"
 msgstr "Как найти"
 
-#: territory_sectors/templates/house/house_popup.html:9
+#: territory_sectors/templates/house/house_popup.html:5
 msgid "Entrances"
 msgstr "Подъездов"
 
-#: territory_sectors/templates/house/house_popup.html:10
+#: territory_sectors/templates/house/house_popup.html:6
 msgid "Floors"
 msgstr "Этажей"
 
@@ -477,18 +466,6 @@ msgstr "Дата"
 msgid "status"
 msgstr "Статус"
 
-#: territory_sectors/templates/sector/list.html:43
-msgid "under constuction"
-msgstr "!!ведутся работы-не выдавать!!"
-
-#: territory_sectors/templates/sector/list.html:53
-msgid "search"
-msgstr "Поисковый"
-
-#: territory_sectors/templates/sector/list.html:58
-msgid "ready"
-msgstr "Рабочий"
-
 #: territory_sectors/templates/sector/list_debtors.html:5
 msgid "Sector debtors list"
 msgstr "Подошло время сдавать"
@@ -499,7 +476,7 @@ msgstr "Скоро надо будет сдавать"
 
 #: territory_sectors/templates/sector/print_sector.html:85
 #: territory_sectors/templates/sector/print_sector_quadra.html:122
-#: territory_sectors/templates/uuid.html:40
+#: territory_sectors/templates/uuid-house-detail.html:11
 msgid "desc"
 msgstr "Как найти"
 
@@ -576,6 +553,18 @@ msgstr "Создать статус"
 msgid "name"
 msgstr "Имя"
 
+#: territory_sectors/templates/uuid-house-detail.html:16
+msgid "entrance_short"
+msgstr "п."
+
+#: territory_sectors/templates/uuid-house-detail.html:17
+msgid "floor_short"
+msgstr "э."
+
+#: territory_sectors/templates/uuid-house-detail.html:18
+msgid "number_short"
+msgstr " "
+
 #: territory_sectors/templates/uuid.html:27
 msgid "addresses"
 msgstr " найденных адресов"
@@ -583,13 +572,3 @@ msgstr " найденных адресов"
 #: territory_sectors/views.py:51
 msgid "Sector assignments status"
 msgstr "Назначения участков "
-
-#~| msgid "Sectors"
-#~ msgid "Должники"
-#~ msgstr "Участки"
-
-#~ msgid "info"
-#~ msgstr "Информация"
-
-#~ msgid "houses"
-#~ msgstr "Дома"
