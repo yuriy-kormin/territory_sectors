@@ -22,6 +22,6 @@ RUN apt update && apt install python3-pip --no-install-recommends -y && \
     pip3 install poetry && \
     poetry config virtualenvs.create false && \
     poetry install --no-root && \
-    apt-get clean -y
+    apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
 CMD ["/docker-entrypoint.sh"]
