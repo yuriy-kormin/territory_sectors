@@ -28,7 +28,7 @@ urlpatterns = [
     path('<str:pk>', UUIDView.as_view(), name='uuid'),
     path('login/', UserLoginView.as_view(), name='user_login'),
     path('logout/', UserLogoutView.as_view(), name='user_logout'),
-    path('flat/', include('territory_sectors.flat.urls')),
+    # path('flat/', include('territory_sectors.flat.urls')),
     path('house/', include('territory_sectors.house.urls')),
     path('sector/', include('territory_sectors.sector.urls')),
     path('uuid/', include('territory_sectors.uuid_qr.urls')),

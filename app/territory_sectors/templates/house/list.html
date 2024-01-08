@@ -23,7 +23,7 @@
         </thead>
         <tbody>
         {% for house in object_list %}
-            <tr id = "house{{ house.id }}" data-toggle="collapse" data-target="#house_{{ house.id }}" class="clickable {% if house.for_search %}table-warning{% else %}table-success{% endif %}"  style = " transition: 0.4s;">
+            <tr id = "house{{ house.id }}" data-toggle="collapse" data-target="#house_{{ house.id }}" class="{% if house.for_search %}table-warning{% else %}table-success{% endif %}">
                 <td> <input type="checkbox" id="my_checkbox" name="my_checkbox" value="1" {% if house.for_search %}checked{% endif %} disabled></td>
                 <th scope="row"> <a href = {% url "house_update" house.id %}>{{house.address}}</a></th>
                 <td> {{house.entrances}}</td>
@@ -41,11 +41,6 @@
                             </svg>
                         </button>
                     </form>
-                </td>
-            </tr>
-            <tr class = "collapse" id="house_{{ house.id }}">
-                <td colspan="6">
-                    {% include "house/list_flat.html" %}
                 </td>
             </tr>
         {% endfor %}

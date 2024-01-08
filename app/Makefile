@@ -12,7 +12,7 @@ migrate:
 collectstatic:
 	${MANAGE} collectstatic --no-input --clear
 test:
-	${MANAGE} test --keepdb --parallel --debug-mode --force-color territory_sectors.tests
+	${MANAGE} test --parallel --debug-mode --force-color territory_sectors.tests
 install:
 	poetry install --no-root
 lint:

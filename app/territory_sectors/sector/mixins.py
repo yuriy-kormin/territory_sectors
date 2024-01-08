@@ -122,7 +122,8 @@ class AddDebtorsMixin:
                 'id': sector.id,
                 'status': sector.status.name,
                 'status_age': sector.get_status_age_in_months(),
-                'houses': {house.id: house.address for house in sector.get_houses_into()}
+                'houses': {house.id: house.address
+                           for house in sector.get_houses_into()}
             }
 
         context = super().get_context_data(**kwargs)

@@ -15,7 +15,7 @@ class HouseCreateView(LoginRequiredMixinCustom, ImageResizeBeforeMixin,
                       SuccessMessageMixin, CreateView):
     form_class = HouseForm
     template_name = "house/create.html"
-    success_url = reverse_lazy('house_list')
+    success_url = reverse_lazy('sector_list')
     extra_context = {
         'header': _('Create house'),
         'button_title': _('Create'),
@@ -29,7 +29,7 @@ class HouseUpdateView(LoginRequiredMixinCustom, ImageResizeBeforeMixin,
     model = House
     form_class = HouseForm
     template_name = "house/create.html"
-    success_url = reverse_lazy('house_list')
+    success_url = reverse_lazy('sector_list')
     extra_context = {
         'header': _('Update house'),
         'button_title': _('Update'),
@@ -54,7 +54,7 @@ class HouseDeleteView(LoginRequiredMixinCustom,
                       SuccessMessageMixin, DeleteView):
     model = House
     template_name = "house/delete.html"
-    success_url = reverse_lazy('house_list')
+    success_url = reverse_lazy('sector_list')
     extra_context = {
         'header': _('Remove house'),
         'button_title': _('Remove '),

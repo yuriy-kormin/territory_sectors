@@ -42,7 +42,7 @@ class TestCreate(TestCase):
             reverse('house_add'),
             self.test_house
         )
-        self.assertRedirects(response, reverse('house_list'), 302,
+        self.assertRedirects(response, reverse('sector_list'), 302,
                              fetch_redirect_response=True)
         self.assertEqual(House.objects.all().count(), 1)
         house = House.objects.first()
@@ -59,7 +59,7 @@ class TestCreate(TestCase):
             reverse('house_add'),
             self.test_house
         )
-        self.assertRedirects(response, reverse('house_list'), 302,
+        self.assertRedirects(response, reverse('sector_list'), 302,
                              fetch_redirect_response=True)
         house = House.objects.first()
         flats = house.flat_set.all()
@@ -82,7 +82,7 @@ class TestCreate(TestCase):
             reverse('house_add'),
             self.test_house
         )
-        self.assertRedirects(response, reverse('house_list'), 302,
+        self.assertRedirects(response, reverse('sector_list'), 302,
                              fetch_redirect_response=True)
         house = House.objects.first()
         house_flats = house.flat_set.all()

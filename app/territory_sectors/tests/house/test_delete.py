@@ -46,6 +46,6 @@ class TestRemoveRelatedFlats(TestCase):
             reverse_lazy('house_delete', kwargs={'pk': house.pk})
         )
         self.assertRedirects(response,
-                             f'{reverse_lazy("house_list")}')
+                             f'{reverse_lazy("sector_list")}')
         self.assertEqual(House.objects.all().count(), 0)
         self.assertEqual(Flat.objects.all().count(), 0)
