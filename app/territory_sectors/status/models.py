@@ -10,6 +10,8 @@ class Status(models.Model):
         ('assigned', _('assigned')),
         ("under_construction", _('under_construction')),
         ("completed", _('completed')),
+        ("for_event", _('for_event')),
+        ("for_event_done", _('for_event_done')),
     )
     name = models.CharField(max_length=200, unique=True,
                             choices=name_options,
