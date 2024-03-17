@@ -33,6 +33,7 @@ graphene-gis = "^0.0.8"
 django-cors-headers = "^4.2.0"
 django-graphql-jwt = "^0.4.0"
 gdal = "3.7"
+django-dbbackup = "^4.1.0"
 
 [tool.poetry.group.dev.dependencies]
 django-debug-toolbar = "^3.8.1"
