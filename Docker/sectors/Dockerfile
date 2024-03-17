@@ -1,5 +1,6 @@
 #FROM python
-FROM osgeo/gdal
+#FROM osgeo/gdal
+FROM ghcr.io/osgeo/gdal:latest
 
 ENV PYTHONUNBUFFERED 1
 ENV PYTHONDONTWRITEBYTECODE 1
