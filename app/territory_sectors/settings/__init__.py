@@ -1,3 +1,5 @@
+# flake8: noqa
+
 from .base import *
 from .middleware import *
 from .apps import *

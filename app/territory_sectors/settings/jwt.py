@@ -1,3 +1,6 @@
+# flake8: noqa
+
+
 from datetime import timedelta
 from .base import DEBUG, ALLOWED_HOSTS
 import os

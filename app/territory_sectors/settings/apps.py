@@ -1,3 +1,5 @@
+# flake8: noqa
+
 DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -18,7 +20,6 @@ THIRD_PARTY_APPS = [
     'graphene_gis',
     'corsheaders',
     'dbbackup',
-    'debug_toolbar',
 ]
 
 PROJECT_APPS = [

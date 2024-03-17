@@ -1,3 +1,5 @@
+# flake8: noqa
+
 from .base import BASE_DIR
 
 DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'

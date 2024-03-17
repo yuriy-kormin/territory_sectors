@@ -1,3 +1,5 @@
+# flake8: noqa
+
 import os
 import dj_database_url
 from .base import CERTBOT_DOMAINS
