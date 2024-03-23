@@ -1,6 +1,4 @@
-#FROM python
-#FROM osgeo/gdal
-FROM ghcr.io/osgeo/gdal:latest
+FROM python:3.10
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
@@ -11,12 +9,10 @@ COPY ["pyproject.toml","README.md","poetry.lock","/poetry/"]
 COPY Docker/sectors/docker-entrypoint.sh /
 WORKDIR /poetry
 
-# Install GDAL dependencies
-# RUN apt update && apt install -y libgdal-dev gdal-bin g++ python3-dev --no-install-recommends && \
-# RUN apt update &&  \ apt install pip pip3 &&\
-RUN apt update && apt install python3-pip libgdal-dev --no-install-recommends -y && \
+RUN apt-get update && apt-get install -y binutils libproj-dev gdal-bin --upgrade && \
+    apt-get install -y libpq-dev libgdal-dev && \
     python3 -m pip install --upgrade pip &&\
-    pip3 install pipenv whitenoise gunicorn poetry && \
+    pip3 install whitenoise gunicorn poetry && \
     poetry config virtualenvs.create false && \
     poetry install --no-root && \
     apt-get clean -y && rm -rf /var/lib/apt/lists/*
