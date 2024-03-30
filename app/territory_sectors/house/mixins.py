@@ -68,7 +68,7 @@ class ImageResizeBeforeMixin:
                     buffer = BytesIO()
                     img.save(buffer, format='JPEG', quality=90)
                 return buffer.getvalue()
-            except:
+            except Exception:
                 return
 
         image = form.cleaned_data.get('image')
