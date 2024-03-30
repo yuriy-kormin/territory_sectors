@@ -59,24 +59,28 @@ class ImageResizeBeforeMixin:
                     img = img.transpose(rotate_values[orientation])
 
         def resize_image(image_data, max_size):
-            with Image.open(image_data) as img:
-                process_rotation_based_on_exif(img)
-                image_dimensions = calculate_new_size(max_size, *img.size)
-                img = img.resize(image_dimensions, Image.ANTIALIAS)
-                img = img.convert('RGB')
-                buffer = BytesIO()
-                img.save(buffer, format='JPEG', quality=90)
-            return buffer.getvalue()
+            try:
+                with Image.open(image_data) as img:
+                    process_rotation_based_on_exif(img)
+                    image_dimensions = calculate_new_size(max_size, *img.size)
+                    img = img.resize(image_dimensions, Image.ANTIALIAS)
+                    img = img.convert('RGB')
+                    buffer = BytesIO()
+                    img.save(buffer, format='JPEG', quality=90)
+                return buffer.getvalue()
+            except:
+                return
 
         image = form.cleaned_data.get('image')
         if image:
             image_data = resize_image(
                 image, form.instance.MAX_IMAGE_RESOLUTION)
-            form.instance.image.save(
-                image.name, content=ContentFile(image_data), save=False)
-            image_data = resize_image(
-                image, form.instance.PREVIEW_IMAGE_RESOLUTION)
-            form.instance.image_preview.save(
-                image.name, content=ContentFile(image_data), save=False)
+            if image_data:
+                form.instance.image.save(
+                    image.name, content=ContentFile(image_data), save=False)
+                image_data = resize_image(
+                    image, form.instance.PREVIEW_IMAGE_RESOLUTION)
+                form.instance.image_preview.save(
+                    image.name, content=ContentFile(image_data), save=False)
 
         return super().form_valid(form)
