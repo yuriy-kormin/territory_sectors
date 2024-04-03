@@ -20,6 +20,11 @@ from .views import IndexView, UserLoginView, UserLogoutView, UUIDView, \
 from django.conf import settings
 from django.conf.urls.static import static
 
+
+def trigger_error(request):
+    division_by_zero = 1 / 0
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', IndexView.as_view(), name='root'),
@@ -39,3 +44,4 @@ if settings.DEBUG:
     urlpatterns.append(path('__debug__/', include('debug_toolbar.urls')))
     urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)
+    urlpatterns.append(path('sentry-debug/', trigger_error))

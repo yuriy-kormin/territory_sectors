@@ -8,3 +8,4 @@ from .dbbackup import *
 from .debug_toolbar import *
 from .rollbar import *
 from .jwt import *
+from .sentry import *

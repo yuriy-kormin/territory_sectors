@@ -35,6 +35,7 @@ django-graphql-jwt = "^0.4.0"
 gdal = "3.6.4"
 django-dbbackup = "^4.1.0"
 #gdal = "^3.8.4"
+sentry-sdk = {extras = ["django"], version = "^1.44.0"}
 
 [tool.poetry.group.dev.dependencies]
 django-debug-toolbar = "^3.8.1"

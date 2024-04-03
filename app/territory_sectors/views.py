@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.gis.db.models.functions import Centroid
-from django.views.generic import TemplateView, DetailView, ListView
+from django.views.generic import TemplateView, DetailView, ListView, RedirectView
 from django.contrib.auth import logout
 from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import redirect
@@ -15,8 +15,8 @@ from .sector.mixins import AddContextGetChangesHistoryMixin
 from .sector.models import Sector
 
 
-class IndexView(TemplateView):
-    template_name = "index.html"
+class IndexView(RedirectView):
+    url = reverse_lazy('sector_list')
 
 
 class UserLoginView(LoginView):
