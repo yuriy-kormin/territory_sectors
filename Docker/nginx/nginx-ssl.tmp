@@ -7,6 +7,10 @@ server {
     client_max_body_size 20m;
     server_name  $CERTBOT_DOMAINS;
 
+    if ($host != '$CERTBOT_DOMAINS') {
+        return 444;
+    }
+
     location / {
         return 301 https://$host$request_uri;
     }
