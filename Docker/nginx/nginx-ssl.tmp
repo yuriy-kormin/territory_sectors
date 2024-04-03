@@ -7,7 +7,7 @@ server {
     client_max_body_size 20m;
     server_name  $CERTBOT_DOMAINS;
 
-    if ($host != '$CERTBOT_DOMAINS') {
+    if ($host != $server_name) {
         return 444;
     }
 
@@ -23,6 +23,7 @@ server {
 }
 
 server {
+
     listen 443 ssl;
     client_max_body_size 20m;
     server_name  $CERTBOT_DOMAINS;
@@ -34,7 +35,9 @@ server {
     ssl_prefer_server_ciphers on;
     ssl_ciphers "EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH";
 
-
+    if ($host != $server_name) {
+        return 444;
+    }
 
     location / {
         proxy_pass http://hello_django;
