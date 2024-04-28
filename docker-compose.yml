@@ -39,7 +39,7 @@ services:
             - letsencrypt:/etc/letsencrypt/:ro
             - acme:/var/www/letsencrypt/:ro
             - nginx-conf:/etc/nginx/conf.d/:rw
-            - ./app/media:/app/media/:rw
+            - ./app/territory_sectors/media:/app/media/:rw
             - ./log:/var/log/:rw
         ports:
             - 80:80
