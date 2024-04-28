@@ -77,10 +77,10 @@ class ImageResizeBeforeMixin:
                 image, form.instance.MAX_IMAGE_RESOLUTION)
             if image_data:
                 form.instance.image.save(
-                    image.name, content=ContentFile(image_data), save=False)
+                    image.name, content=ContentFile(image_data), save=True)
                 image_data = resize_image(
                     image, form.instance.PREVIEW_IMAGE_RESOLUTION)
                 form.instance.image_preview.save(
-                    image.name, content=ContentFile(image_data), save=False)
+                    image.name, content=ContentFile(image_data), save=True)
 
         return super().form_valid(form)
