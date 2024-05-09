@@ -40,6 +40,7 @@ services:
             - acme:/var/www/letsencrypt/:ro
             - nginx-conf:/etc/nginx/conf.d/:rw
             - ./app/territory_sectors/media:/app/media/:rw
+            - ./user_manual:/app/user_manual/:ro
             - ./log:/var/log/:rw
         ports:
             - 80:80
@@ -66,3 +67,4 @@ volumes:
     acme:
     nginx-conf:
     log:
+    manual:
