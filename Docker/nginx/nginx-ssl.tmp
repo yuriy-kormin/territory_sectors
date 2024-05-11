@@ -52,9 +52,4 @@ server {
     alias /app/media/;
     expires 1h;
     }
-
-    location /manual/ {
-    alias /app/user_manual/;
-    expires 1h;
-    }
 }
