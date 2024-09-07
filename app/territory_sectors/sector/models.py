@@ -42,6 +42,8 @@ class StatManager(models.Manager):
 
 
 class Sector(models.Model):
+    AUTO_FREE_MONTH = 4
+
     date_joined = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
     name = models.CharField(max_length=300, null=True, unique=True)
@@ -146,3 +148,13 @@ class Sector(models.Model):
         status_set_datetime = self.get_changes_history()[0].date_modified
         delta = timezone.now() - status_set_datetime
         return round(delta.days / 30, 1)
+
+    def save(self, *args, **kwargs):
+        #update completed status to free if get_status_age_in_months more AUTO_FREE_MONTH
+        free_status = Status.objects.filter(name='free').first()
+
+        for s in self.__class__.objects.filter(status__name='completed'):
+            if s.get_status_age_in_months()>=self.AUTO_FREE_MONTH:
+                s.status = free_status
+                s.save()
+        return super().save(*args, **kwargs)
