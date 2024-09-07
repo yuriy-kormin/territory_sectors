@@ -11,6 +11,6 @@ class Command(BaseCommand):
         free_status = Status.objects.filter(name='free').first()
 
         for s in Sector.objects.filter(status__name='completed'):
-            if s.get_status_age_in_months() >= self.AUTO_FREE_MONTH:
+            if s.get_status_age_in_months() >= Sector.AUTO_FREE_MONTH:
                 s.status = free_status
                 s.save()
