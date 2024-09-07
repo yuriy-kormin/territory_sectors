@@ -12,6 +12,10 @@ python manage.py createsuperuser --noinput \
       --username $DJANGO_SUPERUSER_USERNAME \
       --email $DJANGO_SUPERUSER_EMAIL
 
+
+echo "run crontab"
+service cron start
+
 echo "Starting jango app"
 
 gunicorn territory_sectors.wsgi:application --bind 0.0.0.0:8000
