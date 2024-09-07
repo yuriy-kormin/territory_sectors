@@ -22,3 +22,6 @@ coverage:
 translate:
 	${MANAGE} makemessages --locale ru --ignore=venv
 	${MANAGE} compilemessages --locale ru
+
+free:
+	${MANAGE} free_sectors
