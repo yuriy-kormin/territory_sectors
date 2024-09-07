@@ -92,7 +92,7 @@ class AddContextGetChangesHistoryMixin:
             else:
                 groups = [history]
 
-            item.assignments = groups[-3:]
+            item.assignments = groups[-2:]
 
         return qs
 
