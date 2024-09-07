@@ -11,10 +11,19 @@ COPY --chmod=644 Docker/sectors/cronjob /etc/cron.d/cronjob
 
 WORKDIR /poetry
 
-RUN apt-get update && apt-get install -y binutils libproj-dev gdal-bin --upgrade && \
-    apt-get install -y libpq-dev libgdal-dev cron && \
+RUN apt-get update && apt-get install -y  \
+    binutils \
+    libproj-dev \
+    gdal-bin \
+    libpq-dev \
+    libgdal-dev \
+    cron\
+    --upgrade && \
     python3 -m pip install --upgrade pip &&\
-    pip3 install whitenoise gunicorn poetry && \
+    pip3 install  \
+    whitenoise \
+    gunicorn \
+    poetry && \
     poetry config virtualenvs.create false && \
     poetry install --no-root && \
     apt-get clean -y && rm -rf /var/lib/apt/lists/* && \
