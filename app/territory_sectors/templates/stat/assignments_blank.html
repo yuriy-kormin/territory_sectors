@@ -10,7 +10,7 @@
               <div title="Статус: {{ sector.status }}" class="col-2 {% with sector as obj %}{% include "stat/status_bg-color.html" %}{% endwith %}">
                 <div class="align-self-center"><b><a class="text-secondary" href="{% url "sector_update" sector.id %}">{{ sector.name }}</a></b></div>
               </div>
-              {% for cell in sector.assignments %}
+              {% for cell in sector.assignments|slice: "-2:" %}
                 <div class="col-3 ml-1">
                     {% for record in cell %}
                         <div title=" {{ record.status }}: {{record.full_name|default:""}}" class="row text-left pl-0 {% with record as obj %}{% include "stat/status_bg-color.html" %}{% endwith %}">
