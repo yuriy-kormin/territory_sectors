@@ -58,6 +58,22 @@ class Sector(models.Model):
     history = HistoricalRecords(related_name='historical')
     stat = StatManager()
 
+
+    @classmethod
+    def update_free_sectors(cls):
+        free_status = Status.objects.filter(name='free').first()
+
+        for s in Sector.objects.filter(status__name='completed'):
+            age = s.get_status_age_in_months()
+            if age >= Sector.AUTO_FREE_MONTH:
+                s.status = free_status
+                s.save()
+                print(f"{s.name} was free after {age} months completed")
+
+    def save(self, *args, **kwargs):
+        self.__class__.update_free_sectors()
+        super(Sector, self).save(*args, **kwargs)
+
     def __str__(self):
         return self.name
 
