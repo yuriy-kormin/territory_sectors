@@ -70,9 +70,9 @@ class Sector(models.Model):
                 s.save()
                 print(f"{s.name} was free after {age} months completed")
 
-    def save(self, *args, **kwargs):
-        self.__class__.update_free_sectors()
-        super(Sector, self).save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     self.__class__.update_free_sectors()
+    #     super(Sector, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.name
