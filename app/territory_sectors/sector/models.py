@@ -58,7 +58,6 @@ class Sector(models.Model):
     history = HistoricalRecords(related_name='historical')
     stat = StatManager()
 
-
     @classmethod
     def update_free_sectors(cls):
         free_status = Status.objects.filter(name='free').first()
