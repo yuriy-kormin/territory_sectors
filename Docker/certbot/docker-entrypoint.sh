@@ -1,4 +1,4 @@
-certbot certonly --agree-tos --keep-until-expiring \
+certbot certonly --agree-tos --keep-until-renewal \
 --webroot -w /var/www/letsencrypt --no-eff-email \
 --email "${CERTBOT_EMAIL}" -d "${CERTBOT_DOMAINS}" \
 #--dry-run
