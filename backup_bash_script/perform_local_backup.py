@@ -1,6 +1,7 @@
-import datetime, subprocess
+import datetime
+import subprocess
 
-from backup_bash_script.conf import BACKUP_DIR, DATABASE_CONTAINER_NAME, DATABASE_USERNAME, DATABASE_PASSWORD, \
+from conf import BACKUP_DIR, DATABASE_CONTAINER_NAME, DATABASE_USERNAME, DATABASE_PASSWORD, \
     DJANGO_CONTAINER_NAME
 
 FOLDER_TO_BACKUP = "territory_sectors/app/media"
