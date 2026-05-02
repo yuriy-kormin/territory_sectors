@@ -40,3 +40,14 @@ else
   echo "ERROR Cert dir doesnot exists - cert not received"
   exit 1
 fi
+
+# Renewal loop — runs forever, checks every 12 hours
+echo "Starting renewal loop..."
+while true; do
+  echo "Running certbot renew at $(date)"
+  certbot renew --webroot --webroot-path=/var/www/letsencrypt --quiet
+  # Signal Nginx to reload (graceful, no downtime)
+  nginx_container=$(getent hosts nginx | awk '{ print $1 }')
+  wget -q --spider "http://${nginx_container}/nginx-reload" 2>/dev/null || true
+  sleep 12h
+done
